@@ -2,7 +2,7 @@
 
     $db_user = "root";
     $db_password = "";
-    $db_name = "Modagi";
+    $db_name = "modagi";
     $host = "127.0.0.1";
 
     // apre la connessione
