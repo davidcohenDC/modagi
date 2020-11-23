@@ -11,10 +11,10 @@
   <title>Shop Homepage - Start Bootstrap Template</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<?php echo CSS_FILE; ?>bootstrap/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="css/shop-homepage.css" rel="stylesheet">
+  <link href="<?php echo CSS_FILE; ?>shop-homepage.css" rel="stylesheet">
 
 </head>
 
@@ -213,8 +213,8 @@
   </footer>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="js/jquery/jquery.min.js"></script>
-  <script src="js/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="<?php echo JS_FILE ?>jquery/jquery.min.js"></script>
+  <script src="<?php echo JS_FILE ?>bootstrap/bootstrap.bundle.min.js"></script>
 
 </body>
 

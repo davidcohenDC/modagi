@@ -5,28 +5,10 @@
     $db_name = "modagi";
     $host = "127.0.0.1";
 
-    // apre la connessione
-    $conn = new mysqli($host, $db_user, $db_password);
+    require("./database.php");
 
-    // controllo se la connessione Ã¨ stabilita
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    else {
-        echo "Connection successful";
-    }
+    //$dbh = new DatabaseHelper($host, $db_user, $db_password, $db_name, 3306);
 
-    // query con i prepared statement (in modo da evitare mysql injection)
-        // imposto la query
-    $query_preparator = $conn->prepare("SELECT * FROM table WHERE columnname = ?");
-        // sostituisco il ? con il valore della variabile (normalmente una input di form)
-    $variabile = "nome_colonna";
-    $query_preparator->bind_param('s', $variabile);
-        // eseguo la query
-    $query_preparator->execute();
-        // chiudo il preparatore
-    $query_preparator->close();
-
-    // chiude la connessione
-    $conn->close();
+    define("CSS_FILE", "./css/");
+    define("JS_FILE", "./js/");
 ?>
