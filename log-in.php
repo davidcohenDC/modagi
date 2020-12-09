@@ -2,4 +2,7 @@
 
     require_once("./server.php");
 
-    $templateArguments["main"] = "log-in-form.php";
+    $templateParams["title"] = "Log In";
+    $templateParams["main"] = "log-in-form.php";
+    
+    require 'template/base.php';
