@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 
 <head>
 
@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Shop Homepage - Start Bootstrap Template</title>
+  <title>Shop Homepage</title>
 
   <!-- Bootstrap core CSS -->
   <link href="<?php echo CSS_FILE; ?>bootstrap/bootstrap.min.css" rel="stylesheet">

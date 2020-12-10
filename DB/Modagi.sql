@@ -1,90 +1,175 @@
--- Database Section
--- ________________ 
-
-create database Modagi;
-use Modagi;
+CREATE DATABASE IF NOT EXISTS `ShopOnline`;
 
 
--- Tables Section
--- _____________ 
+# ---------------------------------------------------------------------- #
+# ADD TABLE "Cliente"                                                    #
+# ---------------------------------------------------------------------- #
 
-create table AppartenenzaProdCat (
-	idCategoria int not null,
-	idProdotto int not null,
-	primary key (idCategoria, idProdotto)
-);
+CREATE TABLE `ProdottiCategorie` (
+     `idCategoria` INT NOT NULL,
+     `idProdotto` INT NOT NULL,
+     PRIMARY KEY (`idCategoria`, `idProdotto`)
+) ENGINE=INNODB;
 
-create table Categoria (
-    idCategoria int not null AUTO_INCREMENT,
-    nomeCategoria char(20) not null,
-    primary key (idCategoria)
-);
+# ---------------------------------------------------------------------- #
+# ADD TABLE "Categoria"                                                  #
+# ---------------------------------------------------------------------- #
 
-create table Colore (
-    idColore int not null AUTO_INCREMENT,
-    nomeColore char(20) not null,
-    primary key (idColore)
-);
+CREATE TABLE `Categoria` (
+     `idCategoria` INT NOT NULL,
+     `nomeCategoria` CHAR(20) NOT NULL,
+     PRIMARY KEY (`idCategoria`)
+) ENGINE=INNODB;
+# ---------------------------------------------------------------------- #
+# ADD TABLE "Colore"                                                     #
+# ---------------------------------------------------------------------- #
 
-create table Materiale (
-    idMateriale int not null AUTO_INCREMENT,
-    nomeMateriale char(20) not null,
-    primary key (idMateriale)
-);
+CREATE TABLE `Colore` (
+     `id` INT NOT NULL,
+     `nomeColore` CHAR(20) NOT NULL,
+     PRIMARY KEY (`id`)
+) ENGINE=INNODB;
 
-create table Ordine (
-    idProdotto int not null,
-    username char(20) not null,
-    data date not null,
-    quantita char(1) not null,
-    primary key (idProdotto, username, data)
-);
+CREATE TABLE `Materiale` (
+     `idMateriale` INT NOT NULL,
+     `nomeMateriale` CHAR(20) NOT NULL,
+     PRIMARY KEY (`idMateriale`)
+) ENGINE=INNODB;
 
-create table Prodotto (
-    idProdotto int not null AUTO_INCREMENT,
-    prezzo decimal(5,2) not null,
-    descrizione varchar(256) not null,
-    nome char(20) not null,
-    disponibilita int not null,
-    idColore int not null,
-    sesso char(1) not null,
-    idMateriale int not null,
-    primary key (idProdotto)
-);
+# ---------------------------------------------------------------------- #
+# ADD TABLE "Ordine"                                                     #
+# ---------------------------------------------------------------------- #
 
-create table SESSO (
-    tipoSesso char(1) not null,
-    primary key (tipoSesso)
-);
+CREATE TABLE `Ordine` (
+     `idProdotto` INT NOT NULL,
+     `username` CHAR(20) NOT NULL,
+     `Data` DATE NOT NULL,
+     `quantita` CHAR(1) NOT NULL,
+     PRIMARY KEY (`idProdotto`, `username`, `Data`)
+) ENGINE=INNODB;
 
-create table User (
-    username char(20) not null,
-    password char(20) not null,
-    admin char not null,
-    nome char(20) not null,
-    cognome char(20) not null,
-    indirizzo char(20) not null,
-    primary key (username)
-);
+# ---------------------------------------------------------------------- #
+# ADD TABLE "Prodotto"                                                   #
+# ---------------------------------------------------------------------- #
+
+CREATE TABLE `Prodotto` (
+     `id` INT NOT NULL,
+     `prezzo` decimal(5,2) NOT NULL,
+     `descrizione` VARCHAR(256) NOT NULL,
+     `nome` CHAR(20) NOT NULL,
+     `stock` INT NOT NULL,
+     `idColore` INT NOT NULL,
+     `sesso` CHAR(1) NOT NULL,
+     `idMateriale` INT NOT NULL,
+     PRIMARY KEY (`id`)
+) ENGINE=INNODB;
+
+# ---------------------------------------------------------------------- #
+# ADD TABLE "Sesso"                                                      #
+# ---------------------------------------------------------------------- #
+
+CREATE TABLE `SESSO` (
+     `tipoSesso` CHAR(1) NOT NULL,
+     PRIMARY KEY (`tipoSesso`)
+) ENGINE=INNODB;
+
+# ---------------------------------------------------------------------- #
+# ADD TABLE "User"                                                    #
+# ---------------------------------------------------------------------- #
+
+CREATE TABLE `User` (
+     `username` CHAR(20) NOT NULL,
+     `password` CHAR(20) NOT NULL,
+     `Admin` CHAR NOT NULL,
+     `Nome` CHAR(20) NOT NULL,
+     `Cognome` CHAR(20) NOT NULL,
+     `Indirizzo` CHAR(20) NOT NULL,
+     PRIMARY KEY (`username`)
+) ENGINE=INNODB;
+
+# ---------------------------------------------------------------------- #
+# ADD View "INDEX SECTION"                                               #
+# ---------------------------------------------------------------------- #
 
 
-alter table AppartenenzaProdCat
-	foreign key (idCategoria) references Categoria(idCategoria);
+CREATE UNIQUE INDEX `PK_ProdottiCategorie`
+     ON `ProdottiCategorie` (`idCategoria`, `idProdotto`);
 
-alter table AppartenenzaProdCat
-	foreign key (idProdotto) references Prodotto(idProdotto);
+CREATE INDEX `FK_ProCat_Prodotto`
+     ON `ProdottiCategorie` (`idProdotto`);
 
-alter table Ordine
-	foreign key (idProdotto) references Prodotto(idProdotto);
+CREATE UNIQUE INDEX `FK_ProCat_Categoria`
+     ON `Categoria` (`idCategoria`);
 
-alter table Ordine
-	foreign key (username) references User(username)
+CREATE UNIQUE INDEX `PK_Colore`
+     ON `Colore` (`id`);
 
-alter table Prodotto
-	foreign key (idColore) references Colore(idColore)
+CREATE UNIQUE INDEX `PK_Materiale`
+     ON `Materiale` (`idMateriale`);
 
-alter table Prodotto
-	foreign key (sesso) references SESSO(tipoSesso)
+CREATE UNIQUE INDEX `PK_Ordine`
+     ON `Ordine` (`idProdotto`, `username`, `Data`);
 
-alter table Prodotto
-	foreign key (idMateriale) references Materiale(idMateriale)
+CREATE INDEX `FK_Ordine_Username`
+     ON `Ordine` (`username`);
+
+CREATE UNIQUE INDEX `PK_Prodotto`
+     ON `Prodotto` (`id`);
+
+CREATE INDEX `FK_Prodotto_Colore`
+     ON `Prodotto` (`idColore`);
+
+CREATE INDEX `FK_Prodotto_Sesso`
+     ON Prodotto (sesso);
+
+CREATE INDEX `FK_Prodotto_Materiale`
+     ON `Prodotto` (`idMateriale`);
+
+CREATE UNIQUE INDEX `PK_Sesso`
+     ON `SESSO` (`tipoSesso`);
+
+CREATE UNIQUE INDEX `PK_Username`
+     ON `User` (`username`);
+
+
+# ---------------------------------------------------------------------- #
+# FOREIGN KEY CONSTRAINTS                                                #
+# ---------------------------------------------------------------------- #
+
+ALTER TABLE `ProdottiCategorie` ADD CONSTRAINT `FK_ProCat_Prodotto`
+     FOREIGN KEY (`idProdotto`)
+     REFERENCES `Prodotto` (`id`);
+
+ALTER TABLE `ProdottiCategorie` ADD CONSTRAINT `FK_ProCat_Categoria`
+     FOREIGN KEY (`idCategoria`)
+     REFERENCES `Categoria` (`idCategoria`);
+
+ALTER TABLE `Ordine` ADD CONSTRAINT `FK_Ordine_Username`
+     FOREIGN KEY (`username`)
+     REFERENCES `User` (`username`);
+
+ALTER TABLE `Ordine` ADD CONSTRAINT `FK_Ordine_Prodotto`
+     FOREIGN KEY (`idProdotto`)
+     REFERENCES `Prodotto` (`id`);
+
+ALTER TABLE `Prodotto` ADD CONSTRAINT `FK_Prodotto_Colore`
+     FOREIGN KEY (`idColore`)
+     REFERENCES `Colore` (`id`);
+
+ALTER TABLE `Prodotto` ADD CONSTRAINT `FK_Prodotto_Sesso`
+     FOREIGN KEY (`sesso`)
+     REFERENCES `SESSO` (`tipoSesso`);
+
+ALTER TABLE `Prodotto` ADD CONSTRAINT `FK_Prodotto_Materiale`
+     FOREIGN KEY (`idMateriale`)
+     REFERENCES `Materiale` (`idMateriale`);
+
+
+
+# ---------------------------------------------------------------------- #
+# ADD info INTo "Cliente"                                                #
+# ---------------------------------------------------------------------- #
+
+# ---------------------------------------------------------------------- #
+# ADD View "Ricerca Sito Web Libero"                                     #
+# ---------------------------------------------------------------------- #
