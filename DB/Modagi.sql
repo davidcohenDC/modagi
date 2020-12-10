@@ -1,14 +1,14 @@
 CREATE DATABASE IF NOT EXISTS `Modagi`;
-
+USE `Modagi`;
 
 # ---------------------------------------------------------------------- #
 # ADD TABLE "Cliente"                                                    #
 # ---------------------------------------------------------------------- #
 
 CREATE TABLE `ProdottiCategorie` (
-     `idCategoria` INT NOT NULL,
-     `idProdotto` INT NOT NULL,
-     PRIMARY KEY (`idCategoria`, `idProdotto`)
+    `idCategoria` INT NOT NULL,
+    `idProdotto` INT NOT NULL,
+    PRIMARY KEY (`idCategoria`, `idProdotto`)
 ) ENGINE=INNODB;
 
 # ---------------------------------------------------------------------- #
@@ -16,24 +16,24 @@ CREATE TABLE `ProdottiCategorie` (
 # ---------------------------------------------------------------------- #
 
 CREATE TABLE `Categoria` (
-     `idCategoria` INT NOT NULL,
-     `nomeCategoria` CHAR(20) NOT NULL,
-     PRIMARY KEY (`idCategoria`)
+    `idCategoria` INT NOT NULL AUTO_INCREMENT,
+    `nomeCategoria` CHAR(20) NOT NULL,
+    PRIMARY KEY (`idCategoria`)
 ) ENGINE=INNODB;
 # ---------------------------------------------------------------------- #
 # ADD TABLE "Colore"                                                     #
 # ---------------------------------------------------------------------- #
 
 CREATE TABLE `Colore` (
-     `id` INT NOT NULL,
-     `nomeColore` CHAR(20) NOT NULL,
-     PRIMARY KEY (`id`)
+    `idColore` INT NOT NULL AUTO_INCREMENT,
+    `nomeColore` CHAR(20) NOT NULL,
+    PRIMARY KEY (`idColore`)
 ) ENGINE=INNODB;
 
 CREATE TABLE `Materiale` (
-     `idMateriale` INT NOT NULL,
-     `nomeMateriale` CHAR(20) NOT NULL,
-     PRIMARY KEY (`idMateriale`)
+    `idMateriale` INT NOT NULL AUTO_INCREMENT,
+    `nomeMateriale` CHAR(20) NOT NULL,
+    PRIMARY KEY (`idMateriale`)
 ) ENGINE=INNODB;
 
 # ---------------------------------------------------------------------- #
@@ -41,11 +41,11 @@ CREATE TABLE `Materiale` (
 # ---------------------------------------------------------------------- #
 
 CREATE TABLE `Ordine` (
-     `idProdotto` INT NOT NULL,
-     `username` CHAR(20) NOT NULL,
-     `Data` DATE NOT NULL,
-     `quantita` CHAR(1) NOT NULL,
-     PRIMARY KEY (`idProdotto`, `username`, `Data`)
+    `idProdotto` INT NOT NULL,
+    `username` CHAR(20) NOT NULL,
+    `Data` DATE NOT NULL,
+    `quantita` CHAR(1) NOT NULL,
+    PRIMARY KEY (`idProdotto`, `username`, `Data`)
 ) ENGINE=INNODB;
 
 # ---------------------------------------------------------------------- #
@@ -53,15 +53,15 @@ CREATE TABLE `Ordine` (
 # ---------------------------------------------------------------------- #
 
 CREATE TABLE `Prodotto` (
-     `id` INT NOT NULL,
-     `prezzo` decimal(5,2) NOT NULL,
-     `descrizione` VARCHAR(256) NOT NULL,
-     `nome` CHAR(200) NOT NULL,
-     `stock` INT NOT NULL,
-     `idColore` INT NOT NULL,
-     `genere` CHAR(1) NOT NULL,
-     `idMateriale` INT NOT NULL,
-     PRIMARY KEY (`id`)
+    `idProdotto` INT NOT NULL AUTO_INCREMENT,
+    `prezzo` decimal(5,2) NOT NULL,
+    `descrizione` VARCHAR(256) NOT NULL,
+    `nome` CHAR(200) NOT NULL,
+    `stock` INT NOT NULL,
+    `idColore` INT NOT NULL,
+    `genere` CHAR(1) NOT NULL,
+    `idMateriale` INT NOT NULL,
+    PRIMARY KEY (`idProdotto`)
 ) ENGINE=INNODB;
 
 # ---------------------------------------------------------------------- #
@@ -69,8 +69,8 @@ CREATE TABLE `Prodotto` (
 # ---------------------------------------------------------------------- #
 
 CREATE TABLE `Genere` (
-     `tipoGenere` CHAR(1) NOT NULL,
-     PRIMARY KEY (`tipoGenere`)
+    `tipoGenere` CHAR(1) NOT NULL,
+    PRIMARY KEY (`tipoGenere`)
 ) ENGINE=INNODB;
 
 # ---------------------------------------------------------------------- #
@@ -78,13 +78,13 @@ CREATE TABLE `Genere` (
 # ---------------------------------------------------------------------- #
 
 CREATE TABLE `User` (
-     `username` CHAR(20) NOT NULL,
-     `password` CHAR(20) NOT NULL,
-     `Admin` CHAR NOT NULL,
-     `Nome` CHAR(20) NOT NULL,
-     `Cognome` CHAR(20) NOT NULL,
-     `Indirizzo` CHAR(20) NOT NULL,
-     PRIMARY KEY (`username`)
+    `username` CHAR(20) NOT NULL,
+    `password` CHAR(20) NOT NULL,
+    `Admin` CHAR NOT NULL,
+    `Nome` CHAR(20) NOT NULL,
+    `Cognome` CHAR(20) NOT NULL,
+    `Indirizzo` CHAR(20) NOT NULL,
+    PRIMARY KEY (`username`)
 ) ENGINE=INNODB;
 
 # ---------------------------------------------------------------------- #
@@ -102,7 +102,7 @@ CREATE UNIQUE INDEX `FK_ProCat_Categoria`
      ON `Categoria` (`idCategoria`);
 
 CREATE UNIQUE INDEX `PK_Colore`
-     ON `Colore` (`id`);
+     ON `Colore` (`idColore`);
 
 CREATE UNIQUE INDEX `PK_Materiale`
      ON `Materiale` (`idMateriale`);
@@ -114,13 +114,13 @@ CREATE INDEX `FK_Ordine_Username`
      ON `Ordine` (`username`);
 
 CREATE UNIQUE INDEX `PK_Prodotto`
-     ON `Prodotto` (`id`);
+     ON `Prodotto` (`idProdotto`);
 
 CREATE INDEX `FK_Prodotto_Colore`
      ON `Prodotto` (`idColore`);
 
 CREATE INDEX `FK_Prodotto_Genere`
-     ON Prodotto (`Genere`);
+     ON `Prodotto` (`Genere`);
 
 CREATE INDEX `FK_Prodotto_Materiale`
      ON `Prodotto` (`idMateriale`);
@@ -138,7 +138,7 @@ CREATE UNIQUE INDEX `PK_Username`
 
 ALTER TABLE `ProdottiCategorie` ADD CONSTRAINT `FK_ProCat_Prodotto`
      FOREIGN KEY (`idProdotto`)
-     REFERENCES `Prodotto` (`id`);
+     REFERENCES `Prodotto` (`idProdotto`);
 
 ALTER TABLE `ProdottiCategorie` ADD CONSTRAINT `FK_ProCat_Categoria`
      FOREIGN KEY (`idCategoria`)
@@ -150,11 +150,11 @@ ALTER TABLE `Ordine` ADD CONSTRAINT `FK_Ordine_Username`
 
 ALTER TABLE `Ordine` ADD CONSTRAINT `FK_Ordine_Prodotto`
      FOREIGN KEY (`idProdotto`)
-     REFERENCES `Prodotto` (`id`);
+     REFERENCES `Prodotto` (`idProdotto`);
 
 ALTER TABLE `Prodotto` ADD CONSTRAINT `FK_Prodotto_Colore`
      FOREIGN KEY (`idColore`)
-     REFERENCES `Colore` (`id`);
+     REFERENCES `Colore` (`idColore`);
 
 ALTER TABLE `Prodotto` ADD CONSTRAINT `FK_Prodotto_Genere`
      FOREIGN KEY (`genere`)
@@ -169,7 +169,7 @@ ALTER TABLE `Prodotto` ADD CONSTRAINT `FK_Prodotto_Materiale`
 # ADD VALUES "Colore"                                          #
 # ---------------------------------------------------------------------- #
 
-INSERT INTO `colore` (`id`, `nomeColore`) 
+INSERT INTO `colore` (`idColore`, `nomeColore`) 
 VALUES ('1', 'Bianco'), ('2', 'Nero'), ('3', 'Rosso'), ('4', 'Giallo'), ('5', 'Blu'), ('6', 'Viola'), ('7', 'Marrone'), ('8', 'Verde'), ('9', 'Grigio');
 
 # ---------------------------------------------------------------------- #
@@ -208,7 +208,7 @@ VALUES ('1', 'Running'), ('2', 'Mocassini'), ('3', 'Tacchi'), ('4', 'Stivali'), 
 # ADD VALUES "Prodotto"                                        #
 # ---------------------------------------------------------------------- #
 
-INSERT INTO `prodotto` (`id`, `prezzo`, `descrizione`, `nome`, `stock`, `idColore`, `genere`, `idMateriale`) 
+INSERT INTO `prodotto` (`idProdotto`, `prezzo`, `descrizione`, `nome`, `stock`, `idColore`, `genere`, `idMateriale`) 
 VALUES ('1', '149,99', 'Niente è più elegante, confortevole e affidabile. Nike Air Max 90 resta fedele alle origini da running della prima edizione 
 grazie all\'iconica suola con motivo waffle, agli strati esterni cuciti e alle iconiche linee di design.', 
 'Nike Air Max 90', '50', '1', 'M', '4'), ('2', '89,99', 'Chukka da uomo con tomaia in pelle Better Leather proveniente da fonti 
