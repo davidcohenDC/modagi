@@ -59,18 +59,18 @@ CREATE TABLE `Prodotto` (
      `nome` CHAR(200) NOT NULL,
      `stock` INT NOT NULL,
      `idColore` INT NOT NULL,
-     `sesso` CHAR(1) NOT NULL,
+     `genere` CHAR(1) NOT NULL,
      `idMateriale` INT NOT NULL,
      PRIMARY KEY (`id`)
 ) ENGINE=INNODB;
 
 # ---------------------------------------------------------------------- #
-# ADD TABLE "Sesso"                                                      #
+# ADD TABLE "genere"                                                      #
 # ---------------------------------------------------------------------- #
 
-CREATE TABLE `SESSO` (
-     `tipoSesso` CHAR(1) NOT NULL,
-     PRIMARY KEY (`tipoSesso`)
+CREATE TABLE `Genere` (
+     `tipoGenere` CHAR(1) NOT NULL,
+     PRIMARY KEY (`tipoGenere`)
 ) ENGINE=INNODB;
 
 # ---------------------------------------------------------------------- #
@@ -119,14 +119,14 @@ CREATE UNIQUE INDEX `PK_Prodotto`
 CREATE INDEX `FK_Prodotto_Colore`
      ON `Prodotto` (`idColore`);
 
-CREATE INDEX `FK_Prodotto_Sesso`
-     ON Prodotto (sesso);
+CREATE INDEX `FK_Prodotto_Genere`
+     ON Prodotto (`Genere`);
 
 CREATE INDEX `FK_Prodotto_Materiale`
      ON `Prodotto` (`idMateriale`);
 
-CREATE UNIQUE INDEX `PK_Sesso`
-     ON `SESSO` (`tipoSesso`);
+CREATE UNIQUE INDEX `PK_Genere`
+     ON `Genere` (`tipoGenere`);
 
 CREATE UNIQUE INDEX `PK_Username`
      ON `User` (`username`);
@@ -156,9 +156,9 @@ ALTER TABLE `Prodotto` ADD CONSTRAINT `FK_Prodotto_Colore`
      FOREIGN KEY (`idColore`)
      REFERENCES `Colore` (`id`);
 
-ALTER TABLE `Prodotto` ADD CONSTRAINT `FK_Prodotto_Sesso`
-     FOREIGN KEY (`sesso`)
-     REFERENCES `SESSO` (`tipoSesso`);
+ALTER TABLE `Prodotto` ADD CONSTRAINT `FK_Prodotto_Genere`
+     FOREIGN KEY (`genere`)
+     REFERENCES `Genere` (`tipoGenere`);
 
 ALTER TABLE `Prodotto` ADD CONSTRAINT `FK_Prodotto_Materiale`
      FOREIGN KEY (`idMateriale`)
@@ -166,28 +166,28 @@ ALTER TABLE `Prodotto` ADD CONSTRAINT `FK_Prodotto_Materiale`
 
 
 # ---------------------------------------------------------------------- #
-# ADD VALUES tipoSesso "Colore"                                          #
+# ADD VALUES "Colore"                                          #
 # ---------------------------------------------------------------------- #
 
 INSERT INTO `colore` (`id`, `nomeColore`) 
 VALUES ('1', 'Bianco'), ('2', 'Nero'), ('3', 'Rosso'), ('4', 'Giallo'), ('5', 'Blu'), ('6', 'Viola'), ('7', 'Marrone'), ('8', 'Verde'), ('9', 'Grigio');
 
 # ---------------------------------------------------------------------- #
-# ADD VALUES tipoSesso "Materiale"                                       #
+# ADD VALUES "Materiale"                                       #
 # ---------------------------------------------------------------------- #
 
 INSERT INTO `materiale` (`idMateriale`, `nomeMateriale`) 
 VALUES ('1', 'Cuoio'), ('2', 'Sintentico'), ('3', 'Pelle'), ('4', 'Tessuto');
 
 # ---------------------------------------------------------------------- #
-# ADD VALUES tipoSesso "Sesso"                                           #
+# ADD VALUES "Genere"                                           #
 # ---------------------------------------------------------------------- #
 
-INSERT INTO `sesso` (`tipoSesso`) 
+INSERT INTO `Genere` (`tipoGenere`) 
 VALUES ('M'), ('F');
 
 # ---------------------------------------------------------------------- #
-# ADD VALUES tipoSesso "User"                                            #
+# ADD VALUES "User"                                            #
 # ---------------------------------------------------------------------- #
 
 INSERT INTO `user` (`username`, `password`, `Admin`, `Nome`, `Cognome`, `Indirizzo`) 
@@ -198,17 +198,17 @@ INSERT INTO `user` (`username`, `password`, `Admin`, `Nome`, `Cognome`, `Indiriz
 VALUES ('test', 'test', 'N', 'testNome', 'TestCognome', 'Via Test 3');
 
 # ---------------------------------------------------------------------- #
-# ADD VALUES tipoSesso "Categoria"                                       #
+# ADD VALUES "Categoria"                                       #
 # ---------------------------------------------------------------------- #
 
 INSERT INTO `categoria` (`idCategoria`, `nomeCategoria`) 
 VALUES ('1', 'Running'), ('2', 'Mocassini'), ('3', 'Tacchi'), ('4', 'Stivali'), ('5', 'Classica'), ('6', 'Trekking');
 
 # ---------------------------------------------------------------------- #
-# ADD VALUES tipoSesso "Prodotto"                                        #
+# ADD VALUES "Prodotto"                                        #
 # ---------------------------------------------------------------------- #
 
-INSERT INTO `prodotto` (`id`, `prezzo`, `descrizione`, `nome`, `stock`, `idColore`, `sesso`, `idMateriale`) 
+INSERT INTO `prodotto` (`id`, `prezzo`, `descrizione`, `nome`, `stock`, `idColore`, `genere`, `idMateriale`) 
 VALUES ('1', '149,99', 'Niente è più elegante, confortevole e affidabile. Nike Air Max 90 resta fedele alle origini da running della prima edizione 
 grazie all\'iconica suola con motivo waffle, agli strati esterni cuciti e alle iconiche linee di design.', 
 'Nike Air Max 90', '50', '1', 'M', '4'), ('2', '89,99', 'Chukka da uomo con tomaia in pelle Better Leather proveniente da fonti 
@@ -216,7 +216,7 @@ ecosostenibili e fodera in tessuto ReBOTL™ realizzata con almeno il 50% di pla
 Sistema Aerocore™ integrato per una maggiore durata e un effetto ammortizzante a ritorno di energia.', 'Timberland Chukka', '30', '7', 'M', '1');
 
 # ---------------------------------------------------------------------- #
-# ADD VALUES tipoSesso "Ordine"                                          #
+# ADD VALUES "Ordine"                                          #
 # ---------------------------------------------------------------------- #
 
 INSERT INTO `ordine` (`idProdotto`, `username`, `Data`, `quantita`) 
