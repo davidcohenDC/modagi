@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS `ShopOnline`;
+CREATE DATABASE IF NOT EXISTS `Modagi`;
 
 
 # ---------------------------------------------------------------------- #
@@ -56,7 +56,7 @@ CREATE TABLE `Prodotto` (
      `id` INT NOT NULL,
      `prezzo` decimal(5,2) NOT NULL,
      `descrizione` VARCHAR(256) NOT NULL,
-     `nome` CHAR(20) NOT NULL,
+     `nome` CHAR(200) NOT NULL,
      `stock` INT NOT NULL,
      `idColore` INT NOT NULL,
      `sesso` CHAR(1) NOT NULL,
@@ -88,7 +88,7 @@ CREATE TABLE `User` (
 ) ENGINE=INNODB;
 
 # ---------------------------------------------------------------------- #
-# ADD View "INDEX SECTION"                                               #
+# ADD INDEX SECTION                                                      #
 # ---------------------------------------------------------------------- #
 
 
@@ -165,11 +165,60 @@ ALTER TABLE `Prodotto` ADD CONSTRAINT `FK_Prodotto_Materiale`
      REFERENCES `Materiale` (`idMateriale`);
 
 
+# ---------------------------------------------------------------------- #
+# ADD VALUES tipoSesso "Colore"                                          #
+# ---------------------------------------------------------------------- #
+
+INSERT INTO `colore` (`id`, `nomeColore`) 
+VALUES ('1', 'Bianco'), ('2', 'Nero'), ('3', 'Rosso'), ('4', 'Giallo'), ('5', 'Blu'), ('6', 'Viola'), ('7', 'Marrone'), ('8', 'Verde'), ('9', 'Grigio');
 
 # ---------------------------------------------------------------------- #
-# ADD info INTo "Cliente"                                                #
+# ADD VALUES tipoSesso "Materiale"                                       #
 # ---------------------------------------------------------------------- #
 
+INSERT INTO `materiale` (`idMateriale`, `nomeMateriale`) 
+VALUES ('1', 'Cuoio'), ('2', 'Sintentico'), ('3', 'Pelle'), ('4', 'Tessuto');
+
 # ---------------------------------------------------------------------- #
-# ADD View "Ricerca Sito Web Libero"                                     #
+# ADD VALUES tipoSesso "Sesso"                                           #
 # ---------------------------------------------------------------------- #
+
+INSERT INTO `sesso` (`tipoSesso`) 
+VALUES ('M'), ('F');
+
+# ---------------------------------------------------------------------- #
+# ADD VALUES tipoSesso "User"                                            #
+# ---------------------------------------------------------------------- #
+
+INSERT INTO `user` (`username`, `password`, `Admin`, `Nome`, `Cognome`, `Indirizzo`) 
+VALUES ('Dev', 'davidcohehn', 'S', 'David', 'Cohen', 'Via Roma 1'), ('More', 'lorenzomorelli', 
+'S', 'Lorenzo', 'Morelli', 'Via Test 1'), ('Gigi', 'luigiolivieri', 'S', 'Luigi', 'Olivieri', 'Via Test 2');
+
+INSERT INTO `user` (`username`, `password`, `Admin`, `Nome`, `Cognome`, `Indirizzo`) 
+VALUES ('test', 'test', 'N', 'testNome', 'TestCognome', 'Via Test 3');
+
+# ---------------------------------------------------------------------- #
+# ADD VALUES tipoSesso "Categoria"                                       #
+# ---------------------------------------------------------------------- #
+
+INSERT INTO `categoria` (`idCategoria`, `nomeCategoria`) 
+VALUES ('1', 'Running'), ('2', 'Mocassini'), ('3', 'Tacchi'), ('4', 'Stivali'), ('5', 'Classica'), ('6', 'Trekking');
+
+# ---------------------------------------------------------------------- #
+# ADD VALUES tipoSesso "Prodotto"                                        #
+# ---------------------------------------------------------------------- #
+
+INSERT INTO `prodotto` (`id`, `prezzo`, `descrizione`, `nome`, `stock`, `idColore`, `sesso`, `idMateriale`) 
+VALUES ('1', '149,99', 'Niente è più elegante, confortevole e affidabile. Nike Air Max 90 resta fedele alle origini da running della prima edizione 
+grazie all\'iconica suola con motivo waffle, agli strati esterni cuciti e alle iconiche linee di design.', 
+'Nike Air Max 90', '50', '1', 'M', '4'), ('2', '89,99', 'Chukka da uomo con tomaia in pelle Better Leather proveniente da fonti 
+ecosostenibili e fodera in tessuto ReBOTL™ realizzata con almeno il 50% di plastica riciclata per un ridotto impatto ambientale. 
+Sistema Aerocore™ integrato per una maggiore durata e un effetto ammortizzante a ritorno di energia.', 'Timberland Chukka', '30', '7', 'M', '1');
+
+# ---------------------------------------------------------------------- #
+# ADD VALUES tipoSesso "Ordine"                                          #
+# ---------------------------------------------------------------------- #
+
+INSERT INTO `ordine` (`idProdotto`, `username`, `Data`, `quantita`) 
+VALUES ('2', 'test', '2020-12-10', '1'), ('1', 'test', '2020-12-10', '2');
+
