@@ -26,6 +26,34 @@ class DatabaseHelper{
         // che ritornare un array associativo (dizionario)
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function checkLogIn($username, $password){
+
+        $stmt = $this->db->prepare("SELECT username
+                                    FROM User
+                                    WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        
+        /* prima controllo che l'utente sia nel db */
+        if (count($stmt->get_result()->fetch_all(MYSQLI_ASSOC)) > 0) {
+            
+            /* controllo che la password sia giusta */
+            return $this->checkPassword($username, $password);   
+        } 
+        return [false,"USER NON TROVATO"];
+    }
+
+    //TODO: salare la password
+    private function checkPassword($username, $password){
+        $stmt = $this->db->prepare("SELECT COUNT(username)
+                                    FROM User
+                                    WHERE username = ? AND password = ?");
+        $stmt->bind_param("ss", $username, $password);
+        $stmt->execute();
+
+        return [$stmt->get_result() > "0","PASSWORD ERRATA!"];
+    }
 }
 
 ?>

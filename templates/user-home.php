@@ -3,7 +3,7 @@
             Bentornato!
         </div>
         <div class="fs-1 col-12 text-center fw-bold">
-            <?php echo $templateParams["userName"]; ?>
+            <?php echo $_SESSION["username"]; ?>
         </div>
     </h1>
 </div>
@@ -19,7 +19,7 @@
         <a href="#" class="my-3 btn btn-light fw-bold"> I miei Ordini </a>
         <a href="#" class="my-3 btn btn-light fw-bold"> Cambia Password </a>
         <a href="#" class="my-3 btn btn-light fw-bold"> ... </a>
-        <button id="log-out" class="my-3 btn btn-danger fw-bold" onclick=""> Esci </a>
+        <a href="user-page.php" class="my-3 btn btn-danger fw-bold"> Esci </a>
     </div>
 </div>
 
