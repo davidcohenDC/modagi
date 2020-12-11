@@ -25,7 +25,22 @@ class Table extends Connection {
       return $this->connection; 
     }
 
-  public function getAll() { }
+    public function getAll() {
+      //creo un nuovo array per i prodotti
+      $row = array();
+      //effettuo al query estesa dalla Connection e la metto in result
+      $result = parent::query("SELECT * FROM ". $this->table );
+
+      //inserisco nell'array tutti i gli oggetti
+      while($record = $result->fetch_object()) {
+          array_push($row, $record);
+      }
+      //ritorno il risultato
+      $result = $row;
+      return $result;
+  }
+
+  //da implementare
   public function getById() { }
   public function deleteById() { }
 

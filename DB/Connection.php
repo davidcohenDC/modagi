@@ -1,13 +1,16 @@
 <?php
 
 class Connection{
+    //connections fields
     private $connection;
-    private $servername = getenv('DB_HOST');
-    private $username = getenv('DB_USER');
-    private $password = getenv('DB_PASS');
+    private $username = "root";
+    private $password = "";
+    private $serverName = "modagi";
+    private $serverHost = "127.0.0.1";
+    private $serverPort = 3306;
 
     public function __construct() {
-        $this->connection = new mysqli($this->servername, $this->username, $this->password, $this->db);
+        $this->connection = new mysqli($this->serverHost, $this->username, $this->password, $this->serverName, $this->serverPort);
 
         if($this->connection->connect_error) {
             // die interrompe tutto!!
