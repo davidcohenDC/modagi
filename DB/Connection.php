@@ -1,16 +1,15 @@
 <?php
 
+
+require("./DbInfo.php");
+
 class Connection{
     //connections fields
     private $connection;
-    private $username = "root";
-    private $password = "";
-    private $serverName = "modagi";
-    private $serverHost = "127.0.0.1";
-    private $serverPort = 3306;
 
     public function __construct() {
-        $this->connection = new mysqli($this->serverHost, $this->username, $this->password, $this->serverName, $this->serverPort);
+      $dbInfo = new DbInfo();
+      $this->connection = new mysqli($dbInfo->getHost(), $dbInfo->getUsername(), $dbInfo->getUsername(), $dbInfo->getName(), $dbInfo->getPort());
 
         if($this->connection->connect_error) {
             // die interrompe tutto!!
