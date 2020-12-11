@@ -26,11 +26,6 @@
             </div>
         </div>
 
-        <div class="my-4 mx-2">
-            <input id="vendor" name="vendor" class="form-check-input" type="checkbox" value="true" />
-            <label for="vendor" class="form-check-label fw-bold"> Sono un venditore </label>
-        </div>
-
         <div class="row justify-content-md-center justify-content-lg-end">
             <div class="my-3 mx-2 col-md-10 col-lg-8">
                 <input type="submit" class="btn btn-light col-12 fw-bold" value="Log In" />
