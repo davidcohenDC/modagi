@@ -26,6 +26,7 @@ class DatabaseHelper{
         // che ritornare un array associativo (dizionario)
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
 }
 
 ?>
