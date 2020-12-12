@@ -31,9 +31,8 @@ CREATE TABLE IF NOT EXISTS `Categoria` (
     `idCategoria` INT NOT NULL AUTO_INCREMENT,
     `nomeCategoria` CHAR(20) NOT NULL,
     PRIMARY KEY (`idCategoria`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
 ) ENGINE=INNODB;
+
 # ---------------------------------------------------------------------- #
 # ADD TABLE "Colore"                                                     #
 # ---------------------------------------------------------------------- #
@@ -75,6 +74,7 @@ CREATE TABLE IF NOT EXISTS `Prodotto` (
     `idColore` INT NOT NULL,
     `genere` CHAR(1) NOT NULL,
     `idMateriale` INT NOT NULL,
+    `idMarca` INT NOT NULL,
     PRIMARY KEY (`idProdotto`)
 ) ENGINE=INNODB;
 
@@ -100,6 +100,15 @@ CREATE TABLE IF NOT EXISTS `User` (
     `Indirizzo` CHAR(20) NOT NULL,
     PRIMARY KEY (`username`)
 ) ENGINE=INNODB;
+
+# ---------------------------------------------------------------------- #
+# ADD TABLE "Marca"                                                      #
+# ---------------------------------------------------------------------- #
+
+CREATE TABLE IF NOT EXISTS `marca` ( 
+     `IdMarca` INT NOT NULL AUTO_INCREMENT,
+     `Nome` VARCHAR(50) NOT NULL,
+     PRIMARY KEY (`IdMarca`)) ENGINE = InnoDB;
 
 # ---------------------------------------------------------------------- #
 # ADD INDEX SECTION                                                      #
@@ -145,6 +154,9 @@ CREATE UNIQUE INDEX `PK_Genere`
 CREATE UNIQUE INDEX `PK_Username`
      ON `User` (`username`);
 
+CREATE UNIQUE INDEX `PK_Marca`
+     ON `Marca` (`idMarca`);
+
 
 # ---------------------------------------------------------------------- #
 # FOREIGN KEY CONSTRAINTS                                                #
@@ -177,6 +189,10 @@ ALTER TABLE `Prodotto` ADD CONSTRAINT `FK_Prodotto_Genere`
 ALTER TABLE `Prodotto` ADD CONSTRAINT `FK_Prodotto_Materiale`
      FOREIGN KEY (`idMateriale`)
      REFERENCES `Materiale` (`idMateriale`);
+
+ALTER TABLE `Prodotto` ADD CONSTRAINT `FK_Prodotto_Marca`
+     FOREIGN KEY (`idMarca`)
+     REFERENCES `Marca` (`idMarca`);
 
 
 
