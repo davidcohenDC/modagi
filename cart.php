@@ -6,7 +6,7 @@ require_once("cookie.php");
 //TODO check if user is logged, else redirect to login page
 $templateParams["title"] = "Shopping cart";
 $templateParams["main"] = "./templates/cart_page.php";
-$templateParams["cssFileName"] = "cart.css";
+$templateParams["cssFileName"] = "cart/cart.css";
 
 $cookie = new CookieManager();
 // la setCookie la deve fare Dev quando nella main page l'utente aggiunge qualcosa al carrello
