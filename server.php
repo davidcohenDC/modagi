@@ -12,4 +12,5 @@ $product = new Product("prodotto");
 
 $templateParams["categorie"] = $category->selectAll();
 $templateParams["prodotti"] = $product->selectAll();
+$templateParams["promozioni"] = 2;
 //da inserire gli altri
