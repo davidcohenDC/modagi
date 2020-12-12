@@ -1,33 +1,32 @@
 <?php
 
-    require_once("./server.php");
-    
-    if (isset($_POST["username"]) && isset($_POST["password"])) {
-        $login_result = $dbh->checkLogIn($_POST["username"], $_POST["password"]);
+require_once("./server.php");
+
+if (isset($_POST["username"]) && isset($_POST["password"])) {
+    $login_result = $dbh->checkLogIn($_POST["username"], $_POST["password"]);
+
+    // login fallito
+    if ($login_result[0]) {
+        $_SESSION["username"] = $_POST["username"];
+    } else {
+        $templateParams["error"] = $login_result[1];
     }
+}
 
+if (isset($_GET["logOut"])) {
+    logOut();
+    header("location: user-page.php");
+}
 
-    if(isset($login_result[0])){
-        if ($login_result[0]){
-        
-            /* login con successo */
-            $templateParams["title"] = "User Page";
-            $_SESSION["username"] = "Luigi"; //TODO: make this query driven.
-            $templateParams["main"] = "user-home.php";
-        
-        } else {
+if (isUserLoggedIn()) {
+    $pageTitle = "User Page";
+    $pageMain = "user-home.php";
+} else {
+    $pageTitle = "Log In";
+    $pageMain = "log-in-form.php";
+}
 
-            /* login fallito */
-            $templateParams["title"] = "Log In";
-            $templateParams["error"] = $login_result[1];
-            $templateParams["main"] = "log-in-form.php";
-        }
-    } else { 
-        
-        /* user non ha effetuato log in */
-        $templateParams["title"] = "Log In";
-        $templateParams["main"] = "log-in-form.php";
-    }
-    
-    
-    require 'templates/base.php';
+$templateParams["title"] = $pageTitle;
+$templateParams["main"] = $pageMain;
+
+require 'templates/base.php';
