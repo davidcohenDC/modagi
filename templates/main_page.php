@@ -11,7 +11,7 @@
   <title>Shop Homepage</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="<?php echo CSS_FILE; ?>bootstrap/bootstrap.min.css" rel="stylesheet">
+  <link href="<?php echo BOOTSTRAP_CSS_LINK ?>" rel="stylesheet">
 
   <!-- Custom styles for this template -->
   <link href="<?php echo CSS_FILE; ?>shop-homepage.css" rel="stylesheet">
@@ -133,7 +133,7 @@
 
   <!-- Bootstrap core JavaScript -->
   <script src="<?php echo JS_FILE ?>jquery/jquery.min.js"></script>
-  <script src="<?php echo JS_FILE ?>bootstrap/bootstrap.bundle.min.js"></script>
+  <script src="<?php echo BOOTSTRAP_JS_LINK ?>"></script>
 
 </body>
 
