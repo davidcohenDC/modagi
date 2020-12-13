@@ -7,7 +7,7 @@ require_once("./utilis/functions.php");
 require_once("./db/Category.php");
 require_once("./db/Product.php");
 
-$category = new Category("categoria");
+$category = new Category();
 $product = new Product();
 
 $templateParams["categorie"] = $category->selectAll();

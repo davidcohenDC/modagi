@@ -24,5 +24,6 @@ foreach ($allArticle as $key => $articleName) {
 $cart["totalPrice"] = $db->getTotalPrice($allArticle);
 
 require("./templates/base.php");
+require("./templates/footer.php");
 
 ?>

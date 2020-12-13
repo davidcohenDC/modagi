@@ -30,3 +30,4 @@ $templateParams["title"] = $pageTitle;
 $templateParams["main"] = $pageMain;
 
 require 'templates/base.php';
+require("templates/footer.php");
