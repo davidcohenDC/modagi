@@ -1,3 +1,20 @@
+<?php 
+
+if (isset($_GET['pageno'])) {
+    $pageno = $_GET['pageno'];
+} else {
+    $pageno = 1;
+}
+
+$product = new Product("prodotto");
+$product->setNumberOfRecordPerPage(6);
+$offset = ($pageno-1) * $product->getNumberOfRecordPerPage();
+
+$total_pages = $product->getTotalPages();
+$templateParams["prodotti"] = $product->Pagination($offset);
+
+?>
+
 <!DOCTYPE html>
 <html lang="it">
 
@@ -12,7 +29,6 @@
 
   <!-- Bootstrap core CSS -->
   <link href="<?php echo BOOTSTRAP_CSS_LINK ?>" rel="stylesheet">
-
   <!-- Custom styles for this template -->
   <link href="<?php echo CSS_FILE; ?>shop-homepage.css" rel="stylesheet">
 
@@ -113,6 +129,22 @@
 
         </div>
         <!-- /.row -->
+        <div class="row">
+          <div class="col-12">
+            <ul class="pagination">
+              <li><a href="?pageno=1">First</a></li>
+              <li class="<?php if($pageno <= 1){ echo 'disable';} ?>">
+                <a href="<?php if($pageno <= 1){ echo "#";} else { echo "?pageno=".($pageno-1);}?>">Prev</a>
+              </li>
+              <li class="<?php if($pageno >= $total_pages){ echo 'disabled'; } ?>">
+                <a href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?>">Next</a>
+              </li>
+              <li>
+                <a href="?pageno=<?php echo $total_pages; ?>">Last</a>
+              </li>
+            </ul>
+          </div>
+        </div>
 
       </div>
       <!-- /.col-lg-9 -->
