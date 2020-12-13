@@ -4,7 +4,8 @@ class CookieManager{
     private $expireTime;
 
     public function __construct() {
-        $this->expireTime = time() + (86400 * 30);
+        $oneDay = 86400;
+        $this->expireTime = time() + $oneDay;
     }
 
     public function exists($cookie_name) {
