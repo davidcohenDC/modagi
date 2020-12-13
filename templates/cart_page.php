@@ -5,7 +5,7 @@
     <div class="card-header bg-dark text-light">
         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
         Shipping cart
-        <a href="" class="btn btn-outline-info btn-sm float-xs-right">Continiu shopping</a>
+        <a href="" class="btn btn-outline-info btn-sm pull-right">Continiu shopping</a>
         <div class="clearfix"></div>
     </div>
 
@@ -45,13 +45,13 @@
         <?php endforeach ?>
         <!-- END PRODUCT -->
 
-        <div class="float-xs-right">
-            <a href="" class="btn btn-outline-secondary float-xs-right">Update shopping cart</a>
+        <div class="pull-right">
+            <a href="" class="btn btn-outline-secondary pull-right">Update shopping cart</a>
         </div>
     </div>
 
     <div class="card-footer">
-        <div class="coupon col-md-5 col-sm-5 no-padding-left float-xs-left">
+        <div class="coupon col-md-5 col-sm-5 no-padding-left pull-left">
             <div class="row">
                 <div class="col-6">
                     <input type="text" class="form-control" placeholder="cupone code">
@@ -61,9 +61,9 @@
                 </div>
             </div>
         </div>
-        <div class="float-xs-right" style="margin: 10px">
-            <a href="" class="btn btn-success float-xs-right">Checkout</a>
-            <div class="float-xs-right" style="margin: 5px">
+        <div class="pull-right" style="margin: 10px">
+            <a href="" class="btn btn-success pull-right">Checkout</a>
+            <div class="pull-right" style="margin: 5px">
                 Total price: <b><?php echo $cart["totalPrice"] ?>€ </b>
             </div>
         </div>
