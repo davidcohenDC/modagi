@@ -7,11 +7,11 @@
     <meta name="author" content="">
     <!--page title-->
     <title><?php echo $templateParams["title"]; ?></title>
-    <!--bootstrap include-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <!--jquery include-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="<?php echo JQUERY_LINK ?>"></script>
+    <!--bootstrap include-->
+    <link rel="stylesheet" href="<?php echo BOOTSTRAP_CSS_LINK ?>">
+    <script src="<?php echo BOOTSTRAP_JS_LINK ?>"></script>
     <!--base css file-->
     <link rel="stylesheet" href="<?php echo CSS_FILE; ?>base.css">
     <!-- Custom styles for this template -->
