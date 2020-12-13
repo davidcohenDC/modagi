@@ -44,7 +44,7 @@ VALUES ('1', 'Running'), ('2', 'Mocassini'), ('3', 'Tacchi'), ('4', 'Stivali'), 
 # ---------------------------------------------------------------------- #
 
 INSERT INTO `marca` (`IdMarca`, `Nome`) 
-VALUES ('1', 'Nike'), ('2', 'Timberland'), ('4', 'Anna Field'), ('5', 'Adidas'), ('5', 'New Balance');
+VALUES ('1', 'Nike'), ('2', 'Timberland'), ('4', 'Anna Field'), ('5', 'Adidas'), ('6', 'New Balance');
 
 # ---------------------------------------------------------------------- #
 # ADD VALUES "Prodotto"                                                  #
