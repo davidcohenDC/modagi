@@ -3,8 +3,8 @@
 require_once("Database.php");
 
 //La classe prodotto estende da table che a sua volta estende da Connection. Abbiamo tutti i getter e setter e implementiamo metodi specifici
-class Product extends Database {
-    private $table = "Prodotto";
+class Colour extends Database {
+    private $table = "Colore";
 
     public function __construct() {
         //richiamo la classe setTable dalla Table
@@ -15,7 +15,7 @@ class Product extends Database {
       return parent::Select("SELECT * FROM ".$this->table);
     }
 
-    public function countAllProduct() {
+    public function countAll() {
       return parent::Select("SELECT COUNT(*) as TOT FROM ".$this->table)[0]; 
     }
 
@@ -23,9 +23,6 @@ class Product extends Database {
       return $this->table;
     }
 
-    public function selectByIdCategoria() {
-      return parent::Select("SELECT * FROM ".$this->table. "WHERE idCategoria = ?");
-    }
 
 }
 

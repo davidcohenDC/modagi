@@ -9,13 +9,19 @@ $totalPage = $paginator->getTotalPages();
 
       <h1 class="my-4">SH</h1>
       <div class="list-group">
-      <?php foreach($templateParams["categorie"] as $categoria): ?>
-        <a href="index.php?categoria=<?php echo $categoria["idCategoria"] ?>" class="list-group-item"><?php echo $categoria["nomeCategoria"] ?></a>
+      <?php foreach($templateParams["marca"] as $marca): ?>
+        <a href="<?php if($_SERVER['REQUEST_URI'] != "/") {echo change_url_parameter($_SERVER['REQUEST_URI'],"marca", $marca["IdMarca"]);} else {echo "?marca=".$marca["IdMarca"];}?>" class="list-group-item"><?php echo $marca["Nome"] ?></a>
       <?php endforeach ?>
       </div>
-
+      <div class="list-group mx-10">
+      <?php foreach($templateParams["colori"] as $colore): ?>
+        <a href="<?php if($_SERVER['REQUEST_URI'] != "/") {echo change_url_parameter($_SERVER['REQUEST_URI'],"colore", $colore["idColore"]);} else {echo "?colore=".$colore["idColore"];}?>" class="list-group-item"><?php echo $colore["nomeColore"] ?></a>
+      <?php endforeach ?>
+      </div>
     </div>
     <!-- /.col-lg-3 -->
+
+    
 
     <div class="col-lg-9">
 
@@ -67,16 +73,16 @@ $totalPage = $paginator->getTotalPages();
       <!-- /.row -->
       <div class="row">
         <div class="col-12">
-          <ul class="pagination">
-            <li><a href="?pag=1">First</a></li>
+          <ul class="pagination <?php if($records <= 0) {echo " hidden";} ?>">
+            <li><a href="<?php echo $paginator->getFirstUrlPage(); ?>">First</a></li>
             <li class="<?php if($page <= 1){ echo 'disable';} ?>">
-              <a href="<?php if($page <= 1){ echo "#";} else { echo "?pag=".($page-1);}?>">Prev</a>
+              <a href="<?php if($page <= 1){ echo "#";} else { echo ($paginator->setPrevUrlPage());}?>">Prev</a>
             </li>
             <li class="<?php if($page >= $totalPage){ echo 'disabled'; } ?>">
-              <a href="<?php if($page >= $totalPage){ echo '#'; } else { echo "?pag=".($page+1); } ?>">Next</a>
+            <a href="<?php if($page >= $totalPage){ echo "#";} else { echo ($paginator->setNextUrlPage());}?>">Next</a>
             </li>
             <li>
-              <a href="?pag=<?php echo $totalPage; ?>">Last</a>
+              <a href="<?php echo $paginator->getLastUrlPage(); ?>">Last</a>
             </li>
           </ul>
         </div>

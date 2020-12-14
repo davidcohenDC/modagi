@@ -60,6 +60,23 @@ class Database{
         return false;
     }
 
+        // Select a row/s in a Database Table
+        public function SimpleQuery( $query = ""){
+	
+            try{
+            
+                $stmt = $this->connection->prepare( $query );
+                $stmt->execute();
+                $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+                return $result;
+            
+            }catch(Exception $e){
+                throw New Exception( $e->getMessage() );
+            }
+        
+            return false;
+        }
+
     // Update a row/s in a Database Table
     public function Update( $query = "" , $params = [] ){
         try{

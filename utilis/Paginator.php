@@ -10,24 +10,20 @@ class Paginator{
     private $query;
     private $resultQuery;
 
-    public function __construct($table,$query, $elementForPage)
+    public function __construct($table)
     {
         $this->table = $table;
-        $this->query = $query;
         $this->page = 1;
-        $this->elementForPage= $elementForPage;
         $this->startPage= ($this->page-1) * $this->elementForPage;
         $this->totalPages = 1;
-        $this->resultQuery = $table->Select($query);
-        $this->records = count($this->resultQuery);
     }
-
-
+    
     private function retrivePage() {
-        
+
         if(isset($_GET["pag"])) {
             return $this->page = $_GET["pag"];
         } else {
+
             return $this->page = 1;
         }
     }
@@ -38,13 +34,65 @@ class Paginator{
         $this->totalPages = ceil($this->records / $this->elementForPage);
     }
 
-
-    public function getPage() {
-        return $this->page;
-    }
-
     public function setNewFilter($query) {
         $this->query = $query;
+        $this->resultQuery = $this->table->Select($query);
+        //$this->refresh();
+    }
+
+    public function setNextUrlPage() {
+        $this->page = $this->retrivePage()+1;
+        if($_SERVER['REQUEST_URI'] != "/") {
+            return change_url_parameter($_SERVER['REQUEST_URI'],"pag",$this->page);
+        } else {
+            return "?pag=".$this->page;
+        }
+        
+    }
+
+    public function setPrevUrlPage() {
+        $this->page = $this->retrivePage()-1;
+        if($_SERVER['REQUEST_URI'] != "/") {
+            return change_url_parameter($_SERVER['REQUEST_URI'],"pag",$this->page);
+        } else {
+            return "?pag=".$this->page;
+        }
+ 
+    }
+
+    public function getLastUrlPage() {
+        if($_SERVER['REQUEST_URI'] != "/") {
+            return change_url_parameter($_SERVER['REQUEST_URI'],"pag",$this->totalPages);
+        } else {
+            return "?pag=".$this->totalPages;
+        }
+        
+    }
+
+    public function getFirstUrlPage() {
+        $this->page = 1;
+        if($_SERVER['REQUEST_URI'] != "/") {
+            return change_url_parameter($_SERVER['REQUEST_URI'],"pag",$this->page);
+        } else {
+            return "?pag=".$this->page;
+        }
+    }
+
+    public function paging() {
+
+        $this->retrivePage();
+        $this->refresh();
+
+        if($this->startPage > 1) {
+            $this->query = $this->query. " LIMIT ". $this->elementForPage. " OFFSET ". $this->startPage;
+            $this->resultQuery = $this->table->Select($this->query);
+            return $this->resultQuery;
+        } else {
+            $this->query = $this->query. " LIMIT ". $this->elementForPage;
+            $this->resultQuery = $this->table->Select($this->query);
+            return $this->resultQuery;
+        }
+
     }
 
     public function getQuery() {
@@ -63,21 +111,12 @@ class Paginator{
         return $this->records;
     }
 
-    public function paging() {
+    public function setElementForPage($elemForPage) {
+        $this->elementForPage = $elemForPage;
+    }
 
-        $this->retrivePage();
-        $this->refresh();
-
-        if($this->startPage > 1) {
-            $this->query = $this->query. " LIMIT ". $this->records. " OFFSET ". $this->startPage;
-            $this->resultQuery = $this->table->Select($this->query);
-            return $this->resultQuery;
-        } else {
-            $this->query = $this->query. " LIMIT ". $this->elementForPage;
-            $this->resultQuery = $this->table->Select($this->query);
-            return $this->resultQuery;
-        }
-
+    public function getPage() {
+        return $this->page;
     }
 
 }
