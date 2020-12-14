@@ -28,9 +28,9 @@ CREATE TABLE IF NOT EXISTS `ProdottiCategorie` (
 # ---------------------------------------------------------------------- #
 
 CREATE TABLE IF NOT EXISTS `Categoria` (
-    `idCategoria` INT NOT NULL AUTO_INCREMENT,
-    `nomeCategoria` CHAR(20) NOT NULL,
-    PRIMARY KEY (`idCategoria`)
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `nome` CHAR(20) NOT NULL,
+    PRIMARY KEY (`id`)
 ) ENGINE=INNODB;
 
 # ---------------------------------------------------------------------- #
@@ -38,15 +38,15 @@ CREATE TABLE IF NOT EXISTS `Categoria` (
 # ---------------------------------------------------------------------- #
 
 CREATE TABLE IF NOT EXISTS `Colore` (
-    `idColore` INT NOT NULL AUTO_INCREMENT,
-    `nomeColore` CHAR(20) NOT NULL,
-    PRIMARY KEY (`idColore`)
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `nome` CHAR(20) NOT NULL,
+    PRIMARY KEY (`id`)
 ) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `Materiale` (
-    `idMateriale` INT NOT NULL AUTO_INCREMENT,
-    `nomeMateriale` CHAR(20) NOT NULL,
-    PRIMARY KEY (`idMateriale`)
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `nome` CHAR(20) NOT NULL,
+    PRIMARY KEY (`id`)
 ) ENGINE=INNODB;
 
 # ---------------------------------------------------------------------- #
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `Materiale` (
 CREATE TABLE IF NOT EXISTS `Ordine` (
     `idProdotto` INT NOT NULL,
     `username` CHAR(20) NOT NULL,
-    `Data` DATE NOT NULL,
+    `data` DATE NOT NULL,
     `quantita` CHAR(1) NOT NULL,
     PRIMARY KEY (`idProdotto`, `username`, `Data`)
 ) ENGINE=INNODB;
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `Ordine` (
 # ---------------------------------------------------------------------- #
 
 CREATE TABLE IF NOT EXISTS `Prodotto` (
-    `idProdotto` INT NOT NULL AUTO_INCREMENT,
+    `id` INT NOT NULL AUTO_INCREMENT,
     `prezzo` decimal(5,2) NOT NULL,
     `descrizione` VARCHAR(256) NOT NULL,
     `nome` CHAR(200) NOT NULL,
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `Prodotto` (
     `genere` CHAR(1) NOT NULL,
     `idMateriale` INT NOT NULL,
     `idMarca` INT NOT NULL,
-    PRIMARY KEY (`idProdotto`)
+    PRIMARY KEY (`id`)
 ) ENGINE=INNODB;
 
 # ---------------------------------------------------------------------- #
@@ -94,10 +94,10 @@ CREATE TABLE IF NOT EXISTS `Genere` (
 CREATE TABLE IF NOT EXISTS `User` (
     `username` CHAR(20) NOT NULL,
     `password` CHAR(20) NOT NULL,
-    `Admin` CHAR NOT NULL,
-    `Nome` CHAR(20) NOT NULL,
-    `Cognome` CHAR(20) NOT NULL,
-    `Indirizzo` CHAR(20) NOT NULL,
+    `admin` CHAR NOT NULL,
+    `nome` CHAR(20) NOT NULL,
+    `cognome` CHAR(20) NOT NULL,
+    `indirizzo` CHAR(20) NOT NULL,
     PRIMARY KEY (`username`)
 ) ENGINE=INNODB;
 
@@ -106,9 +106,9 @@ CREATE TABLE IF NOT EXISTS `User` (
 # ---------------------------------------------------------------------- #
 
 CREATE TABLE IF NOT EXISTS `marca` ( 
-     `IdMarca` INT NOT NULL AUTO_INCREMENT,
-     `Nome` VARCHAR(50) NOT NULL,
-     PRIMARY KEY (`IdMarca`)) ENGINE = InnoDB;
+     `id` INT NOT NULL AUTO_INCREMENT,
+     `nome` VARCHAR(50) NOT NULL,
+     PRIMARY KEY (`Id`)) ENGINE = InnoDB;
 
 # ---------------------------------------------------------------------- #
 # ADD INDEX SECTION                                                      #
@@ -122,13 +122,13 @@ CREATE INDEX `FK_ProCat_Prodotto`
      ON `ProdottiCategorie` (`idProdotto`);
 
 CREATE UNIQUE INDEX `FK_ProCat_Categoria`
-     ON `Categoria` (`idCategoria`);
+     ON `Categoria` (`id`);
 
 CREATE UNIQUE INDEX `PK_Colore`
-     ON `Colore` (`idColore`);
+     ON `Colore` (`id`);
 
 CREATE UNIQUE INDEX `PK_Materiale`
-     ON `Materiale` (`idMateriale`);
+     ON `Materiale` (`id`);
 
 CREATE UNIQUE INDEX `PK_Ordine`
      ON `Ordine` (`idProdotto`, `username`, `Data`);
@@ -137,7 +137,7 @@ CREATE INDEX `FK_Ordine_Username`
      ON `Ordine` (`username`);
 
 CREATE UNIQUE INDEX `PK_Prodotto`
-     ON `Prodotto` (`idProdotto`);
+     ON `Prodotto` (`id`);
 
 CREATE INDEX `FK_Prodotto_Colore`
      ON `Prodotto` (`idColore`);
@@ -155,7 +155,7 @@ CREATE UNIQUE INDEX `PK_Username`
      ON `User` (`username`);
 
 CREATE UNIQUE INDEX `PK_Marca`
-     ON `Marca` (`idMarca`);
+     ON `Marca` (`id`);
 
 
 # ---------------------------------------------------------------------- #
@@ -164,11 +164,11 @@ CREATE UNIQUE INDEX `PK_Marca`
 
 ALTER TABLE `ProdottiCategorie` ADD CONSTRAINT `FK_ProCat_Prodotto`
      FOREIGN KEY (`idProdotto`)
-     REFERENCES `Prodotto` (`idProdotto`);
+     REFERENCES `Prodotto` (`id`);
 
 ALTER TABLE `ProdottiCategorie` ADD CONSTRAINT `FK_ProCat_Categoria`
      FOREIGN KEY (`idCategoria`)
-     REFERENCES `Categoria` (`idCategoria`);
+     REFERENCES `Categoria` (`id`);
 
 ALTER TABLE `Ordine` ADD CONSTRAINT `FK_Ordine_Username`
      FOREIGN KEY (`username`)
@@ -176,11 +176,11 @@ ALTER TABLE `Ordine` ADD CONSTRAINT `FK_Ordine_Username`
 
 ALTER TABLE `Ordine` ADD CONSTRAINT `FK_Ordine_Prodotto`
      FOREIGN KEY (`idProdotto`)
-     REFERENCES `Prodotto` (`idProdotto`);
+     REFERENCES `Prodotto` (`id`);
 
 ALTER TABLE `Prodotto` ADD CONSTRAINT `FK_Prodotto_Colore`
      FOREIGN KEY (`idColore`)
-     REFERENCES `Colore` (`idColore`);
+     REFERENCES `Colore` (`id`);
 
 ALTER TABLE `Prodotto` ADD CONSTRAINT `FK_Prodotto_Genere`
      FOREIGN KEY (`genere`)
@@ -188,11 +188,11 @@ ALTER TABLE `Prodotto` ADD CONSTRAINT `FK_Prodotto_Genere`
 
 ALTER TABLE `Prodotto` ADD CONSTRAINT `FK_Prodotto_Materiale`
      FOREIGN KEY (`idMateriale`)
-     REFERENCES `Materiale` (`idMateriale`);
+     REFERENCES `Materiale` (`id`);
 
 ALTER TABLE `Prodotto` ADD CONSTRAINT `FK_Prodotto_Marca`
      FOREIGN KEY (`idMarca`)
-     REFERENCES `Marca` (`idMarca`);
+     REFERENCES `Marca` (`id`);
 
 
 

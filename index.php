@@ -10,17 +10,16 @@
     $filter = "SELECT * FROM prodotto ";
 
     if(isset($_GET["marca"])) {
-        $filter = $filter."WHERE IdMarca = ".$_GET["marca"];
+        $filter = $filter."WHERE id = ".$_GET["marca"];
     }
  
     if(isset($_GET["colore"])) {
-        $filter = $filter." AND IdColore = ".$_GET["colore"];
+        $filter = $filter." AND id = ".$_GET["colore"];
     }
 
     //setting the Paginator
-    $paginator = new Paginator($product);
     $paginator->setElementForPage(MAX_PRODUCT_FOR_PAGE);
-    $paginator->setNewFilter($filter);
+    $paginator->setNewSelection($filter);
     
     $templateParams["prodotti"] = $paginator->paging();
     $templateParams["pagina"] = $paginator->getPage();

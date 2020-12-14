@@ -10,12 +10,12 @@ $totalPage = $paginator->getTotalPages();
       <h1 class="my-4">SH</h1>
       <div class="list-group">
       <?php foreach($templateParams["marca"] as $marca): ?>
-        <a href="<?php if($_SERVER['REQUEST_URI'] != "/") {echo change_url_parameter($_SERVER['REQUEST_URI'],"marca", $marca["IdMarca"]);} else {echo "?marca=".$marca["IdMarca"];}?>" class="list-group-item"><?php echo $marca["Nome"] ?></a>
+        <a href="<?php if($_SERVER['REQUEST_URI'] != "/") { $url = $paginator->setFirstUrlPage(); echo addURLParameter($url,"marca", $marca["id"]);} else {echo "?marca=".$marca["id"];}?>" class="list-group-item"><?php echo $marca["nome"] ?></a>
       <?php endforeach ?>
       </div>
       <div class="list-group mx-10">
       <?php foreach($templateParams["colori"] as $colore): ?>
-        <a href="<?php if($_SERVER['REQUEST_URI'] != "/") {echo change_url_parameter($_SERVER['REQUEST_URI'],"colore", $colore["idColore"]);} else {echo "?colore=".$colore["idColore"];}?>" class="list-group-item"><?php echo $colore["nomeColore"] ?></a>
+        <a href="<?php if($_SERVER['REQUEST_URI'] != "/") {$url = $paginator->setFirstUrlPage(); echo addURLParameter($url,"colore", $colore["id"]);} else {echo "?colore=".$colore["id"];}?>" class="list-group-item"><?php echo $colore["nome"] ?></a>
       <?php endforeach ?>
       </div>
     </div>
@@ -74,7 +74,7 @@ $totalPage = $paginator->getTotalPages();
       <div class="row">
         <div class="col-12">
           <ul class="pagination <?php if($records <= 0) {echo " hidden";} ?>">
-            <li><a href="<?php echo $paginator->getFirstUrlPage(); ?>">First</a></li>
+            <li><a href="<?php echo $paginator->setFirstUrlPage(); ?>">First</a></li>
             <li class="<?php if($page <= 1){ echo 'disable';} ?>">
               <a href="<?php if($page <= 1){ echo "#";} else { echo ($paginator->setPrevUrlPage());}?>">Prev</a>
             </li>
@@ -82,7 +82,7 @@ $totalPage = $paginator->getTotalPages();
             <a href="<?php if($page >= $totalPage){ echo "#";} else { echo ($paginator->setNextUrlPage());}?>">Next</a>
             </li>
             <li>
-              <a href="<?php echo $paginator->getLastUrlPage(); ?>">Last</a>
+              <a href="<?php echo $paginator->setLastUrlPage(); ?>">Last</a>
             </li>
           </ul>
         </div>

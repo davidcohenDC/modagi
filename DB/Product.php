@@ -24,7 +24,7 @@ class Product extends Database {
     }
 
     public function selectByIdCategoria() {
-      return parent::Select("SELECT * FROM ".$this->table. "WHERE idCategoria = ?");
+      return parent::Select("SELECT * FROM ".$this->table. "WHERE id = ?");
     }
 
 }
