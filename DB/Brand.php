@@ -3,7 +3,7 @@
 require_once("Database.php");
 
 //La classe prodotto estende da table che a sua volta estende da Connection. Abbiamo tutti i getter e setter e implementiamo metodi specifici
-class Marca extends Database {
+class Brand extends Database {
     private $table = "Marca";
 
     public function __construct() {
