@@ -1,4 +1,7 @@
-
+<?php
+$page = $paginator->getPage();
+$totalPage = $paginator->getTotalPages();
+?>
 
   <div class="row">
 
@@ -66,14 +69,14 @@
         <div class="col-12">
           <ul class="pagination">
             <li><a href="?pag=1">First</a></li>
-            <li class="<?php if($pageno <= 1){ echo 'disable';} ?>">
-              <a href="<?php if($pageno <= 1){ echo "#";} else { echo "?pag=".$paginator->prevPage();}?>">Prev</a>
+            <li class="<?php if($page <= 1){ echo 'disable';} ?>">
+              <a href="<?php if($page <= 1){ echo "#";} else { echo "?pag=".($page-1);}?>">Prev</a>
             </li>
-            <li class="<?php if($pageno >= $total_pages){ echo 'disabled'; } ?>">
-              <a href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pag=".$paginator->nextPage(); } ?>">Next</a>
+            <li class="<?php if($page >= $totalPage){ echo 'disabled'; } ?>">
+              <a href="<?php if($page >= $totalPage){ echo '#'; } else { echo "?pag=".($page+1); } ?>">Next</a>
             </li>
             <li>
-              <a href="?pag=<?php echo $total_pages; ?>">Last</a>
+              <a href="?pag=<?php echo $totalPage; ?>">Last</a>
             </li>
           </ul>
         </div>

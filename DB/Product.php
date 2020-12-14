@@ -19,8 +19,14 @@ class Product extends Database {
       return parent::Select("SELECT COUNT(*) as TOT FROM ".$this->table)[0]; 
     }
 
-    public function limit($start, $stop) {
-      return parent::Select("SELECT * FROM ".$this->table." LIMIT ".$start.", ".$stop);
+    public function limit($query, $stop, $start = 0) {
+
+      if($start) {
+        $query = $query ." LIMIT ".$start.", ".$stop;
+      } else {
+        $query = $query ." LIMIT ".$stop;
+      }
+      return parent::Select($query);
     }
 
     public function getTable() {

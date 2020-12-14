@@ -1,21 +1,30 @@
 <?php
 
 class Paginator{
-    private $table;
     private $page;
-    private $maxPages;
-    private $offset;
+    private $elementForPage;
+    private $startPage;
+    private $records;
     private $totalPages;
+    private $table;
+    private $query;
+    private $resultQuery;
 
-    public function __construct($maxPages)
+    public function __construct($table,$query, $elementForPage)
     {
-        $this->page = $this->getPage();
-        $this->maxPages= $maxPages;
-        $this->offset = 1;
+        $this->table = $table;
+        $this->query = $query;
+        $this->page = 1;
+        $this->elementForPage= $elementForPage;
+        $this->startPage= ($this->page-1) * $this->elementForPage;
+        $this->totalPages = 1;
+        $this->resultQuery = $table->Select($query);
+        $this->records = count($this->resultQuery);
     }
 
 
-    public function getPage() {
+    private function retrivePage() {
+        
         if(isset($_GET["pag"])) {
             return $this->page = $_GET["pag"];
         } else {
@@ -23,18 +32,52 @@ class Paginator{
         }
     }
 
-    public function prevPage() {
-        if($this->page > 1) {
-            $this->page--;
-            return $this->page;
-        } 
+    private function refresh() {
+        $this->startPage = ($this->page-1) * $this->elementForPage;
+        $this->records = count($this->resultQuery);
+        $this->totalPages = ceil($this->records / $this->elementForPage);
     }
 
-    public function nextPage() {
-        if($this->page <= $this->maxPages) {
-            $this->page++;
-            return $this->page;
+
+    public function getPage() {
+        return $this->page;
+    }
+
+    public function setNewFilter($query) {
+        $this->query = $query;
+    }
+
+    public function getQuery() {
+        return $this->query;
+    }
+
+    public function getStartPage() {
+        return $this->startPage;
+    }
+
+    public function getTotalPages() {
+        return $this->totalPages;
+    }
+
+    public function getRecords() {
+        return $this->records;
+    }
+
+    public function paging() {
+
+        $this->retrivePage();
+        $this->refresh();
+
+        if($this->startPage > 1) {
+            $this->query = $this->query. " LIMIT ". $this->records. " OFFSET ". $this->startPage;
+            $this->resultQuery = $this->table->Select($this->query);
+            return $this->resultQuery;
+        } else {
+            $this->query = $this->query. " LIMIT ". $this->elementForPage;
+            $this->resultQuery = $this->table->Select($this->query);
+            return $this->resultQuery;
         }
+
     }
 
 }

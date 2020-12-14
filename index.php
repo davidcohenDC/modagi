@@ -3,22 +3,18 @@
     require_once("./server.php");
     require_once("./utilis/Paginator.php");
 
-    $maxPage = 6;
-    $product = new Product();
-    $paginator = new Paginator($maxPage);
+    $filter = "SELECT * FROM prodotto ";
+    $productForPage = 6;
 
-    $pageno = $paginator->getPage();
 
-    $offset = ($pageno-1) * $maxPage;
-    
-    $totalProduct = $product->countAllProduct();
-    $total_pages = ceil($totalProduct["TOT"] / $maxPage);
-
-    $templateParams["prodotti"] = $product->Limit($offset, $maxPage);
-    
-    
+    $paginator = new Paginator($product,$filter,$productForPage);
+    $templateParams["prodotti"] = $paginator->paging();
+    $templateParams["pagina"] = $paginator->getPage();
     $templateParams["title"] = "Index";
     $templateParams["main"] = "main-page.php";
+    $templateParams["categorie"] = $category->selectAll();
+    $templateParams["promozioni"] = 2;
+
     require_once("templates/base.php");
     require_once("templates/main-page.php");
     require_once("templates/footer.php");

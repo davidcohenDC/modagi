@@ -10,7 +10,5 @@ require_once("./db/Product.php");
 $category = new Category();
 $product = new Product();
 
-$templateParams["categorie"] = $category->selectAll();
-$templateParams["promozioni"] = 2;
 
 //da inserire gli altri

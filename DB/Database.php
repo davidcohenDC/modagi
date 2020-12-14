@@ -86,6 +86,7 @@ class Database{
         return false;
     }		
 
+
     // execute statement
     private function executeStatement( $query = "" , $params = [] ){
 	
@@ -110,6 +111,7 @@ class Database{
         }
 	
     }
+
 		
 }
 
