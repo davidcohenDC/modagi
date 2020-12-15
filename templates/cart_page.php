@@ -32,70 +32,77 @@
     }
 </script>
 
-<div class="card shopping-cart">
-    <div class="card-header bg-dark text-light">
-        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-        Shipping cart
-        <a href="" class="btn btn-outline-info btn-sm pull-right">Continuie shopping</a>
-        <div class="clearfix"></div>
-    </div>
-
-    <div class="card-body">
-        <!-- PRODUCT -->
-        <?php foreach($cart["articleDetails"] as $key => $article): ?> 
-        <div class="row">
-            <div class="col-12 col-sm-12 col-md-2 text-xs-center">
-                <img class="img-responsive" src="<?php echo IMG_DIR.$article[0]["nome"].".jpg" ?>" alt="prewiew" width="120" height="120">
-            </div>
-            <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
-                <h4 class="product-name"><strong><?php echo $article[0]["nome"] ?></strong></h4>
-                <h4>
-                    <small><?php echo $article[0]["descrizione"] ?></small>
-                </h4>
-            </div>
-            <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
-                <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
-                    <h6><strong><?php echo ($article[0]["prezzo"] * $article[1]) ?><span class="text-muted">€</span></strong></h6>
-                </div>
-                <div class="col-4 col-sm-4 col-md-4">
-                    <div class="quantity">
-                        <input type="button" value="+" class="plus" onclick="increaseQuantity('<?php echo $article[0]["nome"] ?>')" >
-                        <input type="number" step="1" max="99" min="1" value="<?php echo $article[1]?>" title="Qty" class="qty" size="4">
-                        <input type="button" value="-" class="minus" onclick="decreaseQuantity('<?php echo $article[0]["nome"] ?>')">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<section class="shopping-cart">
+    <div class="container">
+        <div class="block-heading">
+            <h2>Shopping Cart</h2>
+        </div>
+        <div class="content">
+            <div class="row">
+                <div class="col-md-12 col-lg-8">
+                    <div class="items">
+                        <!-- PRODUCT -->
+                        <?php foreach($cart["articleDetails"] as $key => $article): ?> 
+                        <div class="product">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <img class="img-fluid mx-auto d-block image" src="<?php echo IMG_DIR.$article[0]["nome"].".jpg" ?>">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="info">
+                                        <div class="row">
+                                            <div class="col-md-5 product-name">
+                                                <div class="product-name">
+                                                    <a href="#"><?php echo $article[0]["nome"] ?></a>
+                                                    <div class="product-info">
+                                                        <div>Colore: <span class="value">Bianco</span></div>
+                                                        <div>Taglia: <span class="value">44.5</span></div>
+                                                        <div>Genere: <span class="value">Uomo</span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md quantity">
+                                                <div class="input-group product-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-btn">
+                                                            <input type="button" value="-" class="btn btn-danger" onclick="decreaseQuantity('<?php echo $article[0]["nome"] ?>')">
+                                                        </div>
+                                                    </div>
+                                                    <div id="quantity" class="form-control product-quantity"><?php echo $article[1]?></div>
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-btn">
+                                                            <input type="button" value="+" class="btn btn-success" onclick="increaseQuantity('<?php echo $article[0]["nome"] ?>')" >
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3 price">
+                                                <span><?php echo ($article[0]["prezzo"] * $article[1]) ?>€</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endforeach ?>
+                        <!-- END PRODUCT -->
                     </div>
                 </div>
-                <div class="col-2 col-sm-2 col-md-2 text-xs-right">
-                    <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeArticle('<?php echo $article[0]["nome"] ?>')">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                    </button>
+                <div class="col-md-12 col-lg-4">
+                    <div class="summary">
+                        <h3>Summary</h3>
+                        <div class="summary-item"><span class="text">Subtotal: </span><span class="price"><?php echo $cart["totalPrice"] ?>€</span></div>
+                        <div class="summary-item"><span class="text">Discount: </span><span class="price">$0</span></div>
+                        <div class="summary-item"><span class="text">Shipping: </span><span class="price">$0</span></div>
+                        <div class="summary-item"><span class="text">Total: </span><span class="price"><?php echo $cart["totalPrice"] ?>€</span></div>
+                        <button type="button" class="btn btn-primary btn-lg btn-block">Checkout</button>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <hr>
-        <?php endforeach ?>
-        <!-- END PRODUCT -->
-
-        <div class="pull-right">
-            <a href="" class="btn btn-outline-secondary pull-right">Update shopping cart</a>
+            </div> 
         </div>
     </div>
-
-    <div class="card-footer">
-        <div class="coupon col-md-5 col-sm-5 no-padding-left pull-left">
-            <div class="row">
-                <div class="col-6">
-                    <input type="text" class="form-control" placeholder="cupone code">
-                </div>
-                <div class="col-6">
-                    <input type="submit" class="btn btn-secondary" value="Use cupone">
-                </div>
-            </div>
-        </div>
-        <div class="pull-right" style="margin: 10px">
-            <a href="" class="btn btn-success pull-right">Checkout</a>
-            <div class="pull-right" style="margin: 5px">
-                Total price: <b><?php echo $cart["totalPrice"] ?>€ </b>
-            </div>
-        </div>
-    </div>
-</div>
+</section>
