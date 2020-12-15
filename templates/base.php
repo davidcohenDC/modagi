@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="<?php echo BOOTSTRAP_CSS_LINK ?>">
     <link href="<?php echo CSS_FILE.$templateParams["cssFileName"] ?>" rel="stylesheet">
     <script src="<?php echo BOOTSTRAP_JS_LINK ?>"></script>
+    <script src="./js/home.js"></script>
     <!--base css file-->
     <link rel="stylesheet" href="<?php echo CSS_FILE; ?>base.css">
     <!-- Custom styles for this template -->

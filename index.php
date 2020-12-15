@@ -4,6 +4,11 @@
     require_once("./utilis/Paginator.php");
     require_once("./utilis/functions.php");
 
+    $_SESSION["marca"] = 0;
+    $_SESSION["colore"] = 0;
+    $_SESSION["materiale"] = 0;
+
+
     $value = [];
 
     //make a filter to put into Paginator --> use Filter.php
