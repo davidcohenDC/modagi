@@ -32,6 +32,5 @@ foreach ($cart["articleDetails"] as $key => $article) {
 }
 
 require("./templates/base.php");
-require("./templates/footer.php");
 
 ?>

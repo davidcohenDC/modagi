@@ -17,6 +17,5 @@ $templateParams["idColore"] = $product->selectColoreByID($idprodotto)[0];
 $templateParams["idMarca"] = $product->selectMarcaByID($idprodotto)[0];
 require_once('templates/base.php');
 require_once("templates/product-page.php");
-require_once("templates/footer.php");
 
 ?>

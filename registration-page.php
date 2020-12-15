@@ -15,4 +15,3 @@ $templateParams["title"] = "Registration";
 $templateParams["main"] = "register-form.php";
 
 require 'templates/base.php';
-require("./templates/footer.php");
