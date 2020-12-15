@@ -7,17 +7,103 @@ $totalPage = $paginator->getTotalPages();
 
     <div class="col-lg-3">
 
-      <h1 class="my-4">SH</h1>
-      <div class="list-group">
+    <section class="mb-4">
+
+      <h6 class="font-weight-bold mb-3">Marca</h6>
       <?php foreach($templateParams["marca"] as $marca): ?>
-        <a href="<?php if($_SERVER['REQUEST_URI'] != "/") { $url = $paginator->setFirstUrlPage(); echo addURLParameter($url,"marca", $marca["id"]);} else {echo "?marca=".$marca["id"];}?>" class="list-group-item"><?php echo $marca["nome"] ?></a>
-      <?php endforeach ?>
+      <div class="form-check pl-0 mb-3">
+        <input type="checkbox" class="form-check-input filled-in" id="new">
+        <label class="form-check-label small text-uppercase card-link-secondary" for="new"><?php echo $marca["nome"] ?></label>
       </div>
-      <div class="list-group mx-10">
-      <?php foreach($templateParams["colori"] as $colore): ?>
-        <a href="<?php if($_SERVER['REQUEST_URI'] != "/") {$url = $paginator->setFirstUrlPage(); echo addURLParameter($url,"colore", $colore["id"]);} else {echo "?colore=".$colore["id"];}?>" class="list-group-item"><?php echo $colore["nome"] ?></a>
       <?php endforeach ?>
-      </div>
+
+    </section>
+
+             <!-- Section: Color -->
+             <section class="mb-4">
+                <h6 class="font-weight-bold mb-3">Color</h6>
+
+                <div
+                  class="btn-group btn-group-toggle btn-color-group d-block mt-n2 ml-n2"
+                  data-toggle="buttons"
+                >
+                  <label
+                    for="color-1"
+                    class="btn rounded-circle white border-inset-grey p-3 m-2"
+                  >
+                    <input
+                      id="color-1"
+                      class="filter-option"
+                      type="checkbox"
+                    />
+                  </label>
+                  <label for="color-2" class="btn rounded-circle bg-primary p-3 m-2">
+                    <input
+                      id="color-2"
+                      class="filter-option"
+                      type="checkbox"
+                    />
+                  </label>
+                  <label for="color-3" class="btn rounded-circle bg-secondary p-3 m-2">
+                    <input
+                      id="color-3"
+                      class="filter-option"
+                      type="checkbox"
+                    />
+                  </label>
+                  <label for="color-4" class="btn rounded-circle bg-success p-3 m-2">
+                    <input
+                      id="color-4"
+                      class="filter-option"
+                      type="checkbox"
+                    />
+                  </label>
+                  <label for="color-5" class="btn rounded-circle bg-blue p-3 m-2">
+                    <input
+                      id="color-5"
+                      class="filter-option"
+                      type="checkbox"
+                    />
+                  </label>
+                  <label for="color-6" class="btn rounded-circle purple p-3 m-2">
+                    <input
+                      id="color-6"
+                      class="filter-option"
+                      type="checkbox"
+                    />
+                  </label>
+                  <label for="color-7" class="btn rounded-circle bg-warning p-3 m-2">
+                    <input
+                      id="color-7"
+                      class="filter-option"
+                      type="checkbox"
+                    />
+                  </label>
+                  <label for="color-8" class="btn rounded-circle bg-info ciao p-3 m-2">
+                    <input
+                      id="color-8"
+                      class="filter-option"
+                      type="checkbox"
+                    />
+                  </label>
+                  <label for="color-9" class="btn rounded-circle bg-danger p-3 m-2">
+                    <input
+                      id="color-9"
+                      class="filter-option"
+                      type="checkbox"
+                    />
+                  </label>
+                  <label for="color-10" class="btn rounded-circle orange p-3 m-2">
+                    <input
+                      id="color-10"
+                      class="filter-option"
+                      type="checkbox"
+                    />
+                  </label>
+                </div>
+              </section>
+              <!-- Section: Color -->
+<!-- Section: Condition -->
     </div>
     <!-- /.col-lg-3 -->
 
@@ -71,25 +157,29 @@ $totalPage = $paginator->getTotalPages();
 
       </div>
       <!-- /.row -->
-      <div class="row">
-        <div class="col-12">
-          <ul class="pagination <?php if($records <= 0) {echo " hidden";} ?>">
-            <li><a href="<?php echo $paginator->setFirstUrlPage(); ?>">First</a></li>
-            <li class="<?php if($page <= 1){ echo 'disable';} ?>">
-              <a href="<?php if($page <= 1){ echo "#";} else { echo ($paginator->setPrevUrlPage());}?>">Prev</a>
-            </li>
-            <li class="<?php if($page >= $totalPage){ echo 'disabled'; } ?>">
-            <a href="<?php if($page >= $totalPage){ echo "#";} else { echo ($paginator->setNextUrlPage());}?>">Next</a>
-            </li>
-            <li>
-              <a href="<?php echo $paginator->setLastUrlPage(); ?>">Last</a>
-            </li>
-          </ul>
-        </div>
-      </div>
 
-    </div>
     <!-- /.col-lg-9 -->
+
+  <nav>
+    <ul class="pagination pg-red">
+      <li class="page-item">
+        <a class="page-link" aria-label="Previous" href="<?php echo $paginator->setFirstUrlPage(); ?>">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+      <li class="page-item active"><a class="page-link" href="<?php if($page <= 1){ echo "#";} else { echo addURLParameter($_SERVER['REQUEST_URI'], "pag",$paginator->getPage());}?>">1</a></li>
+      <?php for($i=2;$i<$totalPage;$i++): ?>
+      <li class="page-item"><a class="page-link" href="<?php echo addURLParameter($_SERVER['REQUEST_URI'], "pag",$i)?>"><?php echo $i ?></a></li>
+      <?php endfor ?>
+      <li class="page-item">
+        <a class="page-link" aria-label="Next" href="<?php echo $paginator->setLastUrlPage(); ?>">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
 
   </div>
   <!-- /.row -->
