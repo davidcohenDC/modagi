@@ -1,3 +1,8 @@
+<?php
+$prodotto = $templateParams["prodotto"];
+
+?>
+
 <div class="container mt-5 pt-3">
 
     <!--Section: Product detail -->
@@ -10,19 +15,19 @@
           <div class="col-lg-6">
 
             <div class="text-center text-md-left">
-                <img src="./upload/Air Max 2090.jpg" alt="First slide" class="img-fluid">
+                <img src="<?php echo IMG_DIR."/".$prodotto["nome"].".jpg" ?>" alt="First slide" class="img-fluid">
             </div>
 
           </div>
 
           <div class="col-lg-5 mr-3 text-center text-md-left">
             <h2 class="h2-responsive text-center text-md-left product-name font-weight-bold dark-grey-text mb-1 ml-xl-0 ml-4">
-              <strong>Air Max 2090</strong>
+              <strong><?php echo $prodotto["nome"];?></strong>
             </h2>
             <span class="badge badge-danger product mb-4 ml-xl-0 ml-4">nuovo!</span>
             <h3 class="h3-responsive text-center text-md-left mb-5 ml-xl-0 ml-4">
               <span class="red-text font-weight-bold ">
-                <strong>€49,99</strong>
+                <strong><?php echo $prodotto["prezzo"];?>€</strong>
               </span>
             </h3>
 
@@ -44,11 +49,7 @@
 
                 <!-- Card body -->
                 <div id="collapseOne1" class="collapse show" aria-labelledby="headingOne1" data-parent="#accordionEx" >
-                  <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,
-                    non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
-                    tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
-                  </div>
+                  <div class="card-body"><?php if($prodotto["descrizione"] == "") {echo "nessuna descrizione...";} else {echo $prodotto["descrizione"];}?></div>
                 </div>
               </div>
               <!-- Accordion card -->
@@ -69,9 +70,12 @@
                 <!-- Card body -->
                 <div id="collapseThree3" class="collapse"  aria-labelledby="headingThree3" data-parent="#accordionEx" >
                   <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,
-                    non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
-                    tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+                    <ul>
+                      <li>Colore: <?php echo $templateParams["idColore"]['nome'];?></li>
+                      <li>Genere: <?php echo $templateParams["idGenere"]['nome'];?></li>
+                      <li>Materiale: <?php echo $templateParams["idMateriale"]['nome'];?></li>
+                      <li>Marca: <?php echo $templateParams["idMarca"]["nome"];?></li>
+                    </ul>
                   </div>
                 </div>
               </div>

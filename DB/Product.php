@@ -23,9 +23,26 @@ class Product extends Database {
       return $this->table;
     }
 
-    public function selectByIdCategoria() {
-      return parent::Select("SELECT * FROM ".$this->table. "WHERE id = ?");
+    public function selectById($id) {
+      return parent::Select("SELECT * FROM ".$this->table. " WHERE id = ".$id);
     }
+
+    public function selectMaterialeByID($id) {
+      return parent::Select("SELECT materiale.nome FROM materiale LEFT JOIN ".$this->table. " ON materiale.id = ".$this->table. ".idMateriale WHERE ".$this->table.".id = ".$id);
+    }
+
+    public function selectGenereByID($id) {
+      return parent::Select("SELECT genere.nome FROM genere LEFT JOIN ".$this->table. " ON genere.tipogenere = ".$this->table. ".genere WHERE ".$this->table.".id = ".$id);
+    }
+
+    public function selectColoreByID($id) {
+      return parent::Select("SELECT colore.nome FROM colore LEFT JOIN ".$this->table. " ON colore.id = ".$this->table. ".idColore WHERE ".$this->table.".id = ".$id);
+    }
+
+    public function selectMarcaByID($id) {
+      return parent::Select("SELECT marca.nome FROM marca LEFT JOIN ".$this->table. " ON marca.id = ".$this->table. ".idMarca WHERE ".$this->table.".id = ".$id);
+    }
+
 
 }
 

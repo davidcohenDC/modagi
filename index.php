@@ -30,6 +30,7 @@
     $templateParams["marca"] = $brand->getAll();
     $templateParams["colori"] = $colour->getAll();
     $templateParams["generi"] = $gender->getAll();
+    $templateParams["materiali"] = $material->getAll();
     $templateParams["promozioni"] = 2;
 
     require_once("templates/base.php");
