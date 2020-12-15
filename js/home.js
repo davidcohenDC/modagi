@@ -14,7 +14,18 @@ function updateQueryStringParameter(uri, key, value) {
     }
   }
 
+
+
 $(function(){
+
+  document.addEventListener("DOMContentLoaded", function(event) { 
+    var scrollpos = localStorage.getItem('scrollpos');
+    if (scrollpos) window.scrollTo(0, scrollpos);
+});
+
+window.onbeforeunload = function(e) {
+    localStorage.setItem('scrollpos', window.scrollY);
+};
 
     $('input[name=checkGenere]').on('change', function() {
         var $url = $(this).val();
@@ -33,6 +44,7 @@ $(function(){
         var $url = $(this).val();
         $url = updateQueryStringParameter(window.location.href,"materiale",+$(this).val());
         $url = location.href = $url;
+        
 
       })
 

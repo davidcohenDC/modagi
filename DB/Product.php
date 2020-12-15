@@ -32,7 +32,7 @@ class Product extends Database {
     }
 
     public function selectGenereByID($id) {
-      return parent::Select("SELECT genere.nome FROM genere LEFT JOIN ".$this->table. " ON genere.tipogenere = ".$this->table. ".genere WHERE ".$this->table.".id = ".$id);
+      return parent::Select("SELECT genere.nome FROM genere LEFT JOIN ".$this->table. " ON genere.id = ".$this->table. ".idGenere WHERE ".$this->table.".id = ".$id);
     }
 
     public function selectColoreByID($id) {

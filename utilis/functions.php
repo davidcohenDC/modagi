@@ -63,3 +63,48 @@ function build_url($url_data) {
     }
     return $url;
 }
+
+function filterToQuery($selection) {
+    $filter = "";
+    $count = 0;
+
+    if($_SERVER["REQUEST_URI"] == "/") {
+        return $selection;
+    } else {
+        $url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+        $query = parse_url($url);
+
+        if(!isset($query["query"])) {
+            return $selection;
+        }
+        
+        $url = $query["query"];
+        parse_str($url,$result);
+        
+        foreach($result as $name=>$value) {
+            if($name == "pag") {
+            } else if($name == "genere" && $value == 3) {
+                if($count >= 1) {
+                    $filter=  $filter." AND id".$name." IN (1,2,3)";
+                } else {
+                    $filter = $filter." WHERE id".$name." IN (1,2,3)";
+                }
+    
+                $count++;             
+            } else {
+                if($count >= 1) {
+                    $filter=  $filter." AND id".$name." = ".$value;
+                } else {
+                    $filter = $filter." WHERE id".$name." = ".$value;
+                }
+    
+                $count++;
+            }
+        }
+        $selection = $selection.$filter;
+        return $selection;
+    }
+    
+
+
+}

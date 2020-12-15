@@ -8,26 +8,12 @@
     $_SESSION["colore"] = 0;
     $_SESSION["materiale"] = 0;
 
-
-    $value = [];
-
     //make a filter to put into Paginator --> use Filter.php
     $selection = "SELECT * FROM prodotto ";
-    //filter = filter->filter();
-    if(isset($_GET["marca"])) {
-        $filter = "WHERE id = ".$_GET["marca"]." ";
-        $selection = $selection.$filter;
-    }
- 
-    if(isset($_GET["colore"])) {
-        $filter = "AND id = ".$_GET["marca"]." ";
-        $selection = $selection.$filter;
-    }
 
-    //setting the Paginator
-    $paginator->setElementForPage(MAX_PRODUCT_FOR_PAGE);
+    $selection = filterToQuery($selection);
     $paginator->setNewSelection($selection);
-    
+
     $templateParams["prodotti"] = $paginator->paging();
     $templateParams["pagina"] = $paginator->getPage();
     $templateParams["title"] = "Index";

@@ -19,6 +19,7 @@ $brand = new Brand();
 $gender = new Gender();
 $material = new Material();
 $paginator = new Paginator($product);
+$paginator->setElementForPage(MAX_PRODUCT_FOR_PAGE);
 
 
 //da inserire gli altri

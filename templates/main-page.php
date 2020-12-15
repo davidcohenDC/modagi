@@ -23,8 +23,8 @@ $url = "";
       <h6 class="font-weight-bold mb-3">-- Genere --</h6>
       <?php foreach($templateParams["generi"] as $genere): ?>
       <div class="custom-control radio">
-      <input type="radio" class="custom-control-input" id="<?php echo $genere["nome"] ?>" name="checkGenere" value="<?php echo $genere["tipoGenere"] ?>" 
-      <?php if(isset($_GET["genere"]) && $_GET["genere"] == $genere["tipoGenere"]){echo "checked";}?>>
+      <input type="radio" class="custom-control-input" id="<?php echo $genere["nome"] ?>" name="checkGenere" value="<?php echo $genere["id"] ?>" 
+      <?php if(isset($_GET["genere"]) && $_GET["genere"] == $genere["id"]){echo "checked";}?>>
       <label class="custom-control-label" for="<?php echo $genere["nome"] ?>"><?php echo $genere["nome"] ?></label>
       </div>
       <?php endforeach ?>
