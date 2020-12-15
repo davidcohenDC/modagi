@@ -36,6 +36,14 @@ function addURLParameter($url, $paramName, $paramValue) {
     return build_url($url_data);
 }
 
+function removeqsvar($url, $varname) {
+    list($urlpart, $qspart) = array_pad(explode('?', $url), 2, '');
+    parse_str($qspart, $qsvars);
+    unset($qsvars[$varname]);
+    $newqs = http_build_query($qsvars);
+    return $urlpart . '?' . $newqs;
+}
+
 
 function build_url($url_data) {
     $url="";
@@ -77,12 +85,13 @@ function filterToQuery($selection) {
         if(!isset($query["query"])) {
             return $selection;
         }
-        
+
         $url = $query["query"];
         parse_str($url,$result);
         
         foreach($result as $name=>$value) {
             if($name == "pag") {
+                //nothing
             } else if($name == "genere" && $value == 3) {
                 if($count >= 1) {
                     $filter=  $filter." AND id".$name." IN (1,2,3)";
@@ -97,7 +106,6 @@ function filterToQuery($selection) {
                 } else {
                     $filter = $filter." WHERE id".$name." = ".$value;
                 }
-    
                 $count++;
             }
         }

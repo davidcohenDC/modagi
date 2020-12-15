@@ -12,6 +12,7 @@
     $selection = "SELECT * FROM prodotto ";
 
     $selection = filterToQuery($selection);
+    echo $selection;
     $paginator->setNewSelection($selection);
 
     $templateParams["prodotti"] = $paginator->paging();

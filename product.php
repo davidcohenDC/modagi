@@ -11,6 +11,7 @@ if(isset($_GET["prodotto"])) {
 }
 
 $templateParams["prodotto"] = $product->selectById($idprodotto)[0];
+$templateParams["title"] = $templateParams["prodotto"]["nome"];
 $templateParams["idMateriale"] = $product->selectMaterialeByID($idprodotto)[0];
 $templateParams["idGenere"] = $product->selectGenereByID($idprodotto)[0];
 $templateParams["idColore"] = $product->selectColoreByID($idprodotto)[0];

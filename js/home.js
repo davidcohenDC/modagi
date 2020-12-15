@@ -14,7 +14,23 @@ function updateQueryStringParameter(uri, key, value) {
     }
   }
 
-
+  function removeParam(key, sourceURL) {
+    var rtn = sourceURL.split("?")[0],
+        param,
+        params_arr = [],
+        queryString = (sourceURL.indexOf("?") !== -1) ? sourceURL.split("?")[1] : "";
+    if (queryString !== "") {
+        params_arr = queryString.split("&");
+        for (var i = params_arr.length - 1; i >= 0; i -= 1) {
+            param = params_arr[i].split("=")[0];
+            if (param === key) {
+                params_arr.splice(i, 1);
+            }
+        }
+        rtn = rtn + "?" + params_arr.join("&");
+    }
+    return rtn;
+}
 
 $(function(){
 
@@ -30,20 +46,23 @@ window.onbeforeunload = function(e) {
     $('input[name=checkGenere]').on('change', function() {
         var $url = $(this).val();
         $url = updateQueryStringParameter(window.location.href,"genere",+$(this).val());
-        $url = location.href = $url;
+        $url = removeParam("pag",$url);
+        $url = location.href = $url+"&pag=1";
         })
 
     $('input[name=checkMarca]').on('change', function() {
         var $url = $(this).val();
         $url = updateQueryStringParameter(window.location.href,"marca",+$(this).val());
-        $url = location.href = $url;
+        $url = removeParam("pag",$url);
+        $url = location.href = $url+"&pag=1";
 
       })
 
       $('input[name=checkMateriale]').on('change', function() {
         var $url = $(this).val();
         $url = updateQueryStringParameter(window.location.href,"materiale",+$(this).val());
-        $url = location.href = $url;
+        $url = removeParam("pag",$url);
+        $url = location.href = $url+"&pag=1";
         
 
       })
@@ -51,7 +70,8 @@ window.onbeforeunload = function(e) {
       $('input[name=checkColore]').on('change', function() {
         var $url = $(this).val();
         $url = updateQueryStringParameter(window.location.href,"colore",+$(this).val());
-        $url = location.href = $url;
+        $url = removeParam("pag",$url);
+        $url = location.href = $url+"&pag=1";
 
       })
 
