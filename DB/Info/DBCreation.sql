@@ -24,6 +24,27 @@ CREATE TABLE IF NOT EXISTS `ProdottiCategorie` (
 ) ENGINE=INNODB;
 
 # ---------------------------------------------------------------------- #
+# ADD TABLE "Taglia"                                                     #
+# ---------------------------------------------------------------------- #
+
+CREATE TABLE IF NOT EXISTS `Taglia` (
+    `id` INT NOT NULL,
+    `numero` INT NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=INNODB;
+
+# ---------------------------------------------------------------------- #
+# ADD TABLE "ProdottiTaglia"                                                    #
+# ---------------------------------------------------------------------- #
+
+CREATE TABLE IF NOT EXISTS `ProdottiTaglie` (
+    `idTaglia` INT NOT NULL,
+    `idProdotto` INT NOT NULL,
+    PRIMARY KEY (`idTaglia`, `idProdotto`)
+) ENGINE=INNODB;
+
+
+# ---------------------------------------------------------------------- #
 # ADD TABLE "Categoria"                                                  #
 # ---------------------------------------------------------------------- #
 
@@ -58,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `Ordine` (
     `username` CHAR(20) NOT NULL,
     `data` DATE NOT NULL,
     `quantita` CHAR(1) NOT NULL,
-    PRIMARY KEY (`idProdotto`, `username`, `Data`)
+    PRIMARY KEY (`idProdotto`, `username`, `data`)
 ) ENGINE=INNODB;
 
 # ---------------------------------------------------------------------- #
@@ -72,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `Prodotto` (
     `nome` CHAR(200) NOT NULL,
     `stock` INT NOT NULL,
     `idColore` INT NOT NULL,
-    `genere` CHAR(1) NOT NULL,
+    `idGenere` INT NOT NULL,
     `idMateriale` INT NOT NULL,
     `idMarca` INT NOT NULL,
     PRIMARY KEY (`id`)
@@ -83,8 +104,9 @@ CREATE TABLE IF NOT EXISTS `Prodotto` (
 # ---------------------------------------------------------------------- #
 
 CREATE TABLE IF NOT EXISTS `Genere` (
-    `tipoGenere` CHAR(1) NOT NULL,
-    PRIMARY KEY (`tipoGenere`)
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `nome` CHAR(20) NOT NULL,
+    PRIMARY KEY (`id`)
 ) ENGINE=INNODB;
 
 # ---------------------------------------------------------------------- #
@@ -121,8 +143,17 @@ CREATE UNIQUE INDEX `PK_ProdottiCategorie`
 CREATE INDEX `FK_ProCat_Prodotto`
      ON `ProdottiCategorie` (`idProdotto`);
 
-CREATE UNIQUE INDEX `FK_ProCat_Categoria`
-     ON `Categoria` (`id`);
+CREATE INDEX `FK_ProCat_Categoria`
+     ON `ProdottiCategorie` (`idCategoria`);
+
+CREATE UNIQUE INDEX `PK_ProdottiTaglie`
+     ON `ProdottiTaglie` (`idTaglia`, `idProdotto`);
+
+CREATE INDEX `FK_ProTag_Prodotto`
+     ON `ProdottiTaglie` (`idProdotto`);
+
+CREATE INDEX `FK_ProTag_Taglia`
+     ON `ProdottiTaglie` (`idTaglia`);
 
 CREATE UNIQUE INDEX `PK_Colore`
      ON `Colore` (`id`);
@@ -131,7 +162,7 @@ CREATE UNIQUE INDEX `PK_Materiale`
      ON `Materiale` (`id`);
 
 CREATE UNIQUE INDEX `PK_Ordine`
-     ON `Ordine` (`idProdotto`, `username`, `Data`);
+     ON `Ordine` (`idProdotto`, `username`, `data`);
 
 CREATE INDEX `FK_Ordine_Username`
      ON `Ordine` (`username`);
@@ -143,13 +174,13 @@ CREATE INDEX `FK_Prodotto_Colore`
      ON `Prodotto` (`idColore`);
 
 CREATE INDEX `FK_Prodotto_Genere`
-     ON `Prodotto` (`Genere`);
+     ON `Prodotto` (`idGenere`);
 
 CREATE INDEX `FK_Prodotto_Materiale`
      ON `Prodotto` (`idMateriale`);
 
 CREATE UNIQUE INDEX `PK_Genere`
-     ON `Genere` (`tipoGenere`);
+     ON `Genere` (`id`);
 
 CREATE UNIQUE INDEX `PK_Username`
      ON `User` (`username`);
@@ -170,6 +201,14 @@ ALTER TABLE `ProdottiCategorie` ADD CONSTRAINT `FK_ProCat_Categoria`
      FOREIGN KEY (`idCategoria`)
      REFERENCES `Categoria` (`id`);
 
+ALTER TABLE `ProdottiTaglie` ADD CONSTRAINT `FK_ProTag_Prodotto`
+     FOREIGN KEY (`idProdotto`)
+     REFERENCES `Prodotto` (`id`);
+
+ALTER TABLE `ProdottiTaglie` ADD CONSTRAINT `FK_ProTag_Taglia`
+     FOREIGN KEY (`idTaglia`)
+     REFERENCES `Taglia` (`id`);
+
 ALTER TABLE `Ordine` ADD CONSTRAINT `FK_Ordine_Username`
      FOREIGN KEY (`username`)
      REFERENCES `User` (`username`);
@@ -183,8 +222,8 @@ ALTER TABLE `Prodotto` ADD CONSTRAINT `FK_Prodotto_Colore`
      REFERENCES `Colore` (`id`);
 
 ALTER TABLE `Prodotto` ADD CONSTRAINT `FK_Prodotto_Genere`
-     FOREIGN KEY (`genere`)
-     REFERENCES `Genere` (`tipoGenere`);
+     FOREIGN KEY (`idGenere`)
+     REFERENCES `Genere` (`id`);
 
 ALTER TABLE `Prodotto` ADD CONSTRAINT `FK_Prodotto_Materiale`
      FOREIGN KEY (`idMateriale`)

@@ -41,15 +41,15 @@ $url = "";
       <?php endforeach ?>
     </section>
 
-    <section class="list-colour mb-4">
+    <section class="list-material mb-4">
       <h6 class="font-weight-bold mb-3">-- Colore --</h6>
-      <div class="btn-group-toggle d-block mb-2" data-toggle="buttons">
-        <?php foreach($templateParams["colori"] as $colore): ?>
-        <label class="btn rounded-circle btn-<?php echo strtolower($colore["nome"]); ?> p-3 m-2" >
-          <input id="colore-<?php echo $colore["nome"]; ?>" class="filter-option" name="checkColore" type="checkbox" />
-        </label>
-        <?php endforeach ?>
+      <?php foreach($templateParams["colori"] as $colore): ?>
+        <div class="custom-control radio">
+        <input type="radio" class="custom-control-input" id="<?php echo $colore["nome"] ?>" name="checkColore" value="<?php echo $colore["id"] ?>"
+        <?php if(isset($_GET["colore"]) && $_GET["colore"] == $colore["id"]){echo "checked";}?>>
+        <label class="custom-control-label" for="<?php echo $colore["nome"] ?>"><?php echo $colore["nome"] ?></label>
       </div>
+      <?php endforeach ?>
     </section>
   </div>
 
