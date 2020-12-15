@@ -9,41 +9,44 @@ $url = "";
   <div class="col-lg-3">
 
     <section class="list-brand mb-4">
-      <h6 class="font-weight-bold mb-3">Marca</h6>
+      <h6 class="font-weight-bold mb-3">-- Marca --</h6>
       <?php foreach($templateParams["marca"] as $marca): ?>
-      <div class="form-check mb-2">
-        <input type="checkbox" class="form-check-input" name="marca">
-        <label class="form-check-label small text-uppercase" value=<?php echo $marca["id"];?>><?php echo $marca["nome"] ?></label>
+      <div class="custom-control radio">
+      <input type="radio" class="custom-control-input " id="<?php echo $marca["nome"] ?>" name="checkMarca" value="<?php echo $marca["id"] ?>" 
+      <?php if(isset($_GET["marca"]) && $_GET["marca"] == $marca["id"]){echo "checked";}?>>
+      <label class="custom-control-label" for="<?php echo $marca["nome"] ?>" ><?php echo $marca["nome"] ?></label>
       </div>
       <?php endforeach ?>
     </section>
 
     <section class="list-gender mb-4">
-      <h6 class="font-weight-bold mb-3">Genere</h6>
+      <h6 class="font-weight-bold mb-3">-- Genere --</h6>
       <?php foreach($templateParams["generi"] as $genere): ?>
-      <div class="form-check mb-2">
-        <input type="checkbox" class="form-check-input " name="marca">
-        <label class="form-check-label small text-uppercase" value=<?php echo $genere["tipoGenere"];?>><?php echo $genere["nome"] ?></label>
+      <div class="custom-control radio">
+      <input type="radio" class="custom-control-input" id="<?php echo $genere["nome"] ?>" name="checkGenere" value="<?php echo $genere["tipoGenere"] ?>" 
+      <?php if(isset($_GET["genere"]) && $_GET["genere"] == $genere["tipoGenere"]){echo "checked";}?>>
+      <label class="custom-control-label" for="<?php echo $genere["nome"] ?>"><?php echo $genere["nome"] ?></label>
       </div>
       <?php endforeach ?>
     </section>
 
     <section class="list-material mb-4">
-      <h6 class="font-weight-bold mb-3">Materiale</h6>
+      <h6 class="font-weight-bold mb-3">-- Materiale --</h6>
       <?php foreach($templateParams["materiali"] as $materiale): ?>
-      <div class="form-check mb-2">
-        <input type="checkbox" class="form-check-input" name="marca">
-        <label class="form-check-label small text-uppercase" value=<?php echo $materiale["id"];?>><?php echo $materiale["nome"] ?></label>
+        <div class="custom-control radio">
+        <input type="radio" class="custom-control-input" id="<?php echo $materiale["nome"] ?>" name="checkMateriale" value="<?php echo $materiale["id"] ?>"
+        <?php if(isset($_GET["materiale"]) && $_GET["materiale"] == $materiale["id"]){echo "checked";}?>>
+        <label class="custom-control-label" for="<?php echo $materiale["nome"] ?>"><?php echo $materiale["nome"] ?></label>
       </div>
       <?php endforeach ?>
     </section>
 
     <section class="list-colour mb-4">
-      <h6 class="font-weight-bold mb-3">Colore</h6>
+      <h6 class="font-weight-bold mb-3">-- Colore --</h6>
       <div class="btn-group-toggle d-block mb-2" data-toggle="buttons">
         <?php foreach($templateParams["colori"] as $colore): ?>
         <label class="btn rounded-circle btn-<?php echo strtolower($colore["nome"]); ?> p-3 m-2" >
-          <input id="colore-<?php echo $colore["nome"]; ?>" class="filter-option" type="checkbox"/>
+          <input id="colore-<?php echo $colore["nome"]; ?>" class="filter-option" name="checkColore" type="checkbox" />
         </label>
         <?php endforeach ?>
       </div>
@@ -104,9 +107,8 @@ $url = "";
             <span class="sr-only">Previous</span>
           </a>
         </li>
-        <li class="page-item active"><a class="page-link" href="<?php if($page <= 1){ echo "#";} else { echo addURLParameter($_SERVER['REQUEST_URI'], "pag",$paginator->getPage());}?>">1</a></li>
-        <?php for($i=2;$i<=$totalPage;$i++): ?>
-        <li class="page-item"><a class="page-link" href="<?php echo addURLParameter($_SERVER['REQUEST_URI'], "pag",$i)?>"><?php echo $i ?></a></li>
+        <?php for($i=1;$i<=$totalPage;$i++): ?>
+        <li class="page-item <?php if($page == $i){echo "active";} ?>"><a class="page-link" href="<?php echo addURLParameter($_SERVER['REQUEST_URI'], "pag",$i)?>"><?php echo $i ?></a></li>
         <?php endfor ?>
         <li class="page-item">
           <a class="page-link" aria-label="Next" href="<?php echo $paginator->setLastUrlPage(); ?>">
