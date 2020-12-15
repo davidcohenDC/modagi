@@ -14,7 +14,7 @@ $url = "";
       <div class="custom-control radio">
       <input type="radio" class="custom-control-input " id="<?php echo $marca["nome"] ?>" name="checkMarca" value="<?php echo $marca["id"] ?>" 
       <?php if(isset($_GET["marca"]) && $_GET["marca"] == $marca["id"]){echo "checked";}?>>
-      <label class="custom-control-label" for="<?php echo $marca["nome"] ?>" ><?php echo $marca["nome"] ?></label>
+      <label class="custom-control-label mb-1" for="<?php echo $marca["nome"] ?>" ><?php echo $marca["nome"] ?></label>
       </div>
       <?php endforeach ?>
     </section>
@@ -25,7 +25,7 @@ $url = "";
       <div class="custom-control radio">
       <input type="radio" class="custom-control-input" id="<?php echo $genere["nome"] ?>" name="checkGenere" value="<?php echo $genere["id"] ?>" 
       <?php if(isset($_GET["genere"]) && $_GET["genere"] == $genere["id"]){echo "checked";}?>>
-      <label class="custom-control-label" for="<?php echo $genere["nome"] ?>"><?php echo $genere["nome"] ?></label>
+      <label class="custom-control-label mb-1" for="<?php echo $genere["nome"] ?>"><?php echo $genere["nome"] ?></label>
       </div>
       <?php endforeach ?>
     </section>
@@ -36,7 +36,7 @@ $url = "";
         <div class="custom-control radio">
         <input type="radio" class="custom-control-input" id="<?php echo $materiale["nome"] ?>" name="checkMateriale" value="<?php echo $materiale["id"] ?>"
         <?php if(isset($_GET["materiale"]) && $_GET["materiale"] == $materiale["id"]){echo "checked";}?>>
-        <label class="custom-control-label" for="<?php echo $materiale["nome"] ?>"><?php echo $materiale["nome"] ?></label>
+        <label class="custom-control-label mb-1" for="<?php echo $materiale["nome"] ?>"><?php echo $materiale["nome"] ?></label>
       </div>
       <?php endforeach ?>
     </section>
@@ -47,7 +47,7 @@ $url = "";
         <div class="custom-control radio">
         <input type="radio" class="custom-control-input" id="<?php echo $colore["nome"] ?>" name="checkColore" value="<?php echo $colore["id"] ?>"
         <?php if(isset($_GET["colore"]) && $_GET["colore"] == $colore["id"]){echo "checked";}?>>
-        <label class="custom-control-label" for="<?php echo $colore["nome"] ?>"><?php echo $colore["nome"] ?></label>
+        <label class="custom-control-label mb-1" for="<?php echo $colore["nome"] ?>"><?php echo $colore["nome"] ?></label>
       </div>
       <?php endforeach ?>
     </section>
@@ -64,7 +64,8 @@ $url = "";
       <div class="carousel-inner" role="listbox">
       <?php for($i = 0;$i <$templateParams["promozioni"]; $i++):?> 
       <div class="carousel-item <?php if($i==0) {echo " active";}?>">
-          <img class="d-block img-fluid" src="<?php echo PROMOTION_DIR."promotion".$i.".jpg" ?>" alt="">
+        <a href="product.php?prodotto=10"><img class="d-block img-fluid" src="<?php echo PROMOTION_DIR."promotion".$i.".jpg" ?>" alt=""></a>
+          
       </div>
       <?php endfor ?>    
       </div>

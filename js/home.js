@@ -44,14 +44,14 @@ window.onbeforeunload = function(e) {
 };
 
     $('input[name=checkGenere]').on('change', function() {
-        var $url = $(this).val();
+        let $url = $(this).val();
         $url = updateQueryStringParameter(window.location.href,"genere",+$(this).val());
         $url = removeParam("pag",$url);
         $url = location.href = $url+"&pag=1";
         })
 
     $('input[name=checkMarca]').on('change', function() {
-        var $url = $(this).val();
+        let $url = $(this).val();
         $url = updateQueryStringParameter(window.location.href,"marca",+$(this).val());
         $url = removeParam("pag",$url);
         $url = location.href = $url+"&pag=1";
@@ -59,7 +59,7 @@ window.onbeforeunload = function(e) {
       })
 
       $('input[name=checkMateriale]').on('change', function() {
-        var $url = $(this).val();
+        let $url = $(this).val();
         $url = updateQueryStringParameter(window.location.href,"materiale",+$(this).val());
         $url = removeParam("pag",$url);
         $url = location.href = $url+"&pag=1";
@@ -68,11 +68,12 @@ window.onbeforeunload = function(e) {
       })
 
       $('input[name=checkColore]').on('change', function() {
-        var $url = $(this).val();
+        let $url = $(this).val();
         $url = updateQueryStringParameter(window.location.href,"colore",+$(this).val());
         $url = removeParam("pag",$url);
         $url = location.href = $url+"&pag=1";
 
       })
+
 
 });
