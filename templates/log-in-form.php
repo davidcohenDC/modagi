@@ -1,3 +1,7 @@
+<!-- for eye to show password -->
+<script src="https://use.fontawesome.com/c560c025cf.js"></script>
+<script src="<?php echo JS_FILE ?>password-viewer.js"></script>
+
 <div class="row">
     <h1 class="fs-1 my-5 col-12 text-center fw-bold">
         Accedi!
@@ -19,8 +23,11 @@
         </div>
 
         <div class="my-3 mx-2 ">
-            <label for="password" class="form-label fw-bold"> Password </label>
-            <input id="password" name="password" class="form-control col-12 fst-italic" type="password" placeholder="inserire password" minlength="6" maxlength="20" required />
+            <label for="password-group" class="form-label fw-bold"> Password </label>
+            <div id="password-group" class="input-group mb-3">
+                <input id="password" name="password" class="form-control fst-italic" type="password" placeholder="inserire password" minlength="6" maxlength="20" required />
+                <button id="eye" class="show-password"> &#128065; </button>
+            </div>
             <div class="invalid-feedback">
                 Password troppo corta
             </div>

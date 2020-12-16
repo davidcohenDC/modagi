@@ -21,7 +21,9 @@
     <script src="./js/home.js"></script>
     <!--base css file-->
     <link rel="stylesheet" href="<?php echo CSS_FILE; ?>base.css">
-    <!-- Custom styles for this template -->
+
+    <!-- link for icons -->
+
 </head>
 
 <body>
