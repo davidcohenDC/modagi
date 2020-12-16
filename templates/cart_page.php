@@ -31,8 +31,8 @@
         location.reload();
     }
 </script>
-
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
 <section class="shopping-cart">
     <div class="container">
         <div class="block-heading">
@@ -42,7 +42,13 @@
             <div class="row">
                 <div class="col-md-12 col-lg-8">
                     <div class="items">
-                        <!-- PRODUCT -->
+                        <!-- ADVISE THAT THERE ARE NO PRODUCT IN CART -->
+                        <?php if(empty($cart["articleDetails"])): ?>
+                            <div class="alert alert-warning">
+                                Non ci sono articoli nel carrello. <a href="index.php" class="alert-link">Clicca qui per tornare gli acquisti!</a>
+                            </div>
+                        <?php endif ?>
+                        <!-- SHOW PRODUCT -->
                         <?php foreach($cart["articleDetails"] as $key => $article): ?> 
                         <div class="product">
                             <div class="row">
@@ -89,7 +95,7 @@
                             </div>
                         </div>
                         <?php endforeach ?>
-                        <!-- END PRODUCT -->
+                        <!-- END SHOW PRODUCT -->
                     </div>
                 </div>
                 <div class="col-md-12 col-lg-4">
