@@ -53,7 +53,7 @@
                         <div class="product">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <img class="img-fluid mx-auto d-block image" src="<?php echo IMG_DIR.$article[0]["nome"].".jpg" ?>">
+                                    <img class="img-fluid mx-auto d-block image product-image" src="<?php echo IMG_DIR.$article[0]["nome"].".jpg" ?>">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="info">
