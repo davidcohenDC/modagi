@@ -17,7 +17,10 @@ class CookieManager{
     }
 
     public function getCookieValue($cookie_name) {
-        return $_COOKIE[$cookie_name];
+        if($this->exists($cookie_name)) {
+            return $_COOKIE[$cookie_name];
+        }
+        return FALSE;
     }
 
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,19 +12,21 @@
     <script src="<?php echo JQUERY_LINK ?>"></script>
     <!--bootstrap include-->
     <link rel="stylesheet" href="<?php echo BOOTSTRAP_CSS_LINK ?>">
-    <link href="<?php echo CSS_FILE.$templateParams["cssFileName"] ?>" rel="stylesheet">
+    <link href="<?php echo CSS_FILE . $templateParams["cssFileName"] ?>" rel="stylesheet">
     <script src="<?php echo BOOTSTRAP_JS_LINK ?>"></script>
     <script src="./js/home.js"></script>
     <!--base css file-->
     <link rel="stylesheet" href="<?php echo CSS_FILE; ?>base.css">
     <!-- Custom styles for this template -->
 </head>
+
 <body>
     <header class="jumbotron">
         <div class="container text-xs-center">
             <h1><?php echo SHOP_NAME ?></h1>
             <p>Mission, Vission & Values</p>
         </div>
+
     </header>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Expand at md</a>
@@ -50,6 +53,9 @@
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="user-page.php">Log-in</a>
+                </li>
             </ul>
             <form class="form-inline my-2 my-md-0">
                 <input class="form-control" type="text" placeholder="Search">
@@ -59,9 +65,9 @@
     <main class="container">
         <!--main content-->
         <?php
-            if(isset($templateParams["main"])){
-                require($templateParams["main"]);
-            }
+        if (isset($templateParams["main"])) {
+            require($templateParams["main"]);
+        }
         ?>
     </main>
     <footer class="py-5 bg-dark">
@@ -70,4 +76,5 @@
         </div>
     </footer>
 </body>
+
 </html>
