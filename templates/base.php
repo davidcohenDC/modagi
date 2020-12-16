@@ -12,7 +12,11 @@
     <script src="<?php echo JQUERY_LINK ?>"></script>
     <!--bootstrap include-->
     <link rel="stylesheet" href="<?php echo BOOTSTRAP_CSS_LINK ?>">
-    <link href="<?php echo CSS_FILE . $templateParams["cssFileName"] ?>" rel="stylesheet">
+    <!-- personal css file -->
+    <?php if (isset($templateParams["cssFileName"])) : ?>
+        <link href="<?php echo CSS_FILE . $templateParams["cssFileName"] ?>" rel="stylesheet">
+    <?php endif ?>
+
     <script src="<?php echo BOOTSTRAP_JS_LINK ?>"></script>
     <script src="./js/home.js"></script>
     <!--base css file-->
