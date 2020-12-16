@@ -12,7 +12,7 @@
     <div class="col-1 col-md-2 col-lg-3">
         <!--empty space-->
     </div>
-    <form method="POST" class="col-10 col-md-8 col-lg-6" action="user-page.php">
+    <form method="POST" class="col-10 col-md-8 col-lg-6">
 
         <div class="my-3 mx-2 ">
             <label for="name" class="form-label fw-bold"> Nome </label>
@@ -65,7 +65,7 @@
 
         <div class="row justify-content-md-center justify-content-lg-end">
             <div class="my-3 mx-2 col-md-10 col-lg-8">
-                <input type="submit" class="btn btn-light col-12 fw-bold" value="Registrati" onclick="" />
+                <input type="submit" class="btn btn-light col-12 fw-bold" value="Registrati" />
             </div>
         </div>
 

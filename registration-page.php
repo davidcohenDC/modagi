@@ -1,27 +1,27 @@
 <?php
 
 require_once("./server.php");
-require_once './DB/Database.php';
+require_once './utilis/DatabaseUser.php';
 
 /* se tutti i campi sono stati messi */
 if (
     isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["address"])
     && isset($_POST["username"]) && isset($_POST["password"])
 ) {
-    //TODO: inserire i campi nella tabella.
-    $dbh = new Database();
+
+    $dbh = new DatabaseUser(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
     /* check user already exists */
-    $checkUser = $dbh->Select("SELECT username FROM user WHERE username = ?;", [$user]);
+    if (!$dbh->userExists($_POST["username"])) {
 
-    if (count($checkUser) > 0) {
         /* insert user in db */
-        $dbh->Insert(
-            "INSERT INTO user (username, password, admin, nome, cognome, indirizzo) VALUES (?, ?, ?, ?, ?)",
-            [$_POST["username"], $_POST["password"], "N", $_POST["name"], $_POST["surname"], $_POST["address"]]
-        );
+        $register_result = $dbh->registerUser($_POST["username"], $_POST["password"], $_POST["name"], $_POST["surname"], $_POST["address"]);
 
-        header("location: user-page.php");
+        if ($register_result[0]) {
+            header("location: user-page.php");
+        } else {
+            $templateParams["error"] = $register_result[1];
+        }
     } else {
         $templateParams["error"] = "UTENTE ESISTENTE";
     }

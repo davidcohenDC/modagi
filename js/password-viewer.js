@@ -12,6 +12,7 @@ $(function(){
             
             /* show password */
             password.prop("type", "text");
+            
             /* change icon */
             
         } else {
@@ -21,6 +22,7 @@ $(function(){
         
             /* show password */
             password.prop("type", "password");
+            
             /* change icon */
 
         }

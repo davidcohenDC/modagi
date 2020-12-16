@@ -1,0 +1,74 @@
+<?php
+
+class DatabaseUser
+{
+
+    private $db;
+
+    // costruttore
+    public function __construct($servername, $username, $password, $dbname)
+    {
+        $this->db = new mysqli($servername, $username, $password, $dbname);
+
+        // controllo se la connessione è andata a buon fine
+        if ($this->db->connect_error) {
+            // die interrompe tutto!!
+            die("Connessione al db fallita");
+        }
+    }
+
+    public function userAccessLevel($username)
+    {
+        $stmt = $this->db->prepare("SELECT admin 
+                                    FROM user 
+                                    WHERE username = ?;");
+
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function userExists($username)
+    {
+        $stmt = $this->db->prepare("SELECT username
+                                    FROM User
+                                    WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+
+        return count($stmt->get_result()->fetch_all(MYSQLI_ASSOC)) != 0;
+    }
+
+    public function registerUser($username, $password, $name, $surname, $address)
+    {
+        $stmt = $this->db->prepare("INSERT INTO user (username, password, admin, nome, cognome, indirizzo) VALUES (?, ?, 'N', ?, ?, ?)");
+
+        $stmt->bind_param("sssss", $username, $password, $name, $surname, $address);
+        $stmt->execute();
+
+        echo $this->userExists($username);
+        return [$this->userExists($username), "REGISTRAZIONE NON RIUSCITA"];
+    }
+
+    public function checkLogin($username, $password)
+    {
+        if ($this->userExists($username)) {
+
+            /* utente trovato controllo la password */
+            return $this->checkPassword($username, $password);
+        }
+        return [false, "UTENTE NON TROVATO"];
+    }
+
+    private function checkPassword($username, $password)
+    {
+        $stmt = $this->db->prepare("SELECT COUNT(username) as correctUsers
+                                    FROM User
+                                    WHERE username = ? AND password = ?");
+        $stmt->bind_param("ss", $username, $password);
+        $stmt->execute();
+
+        return [$stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]["correctUsers"] != "0", "PASSWORD ERRATA!"];
+    }
+}
