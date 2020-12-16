@@ -81,7 +81,7 @@ $url = "";
 
     <div class="row">
       <?php foreach($templateParams["prodotti"] as $prodotto): ?>
-      <div class="col-lg-4 col-md-6 mb-4">
+      <div class="col-6 col-lg-4 col-md-6 mb-4">
         <div class="card h-100">
           <a href="product.php<?php echo "?prodotto=".$prodotto["id"]; ?>"><img class="card-img-top" src="<?php echo IMG_DIR."/".$prodotto["nome"].".jpg"; ?>" alt=""></a>
           <div class="card-body">
