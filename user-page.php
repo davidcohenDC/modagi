@@ -20,11 +20,6 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
     }
 }
 
-if (isset($_GET["logOut"])) {
-    logOut();
-    header("location: user-page.php");
-}
-
 if (isUserLoggedIn()) {
     $pageTitle = "User Page";
     $pageMain = "user-home.php";

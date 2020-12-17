@@ -11,32 +11,32 @@ const passShowing = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="
                 </svg>`
 
 $(function(){
-    const eye = $("button#eye");
-    const password = $("input#password");
-    
-    eye.on("click", function(e) {
+    const eyes = $("button.eye");
+    const passwords = $("input.password");
+    const icons = $("span.icon");
+    eyes.on("click", function(e) {
         e.preventDefault();
 
         if($(this).hasClass("show-password")){
             /* set next action */
-            $(this).removeClass("show-password");
-            $(this).addClass("hide-password");
+            eyes.removeClass("show-password");
+            eyes.addClass("hide-password");
             
             /* show password */
-            password.prop("type", "text");
+            passwords.prop("type", "text");
             
             /* change icon to password showing */
-            $("span#icon").html(passShowing);
+            icons.html(passShowing);
         } else {
             /* set next action */
-            $(this).removeClass("hide-password");
-            $(this).addClass("show-password");
+            eyes.removeClass("hide-password");
+            eyes.addClass("show-password");
         
             /* show password */
-            password.prop("type", "password");
+            passwords.prop("type", "password");
             
             /* change icon to password not showing */
-            $("span#icon").html(passNotShowing);
+            icons.html(passNotShowing);
         }
     });
 });

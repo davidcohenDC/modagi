@@ -16,10 +16,10 @@
     <!--main content-->
     <div class="col-10 col-md-8 col-lg-6">
         <div class="btn-group-vertical col-12 ">
-            <a href="#" class="my-3 btn btn-light fw-bold"> I miei Ordini </a>
-            <a href="#" class="my-3 btn btn-light fw-bold"> Cambia Password </a>
+            <a href="user-action-page.php?action=1" class="my-3 btn btn-light fw-bold"> I miei Ordini </a>
+            <a href="user-action-page.php?action=2" class="my-3 btn btn-light fw-bold"> Cambia Password </a>
             <a href="#" class="my-3 btn btn-light fw-bold"> ... </a>
-            <a href="user-page.php?logOut=0" class="my-3 btn btn-danger fw-bold"> Esci </a>
+            <a href="user-action-page.php?action=0" class="my-3 btn btn-danger fw-bold"> Esci </a>
         </div>
     </div>
 
