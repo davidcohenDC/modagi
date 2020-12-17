@@ -1,7 +1,7 @@
 <?php
 
 require_once("./server.php");
-
+require_once("utilis/cookie.php");
 
 
 if(isset($_GET["prodotto"])) {
@@ -9,6 +9,22 @@ if(isset($_GET["prodotto"])) {
 } else {
     $idprodotto = 1;
 }
+
+$cart = array();
+
+$cookie = new CookieManager();
+if($cookie->exists(CART_COOKIE)) {
+     $cart = json_decode($cookie->getCookieValue(CART_COOKIE));
+}
+
+var_dump($cart) ;
+
+//to do
+array_push($cart, "8");
+array_push($cart, "1");
+array_push($cart, "2");
+$cookie->setCookie(CART_COOKIE, json_encode($cart));
+//
 
 $templateParams["prodotto"] = $product->selectById($idprodotto)[0];
 $templateParams["title"] = $templateParams["prodotto"]["nome"];

@@ -11,6 +11,7 @@ $templateParams["cssFileName"] = "cart/cart.css";
 $cart["articleDetails"] = array();
 $cart["totalPrice"] = 0;
 
+
 $cookie = new CookieManager();
 // la setCookie la deve fare Dev quando nella main page l'utente aggiunge qualcosa al carrello
 // ora si usa per testare, quindi il + - e cestino del carrello sono un po buggati per questa riga

@@ -359,7 +359,7 @@ div > input > label {
   left: 315px;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 850px) {
   .desktop-show {
     display: none !important;
   }
@@ -369,6 +369,7 @@ div > input > label {
     color: #747373;
   }
 }
+
 
 button.eye {
   border: none;

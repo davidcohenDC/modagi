@@ -68,7 +68,7 @@ $prodotto = $templateParams["prodotto"];
                 </div>
 
                 <!-- Card body -->
-                <div id="collapseThree3" class="collapse"  aria-labelledby="headingThree3" data-parent="#accordionEx" >
+                <div id="collapseThree3" class="collapse show"  aria-labelledby="headingThree3" data-parent="#accordionEx" >
                   <div class="card-body">
                     <ul>
                       <li>Colore: <?php echo $templateParams["idColore"]['nome'];?></li>
