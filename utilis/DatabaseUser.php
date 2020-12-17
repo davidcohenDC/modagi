@@ -29,6 +29,24 @@ class DatabaseUser
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function updatePassword($username, $oldPassword, $newPassword)
+    {
+        /* l'user deve aver messo la password giusta */
+        if ($this->checkPassword($username, $oldPassword)[0]) {
+            if ($oldPassword != $newPassword) {
+                $stmt = $this->db->prepare("UPDATE user
+                                    SET password = ?
+                                    WHERE username = ?");
+                $stmt->bind_param("ss", $newPassword, $username);
+                $stmt->execute();
+
+                return [$this->checkLogin($username, $newPassword)[0], "CAMBIO PASSWORD NON RIUSCITO"];
+            }
+            return [true, ""];
+        }
+        return [false, "PASSWORD CORRENTE SBAGLIATA"];
+    }
+
     public function userExists($username)
     {
         $stmt = $this->db->prepare("SELECT username
@@ -47,7 +65,6 @@ class DatabaseUser
         $stmt->bind_param("sssss", $username, $password, $name, $surname, $address);
         $stmt->execute();
 
-        echo $this->userExists($username);
         return [$this->userExists($username), "REGISTRAZIONE NON RIUSCITA"];
     }
 
