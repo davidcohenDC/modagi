@@ -23,6 +23,30 @@ switch ($action) {
             $dbh = new DatabaseUser(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
         }
 
+        if (isset($_POST["password"])) {
+
+            if (isset($_POST["name"])) {
+                $change_result[0] = $dbh->updateName($_SESSION["username"], $_POST["password"], $_POST["name"]);
+            }
+
+            if (isset($_POST["surname"])) {
+                $change_result[1] = $dbh->updateSurname($_SESSION["username"], $_POST["password"], $_POST["surname"]);
+            }
+
+            if (isset($_POST["address"])) {
+                $change_result[2] = $dbh->updateAddress($_SESSION["username"], $_POST["password"], $_POST["address"]);
+            }
+
+            for ($i = 0; $i < 3; $i++) {
+                if (!$change_result[$i][0]) {
+                    $templateParams["error"] = $change_result[$i][1];
+                }
+            }
+            if (!isset($templateParams["error"])) {
+                header("location: user-page.php");
+            }
+        }
+
         break;
 
     case 2: //? cambio password

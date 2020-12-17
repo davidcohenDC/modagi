@@ -29,6 +29,34 @@ class DatabaseUser
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function updateName($username, $password, $newName)
+    {
+        if ($this->checkPassword($username, $password)[0]) {
+            $stmt = $this->db->prepare("UPDATE user
+                                        SET nome = ?
+                                        WHERE username = ?");
+            $stmt->bind_param("ss", $newName, $username);
+            $stmt->execute();
+
+            return [true, ""];
+        }
+        return [false, "PASSWORD CORRENTE SBAGLIATA"];
+    }
+
+    public function updateSurname($username, $password, $newSurname)
+    {
+        if ($this->checkPassword($username, $password)[0]) {
+            $stmt = $this->db->prepare("UPDATE user
+                                        SET cognome = ?
+                                        WHERE username = ?");
+            $stmt->bind_param("ss", $newSurname, $username);
+            $stmt->execute();
+
+            return [true, ""];
+        }
+        return [false, "PASSWORD CORRENTE SBAGLIATA"];
+    }
+
     public function updateAddress($username, $password, $newAddress)
     {
         if ($this->checkPassword($username, $password)[0]) {
@@ -38,8 +66,9 @@ class DatabaseUser
             $stmt->bind_param("ss", $newAddress, $username);
             $stmt->execute();
 
-            $stmt->close();
+            return [true, ""];
         }
+        return [false, "PASSWORD CORRENTE SBAGLIATA"];
     }
 
     public function updatePassword($username, $oldPassword, $newPassword)
