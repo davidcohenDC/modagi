@@ -31,7 +31,7 @@ if(isset($_GET["colore"])) {
 
 <div class="row">
 
-  <div class="col-lg-3">
+  <div class="col-lg-3 desktop-show">
 
 <!--     <section class="list-brand mb-4">
       <h6 class="font-weight-bold mb-3">SELECTION</h6>
@@ -149,7 +149,7 @@ if(isset($_GET["colore"])) {
    <div class="row">
 
       <?php foreach($templateParams["prodotti"] as $prodotto): ?>
-      <div class="col-6 col-lg-4 col-md-6 mb-4">
+      <div class="col-git col-lg-4 col-md-6 mb-4">
         <div class="card h-100">
           <a href="product.php<?php echo "?prodotto=".$prodotto["id"]; ?>"><img class="card-img-top" src="<?php echo IMG_DIR."/".$prodotto["nome"].".jpg"; ?>" alt=""></a>
           <div class="card-body">
