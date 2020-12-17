@@ -4,16 +4,11 @@
     require_once("./utilis/Paginator.php");
     require_once("./utilis/functions.php");
 
-    $_SESSION["marca"] = 0;
-    $_SESSION["colore"] = 0;
-    $_SESSION["materiale"] = 0;
-
     //make a filter to put into Paginator --> use Filter.php
     $selection = "SELECT * FROM prodotto ";
 
     $selection = filterToQuery($selection);
     $paginator->setNewSelection($selection);
-
     $templateParams["prodotti"] = $paginator->paging();
     $templateParams["pagina"] = $paginator->getPage();
     $templateParams["title"] = "Index";
