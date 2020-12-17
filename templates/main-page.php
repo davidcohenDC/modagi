@@ -1,23 +1,24 @@
 <?php
 $page = $paginator->getPage();
 $totalPage = $paginator->getTotalPages();
-$url = "";
+$firstPage = 1;
 ?>
 
 <div class="row">
 
   <div class="col-lg-3">
 
-    <section class="list-brand mb-4">
-      <h6 class="font-weight-bold mb-3">-- Marca --</h6>
-      <?php foreach($templateParams["marca"] as $marca): ?>
+<!--     <section class="list-brand mb-4">
+      <h6 class="font-weight-bold mb-3">SELECTION</h6>
+      <?php foreach($params as $param=>$value): ?>
       <div class="custom-control radio">
-      <input type="radio" class="custom-control-input " id="<?php echo $marca["nome"] ?>" name="checkMarca" value="<?php echo $marca["id"] ?>" 
-      <?php if(isset($_GET["marca"]) && $_GET["marca"] == $marca["id"]){echo "checked";}?>>
-      <label class="custom-control-label mb-1" for="<?php echo $marca["nome"] ?>" ><?php echo $marca["nome"] ?></label>
+      <label class="custom-control-label mb-1" for="<?php echo $param["marca"] ?>" ><?php echo $product->selectMarcaByID($value)[0]["nome"]; ;  ?></label>
       </div>
       <?php endforeach ?>
-    </section>
+      <div>
+      <a class=" mb-1" href="">remove Selection</a>
+      </div>
+    </section> -->
 
     <section class="list-gender mb-4">
       <h6 class="font-weight-bold mb-3">-- Genere --</h6>
@@ -79,7 +80,49 @@ $url = "";
       </a>
     </div>
 
+
+
     <div class="row">
+
+    <div class="dropdown">
+    <button class="btn btn-light dropdown-toggle mb-4 ml-2" type="button" name="checkMarca1" 
+    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marca</button>
+   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+   <?php foreach($templateParams["marca"] as $marca): ?>
+    <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "marca",$marca["id"])?>"><label data-value="<?php echo $marca["id"] ?>" class="dropdown-item" ><?php echo $marca["nome"] ?></label></a>
+  <?php endforeach ?>
+  </div>
+  </div>
+  <div class="dropdown">
+    <button class="btn btn-light dropdown-toggle mb-4 ml-2" type="button" name="checkMarca1" 
+    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Genere</button>
+   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+   <?php foreach($templateParams["generi"] as $genere): ?>
+    <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "genere",$genere["id"])?>"><label data-value="<?php echo $genere["id"] ?>" class="dropdown-item" ><?php echo $genere["nome"] ?></label></a>
+  <?php endforeach ?>
+  </div>
+  </div>
+  <div class=" dropdown">
+    <button class="btn btn-light dropdown-toggle mb-4 ml-2" type="button" name="checkMarca1" 
+    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Materiale</button>
+   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+   <?php foreach($templateParams["materiali"] as $materiale): ?>
+    <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "materiale",$materiale["id"]);?>"><label data-value="<?php echo $materiale["id"] ?>" class="dropdown-item" ><?php echo $materiale["nome"] ?></label></a>
+  <?php endforeach ?>
+  </div>
+  </div>
+  <div class=" dropdown">
+    <button class="btn btn-light dropdown-toggle mb-4 ml-2" type="button" name="checkMarca1" 
+    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Colore</button>
+   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+   <?php foreach($templateParams["colori"] as $colore): ?>
+    <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "colore",$colore["id"])?>"><label data-value="<?php echo $colore["id"] ?>" class="dropdown-item" ><?php echo $colore["nome"] ?></label></a>
+  <?php endforeach ?>
+  </div>
+  </div>
+   </div>
+   <div class="row">
+
       <?php foreach($templateParams["prodotti"] as $prodotto): ?>
       <div class="col-6 col-lg-4 col-md-6 mb-4">
         <div class="card h-100">
@@ -103,7 +146,7 @@ $url = "";
     <nav>
       <ul class="pagination pg-dark">
         <li class="page-item " >
-          <a class="page-link " aria-label="Previous" href="<?php echo $paginator->setFirstUrlPage(); ?>">
+          <a class="page-link " aria-label="Previous" href="<?php echo addURLParameter($_SERVER['REQUEST_URI'], "pag",$firstPage);?>">
             <span aria-hidden="true">&laquo;</span>
             <span class="sr-only">Previous</span>
           </a>
@@ -112,12 +155,11 @@ $url = "";
         <li class="page-item <?php if($page == $i){echo "active";} ?>"><a class="page-link" href="<?php echo addURLParameter($_SERVER['REQUEST_URI'], "pag",$i)?>"><?php echo $i ?></a></li>
         <?php endfor ?>
         <li class="page-item">
-          <a class="page-link" aria-label="Next" href="<?php echo $paginator->setLastUrlPage(); ?>">
+          <a class="page-link" aria-label="Next" href="<?php echo addURLParameter($_SERVER['REQUEST_URI'], "pag",$totalPage);?>">
             <span aria-hidden="true">&raquo;</span>
             <span class="sr-only">Next</span>
           </a>
         </li>
       </ul>
     </nav>
-
 </div>

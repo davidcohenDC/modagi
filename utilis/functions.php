@@ -21,6 +21,12 @@ function logOut()
     }
 }
 
+function removeParam($url, $param) {
+    $url = preg_replace('/(&|\?)'.preg_quote($param).'=[^&]*$/', '', $url);
+    $url = preg_replace('/(&|\?)'.preg_quote($param).'=[^&]*&/', '$1', $url);
+    return $url;
+}
+
 function change_url_parameter($url, $parameter, $parameterValue)
 {
     $url = parse_url($url);
@@ -41,6 +47,15 @@ function addURLParameter($url, $paramName, $paramValue)
     $params[$paramName] = $paramValue;
     $url_data['query'] = http_build_query($params);
     return build_url($url_data);
+}
+
+function addUrlParameters($url, $paramName, $paramValue) {
+
+    if(isset($_GET["pag"])) {
+        $url = removeParam($url, "pag");
+    } 
+
+    return addURLParameter($url, $paramName, $paramValue);
 }
 
 function removeqsvar($url, $varname)

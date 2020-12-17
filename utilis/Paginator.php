@@ -42,12 +42,12 @@ class Paginator{
     }
 
     public function setLastUrlPage() {
-            return change_url_parameter($_SERVER['REQUEST_URI'],"pag",$this->totalPages);
+            return addUrlParameters($_SERVER['REQUEST_URI'],"pag",$this->totalPages);
     }
 
     public function setFirstUrlPage() {
         $this->page = 1;
-            return change_url_parameter($_SERVER['REQUEST_URI'],"pag",$this->page);
+            return addUrlParameters($_SERVER['REQUEST_URI'],"pag",$this->page);
     }
 
     public function paging() {
