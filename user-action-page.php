@@ -15,8 +15,18 @@ switch ($action) {
         header("location: user-page.php");
         break;
 
+    case 1: //? cambia i dati utente
+        $templateParams["title"] = "Modifica Dati Utente";
+        $templateParams["main"] = "change-user-data.php";
+
+        if (!isset($dbh)) {
+            $dbh = new DatabaseUser(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
+        }
+
+        break;
+
     case 2: //? cambio password
-        $templateParams["title"] = "Cambio Password";
+        $templateParams["title"] = "Modifica Password";
         $templateParams["main"] = "change-password-form.php";
 
         //* effettivo update query

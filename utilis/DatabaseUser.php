@@ -29,6 +29,19 @@ class DatabaseUser
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function updateAddress($username, $password, $newAddress)
+    {
+        if ($this->checkPassword($username, $password)[0]) {
+            $stmt = $this->db->prepare("UPDATE user
+                                        SET indirizzo = ?
+                                        WHERE username = ?");
+            $stmt->bind_param("ss", $newAddress, $username);
+            $stmt->execute();
+
+            $stmt->close();
+        }
+    }
+
     public function updatePassword($username, $oldPassword, $newPassword)
     {
         /* l'user deve aver messo la password giusta */
