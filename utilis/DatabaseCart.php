@@ -16,7 +16,7 @@ class DatabaseCart{
 
     public function getArticleDetails($articleName) {
         $stmt = $this->db->prepare("SELECT nome, prezzo, descrizione 
-                                    FROM prodotto WHERE nome = ?");
+                                    FROM prodotto WHERE id = ?");
         $stmt->bind_param("s", $articleName);
         $stmt->execute();
 
@@ -31,7 +31,7 @@ class DatabaseCart{
     public function getTotalPrice($allArticle = []) {
         $totalPrice = 0;
         foreach ($allArticle as $key => $article) {
-            $stmt = $this->db->prepare("SELECT prezzo FROM prodotto WHERE nome = ?");
+            $stmt = $this->db->prepare("SELECT prezzo FROM prodotto WHERE id = ?");
             $stmt->bind_param("s", $article);
             $stmt->execute();
             $result = $stmt->get_result();
