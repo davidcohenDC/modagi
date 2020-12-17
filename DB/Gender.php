@@ -23,6 +23,10 @@ class Gender extends Database {
       return $this->table;
     }
 
+    public function selectbyID($id) {
+      return parent::Select("SELECT * FROM ".$this->table. " WHERE id = ".$id);
+    }
+
 
 }
 

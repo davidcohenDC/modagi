@@ -237,6 +237,7 @@ div > input > label{
 }
 
 
+
   .card .card-body .card-text {
       font-size: .9rem;
       font-weight: 400;
@@ -370,4 +371,10 @@ cursor:pointer;
     color:#333;
 top:150px;
 left:315px;
+}
+
+@media (max-width: 640px) {
+  #button {
+     width:200%;
+  }
 }

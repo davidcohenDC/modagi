@@ -2,6 +2,31 @@
 $page = $paginator->getPage();
 $totalPage = $paginator->getTotalPages();
 $firstPage = 1;
+
+if(isset($_GET["marca"])) {
+  $tagmarca = $brand->selectByID($_GET["marca"])[0];
+} else {
+  $tagmarca = "";
+}
+
+if(isset($_GET["genere"])) {
+  $tag_genere = $gender->selectbyID($_GET["genere"])[0];
+} else {
+  $tag_genere = "";
+}
+
+if(isset($_GET["materiale"])) {
+  $tag_materiale = $material->selectbyID($_GET["materiale"])[0];
+} else {
+  $tag_materialee = "";
+}
+
+if(isset($_GET["colore"])) {
+  $tag_colore = $colour->selectbyID($_GET["colore"])[0];
+} else {
+  $tag_colore = "";
+}
+ 
 ?>
 
 <div class="row">
@@ -82,11 +107,11 @@ $firstPage = 1;
 
 
 
-    <div class="row">
+    <div class="row justify-content-center">
 
     <div class="dropdown">
-    <button class="btn btn-light dropdown-toggle mb-4 ml-2" type="button" name="checkMarca1" 
-    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marca</button>
+    <button class="btn btn-light dropdown-toggle mb-4 ml-2 <?php if(isset($_GET["marca"])) { echo "active font-weight-bold";}?>" type="button" name="checkMarca1" 
+    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php if(isset($_GET["marca"])) { echo strtoupper($tagmarca["nome"]);} else { echo "Marca";};?></button>
    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
    <?php foreach($templateParams["marca"] as $marca): ?>
     <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "marca",$marca["id"])?>"><label data-value="<?php echo $marca["id"] ?>" class="dropdown-item" ><?php echo $marca["nome"] ?></label></a>
@@ -94,8 +119,8 @@ $firstPage = 1;
   </div>
   </div>
   <div class="dropdown">
-    <button class="btn btn-light dropdown-toggle mb-4 ml-2" type="button" name="checkMarca1" 
-    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Genere</button>
+    <button class="btn btn-light dropdown-toggle mb-4 ml-2 <?php if(isset($_GET["genere"])) { echo "active font-weight-bold";}?>" type="button" name="checkMarca1" 
+    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php if(isset($_GET["genere"])) { echo strtoupper($tag_genere["nome"]);} else { echo "Genere";};?></button>
    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
    <?php foreach($templateParams["generi"] as $genere): ?>
     <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "genere",$genere["id"])?>"><label data-value="<?php echo $genere["id"] ?>" class="dropdown-item" ><?php echo $genere["nome"] ?></label></a>
@@ -103,8 +128,8 @@ $firstPage = 1;
   </div>
   </div>
   <div class=" dropdown">
-    <button class="btn btn-light dropdown-toggle mb-4 ml-2" type="button" name="checkMarca1" 
-    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Materiale</button>
+    <button class="btn btn-light dropdown-toggle mb-4 ml-2 <?php if(isset($_GET["materiale"])) { echo "active font-weight-bold";}?>" type="button" name="checkMarca1" 
+    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php if(isset($_GET["materiale"])) { echo strtoupper($tag_materiale["nome"]);} else { echo "Materiale";};?></button>
    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
    <?php foreach($templateParams["materiali"] as $materiale): ?>
     <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "materiale",$materiale["id"]);?>"><label data-value="<?php echo $materiale["id"] ?>" class="dropdown-item" ><?php echo $materiale["nome"] ?></label></a>
@@ -112,8 +137,8 @@ $firstPage = 1;
   </div>
   </div>
   <div class=" dropdown">
-    <button class="btn btn-light dropdown-toggle mb-4 ml-2" type="button" name="checkMarca1" 
-    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Colore</button>
+    <button class="btn btn-light dropdown-toggle mb-4 ml-2 <?php if(isset($_GET["colore"])) { echo "active font-weight-bold";}?>" type="button" name="checkMarca1" 
+    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php if(isset($_GET["colore"])) { echo strtoupper($tag_colore["nome"]);} else { echo "Colore";};?></button>
    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
    <?php foreach($templateParams["colori"] as $colore): ?>
     <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "colore",$colore["id"])?>"><label data-value="<?php echo $colore["id"] ?>" class="dropdown-item" ><?php echo $colore["nome"] ?></label></a>

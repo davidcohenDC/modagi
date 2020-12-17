@@ -15,6 +15,10 @@ class Category extends Database {
       return parent::Select("SELECT * FROM ".$this->table);
     }
 
+    public function selectbyID($id) {
+      return parent::Select("SELECT * FROM ".$this->table. " WHERE id = ".$id);
+    }
+
 }
 
 ?>
