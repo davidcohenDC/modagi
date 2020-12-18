@@ -14,6 +14,12 @@ $(function(){
     const eyes = $("button.eye");
     const passwords = $("input.password");
     const icons = $("span.icon");
+    
+    /* set up */
+    passwords.prop("type", "password");
+    eyes.addClass("show-password");
+    icons.html(passNotShowing);
+    
     eyes.on("click", function(e) {
         e.preventDefault();
 
@@ -32,7 +38,7 @@ $(function(){
             eyes.removeClass("hide-password");
             eyes.addClass("show-password");
         
-            /* show password */
+            /* hide password */
             passwords.prop("type", "password");
             
             /* change icon to password not showing */
