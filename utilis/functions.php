@@ -55,6 +55,10 @@ function addUrlParameters($url, $paramName, $paramValue) {
         $url = removeParam($url, "pag");
     } 
 
+    if(isset($_GET["filter"])) {
+        $url = removeParam($url, "filter");
+    } 
+
     return addURLParameter($url, $paramName, $paramValue);
 }
 
@@ -95,8 +99,13 @@ function build_url($url_data)
     return $url;
 }
 
-function filterToQuery($selection)
+/*
+// Filter All table of product and binding into the corrispective query
+*/
+function bindProductUrlToQuery()
 {
+    //the main selection for prodotto with all corrispecti
+    $selection = "SELECT * FROM prodotto ";
     $filter = "";
     $count = 0;
 
@@ -114,7 +123,7 @@ function filterToQuery($selection)
         parse_str($url, $result);
 
         foreach ($result as $name => $value) {
-            if ($name == "pag") {
+            if ($name == "pag" || $name == "filter") {
                 //nothing
             } else if ($name == "genere" && $value == 3) {
                 if ($count >= 1) {
@@ -133,7 +142,24 @@ function filterToQuery($selection)
                 $count++;
             }
         }
+
+        //select the filter
+        if(isset($_GET["filter"])) {
+            switch ($_GET["filter"]) {
+              case 'last_product':
+                $filter = $filter . " ORDER BY prodotto.id DESC";
+                break;
+              case 'price_ascending':
+                $filter = $filter . " ORDER BY prodotto.prezzo ASC";
+                break;
+              case 'price_discending':
+                $filter = $filter . " ORDER BY prodotto.prezzo DESC";
+                break;    
+            }
+          } 
+
         $selection = $selection . $filter;
         return $selection;
     }
 }
+

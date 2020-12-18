@@ -27,6 +27,10 @@ class Material extends Database {
       return parent::Select("SELECT * FROM ".$this->table. " WHERE id = ".$id);
     }
 
+    public function selectbyName($name) {
+      return parent::Select("SELECT * FROM ".$this->table. " WHERE nome = ".$name);
+    }
+
 
 }
 

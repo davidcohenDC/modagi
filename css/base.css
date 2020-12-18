@@ -374,3 +374,7 @@ div > input > label {
 button.eye {
   border: none;
 }
+
+.btn-filtro {
+  width: 100% !important;
+}

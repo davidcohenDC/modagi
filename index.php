@@ -5,9 +5,8 @@
     require_once("./utilis/functions.php");
 
     //make a filter to put into Paginator --> use Filter.php
-    $selection = "SELECT * FROM prodotto ";
+    $selection = bindProductUrlToQuery();
 
-    $selection = filterToQuery($selection);
     $paginator->setNewSelection($selection);
     $templateParams["prodotti"] = $paginator->paging();
     $templateParams["pagina"] = $paginator->getPage();
@@ -18,6 +17,7 @@
     $templateParams["generi"] = $gender->getAll();
     $templateParams["materiali"] = $material->getAll();
     $templateParams["promozioni"] = 2;
+    
 
     require_once("templates/base.php");
     require_once("templates/main-page.php");

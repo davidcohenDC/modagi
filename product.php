@@ -20,12 +20,13 @@ if($cookie->exists(CART_COOKIE)) {
 var_dump($cart) ;
 
 //to do
-array_push($cart, "8");
-array_push($cart, "1");
-array_push($cart, "2");
-$cookie->setCookie(CART_COOKIE, json_encode($cart));
+// array_push($cart, "8");
+// array_push($cart, "1");
+// array_push($cart, "2");
+// $cookie->setCookie(CART_COOKIE, json_encode($cart));
 //
 
+$templateParams["main"] = "product-page.php";
 $templateParams["prodotto"] = $product->selectById($idprodotto)[0];
 $templateParams["title"] = $templateParams["prodotto"]["nome"];
 $templateParams["idMateriale"] = $product->selectMaterialeByID($idprodotto)[0];
