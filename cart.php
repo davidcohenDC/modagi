@@ -1,36 +1,16 @@
 <?php
 
 require_once("macro.php");
-require_once("utilis/cookie.php");
-require_once("utilis/DatabaseCart.php");
+require_once("./utilis/CartManager.php");
 
 //TODO check if user is logged, else redirect to login page
 $templateParams["title"] = "Shopping cart";
 $templateParams["main"] = "./templates/cart_page.php";
 $templateParams["cssFileName"] = "cart/cart.css";
-$cart["articleDetails"] = array();
-$cart["totalPrice"] = 0;
 
-
-$cookie = new CookieManager();
-
-$jsonArticle = $cookie->getCookieValue(CART_COOKIE);
-if($jsonArticle) {
-    $allArticle = json_decode($jsonArticle);
-
-    $db = new DatabaseCart(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
-
-    // get number of an article put in the cart
-    $numberOfOrder = array_count_values($allArticle);
-    // need array_unique to don't show in cart the same article more than 1 time
-    foreach (array_unique($allArticle) as $key => $articleName) {
-        array_push($cart["articleDetails"], [$db->getArticleDetails($articleName), $numberOfOrder[$articleName]]);
-    }
-
-    foreach ($cart["articleDetails"] as $key => $article) {
-        $cart["totalPrice"] = $cart["totalPrice"] + ($article[0]["prezzo"] * $article[1]) ;
-    }
-}
+$cartManager = new CartManager();
+$cart["articleDetails"] = $cartManager->getArticleDetails();
+$cart["totalPrice"] = $cartManager->getTotalPrice();
 
 require("./templates/base.php");
 
