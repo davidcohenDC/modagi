@@ -30,7 +30,7 @@
 
 <body>
     <header class="jumbotron">
-        <div class="container text-xs-center">
+        <div class="container text-center">
             <h1><?php echo SHOP_NAME ?></h1>
             <p>Mission, Vission & Values</p>
         </div>
