@@ -75,6 +75,29 @@ switch ($action) {
         }
         break;
 
+    case -1: //! remove account after confirm
+
+        $templateParams["title"] = "Rimuovi Account";
+        $templateParams["main"] = "form.php";
+        $formParams["title"] = "Rimuovi Account";
+        $formParams["main"] = "confirm.php";
+
+        if (!isset($dbh)) {
+            $dbh = new DatabaseUser(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
+        }
+        if (isset($_POST["password"])) {
+            $remove_result = $dbh->removeUser($_SESSION["username"], $_POST["password"]);
+
+            if ($remove_result[0]) {
+                //! then log out
+                logOut();
+                header("location: registration-page.php");
+            } else {
+                $templateParams["error"] = $remove_result[1];
+            }
+        }
+        break;
+
     default:
         $templateParams["title"] = "azione non trovata";
         echo `<div class="fw-1 text-danger"> 
