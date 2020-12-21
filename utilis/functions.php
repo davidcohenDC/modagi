@@ -122,8 +122,17 @@ function bindProductUrlToQuery()
         $url = $query["query"];
         parse_str($url, $result);
 
+        //before filter find a possbile new selection
+
+        if(isset($_GET["taglia"])) {
+            $selection = "SELECT * FROM prodottitaglie PT LEFT JOIN prodotto P ON PT.idProdotto = P.id WHERE PT.idTaglia = ".$_GET["taglia"];
+            $count++;
+        }
+        
+
         foreach ($result as $name => $value) {
-            if ($name == "pag" || $name == "filter") {
+
+            if ($name == "pag" || $name == "filter" || $name== "taglia") {
                 //nothing
             } else if ($name == "genere" && $value == 3) {
                 if ($count >= 1) {
@@ -132,6 +141,13 @@ function bindProductUrlToQuery()
                     $filter = $filter . " WHERE id" . $name . " IN (1,2,3)";
                 }
 
+                $count++;
+            } else if($name == "prezzo") {
+                if ($count >= 1) {
+                    $filter =  $filter . " AND " . $name . " >= " . $value;
+                } else {
+                    $filter = $filter . " WHERE " . $name . " >= " . $value;
+                }
                 $count++;
             } else {
                 if ($count >= 1) {
@@ -143,17 +159,17 @@ function bindProductUrlToQuery()
             }
         }
 
-        //select the filter
+        //after filtering select the order
         if(isset($_GET["filter"])) {
             switch ($_GET["filter"]) {
-              case 'last_product':
-                $filter = $filter . " ORDER BY prodotto.id DESC";
+              case 'ultimi_arrivi':
+                $filter = $filter . " ORDER BY id DESC";
                 break;
-              case 'price_ascending':
-                $filter = $filter . " ORDER BY prodotto.prezzo ASC";
+              case 'prezzo_crescente':
+                $filter = $filter . " ORDER BY prezzo ASC";
                 break;
-              case 'price_discending':
-                $filter = $filter . " ORDER BY prodotto.prezzo DESC";
+              case 'prezzo_decrescente':
+                $filter = $filter . " ORDER BY prezzo DESC";
                 break;    
             }
           } 

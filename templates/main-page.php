@@ -3,62 +3,68 @@ $page = $paginator->getPage();
 $totalPage = $paginator->getTotalPages();
 $firstPage = 1;
 
-if(isset($_GET["marca"])) {
-  $tagmarca = $brand->selectByID($_GET["marca"])[0];
-} else {
-  $tagmarca = "";
-}
+$tabelle = array();
+array_push($tabelle, "marca","genere","materiale","colore","taglia");
 
-if(isset($_GET["genere"])) {
-  $tag_genere = $gender->selectbyID($_GET["genere"])[0];
-} else {
-  $tag_genere = "";
-}
-
-if(isset($_GET["materiale"])) {
-  $tag_materiale = $material->selectbyID($_GET["materiale"])[0];
-} else {
-  $tag_materialee = "";
-}
-
-if(isset($_GET["colore"])) {
-  $tag_colore = $colour->selectbyID($_GET["colore"])[0];
-} else {
-  $tag_colore = "";
-}
- 
 ?>
 
 <div class="row">
 
   <div class="col-lg-3 desktop-show">
-    <!--     <section class="list-brand mb-4">
-      <h6 class="font-weight-bold mb-3">SELECTION</h6>
-      <?php foreach($params as $param=>$value): ?>
-      <div class="custom-control radio">
-      <label class="custom-control-label mb-1" for="<?php echo $param["marca"] ?>" ><?php echo $product->selectMarcaByID($value)[0]["nome"]; ;  ?></label>
-      </div>
-      <?php endforeach ?>
-      <div>
-      <a class=" mb-1" href="">remove Selection</a>
-      </div>
-    </section> -->
 
-    <section class="list-gender my-2 mb-4">
-      <h6 class="font-weight-bold mb-3">ORDER BY:</h6>
+    <!-- Section: Ordered -->
+    <section class="list-order my-2 mb-4">
+      <h6 class="font-weight-bold mb-3">Ordina Per:</h6>
       <div class="list-group">
-        <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "filter","last_product")?>"><label
-            class="control-label mb-1">Ultimi Arrivi</label></a>
-        <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "filter","price_ascending")?>"><label
-            class="control-label mb-1">Prezzo Crescente</label></a>
-        <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "filter","price_discending")?>"><label
-            class="control-label mb-1">Prezzo Decrescente</label></a>
+        <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "filter","ultimi_arrivi")?>"><label
+            class="control-label mb-1 <?php if($_GET["filter"] == "ultimi_arrivi") {echo "font-weight-bold text-primary";} else {}?>">Ultimi Arrivi</label></a>
+        <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "filter","prezzo_crescente")?>"><label
+            class="control-label mb-1 <?php if($_GET["filter"] == "prezzo_crescente") {echo "font-weight-bold text-primary";} else {}?>">Prezzo Crescente</label></a>
+        <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "filter","prezzo_decrescente")?>"><label
+            class="control-label mb-1 <?php if($_GET["filter"] == "prezzo_decrescente") {echo "font-weight-bold text-primary";} else {}?>">Prezzo Decrescente</label></a>
       </div>
     </section>
+    <!-- Section: Ordered -->
+
+    <!-- Section: Price -->
+    <section class="list-price my-2 mb-4">
+
+      <h6 class="font-weight-bold mb-3">Prezzo</h6>
+
+      <div class="slider-price d-flex align-items-center my-4">
+        <span class="font-weight-normal small text-muted mr-2">€0</span>
+        <form class="multi-range-field mr-2 mb-1">
+          <input id="multi" class="multi-range" type="range" min="1" max="500" step="10" />
+        </form>
+        <span class="font-weight-normal small">€500</span>
+      </div>
+
+    </section>
+    <!-- Section: Price -->
+
+    <!-- Section: Tables -->
+    <section class="list-tables my-2 mb-4">
+      <?php foreach($tabelle as $tabella): ?>
+      <section class="list-gender mb-3">
+        <h6 class="font-weight-bold mb-3"><?php echo ucfirst($tabella) ?></h6>
+        <?php foreach($templateParams[$tabella] as $value): ?>
+        <div class="custom-control radio">
+          <input type="radio" class="custom-control-input" id="<?php if($tabella == "taglia") {echo $value["numero"];} else {echo $value["nome"];} ?>"
+            name="check<?php echo ucfirst($tabella) ?>" value="<?php echo $value["id"] ?>"
+            <?php if(isset($_GET[$tabella]) && $_GET[$tabella] == $value["id"]){echo "checked";}?>>
+          <label class="custom-control-label mb-1"
+            for="<?php if($tabella == "taglia") {echo $value["numero"];} else {echo $value["nome"];} ?>"><?php if($tabella == "taglia") {echo $value["numero"];} else {echo $value["nome"];} ?></label>
+        </div>
+        <?php endforeach ?>
+      </section>
+      <?php endforeach ?>
+
+    </section>
+    <!-- Section: Tables -->
 
   </div>
 
-  <div class="col-lg-8">
+  <div class="col-12 col-lg-8">
 
     <div id="carouselExampleIndicators" class="carousel slide mb-4" data-ride="carousel">
       <ol class="carousel-indicators">
@@ -85,85 +91,57 @@ if(isset($_GET["colore"])) {
       </a>
     </div>
 
-
-
     <div class="row d-flex justify-content-center">
 
-      <div class="col-12  dropdown ml-2 mr-2">
+      <div class="col-12 dropdown ml-2 mr-2">
         <button
-          class=" btn-filtro btn btn-light dropdown-toggle mb-4 ml-2 <?php if(isset($_GET["marca"])) { echo "active font-weight-bold";}?>"
+          class=" btn-filter btn btn-light dropdown-toggle mb-4 ml-2 <?php if(isset($_GET["filter"])) { echo "active font-weight-bold";}?>"
           type="button" name="checkMarca1" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">FILTRA</button>
+          aria-expanded="false"><?php if(isset($_GET["filter"])) { echo str_replace("_"," ",strtoupper(($_GET["filter"]))) ;} else { echo "Ordina";};?>
+        </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "ultimiarrivi","on")?>"><label
+          <a class="dropdown-item"
+            href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "filter","ultimi_arrivi")?>"><label
               data-value="ultimiArrivi" class="dropdown-item">Ultimi Arrivi</label></a>
-          <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "ultimiarrivi","on")?>"><label
-              data-value="ultimiArrivi" class="dropdown-item">Ultimi Arrivi</label></a>
-          <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "ultimiarrivi","on")?>"><label
-              data-value="ultimiArrivi" class="dropdown-item">Ultimi Arrivi</label></a>
+          <a class="dropdown-item"
+            href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "filter","prezzo_crescente")?>"><label
+              data-value="prezzoCrescente" class="dropdown-item">Prezzo Crescente</label></a>
+          <a class="dropdown-item"
+            href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "filter","prezzo_decrescente")?>"><label
+              data-value="prezzoDecrescente" class="dropdown-item">Prezzo Decrescente</label></a>
         </div>
       </div>
     </div>
 
     <div class="row justify-content-center">
 
+      <?php foreach($tabelle as $str_tabella): ?>
       <div class="dropdown ml-1 mr-1">
         <button
-          class="btn btn-light dropdown-toggle mb-4 ml-2 <?php if(isset($_GET["marca"])) { echo "active font-weight-bold";}?>"
-          type="button" name="checkMarca1" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false"><?php if(isset($_GET["marca"])) { echo strtoupper($tagmarca["nome"]);} else { echo "Marca";};?></button>
+          class="btn-filter btn btn-light dropdown-toggle mb-4 ml-2 <?php if(isset($_GET[$str_tabella])) { echo "active font-weight-bold";}?>"
+          type="button" name="check<? echo $str_tabella ?>" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"><?php if(isset($_GET[$str_tabella])) { if($str_tabella == "taglia") {echo strtoupper($templateParams[$str_tabella][$_GET[$str_tabella]-1]["numero"]);} else 
+          {echo strtoupper($templateParams[$str_tabella][$_GET[$str_tabella]-1]["nome"]);}} else { echo ucfirst($str_tabella);};?></button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <?php foreach($templateParams["marca"] as $marca): ?>
-          <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "marca",$marca["id"])?>"><label
-              data-value="<?php echo $marca["id"] ?>" class="dropdown-item"><?php echo $marca["nome"] ?></label></a>
+          <?php foreach($templateParams[$str_tabella] as $value): ?>
+          <a class="dropdown-item"
+            href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], $str_tabella,$value["id"])?>"><label
+              data-value="<?php echo $value["id"] ?>" class="dropdown-item"><?php if($str_tabella == "taglia") {echo $value["numero"];} else {echo $value["nome"];} ?></label></a>
           <?php endforeach ?>
         </div>
       </div>
-      <div class="dropdown ml-1 mr-1">
-        <button
-          class="btn btn-light dropdown-toggle mb-4 ml-2 <?php if(isset($_GET["genere"])) { echo "active font-weight-bold";}?>"
-          type="button" name="checkMarca1" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false"><?php if(isset($_GET["genere"])) { echo strtoupper($tag_genere["nome"]);} else { echo "Genere";};?></button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <?php foreach($templateParams["generi"] as $genere): ?>
-          <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "genere",$genere["id"])?>"><label
-              data-value="<?php echo $genere["id"] ?>" class="dropdown-item"><?php echo $genere["nome"] ?></label></a>
-          <?php endforeach ?>
-        </div>
-      </div>
-      <div class="dropdown ml- mr-1">
-        <button
-          class="btn btn-light dropdown-toggle mb-4 ml-2 <?php if(isset($_GET["materiale"])) { echo "active font-weight-bold";}?>"
-          type="button" name="checkMarca1" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false"><?php if(isset($_GET["materiale"])) { echo strtoupper($tag_materiale["nome"]);} else { echo "Materiale";};?></button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <?php foreach($templateParams["materiali"] as $materiale): ?>
-          <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "materiale",$materiale["id"]);?>"><label
-              data-value="<?php echo $materiale["id"] ?>"
-              class="dropdown-item"><?php echo $materiale["nome"] ?></label></a>
-          <?php endforeach ?>
-        </div>
-      </div>
-      <div class=" dropdown ml-1 mr-1">
-        <button
-          class="btn btn-light dropdown-toggle mb-4 ml-2 <?php if(isset($_GET["colore"])) { echo "active font-weight-bold";}?>"
-          type="button" name="checkMarca1" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false"><?php if(isset($_GET["colore"])) { echo strtoupper($tag_colore["nome"]);} else { echo "Colore";};?></button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <?php foreach($templateParams["colori"] as $colore): ?>
-          <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "colore",$colore["id"])?>"><label
-              data-value="<?php echo $colore["id"] ?>" class="dropdown-item"><?php echo $colore["nome"] ?></label></a>
-          <?php endforeach ?>
-        </div>
-      </div>
-    </div>
-    <div class="row">
+      <?php endforeach ?>
 
+    </div>
+
+    <div class="row">
       <?php foreach($templateParams["prodotti"] as $prodotto): ?>
       <div class="col-6 col-lg-4 col-md-6 mb-4">
         <div class="card h-100">
-          <a href="product.php<?php echo "?prodotto=".$prodotto["id"]; ?>"><img class="card-img-top"
-              src="<?php echo IMG_DIR."/".$prodotto["nome"].".jpg"; ?>" alt=""></a>
+
+          <a href="product.php<?php echo "?prodotto=".$prodotto["id"]; ?>">
+            <img class="card-img-top" src="<?php echo IMG_DIR."/".$prodotto["nome"].".jpg"; ?>" alt=""></a>
           <div class="card-body">
             <h4 class="card-title">
               <a href="product.php<?php echo "?prodotto=".$prodotto["id"]; ?>"><?php echo $prodotto["nome"]; ?></a>
@@ -174,12 +152,13 @@ if(isset($_GET["colore"])) {
           <div class="card-footer">
             <small class="text-muted">Disponibilità: <?php echo $prodotto["stock"];?></small>
           </div>
+
         </div>
       </div>
       <?php endforeach ?>
 
     </div>
-
+    <!-- Nav: Paginator -->
     <nav>
       <ul class="pagination pg-dark">
         <li class="page-item ">
@@ -202,4 +181,5 @@ if(isset($_GET["colore"])) {
         </li>
       </ul>
     </nav>
+    <!-- Nav: Paginator -->
   </div>

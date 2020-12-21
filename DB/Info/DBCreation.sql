@@ -161,6 +161,8 @@ CREATE UNIQUE INDEX `PK_Colore`
 CREATE UNIQUE INDEX `PK_Materiale`
      ON `Materiale` (`id`);
 
+
+
 CREATE UNIQUE INDEX `PK_Ordine`
      ON `Ordine` (`idProdotto`, `username`, `data`);
 

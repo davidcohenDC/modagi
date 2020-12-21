@@ -13,9 +13,10 @@ $templateParams["pagina"]=$paginator->getPage();
 $templateParams["title"]="Index";
 $templateParams["main"]="main-page.php";
 $templateParams["marca"]=$brand->getAll();
-$templateParams["colori"]=$colour->getAll();
-$templateParams["generi"]=$gender->getAll();
-$templateParams["materiali"]=$material->getAll();
+$templateParams["taglia"]=$size->getAll();
+$templateParams["colore"]=$colour->getAll();
+$templateParams["genere"]=$gender->getAll();
+$templateParams["materiale"]=$material->getAll();
 $templateParams["promozioni"]=2;
 
 

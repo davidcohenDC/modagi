@@ -32,6 +32,7 @@ function updateQueryStringParameter(uri, key, value) {
     return rtn;
 }
 
+
 $(function(){
 
   document.addEventListener("DOMContentLoaded", function(event) { 
@@ -60,6 +61,7 @@ window.onbeforeunload = function(e) {
 
       $('input[name=checkMateriale]').on('change', function() {
         let $url = $(this).val();
+        $('input[name=checkMateriale]').val($url);
         $url = updateQueryStringParameter(window.location.href,"materiale",+$(this).val());
         $url = removeParam("pag",$url);
         $url = location.href = $url+"&pag=1";
@@ -69,11 +71,38 @@ window.onbeforeunload = function(e) {
 
       $('input[name=checkColore]').on('change', function() {
         let $url = $(this).val();
+        $('input[name=checkMateriale]').val($url);
         $url = updateQueryStringParameter(window.location.href,"colore",+$(this).val());
+        $url = removeParam("pag",$url);
+        $url = location.href = $url+"&pag=1";
+        
+
+      })
+
+      $('input[name=checkTaglia]').on('change', function() {
+        let $url = $(this).val();
+        $url = updateQueryStringParameter(window.location.href,"taglia",+$(this).val());
+        $url = removeParam("pag",$url);
+        $url = location.href = $url+"&pag=1";
+        
+
+      })
+
+      $('.multi-range').on('change', function() {
+        let $url = $(this).val();
+        $url = updateQueryStringParameter(window.location.href,"prezzo",+$(this).val());
         $url = removeParam("pag",$url);
         $url = location.href = $url+"&pag=1";
 
       })
+
+      
+
+      $(window).bind("load", function() {
+        let urlParams = new URLSearchParams(window.location.search);
+        let prezzo = urlParams.get('prezzo');
+        $('.multi-range').val(prezzo);
+     });
 
 
 });

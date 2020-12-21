@@ -17,7 +17,6 @@ if($cookie->exists(CART_COOKIE)) {
      $cart = json_decode($cookie->getCookieValue(CART_COOKIE));
 }
 
-var_dump($cart) ;
 
 //to do
 // array_push($cart, "8");
@@ -29,6 +28,7 @@ var_dump($cart) ;
 $templateParams["main"] = "product-page.php";
 $templateParams["prodotto"] = $product->selectById($idprodotto)[0];
 $templateParams["title"] = $templateParams["prodotto"]["nome"];
+$templateParams["taglia"] = $product->selectTagliaByID($idprodotto);
 $templateParams["idMateriale"] = $product->selectMaterialeByID($idprodotto)[0];
 $templateParams["idGenere"] = $product->selectGenereByID($idprodotto)[0];
 $templateParams["idColore"] = $product->selectColoreByID($idprodotto)[0];
