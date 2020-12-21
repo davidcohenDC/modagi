@@ -163,13 +163,13 @@ function bindProductUrlToQuery()
         if(isset($_GET["filter"])) {
             switch ($_GET["filter"]) {
               case 'ultimi_arrivi':
-                $filter = $filter . " ORDER BY prodotto.id DESC";
+                $filter = $filter . " ORDER BY id DESC";
                 break;
               case 'prezzo_crescente':
-                $filter = $filter . " ORDER BY prodotto.prezzo ASC";
+                $filter = $filter . " ORDER BY prezzo ASC";
                 break;
               case 'prezzo_decrescente':
-                $filter = $filter . " ORDER BY prodotto.prezzo DESC";
+                $filter = $filter . " ORDER BY prezzo DESC";
                 break;    
             }
           } 

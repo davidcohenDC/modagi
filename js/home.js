@@ -35,8 +35,6 @@ function updateQueryStringParameter(uri, key, value) {
 
 $(function(){
 
-  let ciao = 1;
-
   document.addEventListener("DOMContentLoaded", function(event) { 
     var scrollpos = localStorage.getItem('scrollpos');
     if (scrollpos) window.scrollTo(0, scrollpos);

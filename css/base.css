@@ -394,4 +394,30 @@ button.input-embedded {
   padding: .625rem 1.5rem .5rem;
   font-size: .75rem;
   line-height: 1.5;
+
+}
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  border-top: 16px solid blue;
+  border-bottom: 16px solid blue;
+}
+
+section > div > a > label {
+  color: black !important;
+}
+
+section > div > a > label:hover {
+  color: blue !important;
+  cursor: pointer;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

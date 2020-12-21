@@ -17,11 +17,11 @@ array_push($tabelle, "marca","genere","materiale","colore","taglia");
       <h6 class="font-weight-bold mb-3">Ordina Per:</h6>
       <div class="list-group">
         <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "filter","ultimi_arrivi")?>"><label
-            class="control-label mb-1">Ultimi Arrivi</label></a>
+            class="control-label mb-1 <?php if($_GET["filter"] == "ultimi_arrivi") {echo "font-weight-bold text-primary";} else {}?>">Ultimi Arrivi</label></a>
         <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "filter","prezzo_crescente")?>"><label
-            class="control-label mb-1">Prezzo Crescente</label></a>
+            class="control-label mb-1 <?php if($_GET["filter"] == "prezzo_crescente") {echo "font-weight-bold text-primary";} else {}?>">Prezzo Crescente</label></a>
         <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "filter","prezzo_decrescente")?>"><label
-            class="control-label mb-1">Prezzo Decrescente</label></a>
+            class="control-label mb-1 <?php if($_GET["filter"] == "prezzo_decrescente") {echo "font-weight-bold text-primary";} else {}?>">Prezzo Decrescente</label></a>
       </div>
     </section>
     <!-- Section: Ordered -->
@@ -136,10 +136,10 @@ array_push($tabelle, "marca","genere","materiale","colore","taglia");
     </div>
 
     <div class="row">
-
       <?php foreach($templateParams["prodotti"] as $prodotto): ?>
       <div class="col-6 col-lg-4 col-md-6 mb-4">
         <div class="card h-100">
+
           <a href="product.php<?php echo "?prodotto=".$prodotto["id"]; ?>">
             <img class="card-img-top" src="<?php echo IMG_DIR."/".$prodotto["nome"].".jpg"; ?>" alt=""></a>
           <div class="card-body">
@@ -152,6 +152,7 @@ array_push($tabelle, "marca","genere","materiale","colore","taglia");
           <div class="card-footer">
             <small class="text-muted">Disponibilità: <?php echo $prodotto["stock"];?></small>
           </div>
+
         </div>
       </div>
       <?php endforeach ?>
