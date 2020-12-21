@@ -43,6 +43,10 @@ class Product extends Database {
       return parent::Select("SELECT marca.nome FROM marca LEFT JOIN ".$this->table. " ON marca.id = ".$this->table. ".idMarca WHERE ".$this->table.".id = ".$id);
     }
 
+    public function selectTagliaByID($id) {
+      return parent::Select(("SELECT numero FROM prodottitaglie PT LEFT JOIN ".$this->table." P ON PT.idProdotto = P.id LEFT JOIN taglia T ON PT.idTaglia = T.id WHERE idProdotto = ").$id);
+    }
+
 
 }
 

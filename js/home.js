@@ -81,6 +81,15 @@ window.onbeforeunload = function(e) {
 
       })
 
+      $('input[name=checkTaglia]').on('change', function() {
+        let $url = $(this).val();
+        $url = updateQueryStringParameter(window.location.href,"taglia",+$(this).val());
+        $url = removeParam("pag",$url);
+        $url = location.href = $url+"&pag=1";
+        
+
+      })
+
       $('.multi-range').on('change', function() {
         let $url = $(this).val();
         $url = updateQueryStringParameter(window.location.href,"prezzo",+$(this).val());
@@ -88,6 +97,8 @@ window.onbeforeunload = function(e) {
         $url = location.href = $url+"&pag=1";
 
       })
+
+      
 
       $(window).bind("load", function() {
         let urlParams = new URLSearchParams(window.location.search);

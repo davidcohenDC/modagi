@@ -122,8 +122,17 @@ function bindProductUrlToQuery()
         $url = $query["query"];
         parse_str($url, $result);
 
+        //before filter find a possbile new selection
+
+        if(isset($_GET["taglia"])) {
+            $selection = "SELECT * FROM prodottitaglie PT LEFT JOIN prodotto P ON PT.idProdotto = P.id WHERE PT.idTaglia = ".$_GET["taglia"];
+            $count++;
+        }
+        
+
         foreach ($result as $name => $value) {
-            if ($name == "pag" || $name == "filter") {
+
+            if ($name == "pag" || $name == "filter" || $name== "taglia") {
                 //nothing
             } else if ($name == "genere" && $value == 3) {
                 if ($count >= 1) {
@@ -150,7 +159,7 @@ function bindProductUrlToQuery()
             }
         }
 
-        //select the filter
+        //after filtering select the order
         if(isset($_GET["filter"])) {
             switch ($_GET["filter"]) {
               case 'ultimi_arrivi':

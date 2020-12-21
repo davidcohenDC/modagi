@@ -4,7 +4,7 @@ $totalPage = $paginator->getTotalPages();
 $firstPage = 1;
 
 $tabelle = array();
-array_push($tabelle, "marca","genere","materiale","colore");
+array_push($tabelle, "marca","genere","materiale","colore","taglia");
 
 ?>
 
@@ -49,11 +49,12 @@ array_push($tabelle, "marca","genere","materiale","colore");
         <h6 class="font-weight-bold mb-3"><?php echo ucfirst($tabella) ?></h6>
         <?php foreach($templateParams[$tabella] as $value): ?>
         <div class="custom-control radio">
-          <input type="radio" class="custom-control-input" id="<?php echo $value["nome"] ?>"
+          <input type="radio" class="custom-control-input"
+            id="<?php if($tabella == "taglia") {echo $value["numero"];} else {echo $value["nome"];} ?>"
             name="check<?php echo ucfirst($tabella) ?>" value="<?php echo $value["id"] ?>"
             <?php if(isset($_GET[$tabella]) && $_GET[$tabella] == $value["id"]){echo "checked";}?>>
           <label class="custom-control-label mb-1"
-            for="<?php echo $value["nome"] ?>"><?php echo $value["nome"] ?></label>
+            for="<?php if($tabella == "taglia") {echo $value["numero"];} else {echo $value["nome"];} ?>"><?php if($tabella == "taglia") {echo $value["numero"];} else {echo $value["nome"];} ?></label>
         </div>
         <?php endforeach ?>
       </section>
@@ -121,12 +122,14 @@ array_push($tabelle, "marca","genere","materiale","colore");
           class="btn btn-light dropdown-toggle mb-4 ml-2 <?php if(isset($_GET[$str_tabella])) { echo "active font-weight-bold";}?>"
           type="button" name="check<? echo $str_tabella ?>" id="dropdownMenuButton" data-toggle="dropdown"
           aria-haspopup="true"
-          aria-expanded="false"><?php if(isset($_GET[$str_tabella])) { echo strtoupper($templateParams[$str_tabella][$_GET[$str_tabella]-1]["nome"]);} else { echo ucfirst($str_tabella);};?></button>
+          aria-expanded="false"><?php if(isset($_GET[$str_tabella])) { if($str_tabella == "taglia") {echo strtoupper($templateParams[$str_tabella][$_GET[$str_tabella]-1]["numero"]);} else 
+          {echo strtoupper($templateParams[$str_tabella][$_GET[$str_tabella]-1]["nome"]);}} else { echo ucfirst($str_tabella);};?></button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <?php foreach($templateParams[$str_tabella] as $value): ?>
           <a class="dropdown-item"
             href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], $str_tabella,$value["id"])?>"><label
-              data-value="<?php echo $value["id"] ?>" class="dropdown-item"><?php echo $value["nome"] ?></label></a>
+              data-value="<?php echo $value["id"] ?>"
+              class="dropdown-item"><?php if($str_tabella == "taglia") {echo $value["numero"];} else {echo $value["nome"];} ?></label></a>
           <?php endforeach ?>
         </div>
       </div>

@@ -109,9 +109,9 @@ $prodotto = $templateParams["prodotto"];
               <div class="row mt-3 mb-4">
                 
                 <div class="col-md-12 text-center text-md-center text-md-right">
-                <input  type="radio" class="mr-1"><label class="mr-3"for="radio">44</label>
-                <input type="radio" class="mr-1"><label class="mr-3" for="radio">44</label>
-                <input type="radio" class="mr-1"><label class="mr-3"for="radio">44</label>
+                <?php foreach($templateParams["taglia"] as $taglia): ?>
+                <input type="radio" class="mr-1"><label class="mr-3" for="radio"><?php echo $taglia["numero"] ?></label>
+                <?php endforeach ?>
                 </div>
               </div>
             </div>
