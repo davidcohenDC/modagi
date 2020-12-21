@@ -34,7 +34,7 @@ $(function(){
 
             //? change color
             $(this).removeClass("btn-success");
-            $(this).addClass("btn-warning");
+            $(this).addClass("btn-grigio");
  
             //? change text
             $(this).children().html(disable);
@@ -47,7 +47,7 @@ $(function(){
             $(this).addClass("yes-change");
 
             //? change color
-            $(this).removeClass("btn-warning");
+            $(this).removeClass("btn-grigio");
             $(this).addClass("btn-success");
 
             //? change text

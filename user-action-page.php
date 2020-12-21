@@ -15,9 +15,29 @@ switch ($action) {
         header("location: user-page.php");
         break;
 
-    case 1: //? cambia i dati utente
+    case 1: //? Storico ordini
+        $templateParams["title"] = "I miei Ordini";
+
+        if (!isset($dbh)) {
+            $dbh = new DatabaseUser(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
+        }
+
+        $orders = $dbh->getOrders($_SESSION["username"]);
+
+        if (count($orders) == 0) {
+            $templateParams["noOrders"] = "Nessun Ordine da Mostrare";
+        } else {
+            //TODO: get porducts data. to show it
+        }
+
+        $templateParams["main"] = "order-history.php";
+        break;
+
+    case 2: //? cambia i dati utente
         $templateParams["title"] = "Modifica Dati Utente";
-        $templateParams["main"] = "change-user-data.php";
+        $templateParams["main"] = "form.php";
+        $formParams["title"] = "Modifica Dati Utente";
+        $formParams["main"] = "change-user-data.php";
 
         if (!isset($dbh)) {
             $dbh = new DatabaseUser(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
@@ -49,9 +69,11 @@ switch ($action) {
 
         break;
 
-    case 2: //? cambio password
+    case 3: //? cambio password
         $templateParams["title"] = "Modifica Password";
-        $templateParams["main"] = "change-password-form.php";
+        $templateParams["main"] = "form.php";
+        $formParams["title"] = "Modifica Password";
+        $formParams["main"] = "change-password-form.php";
 
         //* effettivo update query
         if (!isset($dbh)) {
@@ -66,6 +88,29 @@ switch ($action) {
                 header("location: user-page.php");
             } else {
                 $templateParams["error"] = $change_result[1];
+            }
+        }
+        break;
+
+    case -1: //! remove account after confirm
+
+        $templateParams["title"] = "Rimuovi Account";
+        $templateParams["main"] = "form.php";
+        $formParams["title"] = "Rimuovi Account";
+        $formParams["main"] = "confirm.php";
+
+        if (!isset($dbh)) {
+            $dbh = new DatabaseUser(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
+        }
+        if (isset($_POST["password"])) {
+            $remove_result = $dbh->removeUser($_SESSION["username"], $_POST["password"]);
+
+            if ($remove_result[0]) {
+                //! then log out
+                logOut();
+                header("location: registration-page.php");
+            } else {
+                $templateParams["error"] = $remove_result[1];
             }
         }
         break;

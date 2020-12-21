@@ -25,13 +25,12 @@ if (isUserLoggedIn()) {
     $pageMain = "user-home.php";
 } else {
     $pageTitle = "Log In";
-    $pageMain = "log-in-form.php";
+    $pageMain = "form.php";
+    $formParams["title"] = "Accedi!";
+    $formParams["main"] = "log-in-form.php";
 }
 
 $templateParams["title"] = $pageTitle;
 $templateParams["main"] = $pageMain;
 
 require 'templates/base.php';
-
-/*//TODO: mettere modali per comunicare gli errori
-<div class="modal-dialog modal-sm">...</div>*/

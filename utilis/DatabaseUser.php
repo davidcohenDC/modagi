@@ -120,6 +120,38 @@ class DatabaseUser
         return [false, "UTENTE NON TROVATO"];
     }
 
+    public function removeUser($username, $password)
+    {
+        if ($this->checkPassword($username, $password)[0]) {
+
+            //* rimuovo gli ordini.
+            $stmt = $this->db->prepare("DELETE FROM ordine WHERE username = ?");
+
+            $stmt->bind_param("s", $username);
+            $stmt->execute();
+
+            //* rimuovo l'user.
+            $stmt = $this->db->prepare("DELETE FROM user WHERE username = ?");
+
+            $stmt->bind_param("s", $username);
+            $stmt->execute();
+
+            return [!$this->userExists($username), "ERRORE DURANTE LA RIMOZIONE"];
+        }
+        return [false, "PASSWORD ERRATA!"];
+    }
+
+    public function getOrders($username)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM ordine WHERE username = ?");
+
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $result;
+    }
+
     private function checkPassword($username, $password)
     {
         $stmt = $this->db->prepare("SELECT COUNT(username) as correctUsers
