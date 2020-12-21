@@ -49,18 +49,18 @@
                             </div>
                         <?php endif ?>
                         <!-- SHOW PRODUCT -->
-                        <?php foreach($cart["articleDetails"] as $key => $article): ?> 
+                        <?php foreach($cart["articleDetails"] as $article): ?> 
                         <div class="product">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <img class="img-fluid mx-auto d-block image product-image" src="<?php echo IMG_DIR.$article[0]["nome"].".jpg" ?>">
+                                    <img class="img-fluid mx-auto d-block image product-image" src="<?php echo IMG_DIR.$article["nome"].".jpg" ?>">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="info">
                                         <div class="row">
                                             <div class="col-md-5 product-name">
                                                 <div class="product-name">
-                                                    <a href="#"><?php echo $article[0]["nome"] ?></a>
+                                                    <a href="#"><?php echo $article["nome"] ?></a>
                                                     <div class="product-info">
                                                         <div>Colore: <span class="value">Bianco</span></div>
                                                         <div>Taglia: <span class="value">44.5</span></div>
@@ -72,22 +72,21 @@
                                                 <div class="input-group product-group">
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-btn">
-                                                            <input type="button" value="-" class="btn btn-danger" onclick="decreaseQuantity('<?php echo $article[0]["nome"] ?>')">
+                                                            <input type="button" value="-" class="btn btn-danger" onclick="decreaseQuantity('<?php echo $article["id"] ?>')">
                                                         </div>
                                                     </div>
-                                                    <div id="quantity" class="form-control product-quantity"><?php echo $article[1]?></div>
+                                                    <div id="quantity" class="form-control product-quantity"><?php echo $article["quantita"]?></div>
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-btn">
-                                                            <input type="button" value="+" class="btn btn-success" onclick="increaseQuantity('<?php echo $article[0]["nome"] ?>')" >
+                                                            <input type="button" value="+" class="btn btn-success" onclick="increaseQuantity('<?php echo $article["id"] ?>')" >
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            
                                         </div>
                                         <div class="row">
                                             <div class="col-md-3 price">
-                                                <span><?php echo ($article[0]["prezzo"] * $article[1]) ?>€</span>
+                                                <span><?php echo ($article["prezzo"] * $article["quantita"]) ?>€</span>
                                             </div>
                                         </div>
                                     </div>
