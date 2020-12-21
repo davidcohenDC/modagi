@@ -8,7 +8,7 @@ $templateParams["title"] = "Checkout";
 $templateParams["cssFileName"] = "checkout/checkout.css";
 
 
-// nel caso in cui è loggato usi un form, nell'altro caso un altro
+// nel caso in cui è loggato usi un form, nell'altro caso un altro (in questo momento per debug ho messo il !)
 if(!isUserLoggedIn()) {
     $templateParams["main"] = "./templates/checkout_page.php";
     
