@@ -11,7 +11,7 @@
     <div class="col-10 col-md-8 col-lg-6">
         <!-- if no orders -->
         <?php if (isset($templateParams["noOrders"])) : ?>
-            <div class="alert alert-secondary my-5" role="alert">
+            <div class="alert alert-secondary text-center my-5" role="alert">
                 <h2>
                     <?php echo $templateParams["noOrders"] ?>
                 </h2>

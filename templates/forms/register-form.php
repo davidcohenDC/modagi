@@ -47,12 +47,6 @@
     </div>
 </div>
 
-<?php if (isset($templateParams["error"])) : ?>
-    <p class="fs-3 my-5 col-12 text-center fw-bold text-danger">
-        <?php echo $templateParams["error"]; ?>
-    </p>
-<?php endif ?>
-
 <div class="row justify-content-md-center justify-content-lg-end">
     <div class="my-3 mx-2 col-md-10 col-lg-8">
         <input type="submit" class="btn btn-light col-12 fw-bold" value="Registrati" />

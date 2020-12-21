@@ -29,9 +29,3 @@
 <div class="my-4 text-end">
     <a href="registration-page.php">Non hai un Account? Registrati!</a>
 </div>
-
-<?php if (isset($templateParams["error"])) : ?>
-    <p class="fs-3 my-5 col-12 text-center fw-bold text-danger">
-        <?php echo $templateParams["error"]; ?>
-    </p>
-<?php endif ?>

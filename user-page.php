@@ -34,6 +34,3 @@ $templateParams["title"] = $pageTitle;
 $templateParams["main"] = $pageMain;
 
 require 'templates/base.php';
-
-/*//TODO: mettere modali per comunicare gli errori
-<div class="modal-dialog modal-sm">...</div>*/

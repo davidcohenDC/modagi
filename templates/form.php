@@ -17,6 +17,19 @@
     </div>
     <form method="POST" class="col-10 col-md-8 col-lg-6">
 
+        <?php if (isset($templateParams["error"])) : ?>
+            <div class="row">
+                <div class="alert alert-danger my-3 text-center" role="alert">
+                    <h2>
+                        ERRORE
+                    </h2>
+                    <p class="my-1 text-center">
+                        <?php echo $templateParams["error"]; ?>
+                    </p>
+                </div>
+
+            </div>
+        <?php endif ?>
 
         <!--form content-->
         <?php
