@@ -28,6 +28,8 @@ if (
 }
 
 $templateParams["title"] = "Registration";
-$templateParams["main"] = "register-form.php";
+$templateParams["main"] = "form.php";
+$formParams["title"] = "Registrazione";
+$formParams["main"] = "register-form.php";
 
 require 'templates/base.php';

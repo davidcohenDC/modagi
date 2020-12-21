@@ -17,7 +17,10 @@ switch ($action) {
 
     case 1: //? cambia i dati utente
         $templateParams["title"] = "Modifica Dati Utente";
-        $templateParams["main"] = "change-user-data.php";
+        $templateParams["main"] = "form.php";
+        $formParams["title"] = "Modifica Dati Utente";
+        $formParams["main"] = "change-user-data.php";
+
 
         if (!isset($dbh)) {
             $dbh = new DatabaseUser(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
@@ -51,7 +54,9 @@ switch ($action) {
 
     case 2: //? cambio password
         $templateParams["title"] = "Modifica Password";
-        $templateParams["main"] = "change-password-form.php";
+        $templateParams["main"] = "form.php";
+        $formParams["title"] = "Modifica Password";
+        $formParams["main"] = "change-password-form.php";
 
         //* effettivo update query
         if (!isset($dbh)) {

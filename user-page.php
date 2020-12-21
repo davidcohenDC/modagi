@@ -25,7 +25,9 @@ if (isUserLoggedIn()) {
     $pageMain = "user-home.php";
 } else {
     $pageTitle = "Log In";
-    $pageMain = "log-in-form.php";
+    $pageMain = "form.php";
+    $formParams["title"] = "Accedi!";
+    $formParams["main"] = "log-in-form.php";
 }
 
 $templateParams["title"] = $pageTitle;
