@@ -141,7 +141,7 @@ class DatabaseUser
         return [false, "PASSWORD ERRATA!"];
     }
 
-    public function getOrders($username)
+    public function hasOrders($username)
     {
         $stmt = $this->db->prepare("SELECT * FROM ordine WHERE username = ?");
 
@@ -149,7 +149,37 @@ class DatabaseUser
         $stmt->execute();
 
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        return $result;
+        return count($result) != 0;
+    }
+
+    public function getOrdersDates($username)
+    {
+        $stmt = $this->db->prepare("SELECT DISTINCT data FROM ordine WHERE username = ? ");
+
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getOrdersProducts($date, $username)
+    {
+        $stmt = $this->db->prepare("SELECT prodotto.nome as nome, prodotto.prezzo as prezzo, ordine.quantita as quantita,
+                                    genere.nome as genere, colore.nome as colore, materiale.nome as materiale, marca.nome as marca
+                                    FROM colore, materiale, marca, genere, ordine, prodotto 
+                                    WHERE prodotto.id = ordine.idProdotto 
+                                    AND ordine.username = ? 
+                                    AND ordine.data = ? 
+                                    AND prodotto.idColore = colore.id
+                                    AND prodotto.idGenere = genere.id
+                                    AND prodotto.idMateriale = materiale.id
+                                    AND prodotto.idMarca = marca.id
+                                    ORDER BY ordine.data");
+
+        $stmt->bind_param("ss", $username, $date);
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
     private function checkPassword($username, $password)

@@ -22,12 +22,14 @@ switch ($action) {
             $dbh = new DatabaseUser(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
         }
 
-        $orders = $dbh->getOrders($_SESSION["username"]);
+        if ($dbh->hasOrders($_SESSION["username"])) {
+            $templateParams["dates"] = $dbh->getOrdersDates($_SESSION["username"]);
 
-        if (count($orders) == 0) {
-            $templateParams["noOrders"] = "Nessun Ordine da Mostrare";
+            foreach ($templateParams["dates"] as $date) {
+                $templateParams[$date["data"]] = $dbh->getOrdersProducts($date["data"], $_SESSION["username"]);
+            }
         } else {
-            //TODO: get porducts data. to show it
+            $templateParams["noOrders"] = "Nessun Ordine da Mostrare";
         }
 
         $templateParams["main"] = "order-history.php";

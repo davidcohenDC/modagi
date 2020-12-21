@@ -20,11 +20,11 @@
     <!--main content-->
     <div class="col-10 col-md-8 col-lg-6">
         <div class="btn-group-vertical col-12 ">
-            <a href="user-action-page.php?action=1" class="my-3 btn btn-dark fw-bold"> I miei Ordini </a>
-            <a href="user-action-page.php?action=2" class="my-3 btn btn-dark fw-bold"> Modifica Dati Utente </a>
-            <a href="user-action-page.php?action=3" class="my-3 btn btn-dark fw-bold"> Modifica Password </a>
+            <a href="user-action-page.php?action=1" class="my-3 btn btn-light fw-bold"> I miei Ordini </a>
+            <a href="user-action-page.php?action=2" class="my-3 btn btn-light fw-bold"> Modifica Dati Utente </a>
+            <a href="user-action-page.php?action=3" class="my-3 btn btn-light fw-bold"> Modifica Password </a>
             <a href="user-action-page.php?action=0" class="my-3 btn btn-danger fw-bold"> Esci </a>
-            <a href="user-action-page.php?action=-1" class="my-3 btn btn-light fw-bold"> Cancella Account </a>
+            <a href="user-action-page.php?action=-1" class="my-3 btn btn-dark fw-bold"> Cancella Account </a>
         </div>
     </div>
 
