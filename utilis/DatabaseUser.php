@@ -141,6 +141,17 @@ class DatabaseUser
         return [false, "PASSWORD ERRATA!"];
     }
 
+    public function getOrders($username)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM ordine WHERE username = ?");
+
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $result;
+    }
+
     private function checkPassword($username, $password)
     {
         $stmt = $this->db->prepare("SELECT COUNT(username) as correctUsers
