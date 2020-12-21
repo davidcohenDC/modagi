@@ -377,3 +377,11 @@ button.input-embedded {
 .btn-filtro {
   width: 100% !important;
 }
+
+.dropdown-menu {
+  width: 100% !important;
+}
+
+.dropdown-menu .dropdown-item {
+  text-align: center;
+}

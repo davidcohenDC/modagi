@@ -133,6 +133,13 @@ function bindProductUrlToQuery()
                 }
 
                 $count++;
+            } else if($name == "prezzo") {
+                if ($count >= 1) {
+                    $filter =  $filter . " AND " . $name . " >= " . $value;
+                } else {
+                    $filter = $filter . " WHERE " . $name . " >= " . $value;
+                }
+                $count++;
             } else {
                 if ($count >= 1) {
                     $filter =  $filter . " AND id" . $name . " = " . $value;
@@ -146,13 +153,13 @@ function bindProductUrlToQuery()
         //select the filter
         if(isset($_GET["filter"])) {
             switch ($_GET["filter"]) {
-              case 'last_product':
+              case 'ultimi_arrivi':
                 $filter = $filter . " ORDER BY prodotto.id DESC";
                 break;
-              case 'price_ascending':
+              case 'prezzo_crescente':
                 $filter = $filter . " ORDER BY prodotto.prezzo ASC";
                 break;
-              case 'price_discending':
+              case 'prezzo_decrescente':
                 $filter = $filter . " ORDER BY prodotto.prezzo DESC";
                 break;    
             }

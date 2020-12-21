@@ -103,12 +103,26 @@ $prodotto = $templateParams["prodotto"];
             <!-- Accordion card -->
           </div>
           <!--/.Accordion wrapper-->
+          <section class="size">
 
+            <div class=" text-center">
+              <div class="row mt-3 mb-4">
+                
+                <div class="col-md-12 text-center text-md-center text-md-right">
+                <input  type="radio" class="mr-1"><label class="mr-3"for="radio">44</label>
+                <input type="radio" class="mr-1"><label class="mr-3" for="radio">44</label>
+                <input type="radio" class="mr-1"><label class="mr-3"for="radio">44</label>
+                </div>
+              </div>
+            </div>
+
+          </section>
           <!-- Add to Cart -->
           <section class="cart">
 
             <div class="mt-5 text-center">
               <div class="row mt-3 mb-4">
+                
                 <div class="col-md-12 text-center text-md-center text-md-right">
                   <button class="btn btn-primary btn-rounder">
                     <i class="fas fa-cart-plus mr-2" aria-hidden="true"></i> Aggiungi al carrello</button>
