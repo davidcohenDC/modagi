@@ -374,7 +374,6 @@ button.input-embedded {
   border: none;
 }
 
-
 .dropdown-menu {
   width: 100% !important;
 }
@@ -388,13 +387,13 @@ button.input-embedded {
   text-transform: uppercase;
   vertical-align: bottom;
   border: 0;
-  -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.2), 0 2px 10px 0 rgba(0,0,0,.1);
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,.2), 0 2px 10px 0 rgba(0,0,0,.1);
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2),
+    0 2px 10px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.1);
   font-weight: 500;
-  padding: .625rem 1.5rem .5rem;
-  font-size: .75rem;
+  padding: 0.625rem 1.5rem 0.5rem;
+  font-size: 0.75rem;
   line-height: 1.5;
-
 }
 
 .loader {
@@ -497,3 +496,14 @@ input[type=range]::-webkit-slider-runnable-track {
   box-shadow: 4px 4px lightgray;
 }
 
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.product-history {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+}

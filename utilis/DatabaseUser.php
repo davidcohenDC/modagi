@@ -17,18 +17,7 @@ class DatabaseUser
         }
     }
 
-    public function userAccessLevel($username)
-    {
-        $stmt = $this->db->prepare("SELECT admin 
-                                    FROM user 
-                                    WHERE username = ?;");
-
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-
-        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-    }
-
+    // UPDATES
     public function updateName($username, $password, $newName)
     {
         if ($this->checkPassword($username, $password)[0]) {
@@ -89,17 +78,94 @@ class DatabaseUser
         return [false, "PASSWORD CORRENTE SBAGLIATA"];
     }
 
-    public function userExists($username)
+    // GETTERS
+    public function getOrdersDates($username)
     {
-        $stmt = $this->db->prepare("SELECT username
-                                    FROM User
-                                    WHERE username = ?");
+        $stmt = $this->db->prepare("SELECT DISTINCT data FROM ordine WHERE username = ? ");
+
         $stmt->bind_param("s", $username);
         $stmt->execute();
 
-        return count($stmt->get_result()->fetch_all(MYSQLI_ASSOC)) != 0;
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getOrdersProducts($date, $username)
+    {
+        $stmt = $this->db->prepare("SELECT prodotto.nome as nome, prodotto.prezzo as prezzo, ordine.quantita as quantita,
+                                    genere.nome as genere, colore.nome as colore, materiale.nome as materiale, marca.nome as marca
+                                    FROM colore, materiale, marca, genere, ordine, prodotto 
+                                    WHERE prodotto.id = ordine.idProdotto 
+                                    AND ordine.username = ? 
+                                    AND ordine.data = ? 
+                                    AND prodotto.idColore = colore.id
+                                    AND prodotto.idGenere = genere.id
+                                    AND prodotto.idMateriale = materiale.id
+                                    AND prodotto.idMarca = marca.id
+                                    ORDER BY ordine.data");
+
+        $stmt->bind_param("ss", $username, $date);
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function userAccessLevel($username)
+    {
+        $stmt = $this->db->prepare("SELECT admin as al
+                                        FROM user 
+                                        WHERE username = ?;");
+
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]["al"];
+    }
+
+    /* admin */
+    public function getAllColors()
+    {
+        $stmt = $this->db->prepare("SELECT * FROM colore");
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        //return $this->getAll("colore");
+    }
+
+    public function getAllSizes()
+    {
+        $stmt = $this->db->prepare("SELECT * FROM taglia ");
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getAllMaterials()
+    {
+        $stmt = $this->db->prepare("SELECT * FROM materiale ");
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getAllBrands()
+    {
+        $stmt = $this->db->prepare("SELECT * FROM marca ");
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getAllCategories()
+    {
+        $stmt = $this->db->prepare("SELECT * FROM categoria ");
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+
+
+    // INSERTS
     public function registerUser($username, $password, $name, $surname, $address)
     {
         $stmt = $this->db->prepare("INSERT INTO user (username, password, admin, nome, cognome, indirizzo) VALUES (?, ?, 'N', ?, ?, ?)");
@@ -110,16 +176,7 @@ class DatabaseUser
         return [$this->userExists($username), "REGISTRAZIONE NON RIUSCITA"];
     }
 
-    public function checkLogin($username, $password)
-    {
-        if ($this->userExists($username)) {
-
-            /* utente trovato controllo la password */
-            return $this->checkPassword($username, $password);
-        }
-        return [false, "UTENTE NON TROVATO"];
-    }
-
+    // REMOVES
     public function removeUser($username, $password)
     {
         if ($this->checkPassword($username, $password)[0]) {
@@ -141,7 +198,8 @@ class DatabaseUser
         return [false, "PASSWORD ERRATA!"];
     }
 
-    public function getOrders($username)
+    // BOOLS
+    public function hasOrders($username)
     {
         $stmt = $this->db->prepare("SELECT * FROM ordine WHERE username = ?");
 
@@ -149,9 +207,31 @@ class DatabaseUser
         $stmt->execute();
 
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        return $result;
+        return count($result) != 0;
     }
 
+    public function checkLogin($username, $password)
+    {
+        if ($this->userExists($username)) {
+
+            /* utente trovato controllo la password */
+            return $this->checkPassword($username, $password);
+        }
+        return [false, "UTENTE NON TROVATO"];
+    }
+
+    public function userExists($username)
+    {
+        $stmt = $this->db->prepare("SELECT username
+                                        FROM User
+                                        WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+
+        return count($stmt->get_result()->fetch_all(MYSQLI_ASSOC)) != 0;
+    }
+
+    // PRIVATES
     private function checkPassword($username, $password)
     {
         $stmt = $this->db->prepare("SELECT COUNT(username) as correctUsers
@@ -161,5 +241,14 @@ class DatabaseUser
         $stmt->execute();
 
         return [$stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]["correctUsers"] != "0", "PASSWORD ERRATA!"];
+    }
+
+    private function getAll($table)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM ?");
+        $stmt->bind_param("s", $table);
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 }

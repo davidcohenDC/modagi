@@ -1,3 +1,19 @@
+<?php if (isset($_SESSION["registrationSuccess"]) && $_SESSION["registrationSuccess"] == 1) : ?>
+    <div class="row">
+        <div class="alert alert-success my-3 text-center" role="alert">
+            <h2>
+                CONGRATULAZIONI!
+            </h2>
+            <p class="my-1 text-center">
+                La registrazione è avventua con successo.
+            </p>
+        </div>
+
+    </div>
+
+    <?php unset($_SESSION["registrationSuccess"]); ?>
+<?php endif ?>
+
 <div class="my-3 mx-2 ">
     <label for="username" class="form-label fw-bold"> Username </label>
     <input id="username" name="username" class="form-control col-12 fst-italic" type="text" placeholder="inserire username" maxlength="20" required />
@@ -9,7 +25,7 @@
 <div class="my-3 mx-2 ">
     <label for="password-group" class="form-label fw-bold"> Password </label>
     <div id="password-group" class="input-group mb-3">
-        <input id="password" name="password" class="form-control fst-italic password" type="password" placeholder="inserire password" minlength="6" maxlength="20" required />
+        <input id="password" name="password" class="form-control fst-italic password" type="password" placeholder="inserire password" minlength="3" maxlength="20" required />
         <button id="eye" class=" eye input-embedded">
             <span id="icon" class="icon">
             </span>
