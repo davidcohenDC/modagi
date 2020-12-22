@@ -124,10 +124,11 @@ class DatabaseUser
     /* admin */
     public function getAllColors()
     {
-        $stmt = $this->db->prepare("SELECT * FROM colore ");
+        $stmt = $this->db->prepare("SELECT * FROM colore");
         $stmt->execute();
 
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        //return $this->getAll("colore");
     }
 
     public function getAllSizes()
@@ -140,7 +141,29 @@ class DatabaseUser
 
     public function getAllMaterials()
     {
+        $stmt = $this->db->prepare("SELECT * FROM materiale ");
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function getAllBrands()
+    {
+        $stmt = $this->db->prepare("SELECT * FROM marca ");
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getAllCategories()
+    {
+        $stmt = $this->db->prepare("SELECT * FROM categoria ");
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+
 
     // INSERTS
     public function registerUser($username, $password, $name, $surname, $address)
@@ -218,5 +241,14 @@ class DatabaseUser
         $stmt->execute();
 
         return [$stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]["correctUsers"] != "0", "PASSWORD ERRATA!"];
+    }
+
+    private function getAll($table)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM ?");
+        $stmt->bind_param("s", $table);
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 }

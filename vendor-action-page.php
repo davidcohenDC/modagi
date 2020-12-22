@@ -26,6 +26,10 @@ switch ($action) {
 
         $formParams["colors"] = $dbh->getAllColors();
         $formParams["sizes"] = $dbh->getAllSizes();
+        $formParams["materials"] = $dbh->getAllMaterials();
+        $formParams["brands"] = $dbh->getAllBrands();
+        $formParams["categories"] = $dbh->getAllCategories();
+
         break;
 
     default:

@@ -1,6 +1,8 @@
 <!-- for better file upload -->
 <script src="<?php echo JS_FILE ?>file-upload.js"></script>
 
+<script src="<?php echo JS_FILE ?>add-params.js"></script>
+
 <div class="my-3 mx-2 ">
     <label for="input-file-now" class="form-label fw-bold"> Immagine Aricolo </label>
     <div class="file-upload-wrapper">
@@ -20,12 +22,38 @@
 
 <div class="my-3 mx-2 ">
     <label for="material" class="form-label fw-bold"> Materiale </label>
-    <input id="material" name="material" class="form-control col-12 fst-italic" type="text" placeholder="material" required />
+    <select id="material" name="material" class="form-select" aria-label="Lista di materiali da cui scegliere" required>
+        <?php foreach ($formParams["materials"] as $material) : ?>
+            <option value="<?php echo $material['id'] ?>"><?php echo $material['nome'] ?></option>
+        <?php endforeach ?>
+    </select>
+    <div class="my-3 ">
+        <button class="btn btn-outline-success add-button">
+            <span> Aggiungi
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                </svg>
+            </span>
+        </button>
+    </div>
 </div>
 
 <div class="my-3 mx-2 ">
     <label for="brand" class="form-label fw-bold"> Marca </label>
-    <input id="brand" name="brand" class="form-control col-12 fst-italic" type="text" placeholder="brand" required />
+    <select id="brand" name="brand" class="form-select" aria-label="Lista di marche da cui scegliere" required>
+        <?php foreach ($formParams["brands"] as $brand) : ?>
+            <option value="<?php echo $brand['id'] ?>"><?php echo $brand['nome'] ?></option>
+        <?php endforeach ?>
+    </select>
+    <div class="my-3">
+        <button class="btn btn-outline-success add-button">
+            <span> Aggiungi
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                </svg>
+            </span>
+        </button>
+    </div>
 </div>
 
 <div class="my-3 mx-2">
@@ -44,6 +72,15 @@
                     <?php endforeach ?>
                 </div>
             </div>
+            <div class="my-3">
+                <button class="btn btn-outline-success add-button">
+                    <span> Aggiungi
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                        </svg>
+                    </span>
+                </button>
+            </div>
         </div>
 
         <div class="col">
@@ -54,6 +91,15 @@
                         <option value="<?php echo $color['id'] ?>"><?php echo $color['nome'] ?></option>
                     <?php endforeach ?>
                 </select>
+            </div>
+            <div class="my-3 mx-2 ">
+                <button class="btn btn-outline-success add-button">
+                    <span> Aggiungi
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                        </svg>
+                    </span>
+                </button>
             </div>
         </div>
     </div>
@@ -99,6 +145,30 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="my-3 mx-2 ">
+    <label for="categories-group" class="form-label fw-bold"> Categorie </label>
+    <div id="categories-group" aria-label="Lista di categorie da cui scegliere">
+        <?php foreach ($formParams["categories"] as $category) : ?>
+            <div class="form-check">
+                <input id="category<?php echo $category['id'] ?>" class="form-check-input" name="categories" type="checkbox" value="<?php echo $category['id'] ?>" />
+                <label class="form-check-label" for="category<?php echo $category['id'] ?>">
+                    <?php echo $category['nome'] ?>
+                </label>
+            </div>
+        <?php endforeach ?>
+    </div>
+
+    <div class="my-3">
+        <button class="btn btn-outline-success add-button">
+            <span> Aggiungi
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                </svg>
+            </span>
+        </button>
     </div>
 </div>
 
