@@ -19,14 +19,14 @@ class DatabaseUser
 
     public function userAccessLevel($username)
     {
-        $stmt = $this->db->prepare("SELECT admin 
+        $stmt = $this->db->prepare("SELECT admin as al
                                     FROM user 
                                     WHERE username = ?;");
 
         $stmt->bind_param("s", $username);
         $stmt->execute();
 
-        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]["al"];
     }
 
     public function updateName($username, $password, $newName)
