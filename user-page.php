@@ -21,8 +21,13 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
 }
 
 if (isUserLoggedIn()) {
-    $pageTitle = "User Page";
-    $pageMain = "user-home.php";
+    if (isUserVendor()) {
+        $pageTitle = "Vendor Page";
+        $pageMain = "vendor-home.php";
+    } else {
+        $pageTitle = "User Page";
+        $pageMain = "user-home.php";
+    }
 } else {
     $pageTitle = "Log In";
     $pageMain = "form.php";

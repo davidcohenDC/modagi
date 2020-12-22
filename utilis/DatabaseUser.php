@@ -17,18 +17,7 @@ class DatabaseUser
         }
     }
 
-    public function userAccessLevel($username)
-    {
-        $stmt = $this->db->prepare("SELECT admin as al
-                                    FROM user 
-                                    WHERE username = ?;");
-
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-
-        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]["al"];
-    }
-
+    // UPDATES
     public function updateName($username, $password, $newName)
     {
         if ($this->checkPassword($username, $password)[0]) {
@@ -89,69 +78,7 @@ class DatabaseUser
         return [false, "PASSWORD CORRENTE SBAGLIATA"];
     }
 
-    public function userExists($username)
-    {
-        $stmt = $this->db->prepare("SELECT username
-                                    FROM User
-                                    WHERE username = ?");
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-
-        return count($stmt->get_result()->fetch_all(MYSQLI_ASSOC)) != 0;
-    }
-
-    public function registerUser($username, $password, $name, $surname, $address)
-    {
-        $stmt = $this->db->prepare("INSERT INTO user (username, password, admin, nome, cognome, indirizzo) VALUES (?, ?, 'N', ?, ?, ?)");
-
-        $stmt->bind_param("sssss", $username, $password, $name, $surname, $address);
-        $stmt->execute();
-
-        return [$this->userExists($username), "REGISTRAZIONE NON RIUSCITA"];
-    }
-
-    public function checkLogin($username, $password)
-    {
-        if ($this->userExists($username)) {
-
-            /* utente trovato controllo la password */
-            return $this->checkPassword($username, $password);
-        }
-        return [false, "UTENTE NON TROVATO"];
-    }
-
-    public function removeUser($username, $password)
-    {
-        if ($this->checkPassword($username, $password)[0]) {
-
-            //* rimuovo gli ordini.
-            $stmt = $this->db->prepare("DELETE FROM ordine WHERE username = ?");
-
-            $stmt->bind_param("s", $username);
-            $stmt->execute();
-
-            //* rimuovo l'user.
-            $stmt = $this->db->prepare("DELETE FROM user WHERE username = ?");
-
-            $stmt->bind_param("s", $username);
-            $stmt->execute();
-
-            return [!$this->userExists($username), "ERRORE DURANTE LA RIMOZIONE"];
-        }
-        return [false, "PASSWORD ERRATA!"];
-    }
-
-    public function hasOrders($username)
-    {
-        $stmt = $this->db->prepare("SELECT * FROM ordine WHERE username = ?");
-
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-
-        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        return count($result) != 0;
-    }
-
+    // GETTERS
     public function getOrdersDates($username)
     {
         $stmt = $this->db->prepare("SELECT DISTINCT data FROM ordine WHERE username = ? ");
@@ -182,6 +109,106 @@ class DatabaseUser
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function userAccessLevel($username)
+    {
+        $stmt = $this->db->prepare("SELECT admin as al
+                                        FROM user 
+                                        WHERE username = ?;");
+
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]["al"];
+    }
+
+    /* admin */
+    public function getAllColors()
+    {
+        $stmt = $this->db->prepare("SELECT * FROM colore ");
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getAllSizes()
+    {
+        $stmt = $this->db->prepare("SELECT * FROM taglia ");
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getAllMaterials()
+    {
+    }
+
+    // INSERTS
+    public function registerUser($username, $password, $name, $surname, $address)
+    {
+        $stmt = $this->db->prepare("INSERT INTO user (username, password, admin, nome, cognome, indirizzo) VALUES (?, ?, 'N', ?, ?, ?)");
+
+        $stmt->bind_param("sssss", $username, $password, $name, $surname, $address);
+        $stmt->execute();
+
+        return [$this->userExists($username), "REGISTRAZIONE NON RIUSCITA"];
+    }
+
+    // REMOVES
+    public function removeUser($username, $password)
+    {
+        if ($this->checkPassword($username, $password)[0]) {
+
+            //* rimuovo gli ordini.
+            $stmt = $this->db->prepare("DELETE FROM ordine WHERE username = ?");
+
+            $stmt->bind_param("s", $username);
+            $stmt->execute();
+
+            //* rimuovo l'user.
+            $stmt = $this->db->prepare("DELETE FROM user WHERE username = ?");
+
+            $stmt->bind_param("s", $username);
+            $stmt->execute();
+
+            return [!$this->userExists($username), "ERRORE DURANTE LA RIMOZIONE"];
+        }
+        return [false, "PASSWORD ERRATA!"];
+    }
+
+    // BOOLS
+    public function hasOrders($username)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM ordine WHERE username = ?");
+
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return count($result) != 0;
+    }
+
+    public function checkLogin($username, $password)
+    {
+        if ($this->userExists($username)) {
+
+            /* utente trovato controllo la password */
+            return $this->checkPassword($username, $password);
+        }
+        return [false, "UTENTE NON TROVATO"];
+    }
+
+    public function userExists($username)
+    {
+        $stmt = $this->db->prepare("SELECT username
+                                        FROM User
+                                        WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+
+        return count($stmt->get_result()->fetch_all(MYSQLI_ASSOC)) != 0;
+    }
+
+    // PRIVATES
     private function checkPassword($username, $password)
     {
         $stmt = $this->db->prepare("SELECT COUNT(username) as correctUsers
