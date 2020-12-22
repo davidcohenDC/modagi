@@ -105,10 +105,10 @@ $prodotto = $templateParams["prodotto"];
           <!--/.Accordion wrapper-->
           <section class="size">
 
-            <div class=" text-center">
+            <div class="">
               <div class="row mt-3 mb-4">
-                
-                <div class="col-md-12 text-center text-md-center text-md-right">
+              <h4 class="mb-3">Taglie disponibili</h4>
+                <div class="col-md-12">
                 <?php foreach($templateParams["taglia"] as $taglia): ?>
                 <input type="radio" class="mr-1"><label class="mr-3" for="radio"><?php echo $taglia["numero"] ?></label>
                 <?php endforeach ?>

@@ -90,13 +90,16 @@ window.onbeforeunload = function(e) {
 
       $('.multi-range').on('change', function() {
         let $url = $(this).val();
+        $(".final-value").html($(this).val());
         $url = updateQueryStringParameter(window.location.href,"prezzo",+$(this).val());
         $url = removeParam("pag",$url);
         $url = location.href = $url+"&pag=1";
 
       })
-
       
+      $('.multi-range').on('input', function() {
+        $(this).next('.range-value').html(this.value);
+      });
 
       $(window).bind("load", function() {
         let urlParams = new URLSearchParams(window.location.search);
