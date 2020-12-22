@@ -10,7 +10,7 @@ array_push($tabelle, "marca","genere","materiale","colore","taglia");
 
 <div class="row">
 
-  <div class="col-lg-3 desktop-show">
+  <div class="col-lg-3 desktop">
 
     <!-- Section: Ordered -->
     <section class="list-order my-2 mb-4">
@@ -71,7 +71,11 @@ array_push($tabelle, "marca","genere","materiale","colore","taglia");
 
     </section>
     <!-- Section: Tables -->
-
+    <?php if($_GET) { echo '
+    <div class="row mb-3">
+    <button type="button" class="btn-delete btn btn-light" name="btndelete"><i class="fa fa-trash fa-2x mr-2" aria-hidden="true"></i>Elimina Selezione</button>
+    </div>
+    ';} ?>
   </div>
 
   <div class="col-12 col-lg-8">
@@ -91,7 +95,7 @@ array_push($tabelle, "marca","genere","materiale","colore","taglia");
       </div>
     </div>
 
-    <div class="row d-flex justify-content-center">
+    <div class="row d-flex justify-content-center mobile">
 
       <div class="col-12 dropdown ml-2 mr-2">
         <button
@@ -111,15 +115,12 @@ array_push($tabelle, "marca","genere","materiale","colore","taglia");
               data-value="prezzoDecrescente" class="dropdown-item">Prezzo Decrescente</label></a>
         </div>
       </div>
-    </div>
-
-    <div class="row justify-content-center">
 
       <?php foreach($tabelle as $str_tabella): ?>
       <div class="dropdown ml-1 mr-1">
         <button
           class="btn-filter btn btn-light dropdown-toggle mb-4 ml-2 <?php if(isset($_GET[$str_tabella])) { echo "active font-weight-bold text-primary";}?>"
-          type="button" name="check<? echo $str_tabella ?>" id="dropdownMenuButton" data-toggle="dropdown"
+          type="button" name="check<?php echo $str_tabella ?>" id="dropdownMenuButton" data-toggle="dropdown"
           aria-haspopup="true"
           aria-expanded="false"><?php if(isset($_GET[$str_tabella])) { if($str_tabella == "taglia") {echo strtoupper($templateParams[$str_tabella][$_GET[$str_tabella]-1]["numero"]);} else 
           {echo strtoupper($templateParams[$str_tabella][$_GET[$str_tabella]-1]["nome"]);}} else { echo ucfirst($str_tabella);};?></button>
@@ -133,8 +134,13 @@ array_push($tabelle, "marca","genere","materiale","colore","taglia");
         </div>
       </div>
       <?php endforeach ?>
-
     </div>
+
+    <?php if($_GET) { echo '
+    <div class="row justify-content-center mb-3 mobile">
+    <button type="button" class="btn-delete btn btn-light" name="btndelete"><i class="fa fa-trash fa-2x mr-2" aria-hidden="true"></i>Elimina Selezione</button>
+    </div>
+    ';} ?>
 
     <div class="row">
       <?php foreach($templateParams["prodotti"] as $prodotto): ?>
