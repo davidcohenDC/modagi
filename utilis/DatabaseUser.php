@@ -124,43 +124,27 @@ class DatabaseUser
     /* admin */
     public function getAllColors()
     {
-        $stmt = $this->db->prepare("SELECT * FROM colore");
-        $stmt->execute();
-
-        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        //return $this->getAll("colore");
+        return $this->getAll("colore");
     }
 
     public function getAllSizes()
     {
-        $stmt = $this->db->prepare("SELECT * FROM taglia ");
-        $stmt->execute();
-
-        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $this->getAll("taglia");
     }
 
     public function getAllMaterials()
     {
-        $stmt = $this->db->prepare("SELECT * FROM materiale ");
-        $stmt->execute();
-
-        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $this->getAll("materiale");
     }
 
     public function getAllBrands()
     {
-        $stmt = $this->db->prepare("SELECT * FROM marca ");
-        $stmt->execute();
-
-        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $this->getAll("marca");
     }
 
     public function getAllCategories()
     {
-        $stmt = $this->db->prepare("SELECT * FROM categoria ");
-        $stmt->execute();
-
-        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $this->getAll("categoria");
     }
 
 
@@ -245,8 +229,7 @@ class DatabaseUser
 
     private function getAll($table)
     {
-        $stmt = $this->db->prepare("SELECT * FROM ?");
-        $stmt->bind_param("s", $table);
+        $stmt = $this->db->prepare("SELECT * FROM " . $table);
         $stmt->execute();
 
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
