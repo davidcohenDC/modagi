@@ -7,5 +7,7 @@
 </head>
 <body>
     <img src="./upload/utilsIMG/loading_gif.gif" \>
+    ...
+    Ok, clicca qui per visionare lo stato dell'ordine
 </body>
 </html>
