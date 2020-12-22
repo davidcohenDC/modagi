@@ -3,6 +3,7 @@
 require_once("macro.php");
 require_once("./utilis/CartManager.php");
 require_once("./utilis/functions.php");
+require_once("./utilis/UserManager.php");
 
 $templateParams["title"] = "Checkout";
 $templateParams["cssFileName"] = "checkout/checkout.css";
@@ -15,8 +16,19 @@ if(!isUserLoggedIn()) {
     $cartManager = new CartManager();
     $cart["articleDetails"] = $cartManager->getArticleDetails();
     $cart["totalPrice"] = $cartManager->getTotalPrice();
-    
-    // crea array con dati personali dalla session
+    $cart["orderCount"] = $cartManager->getOrderCount();
+
+    // for debugging (parte di gigi)
+    $_SESSION["username"] = "More";
+    $_SESSION["password"] = "lorenzomorelli";
+    $userManager = new UserManager();
+    $user["nome"] = $userManager->getNome();
+    $user["username"] = $userManager->getUsername();
+    $user["cognome"] = $userManager->getCognome();
+    $user["indirizzo"] = $userManager->getIndirizzo();
+    if(!$user["nome"] || !$user["username"] || !$user["cognome"] || !$user["indirizzo"]) {
+        $templateParams["main"] = "./templates/go_to_login_page.php";
+    }
 }
 else {
     $templateParams["main"] = "./templates/go_to_login_page.php";
