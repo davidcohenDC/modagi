@@ -18,6 +18,7 @@ if (
         $register_result = $dbh->registerUser($_POST["username"], $_POST["password"], $_POST["name"], $_POST["surname"], $_POST["address"]);
 
         if ($register_result[0]) {
+            $_SESSION["registrationSuccess"] = 1;
             header("location: user-page.php");
         } else {
             $templateParams["error"] = $register_result[1];
