@@ -15,10 +15,10 @@
 <?php endif ?>
 
 <div class="my-3 mx-2 ">
-    <label for="username" class="form-label fw-bold"> Username </label>
-    <input id="username" name="username" class="form-control col-12 fst-italic" type="text" placeholder="inserire username" maxlength="20" required />
+    <label for="email" class="form-label fw-bold"> E-mail </label>
+    <input id="email" name="email" class="form-control col-12 fst-italic" type="email" placeholder="inserire username" required />
     <div class="invalid-feedback">
-        Username non valido
+        email non valida
     </div>
 </div>
 
