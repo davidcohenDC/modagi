@@ -116,8 +116,8 @@ $prodotto = $templateParams["prodotto"];
               <div id="collapseOne4" class="collapse show" aria-labelledby="headingOne4">
                 <div class="card-body">
                 <div class="col-md-12">
-                <?php foreach($templateParams["taglia"] as $taglia): ?>
-                <input type="radio" class="mr-1"><label class="mr-3" for="radio"><?php echo $taglia["numero"] ?> </label>
+                <?php foreach($templateParams["taglia"] as $value => $taglia): ?>
+                <input type="radio" name="taglia" class="mr-1" <?php if($value ==0) {echo "checked";}?>><label class="mr-3" for="radio" ><?php echo $taglia["numero"] ?> </label>
                 <?php endforeach ?>
                 </div>
                 </div>

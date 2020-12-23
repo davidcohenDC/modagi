@@ -135,7 +135,8 @@ window.onbeforeunload = function(e) {
     $('#formAddToCart').on('submit', function (e) {
       e.preventDefault();
       setTimeout(function() {
-        location.href = window.location+"&modal=1";
+        $url = removeParam("modal",window.location.href);
+        location.href = $url+"&modal=on";
       },0);
       this.submit();
 });
