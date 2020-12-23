@@ -13,15 +13,15 @@ class UserManager {
             die("Connessione al db fallita");
         }
 
-        $this->username = $this->getUsername();
+        $this->email = $this->getEmail();
         $this->password = $this->getPassword();
     }
 
-    public function getUsername() {
-        if (empty($_SESSION['username'])) {
+    public function getEmail() {
+        if (empty($_SESSION['email'])) {
             return false;
         }
-        return $_SESSION['username'];
+        return $_SESSION['email'];
     }
 
     public function getPassword() {
@@ -31,15 +31,32 @@ class UserManager {
         return $_SESSION['password'];
     }
 
-    public function getNome() {
-        $this->username = $this->getUsername();
+    public function getUsername() {
+        $this->email = $this->getEmail();
         $this->password = $this->getPassword();
-        if (!$this->username || !$this->password) {
+        if (!$this->email || !$this->password) {
             return false;
         }
-        $stmt = $this->db->prepare("SELECT nome FROM user WHERE username = ? AND password = ?");
+        $stmt = $this->db->prepare("SELECT username FROM user WHERE email = ? AND password = ?");
 
-        $stmt->bind_param("ss", $this->username, $this->password);
+        $stmt->bind_param("ss", $this->email, $this->password);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $stmt->close();
+
+        return $result->fetch_all(MYSQLI_ASSOC)[0]["username"];
+    }
+
+    public function getNome() {
+        $this->email = $this->getEmail();
+        $this->password = $this->getPassword();
+        if (!$this->email || !$this->password) {
+            return false;
+        }
+        $stmt = $this->db->prepare("SELECT nome FROM user WHERE email = ? AND password = ?");
+
+        $stmt->bind_param("ss", $this->email, $this->password);
         $stmt->execute();
 
         $result = $stmt->get_result();
@@ -49,13 +66,13 @@ class UserManager {
     }
 
     public function getCognome() {
-        $this->username = $this->getUsername();
+        $this->email = $this->getEmail();
         $this->password = $this->getPassword();
-        if (!$this->username || !$this->password) {
+        if (!$this->email || !$this->password) {
             return false;
         }
-        $stmt = $this->db->prepare("SELECT cognome FROM user WHERE username = ? AND password = ?");
-        $stmt->bind_param("ss", $this->username, $this->password);
+        $stmt = $this->db->prepare("SELECT cognome FROM user WHERE email = ? AND password = ?");
+        $stmt->bind_param("ss", $this->email, $this->password);
         $stmt->execute();
 
         $result = $stmt->get_result();
@@ -65,13 +82,13 @@ class UserManager {
     }
 
     public function getIndirizzo() {
-        $this->username = $this->getUsername();
+        $this->email = $this->getEmail();
         $this->password = $this->getPassword();
-        if (!$this->username || !$this->password) {
+        if (!$this->email || !$this->password) {
             return false;
         }
-        $stmt = $this->db->prepare("SELECT indirizzo FROM user WHERE username = ? AND password = ?");
-        $stmt->bind_param("ss", $this->username, $this->password);
+        $stmt = $this->db->prepare("SELECT indirizzo FROM user WHERE email = ? AND password = ?");
+        $stmt->bind_param("ss", $this->email, $this->password);
         $stmt->execute();
 
         $result = $stmt->get_result();

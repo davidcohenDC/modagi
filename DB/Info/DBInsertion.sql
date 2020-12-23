@@ -32,12 +32,12 @@ VALUES ('1','Uomo'), ('2','Donna'), ('3','Unisex');
 # ADD VALUES "User"                                                      #
 # ---------------------------------------------------------------------- #
 
-INSERT INTO `user` (`username`, `password`, `admin`, `nome`, `cognome`, `indirizzo`) 
-VALUES ('Dev', 'davidcohen', 'S', 'David', 'Cohen', 'Via Roma 1'), ('More', 'lorenzomorelli', 
-'S', 'Lorenzo', 'Morelli', 'Via Test 1'), ('Gigi', 'luigiolivieri', 'S', 'Luigi', 'Olivieri', 'Via Test 2');
+INSERT INTO `user` (`email`, `username`, `password`, `admin`, `nome`, `cognome`, `indirizzo`) 
+VALUES ('dev@gmail.com', 'Dev', 'davidcohen', 'S', 'David', 'Cohen', 'Via Roma 1'), ('more@gmail.com', 'More', 'lorenzomorelli', 
+'S', 'Lorenzo', 'Morelli', 'Via Test 1'), ('gigi@gmail.com', 'Gigi', 'luigiolivieri', 'S', 'Luigi', 'Olivieri', 'Via Test 2');
 
-INSERT INTO `user` (`username`, `password`, `admin`, `nome`, `cognome`, `indirizzo`) 
-VALUES ('test', 'test', 'N', 'testNome', 'TestCognome', 'Via Test 3');
+INSERT INTO `user` (`email`, `username`, `password`, `admin`, `nome`, `cognome`, `indirizzo`) 
+VALUES ('test@gmail.com', 'test', 'test', 'N', 'testNome', 'TestCognome', 'Via Test 3');
 
 # ---------------------------------------------------------------------- #
 # ADD VALUES "Categoria"                                                 #
@@ -70,8 +70,8 @@ VALUES ('1', '74.99', 'Se vuoi dire la tua in fatto di moda e dimostrare che te 
 # ADD VALUES "Ordine"                                                    #
 # ---------------------------------------------------------------------- #
 
-INSERT INTO `ordine` (`idProdotto`, `username`, `data`, `quantita`) 
-VALUES ('2', 'test', '2020-12-10', '1'), ('1', 'test', '2020-12-10', '2');
+INSERT INTO `ordine` (`idProdotto`, `email`, `data`, `quantita`) 
+VALUES ('2', 'test@gmail.com', '2020-12-10', '1'), ('1', 'test@gmail.com', '2020-12-10', '2');
 
 INSERT INTO `prodottitaglie` (`idTaglia`, `idProdotto`) 
 VALUES ('1', '10'), ('2', '10'), ('3', '10'), ('4', '10'), ('5', '10'), ('1', '2'), ('2', '3'), ('3', '6'), ('5', '7'), ('6', '9')

@@ -76,10 +76,10 @@ CREATE TABLE IF NOT EXISTS `Materiale` (
 
 CREATE TABLE IF NOT EXISTS `Ordine` (
     `idProdotto` INT NOT NULL,
-    `username` CHAR(20) NOT NULL,
+    `email` CHAR(20) NOT NULL,
     `data` DATE NOT NULL,
     `quantita` CHAR(1) NOT NULL,
-    PRIMARY KEY (`idProdotto`, `username`, `data`)
+    PRIMARY KEY (`idProdotto`, `email`, `data`)
 ) ENGINE=INNODB;
 
 # ---------------------------------------------------------------------- #
@@ -114,13 +114,14 @@ CREATE TABLE IF NOT EXISTS `Genere` (
 # ---------------------------------------------------------------------- #
 
 CREATE TABLE IF NOT EXISTS `User` (
+    `email` CHAR(40) NOT NULL,
     `username` CHAR(20) NOT NULL,
     `password` CHAR(20) NOT NULL,
     `admin` CHAR NOT NULL,
     `nome` CHAR(20) NOT NULL,
     `cognome` CHAR(20) NOT NULL,
     `indirizzo` CHAR(20) NOT NULL,
-    PRIMARY KEY (`username`)
+    PRIMARY KEY (`email`)
 ) ENGINE=INNODB;
 
 # ---------------------------------------------------------------------- #
@@ -164,10 +165,10 @@ CREATE UNIQUE INDEX `PK_Materiale`
 
 
 CREATE UNIQUE INDEX `PK_Ordine`
-     ON `Ordine` (`idProdotto`, `username`, `data`);
+     ON `Ordine` (`idProdotto`, `email`, `data`);
 
-CREATE INDEX `FK_Ordine_Username`
-     ON `Ordine` (`username`);
+CREATE INDEX `FK_Ordine_Email`
+     ON `Ordine` (`email`);
 
 CREATE UNIQUE INDEX `PK_Prodotto`
      ON `Prodotto` (`id`);
@@ -184,8 +185,8 @@ CREATE INDEX `FK_Prodotto_Materiale`
 CREATE UNIQUE INDEX `PK_Genere`
      ON `Genere` (`id`);
 
-CREATE UNIQUE INDEX `PK_Username`
-     ON `User` (`username`);
+CREATE UNIQUE INDEX `PK_Email`
+     ON `User` (`email`);
 
 CREATE UNIQUE INDEX `PK_Marca`
      ON `Marca` (`id`);
@@ -211,9 +212,9 @@ ALTER TABLE `ProdottiTaglie` ADD CONSTRAINT `FK_ProTag_Taglia`
      FOREIGN KEY (`idTaglia`)
      REFERENCES `Taglia` (`id`);
 
-ALTER TABLE `Ordine` ADD CONSTRAINT `FK_Ordine_Username`
-     FOREIGN KEY (`username`)
-     REFERENCES `User` (`username`);
+ALTER TABLE `Ordine` ADD CONSTRAINT `FK_Ordine_Email`
+     FOREIGN KEY (`email`)
+     REFERENCES `User` (`email`);
 
 ALTER TABLE `Ordine` ADD CONSTRAINT `FK_Ordine_Prodotto`
      FOREIGN KEY (`idProdotto`)
