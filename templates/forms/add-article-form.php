@@ -1,14 +1,14 @@
 <script src="<?php echo JS_FILE ?>add-params.js"></script>
 
 <div class="my-3 mx-2 ">
-    <label for="input-file-now" class="form-label fw-bold"> Immagine Aricolo </label>
+    <label for="shoe-img" class="form-label fw-bold"> Immagine Aricolo </label>
     <div class="file-upload-wrapper">
-        <input type="file" id="input-file-now" class="file-upload" />
+        <input type="file" id="shoe-img" name="shoe-img" class="file-upload" accept="image/png, image/jpeg, image/jpg, image/gif" />
     </div>
 </div>
 
-<div class="my-3 mx-2 ">
-    <label for="name" class="form-label fw-bold"> Nome Aricolo </label>
+<div class=" my-3 mx-2 ">
+    <label for=" name" class="form-label fw-bold"> Nome Aricolo </label>
     <input id="name" name="name" class="form-control col-12 fst-italic" type="text" placeholder="inserire nome articolo" maxlength="20" required />
 </div>
 
@@ -61,7 +61,7 @@
                 <div id="size" aria-label="Lista di taglie da cui scegliere">
                     <?php foreach ($formParams["sizes"] as $size) : ?>
                         <div class="form-check">
-                            <input id="size<?php echo $size['id'] ?>" class="form-check-input" name="size" type="checkbox" value="<?php echo $size['id'] ?>" />
+                            <input id="size<?php echo $size['id'] ?>" class="form-check-input" name="size-<?php echo $size['id'] ?>" type="checkbox" value="<?php echo $size['id'] ?>" />
                             <label class="form-check-label" for="size<?php echo $size['id'] ?>">
                                 <?php echo $size['numero'] ?>
                             </label>
@@ -138,7 +138,7 @@
                 <label for="price-group" class="form-label fw-bold"> Prezzo </label>
                 <div id="price-group" class="input-group">
                     <span class="input-group-text">€</span>
-                    <input id="price" name="price" class="form-control col-12 fst-italic" type="number" placeholder="prezzo per unità" required />
+                    <input id="price" name="price" class="form-control col-12 fst-italic" type="number" step="0.01" placeholder="prezzo per unità" required />
                 </div>
             </div>
         </div>
@@ -150,7 +150,7 @@
     <div id="categories-group" aria-label="Lista di categorie da cui scegliere">
         <?php foreach ($formParams["categories"] as $category) : ?>
             <div class="form-check">
-                <input id="category<?php echo $category['id'] ?>" class="form-check-input" name="categories" type="checkbox" value="<?php echo $category['id'] ?>" />
+                <input id="category<?php echo $category['id'] ?>" class="form-check-input" name="categories-<?php echo $category['id'] ?>" type="checkbox" value="<?php echo $category['id'] ?>" />
                 <label class="form-check-label" for="category<?php echo $category['id'] ?>">
                     <?php echo $category['nome'] ?>
                 </label>
@@ -188,7 +188,7 @@
 
                 <div class="my-3 mx-2">
                     <label for="new-value" class="form-label fw-bold"> Nome <span class="modal-name"> </span></label>
-                    <input id="new-value" name="new-value" class="form-control col-12 fst-italic" type="text" placeholder="inserire nome articolo" maxlength="20" required />
+                    <input id="new-value" name="new-value" class="form-control col-12 fst-italic" type="text" placeholder="inserire nome articolo" maxlength="20" />
                 </div>
 
                 <div class="my-3 mx-2">

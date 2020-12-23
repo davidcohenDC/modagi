@@ -174,6 +174,13 @@ class DatabaseUser
         }
     }
 
+    public function insertShoe($id, $name, $description, $sizes)
+    {
+        //inserts shoe in product
+
+        // inserts the sizes 
+    }
+
     // REMOVES
     public function removeUser($id, $password)
     {

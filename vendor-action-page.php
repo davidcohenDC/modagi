@@ -30,6 +30,18 @@ switch ($action) {
         $formParams["brands"] = $dbh->getAllBrands();
         $formParams["categories"] = $dbh->getAllCategories();
 
+        if (isArticleSet($formParams)) {
+            //* upload img
+            $imgResult = uploadImage(IMG_DIR, $_FILES["shoe-img"], $_POST["name"]);
+
+            if (!$imgResult[0]) {
+                $templateParams["error"] = $imgResult[1];
+            }
+
+            //* insert data in sql db
+            //$dbh->insertShoe();
+        }
+
         break;
 
     case 2: //? materiale
@@ -46,6 +58,8 @@ switch ($action) {
         break;
     case 6: //? categorie
         $dbh->insertNewValue($newValue, "nome", "categoria");
+        break;
+    case 7: //? aggiungi promozioni
         break;
     default:
         $templateParams["title"] = "Access Violation";
