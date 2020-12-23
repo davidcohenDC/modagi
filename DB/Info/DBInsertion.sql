@@ -122,7 +122,6 @@ INSERT INTO `prodotto` (
         `prezzo`,
         `descrizione`,
         `nome`,
-        `stock`,
         `idColore`,
         `idGenere`,
         `idMateriale`,
@@ -133,7 +132,6 @@ VALUES (
         '74.99',
         'Se vuoi dire la tua in fatto di moda e dimostrare che te ne intendi, scegli le sneakers bianche AIR FORCE 1',
         'Air Max 1',
-        '50',
         '1',
         '3',
         '4',
@@ -144,7 +142,6 @@ VALUES (
         '49.99',
         '',
         'Revolution 5',
-        '30',
         '2',
         '1',
         '4',
@@ -155,7 +152,6 @@ VALUES (
         '104.99',
         '',
         'Af1 Pixel',
-        '',
         '4',
         '2',
         '4',
@@ -166,7 +162,6 @@ VALUES (
         '104.99',
         '',
         'Euro Sprint Hiker',
-        '10',
         '7',
         '1',
         '1',
@@ -177,7 +172,6 @@ VALUES (
         '84.99',
         '',
         'New Balance',
-        '5',
         '9',
         '1',
         '4',
@@ -188,7 +182,6 @@ VALUES (
         '84.99',
         '',
         'ZOOM',
-        '30',
         '1',
         '1',
         '2',
@@ -199,7 +192,6 @@ VALUES (
         '26.59',
         '',
         'Trochetti',
-        '45',
         '2',
         '2',
         '3',
@@ -210,7 +202,6 @@ VALUES (
         '111.99',
         '',
         'Air Max 2090',
-        '80',
         '9',
         '1',
         '2',
@@ -221,7 +212,6 @@ VALUES (
         '16.99',
         '',
         'Pantofole',
-        '5',
         '1',
         '2',
         '4',
@@ -232,7 +222,6 @@ VALUES (
         '124.99',
         '',
         'Air Barrage',
-        '60',
         '7',
         '3',
         '4',
@@ -244,14 +233,42 @@ VALUES (
 INSERT INTO `ordine` (`idProdotto`, `email`, `data`, `quantita`)
 VALUES ('2', 'test@gmail.com', '2020-12-10', '1'),
     ('1', 'test@gmail.com', '2020-12-10', '2');
-INSERT INTO `prodottitaglie` (`idTaglia`, `idProdotto`)
-VALUES ('1', '10'),
-    ('2', '10'),
-    ('3', '10'),
-    ('4', '10'),
-    ('5', '10'),
-    ('1', '2'),
-    ('2', '3'),
-    ('3', '6'),
-    ('5', '7'),
-    ('6', '9')
+# ---------------------------------------------------------------------- #
+# ADD VALUES "ProdottiTaglie"                                                    #
+# ---------------------------------------------------------------------- #
+INSERT INTO `ProdottiTaglie` (`idTaglia`, `idProdotto`, `quantita`)
+VALUES (1, 1, 25);
+INSERT INTO `ProdottiTaglie` (`idTaglia`, `idProdotto`, `quantita`)
+VALUES(1, 2, 25);
+INSERT INTO `ProdottiTaglie` (`idTaglia`, `idProdotto`, `quantita`)
+VALUES(1, 3, 25);
+INSERT INTO `ProdottiTaglie` (`idTaglia`, `idProdotto`, `quantita`)
+VALUES(2, 4, 25);
+INSERT INTO `ProdottiTaglie` (`idTaglia`, `idProdotto`, `quantita`)
+VALUES(2, 5, 25);
+INSERT INTO `ProdottiTaglie` (`idTaglia`, `idProdotto`, `quantita`)
+VALUES(3, 2, 25);
+INSERT INTO `ProdottiTaglie` (`idTaglia`, `idProdotto`, `quantita`)
+VALUES(3, 6, 25);
+INSERT INTO `ProdottiTaglie` (`idTaglia`, `idProdotto`, `quantita`)
+VALUES(3, 7, 25);
+INSERT INTO `ProdottiTaglie` (`idTaglia`, `idProdotto`, `quantita`)
+VALUES(3, 1, 25);
+INSERT INTO `ProdottiTaglie` (`idTaglia`, `idProdotto`, `quantita`)
+VALUES(4, 2, 25);
+INSERT INTO `ProdottiTaglie` (`idTaglia`, `idProdotto`, `quantita`)
+VALUES(4, 3, 25);
+INSERT INTO `ProdottiTaglie` (`idTaglia`, `idProdotto`, `quantita`)
+VALUES(5, 3, 25);
+INSERT INTO `ProdottiTaglie` (`idTaglia`, `idProdotto`, `quantita`)
+VALUES(6, 3, 25);
+INSERT INTO `ProdottiTaglie` (`idTaglia`, `idProdotto`, `quantita`)
+VALUES(6, 1, 25);
+INSERT INTO `ProdottiTaglie` (`idTaglia`, `idProdotto`, `quantita`)
+VALUES(7, 2, 25);
+INSERT INTO `ProdottiTaglie` (`idTaglia`, `idProdotto`, `quantita`)
+VALUES(7, 3, 25);
+INSERT INTO `ProdottiTaglie` (`idTaglia`, `idProdotto`, `quantita`)
+VALUES(7, 4, 25);
+INSERT INTO `ProdottiTaglie` (`idTaglia`, `idProdotto`, `quantita`)
+VALUES(9, 7, 25);

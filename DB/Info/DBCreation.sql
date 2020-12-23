@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `Taglia` (
 CREATE TABLE IF NOT EXISTS `ProdottiTaglie` (
      `idTaglia` INT NOT NULL,
      `idProdotto` INT NOT NULL,
+     `quantita` INT NOT NULL,
      PRIMARY KEY (`idTaglia`, `idProdotto`)
 ) ENGINE = INNODB;
 # ---------------------------------------------------------------------- #
@@ -64,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `Ordine` (
      `idProdotto` INT NOT NULL,
      `email` CHAR(20) NOT NULL,
      `data` DATE NOT NULL,
-     `quantita` CHAR(1) NOT NULL,
+     `quantita` INT NOT NULL,
      PRIMARY KEY (`idProdotto`, `email`, `data`)
 ) ENGINE = INNODB;
 # ---------------------------------------------------------------------- #
@@ -75,7 +76,6 @@ CREATE TABLE IF NOT EXISTS `Prodotto` (
      `prezzo` decimal(5, 2) NOT NULL,
      `descrizione` VARCHAR(256) NOT NULL,
      `nome` CHAR(200) NOT NULL,
-     `stock` INT NOT NULL,
      `idColore` INT NOT NULL,
      `idGenere` INT NOT NULL,
      `idMateriale` INT NOT NULL,
