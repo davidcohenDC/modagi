@@ -17,7 +17,7 @@ $templateParams["taglia"] = $size->getAll();
 $templateParams["colore"] = $colour->getAll();
 $templateParams["genere"] = $gender->getAll();
 $templateParams["materiale"] = $material->getAll();
-$templateParams["Promo"] = getPromotionsUrl(PROMOTION_DIR);
+$templateParams["Promo"] = getProductPromotion(PROMOTION_DIR);
 
 require_once("templates/base.php");
 require_once("templates/main-page.php");

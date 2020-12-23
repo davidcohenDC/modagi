@@ -367,15 +367,29 @@ div > input > label {
   .mobile {
     display: flex !important;
   }
-}
 
-@media (min-width: 350px) {
+  .tablet {
+    display: none !important;
+  }
   .carousel-caption {
     bottom: 0px;
   }
 }
 
-
+@media (min-width: 750px) {
+  .desktop{
+    display: none !important;
+  }
+  .mobile {
+    display: flex !important;
+  }
+  .tablet {
+    display: inline-block !important;
+  }
+  .carousel-caption {
+    bottom: 40px;
+  }
+}
 
 
 @media (min-width: 961px) {
@@ -384,6 +398,9 @@ div > input > label {
   }
   .desktop{
     display:inline-block !important;
+  }
+  .tablet {
+    display: inline-block !important;
   }
   .carousel-caption {
     bottom: 30px;
@@ -595,7 +612,7 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 
 
-    .drop-shadow-second {
+  .drop-shadow-second {
 	filter: drop-shadow(5px 5px 15px  rgb(126, 26, 180));
 }
 .clip-smaller-polygon-second{
@@ -678,4 +695,31 @@ overflow: hidden;
 .action {
 background-image: url('https://brandflow.net/assets/img/featured/mdb-prolog.jpg') !important;
 background-size: contain; 
+}
+
+.header-text-shadow {
+    text-shadow: 0px 0px 12px rgba(255, 255, 255, 1);
+
+}
+
+
+/* product page */
+
+div > div > a {
+  text-decoration: none !important;
+  color: #000;
+}
+
+.text-center {
+  text-align: center!important;
+}
+
+.card {
+  border: 0;
+  /* box-shadow: 0 10px 20px 0 rgba(0,0,0,.05); */
+}
+
+
+.card-no-shadow:hover {
+  box-shadow: none !important;
 }

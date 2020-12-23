@@ -5,9 +5,6 @@ $firstPage = 1;
 
 $tabelle = array();
 array_push($tabelle, "marca","genere","materiale","colore","taglia");
-$promotions = array();
-
-
 ?>
 
 <div class="row">
@@ -85,16 +82,13 @@ $promotions = array();
     <div id="carouselPromotion" class="carousel slide mb-4 " data-ride="carousel">
       <div class="carousel-inner" role="listbox">
         <?php foreach($templateParams["Promo"] as $index => $promo): ?>
-          <?php 
-          $productInPromo = getProductPromotion($promo);
-          $prodotto = $product->selectByName($productInPromo)[0]; 
-          ?>
+          <?php $prodotto = $product->selectByName($promo)[0]; ?>
         <div class="carousel-item <?php if ($index == 0) { echo "active";} ?>">
-            <img class="d-block img-fluid" src="<?php echo $promo; ?>" alt="">
+            <img class="d-block img-fluid" src="<?php echo PROMOTION_DIR."promo_".$promo.".jpg"; ?>" alt="">
               <div class="carousel-caption text-center">
-              <h2 class="text-dark"><?php echo strtoupper($prodotto["nome"]) ?></h2>
-                <p class="text-dark desktop"><?php if($prodotto["descrizione"] != "") {echo $prodotto["descrizione"];} else {echo "aggiungi descrizione!";}?></p>
-                <p><a class="btn btn-dark" href="product.php?prodotto=<?php echo $prodotto["id"]; ?>" role="button">Scopri</a></p>                
+              <h3 class="text-dark header-text-shadow"><i class="fa fa-chevron-up" aria-hidden="true"></i> <?php echo strtoupper($prodotto["nome"]) ?> <i class="fa fa-chevron-up" aria-hidden="true"></i></h3>
+                <p class="text-dark tablet header-text-shadow"><?php if($prodotto["descrizione"] != "") {echo $prodotto["descrizione"];} else {echo "aggiungi descrizione!";}?></p>
+                <p><a class="btn btn-dark header-text-shadow" href="product.php?prodotto=<?php echo $prodotto["id"]; ?>" role="button">Scopri <i class="fa fa-long-arrow-right" aria-hidden="true"></i></i></a></p>                
             </div>
         </div>
         <?php endforeach ?>
@@ -173,7 +167,7 @@ $promotions = array();
     </div>
 
     <!-- Nav: Paginator -->
-    <div class="row d-flex justify-content-center.">
+    <div class="row d-flex justify-content-center">
     <nav>
       <ul class="pagination pg-dark">
         <li class="page-item ">
