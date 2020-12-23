@@ -27,6 +27,10 @@ class Product extends Database {
       return parent::Select("SELECT * FROM ".$this->table. " WHERE id = ".$id);
     }
 
+    public function selectByName($name) {
+      return parent::Select("SELECT * FROM ".$this->table. " WHERE nome = '".$name."'");
+    }
+
     public function selectMaterialeByID($id) {
       return parent::Select("SELECT materiale.nome FROM materiale LEFT JOIN ".$this->table. " ON materiale.id = ".$this->table. ".idMateriale WHERE ".$this->table.".id = ".$id);
     }
