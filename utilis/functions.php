@@ -259,14 +259,20 @@ function bindProductUrlToQuery()
     }
 }
 
-function getProductPromotion($product)
+function getProductPromotion($dir)
 {
-    //remove promo_
-    $product = str_replace("promo_", '', $product);
-    $product = str_replace(PROMOTION_DIR, '', $product);
-    //delete extensions
-    $product = substr($product, 0, strrpos($product, "."));
-    return $product;
+
+    $promotions = array();
+    foreach (scandir($dir) as $img) {
+        if (!is_dir($img)) {
+            
+            $img = str_replace("promo_", '', $img);
+            $img = substr($img, 0, strrpos($img, "."));
+            array_push($promotions, $img);
+        }
+    }
+
+    return $promotions;
 }
 
 function getPromotionsUrl($dir)
