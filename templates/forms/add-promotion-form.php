@@ -1,5 +1,11 @@
+<script src="<?php echo JS_FILE ?>file-upload.js"></script>
+
 <div class="my-3 mx-2 ">
-    <label for="promo-img" class="form-label fw-bold"> Immagine Promozione: </label>
+    <label for="promo-img" class="upload-img-label col-12 fw-bold btn btn-outline-dark">
+        <span class="upload-img">
+
+        </span>
+    </label>
     <input type="file" id="promo-img" name="promo-img" class="file-upload" accept="image/png, image/jpeg, image/jpg, image/gif" />
 </div>
 

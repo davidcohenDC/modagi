@@ -1,7 +1,12 @@
 <script src="<?php echo JS_FILE ?>add-params.js"></script>
+<script src="<?php echo JS_FILE ?>file-upload.js"></script>
 
 <div class="my-3 mx-2 ">
-    <label for="shoe-img" class="form-label fw-bold"> Immagine Aricolo: </label>
+    <label for="shoe-img" class="upload-img-label col-12 fw-bold btn btn-outline-dark">
+        <span class="upload-img">
+
+        </span>
+    </label>
     <input type="file" id="shoe-img" name="shoe-img" class="file-upload" accept="image/png, image/jpeg, image/jpg, image/gif" />
 </div>
 
