@@ -48,6 +48,8 @@ function isArticleSet($formParams, $post)
 function uploadImage($path, $image, $name)
 {
     $imageName = basename($image["name"]);
+    $extension = end(explode(".", $image["name"]));
+
     $fullPath = $path . $imageName;
 
     $maxKB = 500;
@@ -86,6 +88,9 @@ function uploadImage($path, $image, $name)
             $msg = $imageName;
         }
     }
+
+    rename($fullPath, $path . $name . "." . $extension);
+
     return array($result, $msg);
 }
 

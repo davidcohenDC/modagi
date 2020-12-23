@@ -174,11 +174,41 @@ class DatabaseUser
         }
     }
 
-    public function insertShoe($id, $name, $description, $sizes)
+    public function insertShoe($values, $params)
     {
         //inserts shoe in product
+        $stmt = $this->db->prepare("INSERT INTO prodotto (prezzo, descrizione, nome, idColore, idGenere, idMateriale, idMarca) 
+                                    VALUES (?, ?, ?, ?, ?, ?, ?)");
 
-        // inserts the sizes 
+        $stmt->bind_param("sssssss", $values["price"], $values["description"], $values["name"], $values["color"], $values["gender"], $values["material"], $values["brand"]);
+        $stmt->execute();
+
+        $prodId = $this->db->prepare("SELECT id FROM prodotto WHERE nome = ?");
+        $prodId->bind_param("s", $values["name"]);
+        $prodId->execute();
+
+        $prodId = $prodId->get_result()->fetch_all(MYSQLI_ASSOC)[0]["id"];
+
+        // inserts the sizes
+        foreach ($params["sizes"] as $key) {
+            if (isset($values["size-" . $key["id"]]) && $values["size-" . $key["id"]] != "") {
+                $stmt = $this->db->prepare("INSERT INTO ProdottiTaglie (idTaglia, idProdotto, quantita)
+                                            VALUES (?, ?, ?);");
+
+                $stmt->bind_param("iii", $key["id"], $prodId, $values["quantity-" . $key["id"]]);
+                $stmt->execute();
+            }
+        }
+
+        // inserts the categories
+        foreach ($params["categories"] as $key) {
+            if (isset($values["categories-" . $key["id"]]) && $values["categories-" . $key["id"]] != "") {
+                $stmt = $this->db->prepare("INSERT INTO ProdottiCategorie (idTaglia, idProdotto) VALUES (?, ?)");
+
+                $stmt->bind_param("ii", $key["id"], $prodId);
+                $stmt->execute();
+            }
+        }
     }
 
     // REMOVES

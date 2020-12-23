@@ -31,7 +31,6 @@ switch ($action) {
         $formParams["categories"] = $dbh->getAllCategories();
 
         if (isArticleSet($formParams, $_POST)) {
-            $templateParams["error"] = "set";
             //* upload img
             $imgResult = uploadImage(IMG_DIR, $_FILES["shoe-img"], $_POST["name"]);
 
@@ -40,11 +39,12 @@ switch ($action) {
             }
 
             //* insert data in sql db
-            //$dbh->insertShoe();
-        } else {
-            $templateParams["error"] = "not set";
-        }
+            $insertResult = $dbh->insertShoe($_POST, $formParams);
 
+            if (!isset($templateParams["error"])) {
+                header("location: user-page.php");
+            }
+        }
         break;
 
     case 2: //? materiale
