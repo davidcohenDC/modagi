@@ -19,14 +19,15 @@ if(!isUserLoggedIn()) {
     $cart["orderCount"] = $cartManager->getOrderCount();
 
     // for debugging (parte di gigi)
-    $_SESSION["username"] = "More";
+    $_SESSION["email"] = "more@gmail.com";
     $_SESSION["password"] = "lorenzomorelli";
     $userManager = new UserManager();
+    $user["email"] = $userManager->getEmail();
     $user["nome"] = $userManager->getNome();
     $user["username"] = $userManager->getUsername();
     $user["cognome"] = $userManager->getCognome();
     $user["indirizzo"] = $userManager->getIndirizzo();
-    if(!$user["nome"] || !$user["username"] || !$user["cognome"] || !$user["indirizzo"]) {
+    if(!$user["email"] || !$user["nome"] || !$user["username"] || !$user["cognome"] || !$user["indirizzo"]) {
         $templateParams["main"] = "./templates/go_to_login_page.php";
     }
 }
