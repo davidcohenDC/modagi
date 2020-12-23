@@ -96,9 +96,33 @@ window.onbeforeunload = function(e) {
         $url = location.href = $url+"&pag=1";
 
       })
+
+      $('button[name=btndelete]').on('click', function() {
+        location.href = "index.php";
+        console.log("ciao");
+
+      })
+      
       
       $('.multi-range').on('input', function() {
         $(this).next('.range-value').html(this.value);
+      });
+
+      $(".link-table").on("click", function(){
+        const arrow =  $("i",this);
+        if(arrow.hasClass("fa-arrow-right")) {
+          arrow.removeClass("fa-arrow-right");
+          arrow.fadeOut(90,function (){
+            arrow.addClass("fa-arrow-down");
+            arrow.fadeIn("fast");
+          });
+        } else {
+          arrow.removeClass("fa-arrow-down");
+          arrow.fadeOut(90,function (){
+            arrow.addClass("fa-arrow-right");
+            arrow.fadeIn("fast");
+          });
+      }
       });
 
       $(window).bind("load", function() {
