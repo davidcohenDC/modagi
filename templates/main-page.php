@@ -99,8 +99,8 @@ $promotions = array();
             <img class="d-block img-fluid" src="<?php echo $promo; ?>" alt="">
             <div class="container">
               <div class="carousel-caption text-center">
-              <h1 class="text-dark"><?php echo $prodotto["nome"] ?></h1>
-                <p class="text-dark"><?php if($prodotto["descrizione"] != "") {echo $prodotto["descrizione"];} else {echo "aggiungi descrizione!";}?></p>
+              <h1 class="text-dark"><?php echo strtoupper($prodotto["nome"]) ?></h1>
+                <p class="text-dark desktop"><?php if($prodotto["descrizione"] != "") {echo $prodotto["descrizione"];} else {echo "aggiungi descrizione!";}?></p>
                 <p><a class="btn btn-dark" href="product.php?prodotto=<?php echo $prodotto["id"]; ?>" role="button">Scopri</a></p>                
               </div>
             </div>
