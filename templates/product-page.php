@@ -131,17 +131,15 @@ $prodotto = $templateParams["prodotto"];
           <!--/.Accordion wrapper-->
           <!-- Add to Cart -->
           <section class="cart">
-
             <div class=" mb-2 text-center">
               <div class="row">
-                
                 <div class="col-md-12 text-center text-md-center text-md-right">
-                  <button class="btn btn-primary btn-rounder">
-                  <i class="fa fa-cart-plus" aria-hidden="true"></i> Aggiungi al carrello</button>
+                <form method="POST" id="formAddToCart" action="">
+                <button type="submit" id="btnAdd" class="btn btn-info btn-rounder"><i class="fa fa-cart-plus" aria-hidden="true"></i> Aggiungi al carrello</button>
+                </form>
                 </div>
-
+              </div>
             </div>
-
           </section>
           <!-- /.Add to Cart -->
         </div>
@@ -150,3 +148,45 @@ $prodotto = $templateParams["prodotto"];
   </section>
 
 </div>
+
+<div class="modal fade right" id="modalAbandonedCart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true" data-backdrop="false">
+  <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-info" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <p class="heading">Prodotto aggiunto al carrello!
+        </p>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-3">
+            <p></p>
+            <p class="text-center"><i class="fa fa-shopping-cart fa-4x" aria-hidden="true"></i></p>
+          </div>
+
+          <div class="col-9">
+            <p>Hai bisogno di più tempo per decidere?</p>
+            <p>Nessun problema, il tuo prodotto ti aspetterà nel carrello.</p>
+          </div>
+        </div>
+      </div>
+
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+      <a href="index.php" id="btnReturnHome" class="btn btn-info btn-rounder" >Continua a Comprare</a>
+      <a href="index.php" id="btnReturnHome" class="btn btn-info btn-rounder" >Vai al Carrello</a>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+<!-- Modal -->

@@ -132,4 +132,17 @@ window.onbeforeunload = function(e) {
      });
 
 
+    $('#formAddToCart').on('submit', function (e) {
+      e.preventDefault();
+      setTimeout(function() {
+        location.href = window.location+"&modal=1";
+      },0);
+      this.submit();
+});
+
+    if(location.search.split('modal=')[1]) {
+      $('#modalAbandonedCart').modal('show');
+    }
+    
+
 });
