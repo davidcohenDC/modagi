@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 define("SHOP_NAME", "SHOES COM");
 define("CART_COOKIE", "CART_COOKIE");
@@ -16,4 +16,24 @@ define("DB_PASSWORD", "");
 define("DB_NAME", "modagi");
 define("MAX_PRODUCT_FOR_PAGE", 6);
 
-?>
+//TODO: correct fields
+define("CREATORS", array(
+    1 => array(
+        "nome" => "Luigi",
+        "cognome" => "Olivieri",
+        "email" => "luigi.olivieri@studio.unibo.it",
+        "matricola" => ""
+    ),
+    2 => array(
+        "nome" => "David",
+        "cognome" => "Cohen",
+        "email" => "TODO",
+        "matricola" => "TODO"
+    ),
+    3 => array(
+        "nome" => "Lorenzo",
+        "cognome" => "Morelli",
+        "email" => "TODO",
+        "matricola" => "TODO"
+    )
+));
