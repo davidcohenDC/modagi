@@ -41,9 +41,22 @@
 </div>
 
 <div class="my-3 mx-2 ">
+    <label for="username-group" class="form-label fw-bold"> Modifica Username </label>
+    <div id="username-group" class="input-group mb-3">
+        <button id="change-username" class="change input-embedded">
+            <span></span>
+        </button>
+        <input id="username" name="username" class="form-control col-12 fst-italic" type="text" placeholder="inserire username" maxlength="20" />
+        <div class="invalid-feedback">
+            Inserire un username valido
+        </div>
+    </div>
+</div>
+
+<div class="my-3 mx-2 ">
     <label for="password-group" class="form-label fw-bold"> Password </label>
     <div id="password-group" class="input-group mb-3">
-        <input id="password" name="password" class="form-control fst-italic password" type="password" placeholder="inserire la password" minlength="6" maxlength="20" required />
+        <input id="password" name="password" class="form-control fst-italic password" type="password" placeholder="inserire la password" maxlength="20" required />
         <button id="eye" class=" eye input-embedded">
             <span id="icon" class="icon">
             </span>

@@ -5,25 +5,104 @@
  */
 function isUserLoggedIn()
 {
-    return !empty($_SESSION['username']);
+    return !empty($_SESSION['id']);
 }
 
 function isUserVendor()
 {
-    return !empty($_SESSION['isVendor']) && $_SESSION['isVendor'] == 'S';
+    return isUserLoggedIn() && $_SESSION['isVendor'] == 'S';
 }
+
+function isArticleSet($formParams, $post)
+{
+    $check = false;
+
+    foreach ($formParams["categories"] as $category) {
+        if (isset($post["category-" . $category["id"]]) && $post["category-" . $category["id"]] != "") {
+            $check = true;
+        }
+    }
+
+    if (!$check) {
+        return false;
+    }
+
+    $check = false;
+
+    foreach ($formParams["sizes"] as $size) {
+        if (isset($post["size-" . $size["id"]]) && $post["size-" . $size["id"]] != "") {
+            $check = true;
+        }
+    }
+
+    return $check &&
+        isset($post["name"]) &&
+        isset($post["description"]) &&
+        isset($post["material"]) &&
+        isset($post["brand"]) &&
+        isset($post["color"]) &&
+        isset($post["gender"]) &&
+        isset($post["price"]);
+}
+
+function uploadImage($path, $image, $name)
+{
+    $imageName = basename($image["name"]);
+    $fullPath = $path . $imageName;
+
+    $maxKB = 500;
+    $acceptedExtensions = array("jpg", "jpeg", "png", "gif");
+
+    $result = false;
+    $msg = "";
+
+    //Controllo se immagine è veramente un'immagine
+    $imageSize = getimagesize($image["tmp_name"]);
+    if ($imageSize === false) {
+        $msg .= "File caricato non è un'immagine! ";
+    }
+    //Controllo dimensione dell'immagine < 500KB
+    if ($image["size"] > $maxKB * 1024) {
+        $msg .= "File caricato pesa troppo! Dimensione massima è $maxKB KB. ";
+    }
+
+    //Controllo estensione del file
+    $imageFileType = strtolower(pathinfo($fullPath, PATHINFO_EXTENSION));
+    if (!in_array($imageFileType, $acceptedExtensions)) {
+        $msg .= "Accettate solo le seguenti estensioni: " . implode(",", $acceptedExtensions);
+    }
+
+    //Controllo se esiste file con stesso nome ed eventualmente lo rinomino
+    if (file_exists($fullPath)) {
+        $msg .= "File $fullPath esiste già";
+    }
+
+    //Se non ci sono errori, sposto il file dalla posizione temporanea alla cartella di destinazione
+    if (strlen($msg) == 0) {
+        if (!move_uploaded_file($image["tmp_name"], $fullPath)) {
+            $msg .= "Errore nel caricamento dell'immagine.";
+        } else {
+            $result = true;
+            $msg = $imageName;
+        }
+    }
+    return array($result, $msg);
+}
+
 
 function logOut()
 {
     if (isUserLoggedIn()) {
+        unset($_SESSION['id']);
         unset($_SESSION['username']);
         unset($_SESSION['isVendor']);
     }
 }
 
-function removeParam($url, $param) {
-    $url = preg_replace('/(&|\?)'.preg_quote($param).'=[^&]*$/', '', $url);
-    $url = preg_replace('/(&|\?)'.preg_quote($param).'=[^&]*&/', '$1', $url);
+function removeParam($url, $param)
+{
+    $url = preg_replace('/(&|\?)' . preg_quote($param) . '=[^&]*$/', '', $url);
+    $url = preg_replace('/(&|\?)' . preg_quote($param) . '=[^&]*&/', '$1', $url);
     return $url;
 }
 
@@ -49,15 +128,16 @@ function addURLParameter($url, $paramName, $paramValue)
     return build_url($url_data);
 }
 
-function addUrlParameters($url, $paramName, $paramValue) {
+function addUrlParameters($url, $paramName, $paramValue)
+{
 
-    if(isset($_GET["pag"])) {
+    if (isset($_GET["pag"])) {
         $url = removeParam($url, "pag");
-    } 
+    }
 
-    if(isset($_GET["filter"])) {
+    if (isset($_GET["filter"])) {
         $url = removeParam($url, "filter");
-    } 
+    }
 
     return addURLParameter($url, $paramName, $paramValue);
 }
@@ -124,15 +204,15 @@ function bindProductUrlToQuery()
 
         //before filter find a possbile new selection
 
-        if(isset($_GET["taglia"])) {
-            $selection = "SELECT * FROM prodottitaglie PT LEFT JOIN prodotto P ON PT.idProdotto = P.id WHERE PT.idTaglia = ".$_GET["taglia"];
+        if (isset($_GET["taglia"])) {
+            $selection = "SELECT * FROM prodottitaglie PT LEFT JOIN prodotto P ON PT.idProdotto = P.id WHERE PT.idTaglia = " . $_GET["taglia"];
             $count++;
         }
-        
+
 
         foreach ($result as $name => $value) {
 
-            if ($name == "pag" || $name == "filter" || $name== "taglia") {
+            if ($name == "pag" || $name == "filter" || $name == "taglia") {
                 //nothing
             } else if ($name == "genere" && $value == 3) {
                 if ($count >= 1) {
@@ -142,7 +222,7 @@ function bindProductUrlToQuery()
                 }
 
                 $count++;
-            } else if($name == "prezzo") {
+            } else if ($name == "prezzo") {
                 if ($count >= 1) {
                     $filter =  $filter . " AND " . $name . " >= " . $value;
                 } else {
@@ -160,41 +240,43 @@ function bindProductUrlToQuery()
         }
 
         //after filtering select the order
-        if(isset($_GET["filter"])) {
+        if (isset($_GET["filter"])) {
             switch ($_GET["filter"]) {
-              case 'ultimi_arrivi':
-                $filter = $filter . " ORDER BY id DESC";
-                break;
-              case 'prezzo_crescente':
-                $filter = $filter . " ORDER BY prezzo ASC";
-                break;
-              case 'prezzo_decrescente':
-                $filter = $filter . " ORDER BY prezzo DESC";
-                break;    
+                case 'ultimi_arrivi':
+                    $filter = $filter . " ORDER BY id DESC";
+                    break;
+                case 'prezzo_crescente':
+                    $filter = $filter . " ORDER BY prezzo ASC";
+                    break;
+                case 'prezzo_decrescente':
+                    $filter = $filter . " ORDER BY prezzo DESC";
+                    break;
             }
-          } 
+        }
 
         $selection = $selection . $filter;
         return $selection;
     }
 }
 
-function getProductPromotion($product) {
+function getProductPromotion($product)
+{
     //remove promo_
     $product = str_replace("promo_", '', $product);
     $product = str_replace(PROMOTION_DIR, '', $product);
     //delete extensions
     $product = substr($product, 0, strrpos($product, "."));
-    return $product;    
-  }
+    return $product;
+}
 
-  function getPromotionsUrl($dir) {
+function getPromotionsUrl($dir)
+{
     $promotions = array();
-    foreach(scandir($dir) as $img) {
-      if(!is_dir($img)) {
-          $img = $dir.$img;
-      array_push($promotions,$img);
-      }
+    foreach (scandir($dir) as $img) {
+        if (!is_dir($img)) {
+            $img = $dir . $img;
+            array_push($promotions, $img);
+        }
     }
     return $promotions;
-  }
+}

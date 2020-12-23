@@ -22,11 +22,11 @@ switch ($action) {
             $dbh = new DatabaseUser(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
         }
 
-        if ($dbh->hasOrders($_SESSION["username"])) {
-            $templateParams["dates"] = $dbh->getOrdersDates($_SESSION["username"]);
+        if ($dbh->hasOrders($_SESSION["id"])) {
+            $templateParams["dates"] = $dbh->getOrdersDates($_SESSION["id"]);
 
             foreach ($templateParams["dates"] as $date) {
-                $templateParams[$date["data"]] = $dbh->getOrdersProducts($date["data"], $_SESSION["username"]);
+                $templateParams[$date["data"]] = $dbh->getOrdersProducts($date["data"], $_SESSION["id"]);
             }
         } else {
             $templateParams["noOrders"] = "Nessun Ordine da Mostrare";
@@ -47,24 +47,31 @@ switch ($action) {
 
         if (isset($_POST["password"])) {
 
-            if (isset($_POST["name"])) {
-                $change_result[0] = $dbh->updateName($_SESSION["username"], $_POST["password"], $_POST["name"]);
+            if (isset($_POST["name"]) && $_POST["name"] != "") {
+                $change_result[0] = $dbh->updateName($_SESSION["id"], $_POST["password"], $_POST["name"]);
             }
 
-            if (isset($_POST["surname"])) {
-                $change_result[1] = $dbh->updateSurname($_SESSION["username"], $_POST["password"], $_POST["surname"]);
+            if (isset($_POST["surname"]) && $_POST["surname"] != "") {
+                $change_result[1] = $dbh->updateSurname($_SESSION["id"], $_POST["password"], $_POST["surname"]);
             }
 
-            if (isset($_POST["address"])) {
-                $change_result[2] = $dbh->updateAddress($_SESSION["username"], $_POST["password"], $_POST["address"]);
+            if (isset($_POST["address"]) && $_POST["address"] != "") {
+                $change_result[2] = $dbh->updateAddress($_SESSION["id"], $_POST["password"], $_POST["address"]);
             }
 
-            for ($i = 0; $i < 3; $i++) {
+            if (isset($_POST["username"]) && $_POST["username"] != "") {
+                $change_result[3] = $dbh->updateUsernmae($_SESSION["id"], $_POST["password"], $_POST["username"]);
+            }
+
+            for ($i = 0; $i < array_key_last($change_result) + 1; $i++) {
                 if (!$change_result[$i][0]) {
                     $templateParams["error"] = $change_result[$i][1];
                 }
             }
             if (!isset($templateParams["error"])) {
+                if (isset($_POST["name"])) {
+                    $_SESSION["username"] = $_POST["name"];
+                }
                 header("location: user-page.php");
             }
         }
@@ -83,7 +90,7 @@ switch ($action) {
         }
 
         if (isset($_POST["old-password"]) && isset($_POST["new-password"])) {
-            $change_result = $dbh->updatePassword($_SESSION["username"], $_POST["old-password"], $_POST["new-password"]);
+            $change_result = $dbh->updatePassword($_SESSION["id"], $_POST["old-password"], $_POST["new-password"]);
 
             if ($change_result[0]) {
                 //* cambio password riuscito
@@ -105,7 +112,7 @@ switch ($action) {
             $dbh = new DatabaseUser(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
         }
         if (isset($_POST["password"])) {
-            $remove_result = $dbh->removeUser($_SESSION["username"], $_POST["password"]);
+            $remove_result = $dbh->removeUser($_SESSION["id"], $_POST["password"]);
 
             if ($remove_result[0]) {
                 //! then log out

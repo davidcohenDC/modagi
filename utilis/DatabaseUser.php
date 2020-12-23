@@ -18,60 +18,38 @@ class DatabaseUser
     }
 
     // UPDATES
-    public function updateName($username, $password, $newName)
+    public function updateName($id, $password, $newName)
     {
-        if ($this->checkPassword($username, $password)[0]) {
-            $stmt = $this->db->prepare("UPDATE user
-                                        SET nome = ?
-                                        WHERE username = ?");
-            $stmt->bind_param("ss", $newName, $username);
-            $stmt->execute();
-
-            return [true, ""];
-        }
-        return [false, "PASSWORD CORRENTE SBAGLIATA"];
+        return $this->updateField($id, $password, "nome", $newName);
     }
 
-    public function updateSurname($username, $password, $newSurname)
+    public function updateSurname($id, $password, $newSurname)
     {
-        if ($this->checkPassword($username, $password)[0]) {
-            $stmt = $this->db->prepare("UPDATE user
-                                        SET cognome = ?
-                                        WHERE username = ?");
-            $stmt->bind_param("ss", $newSurname, $username);
-            $stmt->execute();
-
-            return [true, ""];
-        }
-        return [false, "PASSWORD CORRENTE SBAGLIATA"];
+        return $this->updateField($id, $password, "cognome", $newSurname);
     }
 
-    public function updateAddress($username, $password, $newAddress)
+    public function updateAddress($id, $password, $newAddress)
     {
-        if ($this->checkPassword($username, $password)[0]) {
-            $stmt = $this->db->prepare("UPDATE user
-                                        SET indirizzo = ?
-                                        WHERE username = ?");
-            $stmt->bind_param("ss", $newAddress, $username);
-            $stmt->execute();
-
-            return [true, ""];
-        }
-        return [false, "PASSWORD CORRENTE SBAGLIATA"];
+        return $this->updateField($id, $password, "indirizzo", $newAddress);
     }
 
-    public function updatePassword($username, $oldPassword, $newPassword)
+    public function updateUsernmae($id, $password, $newUsername)
+    {
+        return $this->updateField($id, $password, "username", $newUsername);
+    }
+
+    public function updatePassword($id, $oldPassword, $newPassword)
     {
         /* l'user deve aver messo la password giusta */
-        if ($this->checkPassword($username, $oldPassword)[0]) {
+        if ($this->checkPassword($id, $oldPassword)[0]) {
             if ($oldPassword != $newPassword) {
                 $stmt = $this->db->prepare("UPDATE user
                                     SET password = ?
-                                    WHERE username = ?");
-                $stmt->bind_param("ss", $newPassword, $username);
+                                    WHERE email = ?");
+                $stmt->bind_param("ss", $newPassword, $id);
                 $stmt->execute();
 
-                return [$this->checkLogin($username, $newPassword)[0], "CAMBIO PASSWORD NON RIUSCITO"];
+                return [$this->checkLogin($id, $newPassword)[0], "CAMBIO PASSWORD NON RIUSCITO"];
             }
             return [true, ""];
         }
@@ -79,23 +57,33 @@ class DatabaseUser
     }
 
     // GETTERS
-    public function getOrdersDates($username)
+    public function getUserName($id)
     {
-        $stmt = $this->db->prepare("SELECT DISTINCT data FROM ordine WHERE username = ? ");
+        $stmt = $this->db->prepare("SELECT nome FROM user WHERE email = ? ");
 
-        $stmt->bind_param("s", $username);
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]["nome"];
+    }
+
+    public function getOrdersDates($id)
+    {
+        $stmt = $this->db->prepare("SELECT DISTINCT data FROM ordine WHERE email = ? ");
+
+        $stmt->bind_param("s", $id);
         $stmt->execute();
 
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getOrdersProducts($date, $username)
+    public function getOrdersProducts($date, $email)
     {
         $stmt = $this->db->prepare("SELECT prodotto.nome as nome, prodotto.prezzo as prezzo, ordine.quantita as quantita,
                                     genere.nome as genere, colore.nome as colore, materiale.nome as materiale, marca.nome as marca
                                     FROM colore, materiale, marca, genere, ordine, prodotto 
                                     WHERE prodotto.id = ordine.idProdotto 
-                                    AND ordine.username = ? 
+                                    AND ordine.email = ? 
                                     AND ordine.data = ? 
                                     AND prodotto.idColore = colore.id
                                     AND prodotto.idGenere = genere.id
@@ -103,19 +91,19 @@ class DatabaseUser
                                     AND prodotto.idMarca = marca.id
                                     ORDER BY ordine.data");
 
-        $stmt->bind_param("ss", $username, $date);
+        $stmt->bind_param("ss", $email, $date);
         $stmt->execute();
 
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function userAccessLevel($username)
+    public function userAccessLevel($id)
     {
         $stmt = $this->db->prepare("SELECT admin as al
                                         FROM user 
-                                        WHERE username = ?;");
+                                        WHERE email = ?;");
 
-        $stmt->bind_param("s", $username);
+        $stmt->bind_param("s", $id);
         $stmt->execute();
 
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]["al"];
@@ -150,78 +138,111 @@ class DatabaseUser
 
 
     // INSERTS
-    public function registerUser($username, $password, $name, $surname, $address)
+    public function registerUser($email, $username, $password, $name, $surname, $address)
     {
-        $stmt = $this->db->prepare("INSERT INTO user (username, password, admin, nome, cognome, indirizzo) VALUES (?, ?, 'N', ?, ?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO user (email, username, password, admin, nome, cognome, indirizzo) VALUES (?, ?, ?, 'N', ?, ?, ?)");
 
-        $stmt->bind_param("sssss", $username, $password, $name, $surname, $address);
+        $stmt->bind_param("ssssss", $email, $username, $password, $name, $surname, $address);
         $stmt->execute();
 
         return [$this->userExists($username), "REGISTRAZIONE NON RIUSCITA"];
     }
 
-    // REMOVES
-    public function removeUser($username, $password)
+    /* admin */
+    public function insertNewValue($newValue, $field, $table)
     {
-        if ($this->checkPassword($username, $password)[0]) {
+        //check if already in db
+        $check = $this->db->prepare("SELECT * FROM " . $table . " WHERE " . $field . " = ?");
+        $check->bind_param("s", $newValue);
+        $check->execute();
+
+        if (count($check->get_result()->fetch_all(MYSQLI_ASSOC)) == 0) {
+
+            if ($field == 'numero') {
+                $newId = $this->db->prepare("SELECT max(id) as id FROM " . $table);
+                $newId->execute();
+
+                $newId = $newId->get_result()->fetch_all(MYSQLI_ASSOC)[0]["id"] + 1;
+
+                $stmt = $this->db->prepare("INSERT INTO " . $table . " (id, " . $field . " ) VALUES (?,?)");
+                $stmt->bind_param("ii", $newId, $newValue);
+            } else {
+                $stmt = $this->db->prepare("INSERT INTO " . $table . " ( " . $field . " ) VALUES (?)");
+                $stmt->bind_param("s", $newValue);
+            }
+            $stmt->execute();
+        }
+    }
+
+    public function insertShoe($id, $name, $description, $sizes)
+    {
+        //inserts shoe in product
+
+        // inserts the sizes 
+    }
+
+    // REMOVES
+    public function removeUser($id, $password)
+    {
+        if ($this->checkPassword($id, $password)[0]) {
 
             //* rimuovo gli ordini.
-            $stmt = $this->db->prepare("DELETE FROM ordine WHERE username = ?");
+            $stmt = $this->db->prepare("DELETE FROM ordine WHERE email = ?");
 
-            $stmt->bind_param("s", $username);
+            $stmt->bind_param("s", $id);
             $stmt->execute();
 
             //* rimuovo l'user.
-            $stmt = $this->db->prepare("DELETE FROM user WHERE username = ?");
+            $stmt = $this->db->prepare("DELETE FROM user WHERE email = ?");
 
-            $stmt->bind_param("s", $username);
+            $stmt->bind_param("s", $id);
             $stmt->execute();
 
-            return [!$this->userExists($username), "ERRORE DURANTE LA RIMOZIONE"];
+            return [!$this->userExists($id), "ERRORE DURANTE LA RIMOZIONE"];
         }
         return [false, "PASSWORD ERRATA!"];
     }
 
     // BOOLS
-    public function hasOrders($username)
+    public function hasOrders($id)
     {
-        $stmt = $this->db->prepare("SELECT * FROM ordine WHERE username = ?");
+        $stmt = $this->db->prepare("SELECT * FROM ordine WHERE email = ?");
 
-        $stmt->bind_param("s", $username);
+        $stmt->bind_param("s", $id);
         $stmt->execute();
 
         $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         return count($result) != 0;
     }
 
-    public function checkLogin($username, $password)
+    public function checkLogin($id, $password)
     {
-        if ($this->userExists($username)) {
+        if ($this->userExists($id)) {
 
             /* utente trovato controllo la password */
-            return $this->checkPassword($username, $password);
+            return $this->checkPassword($id, $password);
         }
         return [false, "UTENTE NON TROVATO"];
     }
 
-    public function userExists($username)
+    public function userExists($id)
     {
         $stmt = $this->db->prepare("SELECT username
                                         FROM User
-                                        WHERE username = ?");
-        $stmt->bind_param("s", $username);
+                                        WHERE email = ?");
+        $stmt->bind_param("s", $id);
         $stmt->execute();
 
         return count($stmt->get_result()->fetch_all(MYSQLI_ASSOC)) != 0;
     }
 
     // PRIVATES
-    private function checkPassword($username, $password)
+    private function checkPassword($id, $password)
     {
-        $stmt = $this->db->prepare("SELECT COUNT(username) as correctUsers
+        $stmt = $this->db->prepare("SELECT COUNT(email) as correctUsers
                                     FROM User
-                                    WHERE username = ? AND password = ?");
-        $stmt->bind_param("ss", $username, $password);
+                                    WHERE email = ? AND password = ?");
+        $stmt->bind_param("ss", $id, $password);
         $stmt->execute();
 
         return [$stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]["correctUsers"] != "0", "PASSWORD ERRATA!"];
@@ -229,9 +250,27 @@ class DatabaseUser
 
     private function getAll($table)
     {
-        $stmt = $this->db->prepare("SELECT * FROM " . $table);
+        if ($table == 'taglia') {
+            $stmt = $this->db->prepare("SELECT * FROM " . $table . " ORDER BY numero");
+        } else {
+            $stmt = $this->db->prepare("SELECT * FROM " . $table);
+        }
         $stmt->execute();
 
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    private function updateField($id, $password, $field, $newValue)
+    {
+        if ($this->checkPassword($id, $password)[0]) {
+            $stmt = $this->db->prepare("UPDATE user
+                                        SET " . $field . " = ?
+                                        WHERE email = ?");
+            $stmt->bind_param("ss", $newValue, $id);
+            $stmt->execute();
+
+            return [true, ""];
+        }
+        return [false, "PASSWORD CORRENTE SBAGLIATA"];
     }
 }
