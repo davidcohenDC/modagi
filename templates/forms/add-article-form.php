@@ -25,7 +25,7 @@
         <?php endforeach ?>
     </select>
     <div class="my-3 ">
-        <button class="btn btn-outline-success add-button for-materiale" data-mdb-toggle="modal" data-mdb-target="#add-modal">
+        <button class="btn btn-outline-success add-button for-materiale action-2" data-mdb-toggle="modal" data-mdb-target="#add-modal">
             <span> Aggiungi
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
@@ -43,7 +43,7 @@
         <?php endforeach ?>
     </select>
     <div class="my-3">
-        <button class="btn btn-outline-success add-button for-marca" data-mdb-toggle="modal" data-mdb-target="#add-modal">
+        <button class="btn btn-outline-success add-button for-marca action-3" data-mdb-toggle="modal" data-mdb-target="#add-modal">
             <span> Aggiungi
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
@@ -70,7 +70,7 @@
                 </div>
             </div>
             <div class="my-3">
-                <button class="btn btn-outline-success add-button for-taglia" data-mdb-toggle="modal" data-mdb-target="#add-modal">
+                <button class="btn btn-outline-success add-button for-taglia action-4" data-mdb-toggle="modal" data-mdb-target="#add-modal">
                     <span> Aggiungi
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
@@ -90,7 +90,7 @@
                 </select>
             </div>
             <div class="my-3 mx-2 ">
-                <button class="btn btn-outline-success add-button for-colore" data-mdb-toggle="modal" data-mdb-target="#add-modal">
+                <button class="btn btn-outline-success add-button for-colore action-5" data-mdb-toggle="modal" data-mdb-target="#add-modal">
                     <span> Aggiungi
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
@@ -159,7 +159,7 @@
     </div>
 
     <div class="my-3">
-        <button class="btn btn-outline-success add-button for-categoria" data-mdb-toggle="modal" data-mdb-target="#add-modal">
+        <button class="btn btn-outline-success add-button for-categoria action-6" data-mdb-toggle="modal" data-mdb-target="#add-modal">
             <span> Aggiungi
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
@@ -185,16 +185,16 @@
                 <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="GET">
-                    <div class="my-3 mx-2">
-                        <label for="new-value" class="form-label fw-bold"> Nome <span class="modal-name"> </span></label>
-                        <input id="new-value" name="new-value" class="form-control col-12 fst-italic" type="text" placeholder="inserire nome articolo" maxlength="20" required />
-                    </div>
 
-                    <div class="my-3 mx-2">
-                        <input type="submit" class="btn btn-outline-success col-12 fw-bold" value="Conferma" />
-                    </div>
-                </form>
+                <div class="my-3 mx-2">
+                    <label for="new-value" class="form-label fw-bold"> Nome <span class="modal-name"> </span></label>
+                    <input id="new-value" name="new-value" class="form-control col-12 fst-italic" type="text" placeholder="inserire nome articolo" maxlength="20" required />
+                </div>
+
+                <div class="my-3 mx-2">
+                    <a href="#" class="btn btn-outline-success col-12 fw-bold modal-confirm" onclick=""> Conferma </a>
+                </div>
+
             </div>
         </div>
     </div>

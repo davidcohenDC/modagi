@@ -160,6 +160,32 @@ class DatabaseUser
         return [$this->userExists($username), "REGISTRAZIONE NON RIUSCITA"];
     }
 
+    /* admin */
+    public function insertNewValue($newValue, $field, $table)
+    {
+        //check if already in db
+        $check = $this->db->prepare("SELECT * FROM " . $table . " WHERE " . $field . " = ?");
+        $check->bind_param("s", $newValue);
+        $check->execute();
+
+        if (count($check->get_result()->fetch_all(MYSQLI_ASSOC)) == 0) {
+
+            if ($field == 'numero') {
+                $newId = $this->db->prepare("SELECT max(id) as id FROM " . $table);
+                $newId->execute();
+
+                $newId = $newId->get_result()->fetch_all(MYSQLI_ASSOC)[0]["id"] + 1;
+
+                $stmt = $this->db->prepare("INSERT INTO " . $table . " (id, " . $field . " ) VALUES (?,?)");
+                $stmt->bind_param("ii", $newId, $newValue);
+            } else {
+                $stmt = $this->db->prepare("INSERT INTO " . $table . " ( " . $field . " ) VALUES (?)");
+                $stmt->bind_param("s", $newValue);
+            }
+            $stmt->execute();
+        }
+    }
+
     // REMOVES
     public function removeUser($username, $password)
     {
@@ -229,7 +255,11 @@ class DatabaseUser
 
     private function getAll($table)
     {
-        $stmt = $this->db->prepare("SELECT * FROM " . $table);
+        if ($table == 'taglia') {
+            $stmt = $this->db->prepare("SELECT * FROM " . $table . " ORDER BY numero");
+        } else {
+            $stmt = $this->db->prepare("SELECT * FROM " . $table);
+        }
         $stmt->execute();
 
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
