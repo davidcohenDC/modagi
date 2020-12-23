@@ -701,3 +701,25 @@ background-size: contain;
     text-shadow: 0px 0px 12px rgba(255, 255, 255, 1);
 
 }
+
+
+/* product page */
+
+div > div > a {
+  text-decoration: none !important;
+  color: #000;
+}
+
+.text-center {
+  text-align: center!important;
+}
+
+.card {
+  border: 0;
+  /* box-shadow: 0 10px 20px 0 rgba(0,0,0,.05); */
+}
+
+
+.card-no-shadow:hover {
+  box-shadow: none !important;
+}

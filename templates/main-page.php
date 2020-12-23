@@ -167,7 +167,7 @@ array_push($tabelle, "marca","genere","materiale","colore","taglia");
     </div>
 
     <!-- Nav: Paginator -->
-    <div class="row d-flex justify-content-center.">
+    <div class="row d-flex justify-content-center">
     <nav>
       <ul class="pagination pg-dark">
         <li class="page-item ">
