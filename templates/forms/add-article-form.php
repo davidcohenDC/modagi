@@ -1,10 +1,8 @@
 <script src="<?php echo JS_FILE ?>add-params.js"></script>
 
 <div class="my-3 mx-2 ">
-    <label for="shoe-img" class="form-label fw-bold"> Immagine Aricolo </label>
-    <div class="file-upload-wrapper">
-        <input type="file" id="shoe-img" name="shoe-img" class="file-upload" accept="image/png, image/jpeg, image/jpg, image/gif" />
-    </div>
+    <label for="shoe-img" class="form-label fw-bold"> Immagine Aricolo: </label>
+    <input type="file" id="shoe-img" name="shoe-img" class="file-upload" accept="image/png, image/jpeg, image/jpg, image/gif" />
 </div>
 
 <div class=" my-3 mx-2 ">
@@ -54,104 +52,102 @@
 </div>
 
 <div class="my-3 mx-2">
-    <div class="form-row mb-4">
-        <div class="col">
-            <div class="my-3 mx-2 ">
-                <label for="size" class="form-label fw-bold"> Tagie </label>
-                <div id="size" aria-label="Lista di taglie da cui scegliere">
-                    <?php foreach ($formParams["sizes"] as $size) : ?>
-                        <div class="form-check">
-                            <input id="size<?php echo $size['id'] ?>" class="form-check-input" name="size-<?php echo $size['id'] ?>" type="checkbox" value="<?php echo $size['id'] ?>" />
-                            <label class="form-check-label" for="size<?php echo $size['id'] ?>">
-                                <?php echo $size['numero'] ?>
-                            </label>
-                        </div>
-                    <?php endforeach ?>
+    <label for="size" class="form-label fw-bold"> Quantità e Taglie </label>
+    <div id="size" aria-label="Lista di taglie da cui scegliere">
+        <?php foreach ($formParams["sizes"] as $size) : ?>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="form-check">
+                        <input id="size-<?php echo $size['id'] ?>" class="form-check-input" name="size-<?php echo $size['id'] ?>" type="checkbox" value="<?php echo $size['id'] ?>" />
+                    </div>
+                    <span class="input-group-text"><?php echo $size['numero'] ?></span>
+                </div>
+                <input id="quantity-<?php echo $size['id'] ?>" name="quantity-<?php echo $size['id'] ?>" class="form-control col-12 fst-italic" type="number" placeholder="quantità per taglia" />
+
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        &#8364;
+                    </span>
                 </div>
             </div>
-            <div class="my-3">
-                <button class="btn btn-outline-success add-button for-taglia action-4" data-mdb-toggle="modal" data-mdb-target="#add-modal">
-                    <span> Aggiungi
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
-                        </svg>
-                    </span>
-                </button>
-            </div>
-        </div>
 
-        <div class="col">
-            <div class="my-3 mx-2 ">
-                <label for="color" class="form-label fw-bold"> Colore </label>
-                <select id="color" name="color" class="form-select" aria-label="Lista di colori da cui scegliere" required>
-                    <?php foreach ($formParams["colors"] as $color) : ?>
-                        <option value="<?php echo $color['id'] ?>"><?php echo $color['nome'] ?></option>
-                    <?php endforeach ?>
-                </select>
-            </div>
-            <div class="my-3 mx-2 ">
-                <button class="btn btn-outline-success add-button for-colore action-5" data-mdb-toggle="modal" data-mdb-target="#add-modal">
-                    <span> Aggiungi
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
-                        </svg>
-                    </span>
-                </button>
-            </div>
+        <?php endforeach ?>
+
+        <div class="my-3">
+            <button class="btn btn-outline-success add-button for-taglia action-4" data-mdb-toggle="modal" data-mdb-target="#add-modal">
+                <span> Aggiungi
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                    </svg>
+                </span>
+            </button>
         </div>
     </div>
 </div>
 
 
 <div class="my-3 mx-2">
-    <div class="form-row mb-4">
-        <div class="col my-3">
-            <label for="gender" class="form-label fw-bold"> Genere </label>
-            <div id="gender">
 
-                <!-- Group of default radios - option 1 -->
-                <div class="custom-control custom-radio">
-                    <input type="radio" class="custom-control-input" id="male" name="gender" value="1" />
-                    <label class="custom-control-label" for="male">Uomo</label>
-                </div>
 
-                <!-- Group of default radios - option 2 -->
-                <div class="custom-control custom-radio">
-                    <input type="radio" class="custom-control-input" id="female" name="gender" value="2" />
-                    <label class="custom-control-label" for="female">Donna</label>
-                </div>
+    <label for="gender" class="form-label fw-bold"> Genere </label>
+    <div id="gender">
 
-                <!-- Group of default radios - option 3 -->
-                <div class="custom-control custom-radio">
-                    <input type="radio" class="custom-control-input" id="unisex" name="gender" value="3" checked />
-                    <label class="custom-control-label" for="unisex">Unisex</label>
-                </div>
-            </div>
+        <!-- Group of default radios - option 1 -->
+        <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" id="male" name="gender" value="1" />
+            <label class="custom-control-label" for="male">Uomo</label>
         </div>
 
-        <div class="col">
-            <div>
-                <label for="stock" class="form-label fw-bold"> Quantità in Stock </label>
-                <input id="stock" name="stock" class="form-control col-12 fst-italic" type="number" placeholder="quantità di scarpe in stock" required />
-            </div>
-            <div class="my-3">
-                <label for="price-group" class="form-label fw-bold"> Prezzo </label>
-                <div id="price-group" class="input-group">
-                    <span class="input-group-text">€</span>
-                    <input id="price" name="price" class="form-control col-12 fst-italic" type="number" step="0.01" placeholder="prezzo per unità" required />
-                </div>
-            </div>
+        <!-- Group of default radios - option 2 -->
+        <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" id="female" name="gender" value="2" />
+            <label class="custom-control-label" for="female">Donna</label>
+        </div>
+
+        <!-- Group of default radios - option 3 -->
+        <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" id="unisex" name="gender" value="3" checked />
+            <label class="custom-control-label" for="unisex">Unisex</label>
         </div>
     </div>
 </div>
 
-<div class="my-3 mx-2 ">
+
+<div class="my-3 mx-2">
+    <label for="price-group" class="form-label fw-bold"> Prezzo </label>
+    <div id="price-group" class="input-group">
+        <span class="input-group-text">€</span>
+        <input id="price" name="price" class="form-control col-12 fst-italic" type="number" step="0.01" placeholder="prezzo per unità" required />
+    </div>
+</div>
+
+<div class="my-3 mx-2">
+    <label for="color" class="form-label fw-bold"> Colore </label>
+    <select id="color" name="color" class="form-select" aria-label="Lista di colori da cui scegliere" required>
+        <?php foreach ($formParams["colors"] as $color) : ?>
+            <option value="<?php echo $color['id'] ?>"><?php echo $color['nome'] ?></option>
+        <?php endforeach ?>
+    </select>
+
+    <div class="my-3">
+        <button class="btn btn-outline-success add-button for-colore action-5" data-mdb-toggle="modal" data-mdb-target="#add-modal">
+            <span> Aggiungi
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                </svg>
+            </span>
+        </button>
+    </div>
+
+</div>
+
+<div class="my-3 mx-2 row justify-content-center">
     <label for="categories-group" class="form-label fw-bold"> Categorie </label>
     <div id="categories-group" aria-label="Lista di categorie da cui scegliere">
         <?php foreach ($formParams["categories"] as $category) : ?>
             <div class="form-check">
-                <input id="category<?php echo $category['id'] ?>" class="form-check-input" name="categories-<?php echo $category['id'] ?>" type="checkbox" value="<?php echo $category['id'] ?>" />
-                <label class="form-check-label" for="category<?php echo $category['id'] ?>">
+                <input id="category-<?php echo $category['id'] ?>" class="form-check-input" name="category-<?php echo $category['id'] ?>" type="checkbox" value="<?php echo $category['id'] ?>" />
+                <label class="form-check-label" for="category-<?php echo $category['id'] ?>">
                     <?php echo $category['nome'] ?>
                 </label>
             </div>
@@ -175,8 +171,7 @@
     </div>
 </div>
 
-
-
+<!--modal-->
 <div class="modal fade" id="add-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -187,8 +182,8 @@
             <div class="modal-body">
 
                 <div class="my-3 mx-2">
-                    <label for="new-value" class="form-label fw-bold"> Nome <span class="modal-name"> </span></label>
-                    <input id="new-value" name="new-value" class="form-control col-12 fst-italic" type="text" placeholder="inserire nome articolo" maxlength="20" />
+                    <label for="new-value" class="form-label fw-bold"> <span class="modal-name"> </span> da aggiungere </label>
+                    <input id="new-value" name="new-value" class="form-control col-12 fst-italic" type="text" placeholder="inserire valore da aggiungere" maxlength="40" />
                 </div>
 
                 <div class="my-3 mx-2">

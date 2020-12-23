@@ -13,12 +13,12 @@ function isUserVendor()
     return isUserLoggedIn() && $_SESSION['isVendor'] == 'S';
 }
 
-function isArticleSet($formParams)
+function isArticleSet($formParams, $post)
 {
     $check = false;
 
     foreach ($formParams["categories"] as $category) {
-        if (isset($_POST["categoria-" . $category["id"]])) {
+        if (isset($post["category-" . $category["id"]]) && $post["category-" . $category["id"]] != "") {
             $check = true;
         }
     }
@@ -29,26 +29,25 @@ function isArticleSet($formParams)
 
     $check = false;
 
-    foreach ($formParams["size"] as $size) {
-        if (isset($_POST["size-" . $size["id"]])) {
+    foreach ($formParams["sizes"] as $size) {
+        if (isset($post["size-" . $size["id"]]) && $post["size-" . $size["id"]] != "") {
             $check = true;
         }
     }
 
     return $check &&
-        isset($_FILES["shoe-img"]) &&
-        isset($_POST["name"]) &&
-        isset($_POST["description"]) &&
-        isset($_POST["material"]) &&
-        isset($_POST["brand"]) &&
-        isset($_POST["color"]) &&
-        isset($_POST["gender"]) &&
-        isset($_POST["price"]);
+        isset($post["name"]) &&
+        isset($post["description"]) &&
+        isset($post["material"]) &&
+        isset($post["brand"]) &&
+        isset($post["color"]) &&
+        isset($post["gender"]) &&
+        isset($post["price"]);
 }
 
 function uploadImage($path, $image, $name)
 {
-    $imageName = basename($name);
+    $imageName = basename($image["name"]);
     $fullPath = $path . $imageName;
 
     $maxKB = 500;

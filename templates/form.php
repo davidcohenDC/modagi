@@ -15,7 +15,7 @@
     <div class="col-1 col-md-2 col-lg-3">
         <!--empty space-->
     </div>
-    <form method="POST" class="col-10 col-md-8 col-lg-6">
+    <form method="POST" class="col-10 col-md-8 col-lg-6" enctype="multipart/form-data">
 
         <?php if (isset($templateParams["error"])) : ?>
             <div class="row">

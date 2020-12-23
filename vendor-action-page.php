@@ -30,7 +30,8 @@ switch ($action) {
         $formParams["brands"] = $dbh->getAllBrands();
         $formParams["categories"] = $dbh->getAllCategories();
 
-        if (isArticleSet($formParams)) {
+        if (isArticleSet($formParams, $_POST)) {
+            $templateParams["error"] = "set";
             //* upload img
             $imgResult = uploadImage(IMG_DIR, $_FILES["shoe-img"], $_POST["name"]);
 
@@ -40,6 +41,8 @@ switch ($action) {
 
             //* insert data in sql db
             //$dbh->insertShoe();
+        } else {
+            $templateParams["error"] = "not set";
         }
 
         break;
