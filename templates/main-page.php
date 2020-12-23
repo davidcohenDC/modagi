@@ -5,6 +5,8 @@ $firstPage = 1;
 
 $tabelle = array();
 array_push($tabelle, "marca","genere","materiale","colore","taglia");
+$promotions = array();
+
 
 ?>
 
@@ -79,19 +81,31 @@ array_push($tabelle, "marca","genere","materiale","colore","taglia");
   </div>
 
   <div class="col-12 col-lg-8">
-
+    
     <div id="carouselExampleIndicators" class="carousel slide mb-4" data-ride="carousel">
       <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <?php for($nPromo =0; $nPromo <= count($templateParams["Promo"])-1; $nPromo++): ?>
+        <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $nPromo; ?>" class="<?php if($nPromo == 0) {echo "active";} ?>"></li>
+      <?php endfor ?>
       </ol>
 
       <div class="carousel-inner" role="listbox">
-        <?php for($i = 0;$i <$templateParams["promozioni"]; $i++):?>
-        <div class="carousel-item <?php if($i==0) {echo " active";}?>">
-          <a href="product.php?prodotto=10"><img class="d-block img-fluid"
-              src="<?php echo PROMOTION_DIR."promotion".$i.".jpg" ?>" alt=""></a>
+        <?php foreach($templateParams["Promo"] as $index => $promo): ?>
+          <?php 
+          $productInPromo = getProductPromotion($promo);
+          $prodotto = $product->selectByName($productInPromo)[0]; 
+          ?>
+        <div class="carousel-item <?php if ($index == 0) { echo "active";} ?>">
+            <img class="d-block img-fluid" src="<?php echo $promo; ?>" alt="">
+            <div class="container">
+              <div class="carousel-caption text-center">
+              <h1 class="text-dark"><?php echo $prodotto["nome"] ?></h1>
+                <p class="text-dark"><?php if($prodotto["descrizione"] != "") {echo $prodotto["descrizione"];} else {echo "aggiungi descrizione!";}?></p>
+                <p><a class="btn btn-dark" href="product.php?prodotto=<?php echo $prodotto["id"]; ?>" role="button">Scopri</a></p>                
+              </div>
+            </div>
         </div>
-        <?php endfor ?>
+        <?php endforeach ?>
       </div>
     </div>
 
@@ -165,7 +179,9 @@ array_push($tabelle, "marca","genere","materiale","colore","taglia");
       <?php endforeach ?>
 
     </div>
+
     <!-- Nav: Paginator -->
+    <div class="row d-flex justify-content-center.">
     <nav>
       <ul class="pagination pg-dark">
         <li class="page-item ">
@@ -188,5 +204,6 @@ array_push($tabelle, "marca","genere","materiale","colore","taglia");
         </li>
       </ul>
     </nav>
+    </div>
     <!-- Nav: Paginator -->
   </div>
