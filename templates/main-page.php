@@ -82,13 +82,7 @@ $promotions = array();
 
   <div class="col-12 col-lg-8">
     
-    <div id="carouselExampleIndicators" class="carousel slide mb-4" data-ride="carousel">
-      <ol class="carousel-indicators">
-      <?php for($nPromo =0; $nPromo <= count($templateParams["Promo"])-1; $nPromo++): ?>
-        <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $nPromo; ?>" class="<?php if($nPromo == 0) {echo "active";} ?>"></li>
-      <?php endfor ?>
-      </ol>
-
+    <div id="carouselPromotion" class="carousel slide mb-4 " data-ride="carousel">
       <div class="carousel-inner" role="listbox">
         <?php foreach($templateParams["Promo"] as $index => $promo): ?>
           <?php 
@@ -97,12 +91,10 @@ $promotions = array();
           ?>
         <div class="carousel-item <?php if ($index == 0) { echo "active";} ?>">
             <img class="d-block img-fluid" src="<?php echo $promo; ?>" alt="">
-            <div class="container">
               <div class="carousel-caption text-center">
-              <h1 class="text-dark"><?php echo $prodotto["nome"] ?></h1>
-                <p class="text-dark"><?php if($prodotto["descrizione"] != "") {echo $prodotto["descrizione"];} else {echo "aggiungi descrizione!";}?></p>
+              <h2 class="text-dark"><?php echo strtoupper($prodotto["nome"]) ?></h2>
+                <p class="text-dark desktop"><?php if($prodotto["descrizione"] != "") {echo $prodotto["descrizione"];} else {echo "aggiungi descrizione!";}?></p>
                 <p><a class="btn btn-dark" href="product.php?prodotto=<?php echo $prodotto["id"]; ?>" role="button">Scopri</a></p>                
-              </div>
             </div>
         </div>
         <?php endforeach ?>

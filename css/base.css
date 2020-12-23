@@ -359,6 +359,7 @@ div > input > label {
   left: 315px;
 }
 
+
 @media (min-width: 350px) {
   .desktop{
     display: none !important;
@@ -368,12 +369,24 @@ div > input > label {
   }
 }
 
+@media (min-width: 350px) {
+  .carousel-caption {
+    bottom: 0px;
+  }
+}
+
+
+
+
 @media (min-width: 961px) {
   .mobile {
     display: none !important;
   }
   .desktop{
     display:inline-block !important;
+  }
+  .carousel-caption {
+    bottom: 30px;
   }
 }
 
@@ -660,4 +673,9 @@ overflow: hidden;
   100% {
     transform: rotateZ(60deg) translate(1em, -9em);
   }
+}
+
+.action {
+background-image: url('https://brandflow.net/assets/img/featured/mdb-prolog.jpg') !important;
+background-size: contain; 
 }
