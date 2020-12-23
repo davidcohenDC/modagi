@@ -63,12 +63,6 @@
                     <span class="input-group-text"><?php echo $size['numero'] ?></span>
                 </div>
                 <input id="quantity-<?php echo $size['id'] ?>" name="quantity-<?php echo $size['id'] ?>" class="form-control col-12 fst-italic" type="number" placeholder="quantità per taglia" />
-
-                <div class="input-group-append">
-                    <span class="input-group-text">
-                        &#8364;
-                    </span>
-                </div>
             </div>
 
         <?php endforeach ?>
