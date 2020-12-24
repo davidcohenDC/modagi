@@ -13,6 +13,10 @@
     <!--bootstrap include-->
     <link rel="stylesheet" href="<?php echo BOOTSTRAP_CSS_LINK ?>">
 
+    <!--mdbimports-->
+    <link rel="stylesheet" href="<?php echo CSS_FILE ?>mdb.min.css">
+    <script src="<?php echo CSS_FILE ?>mdb.min.js"></script>
+
     <!-- personal css file -->
     <?php if (isset($templateParams["cssFileName"])) : ?>
         <link href="<?php echo CSS_FILE . $templateParams["cssFileName"] ?>" rel="stylesheet">
@@ -20,6 +24,11 @@
 
     <script src="<?php echo BOOTSTRAP_JS_LINK ?>"></script>
     <script src="./js/home.js"></script>
+
+    <!--for nav bar-->
+    <!--<script src="<?php //echo JS_FILE 
+                        ?>nav-bar.js"></script>-->
+
     <!--base css file-->
     <link rel="stylesheet" href="<?php echo CSS_FILE; ?>base.css">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -85,7 +94,6 @@
         </div>
 
     </header>
-
     <main class="container">
         <!--main content-->
         <?php

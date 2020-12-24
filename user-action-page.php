@@ -45,22 +45,22 @@ switch ($action) {
             $dbh = new DatabaseUser(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
         }
 
-        if (isset($_POST["password"])) {
+        if (isset($_POST["p"])) {
 
             if (isset($_POST["name"]) && $_POST["name"] != "") {
-                $change_result[0] = $dbh->updateName($_SESSION["id"], $_POST["password"], $_POST["name"]);
+                $change_result[0] = $dbh->updateName($_SESSION["id"], $_POST["p"], $_POST["name"]);
             }
 
             if (isset($_POST["surname"]) && $_POST["surname"] != "") {
-                $change_result[1] = $dbh->updateSurname($_SESSION["id"], $_POST["password"], $_POST["surname"]);
+                $change_result[1] = $dbh->updateSurname($_SESSION["id"], $_POST["p"], $_POST["surname"]);
             }
 
             if (isset($_POST["address"]) && $_POST["address"] != "") {
-                $change_result[2] = $dbh->updateAddress($_SESSION["id"], $_POST["password"], $_POST["address"]);
+                $change_result[2] = $dbh->updateAddress($_SESSION["id"], $_POST["p"], $_POST["address"]);
             }
 
             if (isset($_POST["username"]) && $_POST["username"] != "") {
-                $change_result[3] = $dbh->updateUsernmae($_SESSION["id"], $_POST["password"], $_POST["username"]);
+                $change_result[3] = $dbh->updateUsernmae($_SESSION["id"], $_POST["p"], $_POST["username"]);
             }
 
             for ($i = 0; $i < array_key_last($change_result) + 1; $i++) {
@@ -89,8 +89,8 @@ switch ($action) {
             $dbh = new DatabaseUser(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
         }
 
-        if (isset($_POST["old-password"]) && isset($_POST["new-password"])) {
-            $change_result = $dbh->updatePassword($_SESSION["id"], $_POST["old-password"], $_POST["new-password"]);
+        if (isset($_POST["old"]) && isset($_POST["new"])) {
+            $change_result = $dbh->updatePassword($_SESSION["id"], $_POST["old"], $_POST["new"]);
 
             if ($change_result[0]) {
                 //* cambio password riuscito
@@ -111,8 +111,8 @@ switch ($action) {
         if (!isset($dbh)) {
             $dbh = new DatabaseUser(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
         }
-        if (isset($_POST["password"])) {
-            $remove_result = $dbh->removeUser($_SESSION["id"], $_POST["password"]);
+        if (isset($_POST["p"])) {
+            $remove_result = $dbh->removeUser($_SESSION["id"], $_POST["p"]);
 
             if ($remove_result[0]) {
                 //! then log out
