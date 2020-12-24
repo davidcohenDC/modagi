@@ -191,8 +191,8 @@ function bindProductUrlToQuery()
 {
     //the main selection for prodotto with all corrispecti
     $selection = "SELECT P.*, SUM(quantita) as stock FROM prodotto P
-    INNER JOIN prodottitaglie PT ON PT.idProdotto = P.id";
-
+    INNER JOIN prodottitaglie PT ON PT.idProdotto = P.id
+    INNER JOIN taglia T ON T.id = PT.idTaglia";
     
     $filter = "";
     $count = 0;
@@ -215,7 +215,7 @@ function bindProductUrlToQuery()
         //before filter find a possbile new selection
 
         if (isset($_GET["taglia"])) {
-            $selection = "SELECT * FROM prodottitaglie PT LEFT JOIN prodotto P ON PT.idProdotto = P.id WHERE PT.idTaglia = " . $_GET["taglia"];
+            $selection = $selection." WHERE PT.idTaglia = " . $_GET["taglia"];
             $count++;
         }
 
