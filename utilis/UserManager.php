@@ -12,7 +12,9 @@ class UserManager {
             // die interrompe tutto!!
             die("Connessione al db fallita");
         }
-
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
         $this->email = $this->getEmail();
     }
 
