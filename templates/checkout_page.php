@@ -84,25 +84,25 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="cc-name">Name on card</label>
-                        <input type="text" name="cardName" class="form-control <?php if($incorrectData) {echo "bg-danger";} ?>" id="cc-name" placeholder="" required="">
+                        <input type="text" name="cardName" class="form-control <?php if($incorrectData) {echo "bg-danger text-white";} ?>" id="cc-name" placeholder="" required="">
                         <small class="text-muted">Full name as displayed on card</small>
                         <div class="invalid-feedback">Name on card is required</div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="cc-number">Credit card number</label>
-                        <input type="text" name="cardNumber" class="form-control <?php if($incorrectData) {echo "bg-danger";} ?>" id="cc-number" placeholder="" required="">
+                        <input type="text" name="cardNumber" class="form-control <?php if($incorrectData) {echo "bg-danger text-white";} ?>" id="cc-number" placeholder="" required="">
                         <div class="invalid-feedback">Credit card number is required</div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-3 mb-3">
                         <label for="cc-expiration">Expiration</label>
-                        <input type="text" name="cardExpiration" class="form-control <?php if($incorrectData) {echo "bg-danger";} ?>" id="cc-expiration" placeholder="" required="">
+                        <input type="text" name="cardExpiration" class="form-control <?php if($incorrectData) {echo "bg-danger text-white";} ?>" id="cc-expiration" placeholder="" required="">
                         <div class="invalid-feedback">Expiration date required</div>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="cc-cvv">CVV</label>
-                        <input type="text" name="cardCVV" class="form-control <?php if($incorrectData) {echo "bg-danger";} ?>" id="cc-cvv" placeholder="" required="">
+                        <input type="text" name="cardCVV" class="form-control <?php if($incorrectData) {echo "bg-danger text-white";} ?>" id="cc-cvv" placeholder="" required="">
                         <div class="invalid-feedback">Security code required</div>
                     </div>
                 </div>
