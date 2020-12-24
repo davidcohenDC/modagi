@@ -114,13 +114,7 @@ $prodotto = $templateParams["prodotto"];
                 <div class="card-body">
                 <div class="col-md-12">
                 <?php foreach($templateParams["taglia"] as $value => $taglia): ?>
-                  <label>
-                  <input type="radio" name="light" class="mr-1" <?php if($value ==0) {echo "checked";}?>>
-                  <span class="design"></span>
-                  <span class="text"><?php echo $taglia["numero"] ?></span>
-                  </label>
-
-                
+                <input type="radio" name="taglia" class="mr-1" <?php if($value ==0) {echo "checked";}?>><label class="mr-3" for="radio" ><?php echo $taglia["numero"] ?> </label>
                 <?php endforeach ?>
                 </div>
                 </div>
