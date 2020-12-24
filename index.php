@@ -6,7 +6,7 @@ require_once("./utilis/functions.php");
 
 //make a filter to put into Paginator --> use Filter.php
 $selection = bindProductUrlToQuery();
-
+echo $selection;
 $paginator->setNewSelection($selection);
 $templateParams["prodotti"] = $paginator->paging();
 $templateParams["pagina"] = $paginator->getPage();

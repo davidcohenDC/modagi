@@ -191,21 +191,21 @@ function bindProductUrlToQuery()
 {
     //the main selection for prodotto with all corrispecti
     $selection = "SELECT P.*, SUM(quantita) as stock FROM prodotto P
-    INNER JOIN prodottitaglie PT ON PT.idTaglia = P.id
-    GROUP BY P.id
-    ";
+    INNER JOIN prodottitaglie PT ON PT.idProdotto = P.id";
 
     
     $filter = "";
     $count = 0;
 
     if ($_SERVER["REQUEST_URI"] == "/") {
+        $selection = $selection." GROUP BY P.id";
         return $selection;
     } else {
         $url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         $query = parse_url($url);
 
         if (!isset($query["query"])) {
+            $selection = $selection." GROUP BY P.id";
             return $selection;
         }
 
@@ -248,6 +248,8 @@ function bindProductUrlToQuery()
                 $count++;
             }
         }
+
+        $filter = $filter." GROUP BY P.id";
 
         //after filtering select the order
         if (isset($_GET["filter"])) {
