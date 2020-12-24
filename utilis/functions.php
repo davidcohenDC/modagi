@@ -48,6 +48,8 @@ function isArticleSet($formParams, $post)
 function uploadImage($path, $image, $name)
 {
     $imageName = basename($image["name"]);
+    $extension = end(explode(".", $image["name"]));
+
     $fullPath = $path . $imageName;
 
     $maxKB = 500;
@@ -86,6 +88,9 @@ function uploadImage($path, $image, $name)
             $msg = $imageName;
         }
     }
+
+    rename($fullPath, $path . $name . "." . $extension);
+
     return array($result, $msg);
 }
 
@@ -97,6 +102,8 @@ function logOut()
         unset($_SESSION['username']);
         unset($_SESSION['isVendor']);
     }
+
+    session_destroy();
 }
 
 function removeParam($url, $param)
@@ -185,17 +192,22 @@ function build_url($url_data)
 function bindProductUrlToQuery()
 {
     //the main selection for prodotto with all corrispecti
-    $selection = "SELECT * FROM prodotto ";
+    $selection = "SELECT P.*, SUM(quantita) as stock FROM prodotto P
+    INNER JOIN prodottitaglie PT ON PT.idProdotto = P.id
+    INNER JOIN taglia T ON T.id = PT.idTaglia";
+    
     $filter = "";
     $count = 0;
 
     if ($_SERVER["REQUEST_URI"] == "/") {
+        $selection = $selection." GROUP BY P.id";
         return $selection;
     } else {
         $url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         $query = parse_url($url);
 
         if (!isset($query["query"])) {
+            $selection = $selection." GROUP BY P.id";
             return $selection;
         }
 
@@ -205,7 +217,7 @@ function bindProductUrlToQuery()
         //before filter find a possbile new selection
 
         if (isset($_GET["taglia"])) {
-            $selection = "SELECT * FROM prodottitaglie PT LEFT JOIN prodotto P ON PT.idProdotto = P.id WHERE PT.idTaglia = " . $_GET["taglia"];
+            $selection = $selection." WHERE PT.idTaglia = " . $_GET["taglia"];
             $count++;
         }
 
@@ -239,6 +251,8 @@ function bindProductUrlToQuery()
             }
         }
 
+        $filter = $filter." GROUP BY P.id";
+
         //after filtering select the order
         if (isset($_GET["filter"])) {
             switch ($_GET["filter"]) {
@@ -259,14 +273,20 @@ function bindProductUrlToQuery()
     }
 }
 
-function getProductPromotion($product)
+function getProductPromotion($dir)
 {
-    //remove promo_
-    $product = str_replace("promo_", '', $product);
-    $product = str_replace(PROMOTION_DIR, '', $product);
-    //delete extensions
-    $product = substr($product, 0, strrpos($product, "."));
-    return $product;
+
+    $promotions = array();
+    foreach (scandir($dir) as $img) {
+        if (!is_dir($img)) {
+
+            $img = str_replace("promo_", '', $img);
+            $img = substr($img, 0, strrpos($img, "."));
+            array_push($promotions, $img);
+        }
+    }
+
+    return $promotions;
 }
 
 function getPromotionsUrl($dir)

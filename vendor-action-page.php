@@ -31,7 +31,6 @@ switch ($action) {
         $formParams["categories"] = $dbh->getAllCategories();
 
         if (isArticleSet($formParams, $_POST)) {
-            $templateParams["error"] = "set";
             //* upload img
             $imgResult = uploadImage(IMG_DIR, $_FILES["shoe-img"], $_POST["name"]);
 
@@ -40,11 +39,12 @@ switch ($action) {
             }
 
             //* insert data in sql db
-            //$dbh->insertShoe();
-        } else {
-            $templateParams["error"] = "not set";
-        }
+            $insertResult = $dbh->insertShoe($_POST, $formParams);
 
+            if (!isset($templateParams["error"])) {
+                header("location: user-page.php");
+            }
+        }
         break;
 
     case 2: //? materiale
@@ -63,6 +63,26 @@ switch ($action) {
         $dbh->insertNewValue($newValue, "nome", "categoria");
         break;
     case 7: //? aggiungi promozioni
+
+        $templateParams["title"] = "Aggiungi Promozione";
+        $templateParams["main"] = "form.php";
+        $formParams["title"] = "Aggiungi Promozione";
+        $formParams["main"] = "add-promotion-form.php";
+
+        $formParams["shoes"] = $dbh->getAllProducts();
+
+        if (isset($_FILES["promo-img"]) && isset($_POST["shoe"])) {
+            //* upload img
+            $imgResult = uploadImage(IMG_DIR . "/promotion/", $_FILES["promo-img"], "promo_" . $_POST["shoe"]);
+
+            if (!$imgResult[0]) {
+                $templateParams["error"] = $imgResult[1];
+            }
+
+            if (!isset($templateParams["error"])) {
+                header("location: user-page.php");
+            }
+        }
         break;
     default:
         $templateParams["title"] = "Access Violation";

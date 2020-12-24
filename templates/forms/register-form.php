@@ -44,7 +44,7 @@
 <div class="my-3 mx-2 ">
     <label for="password-group" class="form-label fw-bold"> Password </label>
     <div id="password-group" class="input-group mb-3">
-        <input id="password" name="password" class="form-control fst-italic password" type="password" placeholder="inserire password" minlength="6" maxlength="20" required />
+        <input id="password" name="p" class="form-control fst-italic password" type="password" placeholder="inserire password" minlength="6" maxlength="20" required />
         <button id="eye" class=" eye input-embedded">
             <span id="icon" class="icon">
             </span>

@@ -23,6 +23,16 @@ class Product extends Database {
       return $this->table;
     }
 
+    public function selectByIdWithQuantity($id) {
+      return parent::Select("SELECT P.*, SUM(quantita) as stock FROM ".$this->table." P INNER JOIN prodottitaglie PT ON
+      PT.idTaglia = P.id WHERE P.id = ".$id);
+    }
+
+    public function selectQuantitaWithNSize($id) {
+      return parent::Select("SELECT numero,quantita FROM Prodotto P INNER JOIN prodottitaglie PT ON PT.idProdotto= P.id 
+      INNER JOIN taglia T ON PT.idTaglia = T.id WHERE P.id = ".$id);
+    }
+
     public function selectById($id) {
       return parent::Select("SELECT * FROM ".$this->table. " WHERE id = ".$id);
     }

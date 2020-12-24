@@ -6,7 +6,6 @@ require_once("./utilis/functions.php");
 
 //make a filter to put into Paginator --> use Filter.php
 $selection = bindProductUrlToQuery();
-
 $paginator->setNewSelection($selection);
 $templateParams["prodotti"] = $paginator->paging();
 $templateParams["pagina"] = $paginator->getPage();
@@ -17,7 +16,7 @@ $templateParams["taglia"] = $size->getAll();
 $templateParams["colore"] = $colour->getAll();
 $templateParams["genere"] = $gender->getAll();
 $templateParams["materiale"] = $material->getAll();
-$templateParams["Promo"] = getPromotionsUrl(PROMOTION_DIR);
+$templateParams["Promo"] = getProductPromotion(PROMOTION_DIR);
 
 require_once("templates/base.php");
 require_once("templates/main-page.php");
