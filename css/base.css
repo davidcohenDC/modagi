@@ -373,6 +373,11 @@ div > input > label {
   .carousel-caption {
     bottom: 0px;
   }
+
+  .carousel-item > img {
+    width:640px;
+    height:200px;
+  }
 }
 
 @media (min-width: 750px) {
@@ -388,6 +393,11 @@ div > input > label {
   .carousel-caption {
     bottom: 40px;
   }
+
+  .carousel-item > img {
+    width:940px;
+    height:300px;
+  }
 }
 
 @media (min-width: 961px) {
@@ -402,6 +412,11 @@ div > input > label {
   }
   .carousel-caption {
     bottom: 30px;
+  }
+
+  .carousel-item > img {
+    width:940px;
+    height:300px;
   }
 }
 
@@ -904,3 +919,4 @@ ul > li > a {
 .navbar-dark .navbar-toggler-icon, .navbar-light .navbar-toggler-icon {
 background-image: none !important; 
 }
+

@@ -14,8 +14,7 @@
     <link rel="stylesheet" href="<?php echo BOOTSTRAP_CSS_LINK ?>">
 
     <!--mdbimports-->
-    <link rel="stylesheet" href="<?php echo CSS_FILE ?>mdb.min.css">
-    <script src="<?php echo CSS_FILE ?>mdb.min.js"></script>
+
 
     <!-- personal css file -->
     <?php if (isset($templateParams["cssFileName"])) : ?>
@@ -39,9 +38,9 @@
 </head>
 
 <body>
-    <header class="jumbotron mb-4">
+    <header class="mb-4">
         <!-- Navbar -->
-<nav class="navbar navbar-expand-md navbar-dark fixed-top scrolling-navbar">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top scrolling-navbar ">
   <div class="container-fluid">
 
     <!-- Brand -->
@@ -88,7 +87,7 @@
   </div>
 </nav>
 <!-- Navbar -->
-        <div class="container text-center">
+        <div class=" mt-3 text-center">
             <h1><?php echo SHOP_NAME ?></h1>
             <p>Mission, Vission & Values</p>
         </div>
