@@ -3,7 +3,6 @@
 require_once("./server.php");
 require_once("utilis/cookie.php");
 
-
 if(isset($_GET["prodotto"])) {
     $idprodotto = $_GET["prodotto"];
 } else {
@@ -26,13 +25,20 @@ if($cookie->exists(CART_COOKIE)) {
 //
 
 $templateParams["main"] = "product-page.php";
-$templateParams["prodotto"] = $product->selectById($idprodotto)[0];
+$templateParams["prodotto"] = $product->selectByIdWithQuantity($idprodotto)[0];
 $templateParams["title"] = $templateParams["prodotto"]["nome"];
 $templateParams["taglia"] = $product->selectTagliaByID($idprodotto);
 $templateParams["idMateriale"] = $product->selectMaterialeByID($idprodotto)[0];
 $templateParams["idGenere"] = $product->selectGenereByID($idprodotto)[0];
 $templateParams["idColore"] = $product->selectColoreByID($idprodotto)[0];
 $templateParams["idMarca"] = $product->selectMarcaByID($idprodotto)[0];
+$templateParams["quantitaTaglia"] = $product->selectQuantitaWithNSize($idprodotto);
+
+if (isset($_GET["modal"])) {
+    array_push($cart, $templateParams["prodotto"]["id"]);
+    $cookie->setCookie(CART_COOKIE, json_encode($cart));
+}
+
 require_once('templates/base.php');
 require_once("templates/product-page.php");
 
