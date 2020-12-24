@@ -873,3 +873,34 @@ div > div > a {
   opacity: .4;
   transition: .6s;
 }
+
+.navbar {
+  -webkit-box-shadow: 0 10px 20px 0 rgba(0,0,0,.05);
+  box-shadow: 0 10px 20px 0 rgba(0,0,0,.05);
+  padding-top: .5625rem;
+  background-color: #343a40;
+}
+
+.fixed-bottom, .fixed-top {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+
+ul > li > a {
+  color: white;
+}
+
+@media (min-width: 768px) {}
+.navbar-expand-md {
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+}
+
+.navbar-dark .navbar-toggler-icon, .navbar-light .navbar-toggler-icon {
+background-image: none !important; 
+}
