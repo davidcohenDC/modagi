@@ -102,6 +102,8 @@ function logOut()
         unset($_SESSION['username']);
         unset($_SESSION['isVendor']);
     }
+
+    session_destroy();
 }
 
 function removeParam($url, $param)
@@ -270,7 +272,7 @@ function getProductPromotion($dir)
     $promotions = array();
     foreach (scandir($dir) as $img) {
         if (!is_dir($img)) {
-            
+
             $img = str_replace("promo_", '', $img);
             $img = substr($img, 0, strrpos($img, "."));
             array_push($promotions, $img);

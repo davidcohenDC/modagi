@@ -7,8 +7,9 @@ if (!isset($dbh)) {
     $dbh = new DatabaseUser(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
 }
 
-if (isset($_POST["email"]) && isset($_POST["password"])) {
-    $login_result = $dbh->checkLogIn($_POST["email"], $_POST["password"]);
+if (isset($_POST["email"]) && isset($_POST["p"])) {
+
+    $login_result = $dbh->checkLogIn($_POST["email"], $_POST["p"]);
 
     if ($login_result[0]) {
         /* login riuscito */

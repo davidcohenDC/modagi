@@ -6,7 +6,7 @@ require_once './utilis/DatabaseUser.php';
 /* se tutti i campi sono stati messi */
 if (
     isset($_POST["email"]) && isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["address"])
-    && isset($_POST["username"]) && isset($_POST["password"])
+    && isset($_POST["username"]) && isset($_POST["p"])
 ) {
 
     $dbh = new DatabaseUser(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
@@ -15,7 +15,7 @@ if (
     if (!$dbh->userExists($_POST["email"])) {
 
         /* insert user in db */
-        $register_result = $dbh->registerUser($_POST["email"], $_POST["username"], $_POST["password"], $_POST["name"], $_POST["surname"], $_POST["address"]);
+        $register_result = $dbh->registerUser($_POST["email"], $_POST["username"], $_POST["p"], $_POST["name"], $_POST["surname"], $_POST["address"]);
 
         if ($register_result[0]) {
             $_SESSION["registrationSuccess"] = 1;
