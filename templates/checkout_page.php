@@ -26,6 +26,12 @@
         <!-- Pagina di checkout -->
         <div class="col-md-8 order-md-1">
             <!-- Riepilogo dati utente -->
+            <?php if(!isUserLoggedIn()) :?>
+                <!-- ADVISE THAT THERE ARE NO PRODUCT IN CART -->
+            <div class="alert alert-warning">
+                Non hai effettuato il login <a href="user-page.php" class="alert-link">Clicca qui loggarti e acquistare!</a>
+            </div>
+            <?php else: ?>
             <h4 class="mb-3">Billing address</h4>
           
             <div class="row">
@@ -110,5 +116,6 @@
                 <hr class="mb-4">
                 <input class="btn btn-primary btn-lg btn-block" type="submit" value="Continue to checkout" />
            </form>
+           <?php endif ?>
         </div>
       </div>
