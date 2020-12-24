@@ -359,9 +359,8 @@ div > input > label {
   left: 315px;
 }
 
-
 @media (min-width: 350px) {
-  .desktop{
+  .desktop {
     display: none !important;
   }
   .mobile {
@@ -377,7 +376,7 @@ div > input > label {
 }
 
 @media (min-width: 750px) {
-  .desktop{
+  .desktop {
     display: none !important;
   }
   .mobile {
@@ -391,13 +390,12 @@ div > input > label {
   }
 }
 
-
 @media (min-width: 961px) {
   .mobile {
     display: none !important;
   }
-  .desktop{
-    display:inline-block !important;
+  .desktop {
+    display: inline-block !important;
   }
   .tablet {
     display: inline-block !important;
@@ -449,7 +447,6 @@ button.input-embedded {
   border: none;
 }
 
-
 .btn-filter {
   width: 100% !important;
   text-transform: uppercase;
@@ -485,23 +482,27 @@ section > div > a > label:hover {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-input[type=range] {
+input[type="range"] {
   background-color: silver;
   color: #3498db;
   width: 150px;
-  height:20px;
+  height: 20px;
 }
 
-input[type=range]:hover {
+input[type="range"]:hover {
   background-color: silver;
   color: #3498db;
   width: 200px;
   transition: width 0.5s;
-  height:20px;
+  height: 20px;
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -511,7 +512,7 @@ input[type="range"]::-webkit-slider-thumb {
   height: 26px;
 }
 
-input[type=range]::-webkit-slider-runnable-track {
+input[type="range"]::-webkit-slider-runnable-track {
   cursor: pointer;
 }
 
@@ -523,13 +524,13 @@ input[type=range]::-webkit-slider-runnable-track {
 .link-table:hover {
   text-decoration: none !important;
   color: #007bff;
-
 }
 
-.link-table > h6, .list-order > h6, .list-price > h6 {
+.link-table > h6,
+.list-order > h6,
+.list-price > h6 {
   text-shadow: 0px 0px 1px lightgray;
 }
-
 
 .link-table-active {
   text-decoration: none !important;
@@ -558,132 +559,184 @@ input[type=range]::-webkit-slider-runnable-track {
   filter: blur(0px);
 }
 
-
 .product-history {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
 }
 
-
 .drop-shadow {
-	filter: drop-shadow(5px 5px 15px #388BDF) !important;
+  filter: drop-shadow(5px 5px 15px #388bdf) !important;
 }
 
-.clip-blue-polygon{
-  top:-0.3125rem !important;
-  left:-0.1875rem !important;
-	background: linear-gradient(125deg, #3787DA, #388BDF,  rgb(80, 52, 134), #573E8A) !important;
+.clip-blue-polygon {
+  top: -0.3125rem !important;
+  left: -0.1875rem !important;
+  background: linear-gradient(
+    125deg,
+    #3787da,
+    #388bdf,
+    rgb(80, 52, 134),
+    #573e8a
+  ) !important;
   clip-path: polygon(0 0, 100% 0%, 71% 100%, 0% 100%) !important;
-  border-radius: .75rem;
+  border-radius: 0.75rem;
 }
-.clip-smaller-polygon{
-  top:-0.3125rem;
-  left:-0.1875rem;
-	background: linear-gradient(125deg, #3787DA, #388BDF,  rgb(80, 52, 134), #573E8A);
+.clip-smaller-polygon {
+  top: -0.3125rem;
+  left: -0.1875rem;
+  background: linear-gradient(
+    125deg,
+    #3787da,
+    #388bdf,
+    rgb(80, 52, 134),
+    #573e8a
+  );
   clip-path: polygon(0 0, 30% 0%, 71% 100%, 0% 100%);
-  border-radius: .75rem;
+  border-radius: 0.75rem;
 }
-.clip-mirror-polygon{
+.clip-mirror-polygon {
   transform: scaleX(-1);
-  top:-0.3125rem;
-  left:-15rem;
-	background: linear-gradient(125deg, #3787DA, #388BDF,  rgb(80, 52, 134), #573E8A);
+  top: -0.3125rem;
+  left: -15rem;
+  background: linear-gradient(
+    125deg,
+    #3787da,
+    #388bdf,
+    rgb(80, 52, 134),
+    #573e8a
+  );
   clip-path: polygon(0 0, 30% 0%, 71% 100%, 0% 100%);
-  border-radius: .75rem;
+  border-radius: 0.75rem;
 }
 
-
-    .drop-shadow-test {
-	filter: drop-shadow(5px 5px 15px  rgb(163, 23, 65));
+.drop-shadow-test {
+  filter: drop-shadow(5px 5px 15px rgb(163, 23, 65));
 }
-.clip-smaller-polygon-test{
-  top:-0.3125rem;
-  left:-0.1875rem;
-	background: linear-gradient(125deg, rgb(240, 138, 170), rgb(209, 64, 108),  rgb(218, 22, 80), rgb(206, 14, 72));
+.clip-smaller-polygon-test {
+  top: -0.3125rem;
+  left: -0.1875rem;
+  background: linear-gradient(
+    125deg,
+    rgb(240, 138, 170),
+    rgb(209, 64, 108),
+    rgb(218, 22, 80),
+    rgb(206, 14, 72)
+  );
   clip-path: polygon(0 0, 50% 13%, 71% 80%, 0% 100%);
-  border-radius: .75rem;
+  border-radius: 0.75rem;
 }
-.clip-mirror-polygon-test{
+.clip-mirror-polygon-test {
   transform: scaleX(-1);
-  top:-0.3125rem;
-  left:-15rem;
-	background: linear-gradient(125deg, rgb(240, 138, 170), rgb(209, 64, 108),  rgb(218, 22, 80), rgb(206, 14, 72));
+  top: -0.3125rem;
+  left: -15rem;
+  background: linear-gradient(
+    125deg,
+    rgb(240, 138, 170),
+    rgb(209, 64, 108),
+    rgb(218, 22, 80),
+    rgb(206, 14, 72)
+  );
   clip-path: polygon(0 0, 50% 13%, 71% 80%, 0% 100%);
-  border-radius: .75rem;
+  border-radius: 0.75rem;
 }
 
-
-  .drop-shadow-second {
-	filter: drop-shadow(5px 5px 15px  rgb(126, 26, 180));
+.drop-shadow-second {
+  filter: drop-shadow(5px 5px 15px rgb(126, 26, 180));
 }
-.clip-smaller-polygon-second{
-  top:-0.3125rem;
-  left:-0.1875rem;
-	background: linear-gradient(125deg, rgb(186, 26, 180), rgb(121, 15, 143),  rgb(116, 42, 155), rgb(100, 42, 155));
+.clip-smaller-polygon-second {
+  top: -0.3125rem;
+  left: -0.1875rem;
+  background: linear-gradient(
+    125deg,
+    rgb(186, 26, 180),
+    rgb(121, 15, 143),
+    rgb(116, 42, 155),
+    rgb(100, 42, 155)
+  );
   clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
-  border-radius: .75rem;
-
+  border-radius: 0.75rem;
 }
-.clip-mirror-polygon-second{
+.clip-mirror-polygon-second {
   transform: scaleX(-1);
-  top:-0.3125rem;
-  left:-15rem;
-	background: linear-gradient(125deg, rgb(186, 26, 180), rgb(121, 15, 143),  rgb(116, 42, 155), rgb(100, 42, 155));
+  top: -0.3125rem;
+  left: -15rem;
+  background: linear-gradient(
+    125deg,
+    rgb(186, 26, 180),
+    rgb(121, 15, 143),
+    rgb(116, 42, 155),
+    rgb(100, 42, 155)
+  );
   clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
-  border-radius: .75rem;
+  border-radius: 0.75rem;
   z-index: -1;
 }
 
-.fadeInLeft:nth-child(1){
-  animation-delay: .1s !important;
+.fadeInLeft:nth-child(1) {
+  animation-delay: 0.1s !important;
 }
-.fadeInLeft:nth-child(2){
-  animation-delay: .2s !important;
+.fadeInLeft:nth-child(2) {
+  animation-delay: 0.2s !important;
 }
-.fadeInLeft:nth-child(3){
-  animation-delay: .3s !important;
+.fadeInLeft:nth-child(3) {
+  animation-delay: 0.3s !important;
 }
-.fadeInLeft:nth-child(4){
-  animation-delay: .4s !important;
+.fadeInLeft:nth-child(4) {
+  animation-delay: 0.4s !important;
 }
-.fadeInLeft:nth-child(5){
-  animation-delay: .5s !important;
+.fadeInLeft:nth-child(5) {
+  animation-delay: 0.5s !important;
 }
 
 @keyframes fadeInLeft {
   0% {
     opacity: 0;
-    transform: translate3d(-100%, 0, 0); }
-    50% {
+    transform: translate3d(-100%, 0, 0);
+  }
+  50% {
     opacity: 0;
-    transform: translate3d(-50%, 0, 0); }
+    transform: translate3d(-50%, 0, 0);
+  }
   100% {
     opacity: 1;
-    transform: translate3d(0, 0, 0); } }
-
-
-        .drop-shadow-rotate {
-	filter: drop-shadow(5px 5px 15px  rgb(170, 43, 141));
+    transform: translate3d(0, 0, 0);
+  }
 }
-.clip-smaller-polygon-rotate{
-  top:-0.3125rem;
-  left:-0.1875rem;
-	background: linear-gradient(125deg, rgb(221, 43, 141), rgb(190, 43, 141),  rgb(170, 43, 141), rgb(150, 43, 141));
+
+.drop-shadow-rotate {
+  filter: drop-shadow(5px 5px 15px rgb(170, 43, 141));
+}
+.clip-smaller-polygon-rotate {
+  top: -0.3125rem;
+  left: -0.1875rem;
+  background: linear-gradient(
+    125deg,
+    rgb(221, 43, 141),
+    rgb(190, 43, 141),
+    rgb(170, 43, 141),
+    rgb(150, 43, 141)
+  );
   clip-path: polygon(0 0, 45% 0%, 100% 100%, 0% 100%);
-overflow: hidden;
+  overflow: hidden;
 }
 
-.clip-smaller-polygon-rotate::after{
-  content: '';
+.clip-smaller-polygon-rotate::after {
+  content: "";
   position: absolute;
   top: -50%;
   right: -50%;
   bottom: -50%;
   left: -90%;
-  background: linear-gradient(to bottom, rgba(229, 172, 142, 0), rgba(255,255,255,0.5) 50%, rgba(229, 172, 142, 0));
+  background: linear-gradient(
+    to bottom,
+    rgba(229, 172, 142, 0),
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(229, 172, 142, 0)
+  );
   transform: rotateZ(60deg) translate(-5em, 7.5em);
 }
 
-.clip-smaller-polygon-rotate:hover::after, .clip-smaller-polygon-rotate:focus::after {
+.clip-smaller-polygon-rotate:hover::after,
+.clip-smaller-polygon-rotate:focus::after {
   animation: sheening 1s forwards;
 }
 @keyframes sheening {
@@ -693,15 +746,13 @@ overflow: hidden;
 }
 
 .action {
-background-image: url('https://brandflow.net/assets/img/featured/mdb-prolog.jpg') !important;
-background-size: contain; 
+  background-image: url("https://brandflow.net/assets/img/featured/mdb-prolog.jpg") !important;
+  background-size: contain;
 }
 
 .header-text-shadow {
-    text-shadow: 0px 0px 12px rgba(255, 255, 255, 1);
-
+  text-shadow: 0px 0px 12px rgba(255, 255, 255, 1);
 }
-
 
 /* product page */
 
@@ -711,9 +762,8 @@ div > div > a {
 }
 
 .text-center {
-  text-align: center!important;
+  text-align: center !important;
 }
-
 
 
 .card-no-shadow:hover {

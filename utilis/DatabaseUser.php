@@ -135,7 +135,10 @@ class DatabaseUser
         return $this->getAll("categoria");
     }
 
-
+    public function getAllProducts()
+    {
+        return $this->getAll("prodotto");
+    }
 
     // INSERTS
     public function registerUser($email, $username, $password, $name, $surname, $address)
