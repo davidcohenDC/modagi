@@ -154,7 +154,7 @@ array_push($tabelle, "marca","genere","materiale","colore","taglia");
               <a href="product.php<?php echo "?prodotto=".$prodotto["id"]; ?>"><?php echo $prodotto["nome"]; ?></a>
             </h4>
             <h5>€<?php echo $prodotto["prezzo"] ?></h5>
-            <p class="card-text"><?php echo $prodotto["descrizione"]; ?></p>
+            <p class="card-text tablet"><?php echo $prodotto["descrizione"]; ?></p>
           </div>
           <div class="card-footer">
             <small class="text-muted">Disponibilità: <?php echo $prodotto["stock"];?></small>

@@ -9,28 +9,25 @@ $prodotto = $templateParams["prodotto"];
   <section id="productDetails" class="pb-5">
 
     <!--News card-->
-    <div class="card mt-5 hoverable">
-      <div class="row mt-5">
+    <div class="card">
+      <div class="row">
 
         <div class="col-12 col-lg-6">
-
-          <div class="text-center ">
-            <img src="<?php echo IMG_DIR."/".$prodotto["nome"].".jpg" ?>" alt="First slide" class="img-fluid">
-          </div>
+        <img src="<?php echo IMG_DIR."/".$prodotto["nome"].".jpg" ?>" alt="First slide" class="img-fluid">
 
         </div>
 
         <div class="col-12 col-lg-5 mr-3 text-center ">
           <h2
             class="mt-3 h2-responsive text-center product-name font-weight-bold dark-grey-text mb-1">
-            <strong ><?php echo $prodotto["nome"];?></strong>
+            <strong ><?php echo $prodotto["nome"];?></strong> 
           </h2>
-          <span class="badge badge-danger product mb-4">nuovo!</span>
-          <h3 class="text-center mb-3">
+          
+          <h4 class="text-center mb-2">
             <span class="red-text font-weight-bold ">
               <strong><?php echo $prodotto["prezzo"];?>€</strong>
             </span>
-          </h3>
+          </h4>
 
           <!--Accordion wrapper-->
           <div class="accordion md-accordion pt-3 pb-3" id="accordionEx" aria-multiselectable="true">
@@ -73,7 +70,7 @@ $prodotto = $templateParams["prodotto"];
               </div>
 
               <!-- Card body -->
-              <div id="collapseThree3" class="collapse show" aria-labelledby="headingThree3" >
+              <div id="collapseThree3" class="collapse " aria-labelledby="headingThree3" >
                 <div class="card-body">
                   <table class="table table-borderless">
                     <tbody>
@@ -117,8 +114,43 @@ $prodotto = $templateParams["prodotto"];
                 <div class="card-body">
                 <div class="col-md-12">
                 <?php foreach($templateParams["taglia"] as $value => $taglia): ?>
-                <input type="radio" name="taglia" class="mr-1" <?php if($value ==0) {echo "checked";}?>><label class="mr-3" for="radio" ><?php echo $taglia["numero"] ?> </label>
+                  <label>
+                  <input type="radio" name="light" class="mr-1" <?php if($value ==0) {echo "checked";}?>>
+                  <span class="design"></span>
+                  <span class="text"><?php echo $taglia["numero"] ?></span>
+                  </label>
+
+                
                 <?php endforeach ?>
+                </div>
+                </div>
+              </div>
+            </div>
+            <!-- Accordion card -->
+  
+            <!-- Accordion card -->
+            <div class="card card-no-shadow">
+
+              <!-- Card header -->
+              <div class="card-header" id="headingOne4">
+                <a data-toggle="collapse" aria-expanded="true"
+                  aria-controls="collapseOne1" class="">
+                  <h5 class="mb-0">
+                    Quantità
+                  </h5>
+                </a>
+              </div>
+
+              <!-- Card body -->
+              <div id="collapseOne4" class="collapse show" aria-labelledby="headingOne4">
+                <div class="card-body">
+                <div class="col-md-12">
+                <div class="def-number-input number-input safari_only mb-0">
+                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="btn bnt-light fa fa-minus"></button>
+                        <input class="number-wrapper" min="0" name="number" value="1" type="number">
+                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="btn bnt-light fa fa-plus"></button>
+                      </div>
+          </div>
                 </div>
                 </div>
               </div>
@@ -127,7 +159,7 @@ $prodotto = $templateParams["prodotto"];
 
             </div>
             <!-- Accordion card -->
-          </div>
+
           <!--/.Accordion wrapper-->
           <!-- Add to Cart -->
           <section class="cart">
@@ -142,6 +174,7 @@ $prodotto = $templateParams["prodotto"];
             </div>
           </section>
           <!-- /.Add to Cart -->
+
         </div>
       </div>
     </div>
@@ -156,12 +189,7 @@ $prodotto = $templateParams["prodotto"];
     <div class="modal-content">
       <!--Header-->
       <div class="modal-header">
-        <p class="heading">Prodotto aggiunto al carrello!
-        </p>
-
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true" class="white-text">&times;</span>
-        </button>
+        <h3 class="heading">Prodotto aggiunto al carrello</h3>
       </div>
 
       <!--Body-->
@@ -183,7 +211,7 @@ $prodotto = $templateParams["prodotto"];
       <!--Footer-->
       <div class="modal-footer justify-content-center">
       <a href="index.php" id="btnReturnHome" class="btn btn-info btn-rounder" >Continua a Comprare</a>
-      <a href="index.php" id="btnReturnHome" class="btn btn-info btn-rounder" >Vai al Carrello</a>
+      <a href="cart.php" id="btnReturnHome" class="btn btn-info btn-rounder" >Vai al Carrello</a>
       </div>
     </div>
     <!--/.Content-->
