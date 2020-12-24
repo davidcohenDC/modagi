@@ -17,7 +17,7 @@ else {
 }
 
 $cartManager = new CartManager();
-$cart["articleDetails"] = $cartManager->getArticleDetails();
+$cart["articleDetails"] = $cartManager->getAllProductDetails();
 $cart["totalPrice"] = $cartManager->getTotalPrice();
 $cart["orderCount"] = $cartManager->getOrderCount();
 

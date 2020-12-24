@@ -20,7 +20,7 @@ class CookieManager{
         if($this->exists($cookie_name)) {
             return $_COOKIE[$cookie_name];
         }
-        return FALSE;
+        return false;
     }
 
 }

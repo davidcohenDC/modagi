@@ -14,10 +14,10 @@ class DatabaseCart{
         }
     }
 
-    public function getArticleDetails($articleName) {
+    public function getArticleDetails($articleId) {
         $stmt = $this->db->prepare("SELECT id, nome, prezzo, descrizione 
                                     FROM prodotto WHERE id = ?");
-        $stmt->bind_param("s", $articleName);
+        $stmt->bind_param("s", $articleId);
         $stmt->execute();
 
         $result = $stmt->get_result();

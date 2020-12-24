@@ -3,28 +3,22 @@
 <script src="<?php echo JS_FILE?>cart/jquery.cookie.js"></script>
 <script src="<?php echo JS_FILE?>cart/cart_page.js"></script>
 <script>
-    function increaseQuantity(articleName) {
+    function increaseQuantity(articleId, articleSize) {
         var allArticle = jQuery.parseJSON(jQuery.cookie("<?php echo CART_COOKIE ?>"));
-        allArticle.push(articleName);
+        var thisArticle = articleId + "|" + articleSize;
+        console.log(thisArticle);
+        allArticle[thisArticle] = allArticle[thisArticle] + 1
 
         jQuery.removeCookie("<?php echo CART_COOKIE ?>");
         jQuery.cookie("<?php echo CART_COOKIE ?>", JSON.stringify(allArticle), {path: '/' });
         location.reload();
     }
 
-    function decreaseQuantity(articleName) {
+    function decreaseQuantity(articleId, articleSize) {
         var allArticle = jQuery.parseJSON(jQuery.cookie("<?php echo CART_COOKIE ?>"));
-        var articleIndex = allArticle.indexOf(articleName);
-        allArticle.splice(articleIndex, 1);
-
-        jQuery.removeCookie("<?php echo CART_COOKIE ?>");
-        jQuery.cookie("<?php echo CART_COOKIE ?>", JSON.stringify(allArticle), {path: '/' });
-        location.reload();
-    }
-
-    function removeArticle(articleName) {
-        var allArticle = jQuery.parseJSON(jQuery.cookie("<?php echo CART_COOKIE ?>"));
-        allArticle.remove(articleName);
+        var thisArticle = articleId + "|" + articleSize;
+        console.log(thisArticle);
+        allArticle[thisArticle] = allArticle[thisArticle] - 1
 
         jQuery.removeCookie("<?php echo CART_COOKIE ?>");
         jQuery.cookie("<?php echo CART_COOKIE ?>", JSON.stringify(allArticle), {path: '/' });
@@ -63,7 +57,7 @@
                                                     <a href="#"><?php echo $article["nome"] ?></a>
                                                     <div class="product-info">
                                                         <div>Colore: <span class="value">Bianco</span></div>
-                                                        <div>Taglia: <span class="value">44.5</span></div>
+                                                        <div>Taglia: <span class="value"><?php echo $article["taglia"] ?></span></div>
                                                         <div>Genere: <span class="value">Uomo</span></div>
                                                     </div>
                                                 </div>
@@ -72,13 +66,15 @@
                                                 <div class="input-group product-group">
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-btn">
-                                                            <input type="button" value="-" class="btn btn-danger" onclick="decreaseQuantity('<?php echo $article["id"] ?>')">
+                                                            <input type="button" value="-" class="btn btn-danger" 
+                                                                onclick="decreaseQuantity('<?php echo $article["id"]."','".$article["taglia"] ?>')">
                                                         </div>
                                                     </div>
                                                     <div id="quantity" class="form-control product-quantity"><?php echo $article["quantita"]?></div>
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-btn">
-                                                            <input type="button" value="+" class="btn btn-success" onclick="increaseQuantity('<?php echo $article["id"] ?>')" >
+                                                            <input type="button" value="+" class="btn btn-success" 
+                                                                onclick="increaseQuantity('<?php echo $article["id"]."','".$article["taglia"] ?>')" >
                                                         </div>
                                                     </div>
                                                 </div>
