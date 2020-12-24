@@ -113,8 +113,8 @@ $prodotto = $templateParams["prodotto"];
               <div id="collapseOne4" class="collapse show" aria-labelledby="headingOne4">
                 <div class="card-body">
                 <div class="col-md-12">
-                <?php foreach($templateParams["taglia"] as $value => $taglia): ?>
-                <input type="radio" name="taglia" class="mr-1" <?php if($value ==0) {echo "checked";}?>><label class="mr-3" for="radio" ><?php echo $taglia["numero"] ?> </label>
+                <?php foreach($templateParams["quantitaTaglia"] as $value => $taglia): ?>
+                <input type="radio" name="taglia" value="<?php echo $taglia["quantita"] ?>" class="mr-1" <?php if($value ==0) {echo "checked";}?>><label class="mr-3" for="radio" ><?php echo $taglia["numero"] ?> </label>
                 <?php endforeach ?>
                 </div>
                 </div>
@@ -141,7 +141,7 @@ $prodotto = $templateParams["prodotto"];
                 <div class="col-md-12">
                 <div class="def-number-input number-input safari_only mb-0">
                         <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="btn bnt-light fa fa-minus"></button>
-                        <input class="number-wrapper" min="0" name="number" value="1" type="number">
+                        <input class="number-wrapper" min="0" max="<?php echo $templateParams["quantitaTaglia"][0]["quantita"]?>"name="number" value="1" type="number">
                         <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="btn bnt-light fa fa-plus"></button>
                       </div>
           </div>
@@ -182,8 +182,8 @@ $prodotto = $templateParams["prodotto"];
     <!--Content-->
     <div class="modal-content">
       <!--Header-->
-      <div class="modal-header">
-        <h3 class="heading">Prodotto aggiunto al carrello</h3>
+      <div class="modal-header  text-center">
+        <strong><h3 class="heading"><?php echo  $templateParams["idMarca"]["nome"]." ".$prodotto["nome"] ?></strong> nel carrello!</h3>
       </div>
 
       <!--Body-->

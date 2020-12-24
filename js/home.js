@@ -139,7 +139,12 @@ window.onbeforeunload = function(e) {
         location.href = $url+"&modal=on";
       },0);
       this.submit();
-});
+    });
+
+    $("input[name=taglia]").on("change", function(){
+      console.log($("input[name=taglia]").val());
+      $("input[type='number']").prop('max',$("input[name=taglia]").val());
+    });
 
     if(location.search.split('modal=')[1]) {
       $('#modalAbandonedCart').modal('show');
