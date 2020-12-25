@@ -16,7 +16,11 @@ class OrderManager {
 
     public function addOrder($userEmail, $productId, $productCount) {
         $date = date("Y-m-d");
-        return 1;
+
+        $stmt = $this->db->prepare("INSERT INTO `ordine`(`idProdotto`, `email`, `data`, `quantita`)
+                                    VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssss", $productId, $userEmail, $date, $productCount);
+        return $stmt->execute();;
     }
 }
 

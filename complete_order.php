@@ -28,18 +28,18 @@ if($cardAccetted) {
     // prendo i dati per far la query
     $userEmail = $userManager->getEmail();
 
-    $cart["articleDetails"] = $cartManager->getArticleDetails();
+    $cart["articleDetails"] = $cartManager->getAllProductDetails();
     foreach ($cart["articleDetails"] as $article) {
         // query per inserimento dell'ordine nel DB
         $orderStatus = $orderManager->addOrder($userEmail, $article["id"], $article["quantita"]);
         // se qualcosa va storto rimando sulla index.php segnalando l'errore
-        if($orderStatus == 0) {
-            header("Location: index.php?orderStatus=0");
+        if(!$orderStatus) {
+            header("Location: index.php?orderStatus=" . $orderStatus);
             die();
         }
     }
 
-    /*header("Location: index.php?orderStatus=1");
+    /*header("Location: index.php?orderStatus=" . $orderStatus);
     die();*/
 }
 
