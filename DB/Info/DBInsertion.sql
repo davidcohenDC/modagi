@@ -270,5 +270,3 @@ INSERT INTO `ProdottiTaglie` (`idTaglia`, `idProdotto`, `quantita`)
 VALUES(7, 3, 25);
 INSERT INTO `ProdottiTaglie` (`idTaglia`, `idProdotto`, `quantita`)
 VALUES(7, 4, 25);
-INSERT INTO `ProdottiTaglie` (`idTaglia`, `idProdotto`, `quantita`)
-VALUES(9, 7, 25);
