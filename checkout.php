@@ -6,7 +6,6 @@ require_once("./utilis/functions.php");
 require_once("./utilis/UserManager.php");
 
 $templateParams["title"] = "Checkout";
-$templateParams["cssFileName"] = "checkout/checkout.css";
 $templateParams["main"] = "./templates/checkout_page.php";
 
 if(empty($_GET["incorrectData"])) {
