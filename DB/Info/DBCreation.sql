@@ -62,11 +62,12 @@ CREATE TABLE IF NOT EXISTS `Materiale` (
 # ADD TABLE "Ordine"                                                     #
 # ---------------------------------------------------------------------- #
 CREATE TABLE IF NOT EXISTS `Ordine` (
+	 `id` INT NOT NULL AUTO_INCREMENT,
      `idProdotto` INT NOT NULL,
      `email` CHAR(20) NOT NULL,
      `data` DATE NOT NULL,
      `quantita` INT NOT NULL,
-     PRIMARY KEY (`idProdotto`, `email`, `data`)
+     PRIMARY KEY (`id`)
 ) ENGINE = INNODB;
 # ---------------------------------------------------------------------- #
 # ADD TABLE "Prodotto"                                                   #
@@ -121,8 +122,9 @@ CREATE UNIQUE INDEX `PK_ProdottiTaglie` ON `ProdottiTaglie` (`idTaglia`, `idProd
 CREATE INDEX `FK_ProTag_Prodotto` ON `ProdottiTaglie` (`idProdotto`);
 CREATE INDEX `FK_ProTag_Taglia` ON `ProdottiTaglie` (`idTaglia`);
 CREATE UNIQUE INDEX `PK_Colore` ON `Colore` (`id`);
+CREATE UNIQUE INDEX `PK_Colore` ON `Taglia` (`id`);
 CREATE UNIQUE INDEX `PK_Materiale` ON `Materiale` (`id`);
-CREATE UNIQUE INDEX `PK_Ordine` ON `Ordine` (`idProdotto`, `email`, `data`);
+CREATE UNIQUE INDEX `PK_Ordine` ON `Ordine` (`id`);
 CREATE INDEX `FK_Ordine_Email` ON `Ordine` (`email`);
 CREATE UNIQUE INDEX `PK_Prodotto` ON `Prodotto` (`id`);
 CREATE INDEX `FK_Prodotto_Colore` ON `Prodotto` (`idColore`);
