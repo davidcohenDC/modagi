@@ -7,6 +7,10 @@ require_once("./utilis/UserManager.php");
 require_once("./utilis/OrderManager.php");
 require_once("./utilis/BankingSimulator.php");
 
+$templateParams["title"] = "Checkout";
+$templateParams["main"] = "./templates/complete_order_page.php";
+$templateParams["cssFileName"] = "./complete_order/complete_order.css";
+
 $cartManager = new CartManager();
 $userManager = new UserManager();
 $orderManager = new OrderManager();
@@ -29,10 +33,7 @@ if($cardAccetted) {
         }
     }
 
-    // mostra che l'ordine è andato a buon fine e reindirizza alla pagina principale dopo 5 secondi
-
-    /*header("Location: index.php?orderStatus=" . $orderStatus);
-    die();*/
+    require("./templates/base.php");
 }
 else {
     header("Location: checkout.php?incorrectData=true#incorrectMessage");
