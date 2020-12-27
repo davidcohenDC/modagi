@@ -30,7 +30,7 @@
 <section class="shopping-cart">
     <div class="container">
         <div class="block-heading">
-            <h2>Shopping Cart</h2>
+            <h2>Carrello</h2>
         </div>
         <div class="content">
             <div class="row">
@@ -95,11 +95,11 @@
                 </div>
                 <div class="col-md-12 col-lg-4">
                     <div class="summary">
-                        <h3>Summary</h3>
-                        <div class="summary-item"><span class="text">Subtotal: </span><span class="price"><?php echo $cart["totalPrice"] ?>€</span></div>
-                        <div class="summary-item"><span class="text">Discount: </span><span class="price">$0</span></div>
-                        <div class="summary-item"><span class="text">Shipping: </span><span class="price">$0</span></div>
-                        <div class="summary-item"><span class="text">Total: </span><span class="price"><?php echo $cart["totalPrice"] ?>€</span></div>
+                        <h3>Resoconto</h3>
+                        <div class="summary-item"><span class="text">Sub-totale: </span><span class="price"><?php echo $cart["totalPrice"] ?>€</span></div>
+                        <div class="summary-item"><span class="text">Sconto: </span><span class="price">$0</span></div>
+                        <div class="summary-item"><span class="text">Spedizione: </span><span class="price">$0</span></div>
+                        <div class="summary-item"><span class="text">Totale: </span><span class="price"><?php echo $cart["totalPrice"] ?>€</span></div>
                         <button type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href = 'checkout.php';">Checkout</button>
                     </div>
                 </div>

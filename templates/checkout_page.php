@@ -15,7 +15,7 @@ function showLoading(submitBtn) {
     <!-- Riepilogo carrello -->
     <div class="col-md-4 order-md-2 mb-4">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span class="text-muted">Your cart</span>
+            <a href="cart.php" class="text-muted">Riepilogo carrello</a>
             <span class="badge badge-secondary badge-pill"><?php echo $cart["orderCount"] ?></span>
         </h4>
         <ul class="list-group mb-3">
@@ -45,15 +45,15 @@ function showLoading(submitBtn) {
             Non hai effettuato il login <a href="user-page.php" class="alert-link">Clicca qui loggarti e acquistare!</a>
         </div>
         <?php else: ?>
-        <h4 class="mb-3">Billing address</h4>
+        <h4 class="mb-3">Indirizzo di consegna</h4>
         
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="firstName">First name</label>
+                <label for="firstName">Nome</label>
                 <input id="firstName" type="text" class="form-control bg-secondary text-white" value="<?php echo $user["nome"] ?>" readonly>
             </div>
             <div class="col-md-6 mb-3">
-                <label for="lastName">Last name</label>
+                <label for="lastName">Cognome</label>
                 <input if="lastName" type="text" class="form-control bg-secondary text-white" value="<?php echo $user["cognome"] ?>" readonly>
             </div>
         </div>
@@ -71,23 +71,23 @@ function showLoading(submitBtn) {
         </div>
 
         <div class="mb-3">
-            <label for="address">Address</label>
+            <label for="address">Indirizzo</label>
             <input id="address" type="text" class="form-control bg-secondary text-white" value="<?php echo $user["indirizzo"] ?>" readonly>
         </div>
 
         <hr class="mb-4">
         <!-- Selezione metodo di pagamento -->
         <form id="form" class="needs-validation" novalidate="" method="POST" action="complete_order.php">
-            <h4 class="mb-3">Payment</h4>
+            <h4 class="mb-3">Pagamento</h4>
 
             <div class="d-block my-3">
                 <div class="custom-control custom-radio">
                     <input id="credit" name="paymentMethod" type="radio" value="credit" class="custom-control-input" checked="" required="">
-                    <label class="custom-control-label" for="credit">Credit card</label>
+                    <label class="custom-control-label" for="credit">Carta di credito</label>
                 </div>
                 <div class="custom-control custom-radio">
                     <input id="debit" name="paymentMethod" type="radio" value="debit" class="custom-control-input" required="">
-                    <label class="custom-control-label" for="debit">Debit card</label>
+                    <label class="custom-control-label" for="debit">Carta di debito</label>
                 </div>
                 <div class="custom-control custom-radio">
                     <input id="paypal" name="paymentMethod" type="radio" value="paypal" class="custom-control-input" required="">
@@ -96,27 +96,23 @@ function showLoading(submitBtn) {
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label for="cc-name">Name on card</label>
+                    <label for="cc-name">Nome sulla carta</label>
                     <input type="text" name="cardName" class="form-control <?php if($incorrectData) {echo "bg-danger text-white";} ?>" id="cc-name" placeholder="" required="">
-                    <small class="text-muted">Full name as displayed on card</small>
-                    <div class="invalid-feedback">Name on card is required</div>
+                    <small class="text-muted">Nome completo mostrato sulla carta</small>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label for="cc-number">Credit card number</label>
+                    <label for="cc-number">Numero carta di credito</label>
                     <input type="text" name="cardNumber" class="form-control <?php if($incorrectData) {echo "bg-danger text-white";} ?>" id="cc-number" placeholder="" required="">
-                    <div class="invalid-feedback">Credit card number is required</div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-3 mb-3">
-                    <label for="cc-expiration">Expiration</label>
+                    <label for="cc-expiration">Scadenza</label>
                     <input type="text" name="cardExpiration" class="form-control <?php if($incorrectData) {echo "bg-danger text-white";} ?>" id="cc-expiration" placeholder="" required="">
-                    <div class="invalid-feedback">Expiration date required</div>
                 </div>
                 <div class="col-md-3 mb-3">
                     <label for="cc-cvv">CVV</label>
                     <input type="text" name="cardCVV" class="form-control <?php if($incorrectData) {echo "bg-danger text-white";} ?>" id="cc-cvv" placeholder="" required="">
-                    <div class="invalid-feedback">Security code required</div>
                 </div>
             </div>
             <?php if($incorrectData) : ?>
