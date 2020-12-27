@@ -136,16 +136,18 @@ window.onbeforeunload = function(e) {
       e.preventDefault();
       setTimeout(function() {
         $url = removeParam("modal",window.location.href);
-        location.href = $url+"&modal=on";
+        location.href = $url+"&taglia="+$('input[name=taglia]:checked').val()+"&modal=on";
       },0);
       this.submit();
+
     });
 
     $("input[name=taglia]").on("change", function(){
       console.log($("input[name=taglia]").val());
-      $("input[type='number']").prop('max',$("input[name=taglia]").val());
+      $("input[type='number']").prop('max',$("input[name=taglia]").attr("id"));
     });
 
+    
     if(location.search.split('modal=')[1]) {
       $('#modalAbandonedCart').modal('show');
     }

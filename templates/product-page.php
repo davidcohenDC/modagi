@@ -114,7 +114,7 @@ $prodotto = $templateParams["prodotto"];
                 <div class="card-body">
                 <div class="col-md-12">
                 <?php foreach($templateParams["quantitaTaglia"] as $value => $taglia): ?>
-                <input type="radio" name="taglia" value="<?php echo $taglia["quantita"] ?>" class="mr-1" <?php if($value ==0) {echo "checked";}?>><label class="mr-3" for="radio" ><?php echo $taglia["numero"] ?> </label>
+                <input type="radio" name="taglia" id="<?php echo $taglia["quantita"] ?>" value="<?php echo $taglia["numero"] ?>" class="mr-1" <?php if($value ==0) {echo "checked";}?>><label class="mr-3" for="radio" ><?php echo $taglia["numero"] ?> </label>
                 <?php endforeach ?>
                 </div>
                 </div>
@@ -161,7 +161,7 @@ $prodotto = $templateParams["prodotto"];
               <div class="row">
                 <div class="col-md-12 text-center text-md-center text-md-right">
                 <form method="POST" id="formAddToCart" action="">
-                <button type="submit" id="btnAdd" class="btn btn-info btn-rounder"><i class="fa fa-cart-plus" aria-hidden="true"></i> Aggiungi al carrello</button>
+                <button type="submit" zid="btnAdd" class="btn btn-info btn-rounder"><i class="fa fa-cart-plus" aria-hidden="true"></i> Aggiungi al carrello</button>
                 </form>
                 </div>
               </div>
