@@ -33,7 +33,7 @@ define("CREATORS", array(
     3 => array(
         "nome" => "Lorenzo",
         "cognome" => "Morelli",
-        "email" => "TODO",
-        "matricola" => "TODO"
+        "email" => "lorenzo.morelli9@studio.unibo.it",
+        "matricola" => ""
     )
 ));
