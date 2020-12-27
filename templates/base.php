@@ -1,4 +1,4 @@
-<?php 
+<?php
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -18,9 +18,6 @@ if (session_status() == PHP_SESSION_NONE) {
     <!--bootstrap include-->
     <link rel="stylesheet" href="<?php echo BOOTSTRAP_CSS_LINK ?>">
 
-    <!--mdbimports-->
-
-
     <!-- personal css file -->
     <?php if (isset($templateParams["cssFileName"])) : ?>
         <link href="<?php echo CSS_FILE . $templateParams["cssFileName"] ?>" rel="stylesheet">
@@ -28,10 +25,6 @@ if (session_status() == PHP_SESSION_NONE) {
 
     <script src="<?php echo BOOTSTRAP_JS_LINK ?>"></script>
     <script src="./js/home.js"></script>
-
-    <!--for nav bar-->
-    <!--<script src="<?php //echo JS_FILE 
-                        ?>nav-bar.js"></script>-->
 
     <!--base css file-->
     <link rel="stylesheet" href="<?php echo CSS_FILE; ?>base.css">
@@ -45,59 +38,70 @@ if (session_status() == PHP_SESSION_NONE) {
 <body>
     <header class="mb-4">
         <!-- Navbar -->
-<nav class="navbar navbar-expand-md navbar-dark fixed-top scrolling-navbar ">
-  <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top scrolling-navbar ">
+            <div class="container-fluid">
 
-    <!-- Brand -->
-    <a class="navbar-brand" href="index.php">
-    <i class="fa fa-odnoklassniki mr-3" aria-hidden="true"></i>SHOES COM
-    </a>
+                <!-- Brand -->
+                <a class="navbar-brand" href="index.php">
+                    <i class="fa fa-odnoklassniki mr-3" aria-hidden="true"></i>SHOES COM
+                </a>
 
-    <!-- Collapse button -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-      aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+                <!-- Collapse button -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-    <!-- Links -->
-    <div class="collapse navbar-collapse" id="basicExampleNav">
+                <!-- Links -->
+                <div class="collapse navbar-collapse" id="basicExampleNav">
 
-      <!-- Right -->
-      <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-          <a href="index.php" class="nav-link waves-effect">
-            HOME
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="cart.php" class="nav-link navbar-link-2 waves-effect">
-            <span class="badge badge-pill red">
-                <?php
-                require_once("./utilis/CartManager.php");
-                $cartManager = new CartManager();
-                echo $cartManager->getOrderCount();
-                ?>
-            </span>
-            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="user-page.php" class="nav-link waves-effect">
-            Sign in
-          </a>
-        </li>
-        <li class="nav-item pl-2 mb-2 mb-md-0">
-          <a href="user-page.php" type="button"
-            class="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">Sign
-            up</a>
-        </li>
-      </ul>
+                    <!-- Right -->
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="index.php" class="nav-link waves-effect">
+                                HOME
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="cart.php" class="nav-link navbar-link-2 waves-effect">
+                                <span class="badge badge-pill red">
+                                    <?php
+                                    require_once("./utilis/CartManager.php");
+                                    $cartManager = new CartManager();
+                                    echo $cartManager->getOrderCount();
+                                    ?>
+                                </span>
+                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="user-page.php" class="nav-link waves-effect">
+                                <?php require_once("./utilis/functions.php"); ?>
 
-    </div>
-    <!-- Links -->
-  </div>
-</nav>
-<!-- Navbar -->
+                                <?php if (isUserLoggedIn()) : ?>
+                                    User Page
+                                <?php else : ?>
+                                    Log in
+                                <?php endif ?>
+                            </a>
+                        </li>
+                        <li class="nav-item pl-2 mb-2 mb-md-0">
+                            <?php if (isUserLoggedIn()) : ?>
+                                <a href="user-action-page.php?action=0" type="button" class="btn btn-outline-danger btn-md btn-rounded btn-navbar waves-effect waves-light">
+                                    Log out
+                                </a>
+                            <?php else : ?>
+                                <a href="registration-page.php" type="button" class="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">
+                                    Sign up
+                                </a>
+                            <?php endif ?>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Links -->
+            </div>
+        </nav>
+        <!-- Navbar -->
         <div class=" mt-3 text-center">
             <h1><?php echo SHOP_NAME ?></h1>
             <p>Mission, Vission & Values</p>
