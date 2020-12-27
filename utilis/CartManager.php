@@ -23,7 +23,7 @@ class CartManager {
             $this->cart = array_merge($this->cart, $newProduct);
         }
         else {
-            $newProduct = array($productId . "|" . $productSize => 1);
+            $newProduct = array($productId . "|" . $productSize => $productCount);
             $this->cart = array_merge($this->cart, $newProduct);
         }
     }
