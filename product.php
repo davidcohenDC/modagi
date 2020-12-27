@@ -1,7 +1,7 @@
 <?php
 
 require_once("./server.php");
-require_once("utilis/cookie.php");
+require_once("utilis/cartManager.php");
 
 if(isset($_GET["prodotto"])) {
     $idprodotto = $_GET["prodotto"];
