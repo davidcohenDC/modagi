@@ -86,7 +86,7 @@ array_push($tabelle, "marca","genere","materiale","colore","taglia");
         <div class="carousel-item <?php if ($index == 0) { echo "active";} ?>">
             <img class="d-block img-fluid" src="<?php echo PROMOTION_DIR."promo_".$promo.".jpg"; ?>" alt="">
               <div class="carousel-caption text-center">
-              <h3 class="text-dark header-text-shadow"><i class="fa fa-chevron-up" aria-hidden="true"></i> <?php echo strtoupper($prodotto["nome"]) ?> <i class="fa fa-chevron-up" aria-hidden="true"></i></h3>
+              <h3 class="text-dark header-text-shadow"><?php echo strtoupper($prodotto["nome"]) ?></h3>
                 <p class="text-dark tablet header-text-shadow"><?php if($prodotto["descrizione"] != "") {echo $prodotto["descrizione"];} else {echo "aggiungi descrizione!";}?></p>
                 <p><a class="btn btn-dark header-text-shadow" href="product.php?prodotto=<?php echo $prodotto["id"]; ?>" role="button">Scopri <i class="fa fa-long-arrow-right" aria-hidden="true"></i></i></a></p>                
             </div>
