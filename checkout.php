@@ -7,6 +7,7 @@ require_once("./utilis/UserManager.php");
 
 $templateParams["title"] = "Checkout";
 $templateParams["main"] = "./templates/checkout_page.php";
+$templateParams["cssFileName"] = "checkout/checkout.css";
 
 if(empty($_GET["incorrectData"])) {
     $incorrectData = false;

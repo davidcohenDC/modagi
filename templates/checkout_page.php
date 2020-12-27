@@ -102,17 +102,17 @@ function showLoading(submitBtn) {
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="cc-number">Numero carta di credito</label>
-                    <input type="text" name="cardNumber" class="form-control <?php if($incorrectData) {echo "bg-danger text-white";} ?>" id="cc-number" placeholder="" required="">
+                    <input type="number" name="cardNumber" class="form-control <?php if($incorrectData) {echo "bg-danger text-white";} ?>" id="cc-number" placeholder="" required="">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-3 mb-3">
                     <label for="cc-expiration">Scadenza</label>
-                    <input type="text" name="cardExpiration" class="form-control <?php if($incorrectData) {echo "bg-danger text-white";} ?>" id="cc-expiration" placeholder="" required="">
+                    <input type="date" name="cardExpiration" class="form-control <?php if($incorrectData) {echo "bg-danger text-white";} ?>" id="cc-expiration" placeholder="" required="">
                 </div>
                 <div class="col-md-3 mb-3">
                     <label for="cc-cvv">CVV</label>
-                    <input type="text" name="cardCVV" class="form-control <?php if($incorrectData) {echo "bg-danger text-white";} ?>" id="cc-cvv" placeholder="" required="">
+                    <input type="text" name="cardCVV" class="form-control <?php if($incorrectData) {echo "bg-danger text-white";} ?>" id="cc-cvv" placeholder="" required="" maxlength="3">
                 </div>
             </div>
             <?php if($incorrectData) : ?>
