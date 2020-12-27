@@ -375,8 +375,8 @@ div > input > label {
   }
 
   .carousel-item > img {
-    width:640px;
-    height:180px;
+    width: 640px;
+    height: 180px;
   }
 }
 
@@ -395,8 +395,8 @@ div > input > label {
   }
 
   .carousel-item > img {
-    width:940px;
-    height:300px;
+    width: 940px;
+    height: 300px;
   }
 }
 
@@ -415,8 +415,8 @@ div > input > label {
   }
 
   .carousel-item > img {
-    width:940px;
-    height:300px;
+    width: 940px;
+    height: 300px;
   }
 }
 
@@ -780,7 +780,6 @@ div > div > a {
   text-align: center !important;
 }
 
-
 .card-no-shadow:hover {
   box-shadow: none !important;
 }
@@ -799,15 +798,13 @@ div > div > a {
   justify-content: space-between;
   padding: 1rem;
   border-bottom: 1px solid #e0e0e0;
-  border-top-left-radius: calc(.3rem - 1px);
-  border-top-right-radius: calc(.3rem - 1px);
+  border-top-left-radius: calc(0.3rem - 1px);
+  border-top-right-radius: calc(0.3rem - 1px);
 }
 
 .modal-content {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
 }
-
-
 
 .number-input {
   border: 0;
@@ -820,7 +817,6 @@ div > div > a {
 }
 
 .number-input button {
-
   background-color: transparent;
   border: none;
   align-items: center;
@@ -832,21 +828,21 @@ div > div > a {
   position: relative;
 }
 
-
-.number-input input[type=number] {
+.number-input input[type="number"] {
   font-family: sans-serif;
   max-width: 5rem;
-  padding: .5rem;
+  padding: 0.5rem;
   border: none;
   border-width: 0 2px;
   font-size: 2rem;
   height: 3rem;
   font-weight: bold;
   text-align: center;
-  color:#17a2b8;
+  color: #17a2b8;
 }
 
-.table td, .table th {
+.table td,
+.table th {
   padding: 0 !important;
 }
 
@@ -880,23 +876,24 @@ div > div > a {
 .design:before {
   background: var(--other);
   opacity: 0;
-  transition: .3s;
+  transition: 0.3s;
 }
 
 .design::after {
   background: var(--primary);
-  opacity: .4;
-  transition: .6s;
+  opacity: 0.4;
+  transition: 0.6s;
 }
 
 .navbar {
-  -webkit-box-shadow: 0 10px 20px 0 rgba(0,0,0,.05);
-  box-shadow: 0 10px 20px 0 rgba(0,0,0,.05);
-  padding-top: .5625rem;
+  -webkit-box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.05);
+  padding-top: 0.5625rem;
   background-color: #343a40;
 }
 
-.fixed-bottom, .fixed-top {
+.fixed-bottom,
+.fixed-top {
   position: fixed;
   right: 0;
   left: 0;
@@ -907,16 +904,21 @@ ul > li > a {
   color: white;
 }
 
-@media (min-width: 768px) {}
+@media (min-width: 768px) {
+}
 .navbar-expand-md {
-    -ms-flex-wrap: nowrap;
-    flex-wrap: nowrap;
-    -webkit-box-pack: start;
-    -ms-flex-pack: start;
-    justify-content: flex-start;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
 }
 
-.navbar-dark .navbar-toggler-icon, .navbar-light .navbar-toggler-icon {
-background-image: none !important; 
+.navbar-dark .navbar-toggler-icon,
+.navbar-light .navbar-toggler-icon {
+  background-image: none !important;
 }
 
+input[type="file"].file-upload {
+  display: none;
+}
