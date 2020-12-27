@@ -5,7 +5,7 @@
     <div class="modal-content">
       <!--Header-->
       <div class="modal-header ">
-        <strong><h3 class="heading">Quantita minima necessaria!</h3></strong>
+        <strong><h3 class="heading">Quantita errata!</h3></strong>
       </div>
 
       <!--Body-->
@@ -18,7 +18,7 @@
           </div>
 
           <div class="col-9">
-            <p>Per aggiungere al carrello il prodotto devi avere una quantità minima</p>
+            <p>Per aggiungere al carrello il prodotto devi avere una quantità minima o massima non superabile.</p>
           </div>
         </div>
       </div>

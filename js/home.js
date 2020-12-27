@@ -143,14 +143,14 @@ window.onbeforeunload = function(e) {
     });
 
     $("input[name=taglia]").on("change", function(){
-      console.log($("input[name=taglia]").val());
       $("input[type='number']").prop('max',$("input[name=taglia]").attr("id"));
     });
 
     
     if(location.search.split('modal=')[1]) {
       let urlParams = new URLSearchParams(window.location.search);
-      if(urlParams.get('quantita') > 0) {
+      console.log($("input[type='number']").attr("max"));
+      if(urlParams.get('quantita') > 0 && urlParams.get('quantita') < $("input[type='number']").attr("max")) {
         if($("#btnAdd").val()) {
           $('#modalAbandonedCart').modal('show');
         } else {

@@ -22,7 +22,7 @@ $templateParams["idMarca"] = $product->selectMarcaByID($idprodotto)[0];
 $templateParams["quantitaTaglia"] = $product->selectQuantitaWithNSize($idprodotto);
 
 
-if(isUserLoggedIn() && isset($_GET["modal"]) && $_GET["quantita"] > 0) {
+if(isUserLoggedIn() && isset($_GET["modal"]) && $_GET["quantita"] > 0 ) {
     $cartManager->addProduct($_GET["prodotto"],$_GET["taglia"],$_GET["quantita"]);
     $cartManager->saveCart();
 }
