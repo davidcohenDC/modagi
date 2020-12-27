@@ -149,7 +149,12 @@ window.onbeforeunload = function(e) {
 
     
     if(location.search.split('modal=')[1]) {
-      $('#modalAbandonedCart').modal('show');
+      if($("#btnAdd").val()) {
+        $('#modalAbandonedCart').modal('show');
+      } else {
+        $('#modalNotUserLogged').modal('show');
+      }
+
     }
     
 
