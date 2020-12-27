@@ -12,7 +12,7 @@ if(empty($_GET["incorrectData"])) {
     $incorrectData = false;
 }
 else {
-    $incorrectData = "Attenzione, non hai inserito i dati correttamente";
+    $incorrectData = "Attenzione, " . $_GET["incorrectData"];
 }
 
 $cartManager = new CartManager();

@@ -15,17 +15,24 @@ class CartManager {
     /**
      * add a product to cart, for save it call saveProduct()
      */
-    public function addProduct($productId, $productSize) {
+    public function addProduct($productId, $productSize, $productCount=1) {
         $newProductKey = $productId . "|" . $productSize;
         if(array_key_exists($newProductKey, $this->cart)) {
-            $productCount = $this->cart[$newProductKey];
-            $newProduct = array($productId . "|" . $productSize => $productCount+1);
+            $oldProductCount = $this->cart[$newProductKey];
+            $newProduct = array($productId . "|" . $productSize => $oldProductCount+$productCount);
             $this->cart = array_merge($this->cart, $newProduct);
         }
         else {
             $newProduct = array($productId . "|" . $productSize => 1);
             $this->cart = array_merge($this->cart, $newProduct);
         }
+    }
+
+    /**
+     * clear the product inside the cart
+     */
+    public function clearCart() {
+        $this->cookie->setCookie(CART_COOKIE, json_encode(array()));
     }
 
     /**
