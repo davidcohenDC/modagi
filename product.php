@@ -11,10 +11,7 @@ if(isset($_GET["prodotto"])) {
 
 $cart = array();
 
-$cookie = new CookieManager();
-if($cookie->exists(CART_COOKIE)) {
-     $cart = json_decode($cookie->getCookieValue(CART_COOKIE));
-}
+$cartManager = new CartManager();
 
 
 //to do
@@ -35,8 +32,8 @@ $templateParams["idMarca"] = $product->selectMarcaByID($idprodotto)[0];
 $templateParams["quantitaTaglia"] = $product->selectQuantitaWithNSize($idprodotto);
 
 if (isset($_GET["modal"])) {
-    array_push($cart, $templateParams["prodotto"]["id"]);
-    $cookie->setCookie(CART_COOKIE, json_encode($cart));
+    $cartManager->addProduct("$idprodotto",$_GET["taglia"]);
+    $cartManager->saveCart();
 }
 
 require_once('templates/base.php');
