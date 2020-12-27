@@ -4,7 +4,7 @@
 <div class="my-3 mx-2 ">
     <label for="name-group" class="form-label fw-bold"> Modifica Nome </label>
     <div id="name-group" class="input-group mb-3">
-        <button id="change-name" class="change input-embedded">
+        <button id="change-name" class="select input-embedded">
             <span></span>
         </button>
         <input id="name" name="name" class="form-control col-12 fst-italic" type="text" placeholder="inserire nome" maxlength="20" />
@@ -17,7 +17,7 @@
 <div class="my-3 mx-2 ">
     <label for="surname-group" class="form-label fw-bold"> Modifica Cognome </label>
     <div id="surname-group" class="input-group mb-3">
-        <button id="change-surname" class="change input-embedded ">
+        <button id="change-surname" class="select input-embedded ">
             <span></span>
         </button>
         <input id="surname" name="surname" class="form-control col-12 fst-italic" type="text" placeholder="inserire cognome" maxlength="20" />
@@ -30,7 +30,7 @@
 <div class="my-3 mx-2 ">
     <label for="address-group" class="form-label fw-bold"> Modifica Indirizzo </label>
     <div id="address-group" class="input-group mb-3">
-        <button id="change-address" class="change input-embedded">
+        <button id="change-address" class="select input-embedded">
             <span></span>
         </button>
         <input id="address" name="address" class="form-control col-12 fst-italic" type="text" placeholder="inserire indirizzo" maxlength="40" />
@@ -43,7 +43,7 @@
 <div class="my-3 mx-2 ">
     <label for="username-group" class="form-label fw-bold"> Modifica Username </label>
     <div id="username-group" class="input-group mb-3">
-        <button id="change-username" class="change input-embedded">
+        <button id="change-username" class="select input-embedded">
             <span></span>
         </button>
         <input id="username" name="username" class="form-control col-12 fst-italic" type="text" placeholder="inserire username" maxlength="20" />

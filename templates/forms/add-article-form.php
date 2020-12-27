@@ -1,5 +1,7 @@
 <script src="<?php echo CSS_FILE ?>mdb.min.js"></script>
 
+<!-- for change buttons -->
+<script src="<?php echo JS_FILE ?>change-data-selector.js"></script>
 <script src="<?php echo JS_FILE ?>add-params.js"></script>
 <script src="<?php echo JS_FILE ?>file-upload.js"></script>
 
@@ -62,12 +64,11 @@
     <div id="size" aria-label="Lista di taglie da cui scegliere">
         <?php foreach ($formParams["sizes"] as $size) : ?>
             <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <div class="form-check">
-                        <input id="size-<?php echo $size['id'] ?>" class="form-check-input" name="size-<?php echo $size['id'] ?>" type="checkbox" value="<?php echo $size['id'] ?>" />
-                    </div>
-                    <span class="input-group-text"><?php echo $size['numero'] ?></span>
-                </div>
+
+                <button id="select-<?php echo $size['numero'] ?>" class="select input-embedded size">
+                    <span><?php echo $size['numero'] ?></span>
+                </button>
+
                 <input id="quantity-<?php echo $size['id'] ?>" name="quantity-<?php echo $size['id'] ?>" class="form-control col-12 fst-italic" type="number" placeholder="quantità per taglia" />
             </div>
 

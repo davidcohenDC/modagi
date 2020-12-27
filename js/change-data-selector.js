@@ -8,51 +8,56 @@ const disable = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 
 $(function(){
     /* set up */
-    $("button.change").each(function(){
-        $(this).addClass("yes-change");
+    $("button.select").each(function(){
+        $(this).addClass("yes-select");
 
         //? change color
         $(this).addClass("btn-success");
 
         //? change text
-        $(this).children().html(enable);
-
+        if(!$(this).hasClass("size")){
+            $(this).children().html(enable);
+        }
+        
         //? close input
         $(this).next().prop("disabled", false);
     });
 
-    const changeButtons = $("button.change");
+    const changeButtons = $("button.select");
 
     changeButtons.on("click", function(e){
         e.preventDefault();
         
-        if($(this).hasClass("yes-change")){
+        if($(this).hasClass("yes-select")){
 
             //* set up next
-            $(this).removeClass("yes-change");
-            $(this).addClass("no-change");
+            $(this).removeClass("yes-select");
+            $(this).addClass("no-select");
 
             //? change color
             $(this).removeClass("btn-success");
             $(this).addClass("btn-grigio");
  
             //? change text
-            $(this).children().html(disable);
+            if(!$(this).hasClass("size")){
+                $(this).children().html(disable);
+            }
 
             //? open input
             $(this).next().prop("disabled", true);
         } else {
             //* set up next
-            $(this).removeClass("no-change");
-            $(this).addClass("yes-change");
+            $(this).removeClass("no-select");
+            $(this).addClass("yes-select");
 
             //? change color
             $(this).removeClass("btn-grigio");
             $(this).addClass("btn-success");
 
             //? change text
-            $(this).children().html(enable);
-
+            if(!$(this).hasClass("size")){
+                $(this).children().html(enable);
+            }
             //? close input
             $(this).next().prop("disabled", false);
         }
