@@ -5,7 +5,7 @@
     <div class="modal-content">
       <!--Header-->
       <div class="modal-header  text-center">
-        <strong><h3 class="heading"><?php echo  $templateParams["idMarca"]["nome"]." ".$prodotto["nome"] ?></strong> nel carrello!</h3>
+        <strong><h3 class="heading"><?php echo  $_GET["quantita"]." '".$templateParams["idMarca"]["nome"]." ".$prodotto["nome"]."'" ?></strong> nel carrello!</h3>
       </div>
 
       <!--Body-->
