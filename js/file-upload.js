@@ -28,13 +28,13 @@ $(function(){
             span.html(fileChosen);
             $("div.file-name").html($(this).val());
 
-            $("label.upload-img-label").removeClass("btn-outline-dark");
-            $("label.upload-img-label").addClass("btn-outline-secondary");
+            $("label.upload-img-label").removeClass("btn-outline-secondary");
+            $("label.upload-img-label").addClass("btn-outline-success");
         } else {
             //file non scelto 
             span.html(fileNotChosen);
-            $("label.upload-img-label").removeClass("btn-outline-secondary");
-            $("label.upload-img-label").addClass("btn-outline-dark");
+            $("label.upload-img-label").removeClass("btn-outline-success");
+            $("label.upload-img-label").addClass("btn-outline-secondary");
 
         }   
     });

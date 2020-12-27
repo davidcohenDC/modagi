@@ -1,10 +1,11 @@
+<script src="<?php echo CSS_FILE ?>mdb.min.js"></script>
+
 <script src="<?php echo JS_FILE ?>add-params.js"></script>
 <script src="<?php echo JS_FILE ?>file-upload.js"></script>
 
 <div class="my-3 mx-2 ">
-    <label for="shoe-img" class="upload-img-label col-12 fw-bold btn btn-outline-dark">
+    <label for="shoe-img" class="upload-img-label col-12 py-2 text-center fw-bold btn-outline-secondary">
         <span class="upload-img">
-
         </span>
     </label>
     <input type="file" id="shoe-img" name="shoe-img" class="file-upload" accept="image/png, image/jpeg, image/jpg, image/gif" />
@@ -22,13 +23,13 @@
 
 <div class="my-3 mx-2 ">
     <label for="material" class="form-label fw-bold"> Materiale </label>
-    <select id="material" name="material" class="form-select" aria-label="Lista di materiali da cui scegliere" required>
+    <select id="material" name="material" class="form-select col-12" aria-label="Lista di materiali da cui scegliere" required>
         <?php foreach ($formParams["materials"] as $material) : ?>
             <option value="<?php echo $material['id'] ?>"><?php echo $material['nome'] ?></option>
         <?php endforeach ?>
     </select>
-    <div class="my-3 ">
-        <button class="btn btn-outline-success add-button for-materiale action-2" data-mdb-toggle="modal" data-mdb-target="#add-modal">
+    <div class="my-2">
+        <button class="px-3 py-2 btn-outline-success input-embedded add-button for-materiale action-2" data-mdb-toggle="modal" data-mdb-target="#add-modal">
             <span> Aggiungi
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
@@ -40,13 +41,13 @@
 
 <div class="my-3 mx-2 ">
     <label for="brand" class="form-label fw-bold"> Marca </label>
-    <select id="brand" name="brand" class="form-select" aria-label="Lista di marche da cui scegliere" required>
+    <select id="brand" name="brand" class="form-select col-12" aria-label="Lista di marche da cui scegliere" required>
         <?php foreach ($formParams["brands"] as $brand) : ?>
             <option value="<?php echo $brand['id'] ?>"><?php echo $brand['nome'] ?></option>
         <?php endforeach ?>
     </select>
     <div class="my-3">
-        <button class="btn btn-outline-success add-button for-marca action-3" data-mdb-toggle="modal" data-mdb-target="#add-modal">
+        <button class="px-3 py-2 btn-outline-success input-embedded add-button for-marca action-3" data-mdb-toggle="modal" data-mdb-target="#add-modal">
             <span> Aggiungi
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
@@ -73,7 +74,7 @@
         <?php endforeach ?>
 
         <div class="my-3">
-            <button class="btn btn-outline-success add-button for-taglia action-4" data-mdb-toggle="modal" data-mdb-target="#add-modal">
+            <button class="px-3 py-2 btn-outline-success input-embedded add-button for-taglia action-4" data-mdb-toggle="modal" data-mdb-target="#add-modal">
                 <span> Aggiungi
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
@@ -122,14 +123,14 @@
 
 <div class="my-3 mx-2">
     <label for="color" class="form-label fw-bold"> Colore </label>
-    <select id="color" name="color" class="form-select" aria-label="Lista di colori da cui scegliere" required>
+    <select id="color" name="color" class="form-select col-12" aria-label="Lista di colori da cui scegliere" required>
         <?php foreach ($formParams["colors"] as $color) : ?>
             <option value="<?php echo $color['id'] ?>"><?php echo $color['nome'] ?></option>
         <?php endforeach ?>
     </select>
 
     <div class="my-3">
-        <button class="btn btn-outline-success add-button for-colore action-5" data-mdb-toggle="modal" data-mdb-target="#add-modal">
+        <button class="px-3 py-2 btn-outline-success input-embedded add-button for-colore action-5" data-mdb-toggle="modal" data-mdb-target="#add-modal">
             <span> Aggiungi
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
@@ -140,9 +141,11 @@
 
 </div>
 
-<div class="my-3 mx-2 row justify-content-center">
-    <label for="categories-group" class="form-label fw-bold"> Categorie </label>
-    <div id="categories-group" aria-label="Lista di categorie da cui scegliere">
+<div class="my-3 mx-2">
+    <div>
+        <label for="categories-group" class="form-label fw-bold"> Categorie </label>
+    </div>
+    <div id="categories-group col-12" aria-label="Lista di categorie da cui scegliere">
         <?php foreach ($formParams["categories"] as $category) : ?>
             <div class="form-check">
                 <input id="category-<?php echo $category['id'] ?>" class="form-check-input" name="category-<?php echo $category['id'] ?>" type="checkbox" value="<?php echo $category['id'] ?>" />
@@ -154,7 +157,7 @@
     </div>
 
     <div class="my-3">
-        <button class="btn btn-outline-success add-button for-categoria action-6" data-mdb-toggle="modal" data-mdb-target="#add-modal">
+        <button class="px-3 py-2 btn-outline-success input-embedded add-button for-categoria action-6" data-mdb-toggle="modal" data-mdb-target="#add-modal">
             <span> Aggiungi
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
@@ -186,7 +189,7 @@
                 </div>
 
                 <div class="my-3 mx-2">
-                    <a href="#" class="btn btn-outline-success col-12 fw-bold modal-confirm" onclick=""> Conferma </a>
+                    <a href="#" class="px-3 py-2 btn-primary col-12 fw-bold modal-confirm" onclick=""> Conferma </a>
                 </div>
 
             </div>

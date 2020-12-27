@@ -1,7 +1,3 @@
-<!--mdbimports-->
-<link rel="stylesheet" href="<?php echo CSS_FILE ?>mdb.min.css">
-<script src="<?php echo CSS_FILE ?>mdb.min.js"></script>
-
 <!-- for eye to show password -->
 <script src="<?php echo JS_FILE ?>password-viewer.js"></script>
 
@@ -19,7 +15,7 @@
 
         <?php if (isset($templateParams["error"])) : ?>
             <div class="row">
-                <div class="alert alert-danger my-3 text-center" role="alert">
+                <div class="alert alert-danger my-3 text-center col-12" role="alert">
                     <h2>
                         ERRORE
                     </h2>

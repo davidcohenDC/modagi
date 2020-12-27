@@ -1,7 +1,3 @@
-<!--mdbimports-->
-<link rel="stylesheet" href="<?php echo CSS_FILE ?>mdb.min.css">
-<script src="<?php echo CSS_FILE ?>mdb.min.js"></script>
-
 <div class="row my-5">
     <div class="fs-2 col-12 text-center fw-bold">
         Bentornato!

@@ -1,7 +1,3 @@
-<!--mdbimports-->
-<link rel="stylesheet" href="<?php echo CSS_FILE ?>mdb.min.css">
-<script src="<?php echo CSS_FILE ?>mdb.min.js"></script>
-
 <!--cart import for cards-->
 <link rel="stylesheet" href="<?php echo CSS_FILE ?>cart/cart.css">
 
