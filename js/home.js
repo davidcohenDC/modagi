@@ -136,7 +136,7 @@ window.onbeforeunload = function(e) {
       e.preventDefault();
       setTimeout(function() {
         $url = removeParam("modal",window.location.href);
-        location.href = $url+"&taglia="+$('input[name=taglia]:checked').val()+"&modal=on";
+        location.href = $url+"&taglia="+$('input[name=taglia]:checked').val()+"&quantita="+ $("input[type='number']").val()+"&modal=on";
       },0);
       this.submit();
 

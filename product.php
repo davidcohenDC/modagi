@@ -9,8 +9,6 @@ if(isset($_GET["prodotto"])) {
     $idprodotto = 1;
 }
 
-$cart = array();
-
 $cartManager = new CartManager();
 
 
@@ -32,7 +30,8 @@ $templateParams["idMarca"] = $product->selectMarcaByID($idprodotto)[0];
 $templateParams["quantitaTaglia"] = $product->selectQuantitaWithNSize($idprodotto);
 
 if (isset($_GET["modal"])) {
-    $cartManager->addProduct("$idprodotto",$_GET["taglia"]);
+    $cartManager->addProduct("$idprodotto",$_GET["taglia"],$_GET["quantita"]);
+    
     $cartManager->saveCart();
 }
 
