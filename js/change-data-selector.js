@@ -9,18 +9,34 @@ const disable = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
 $(function(){
     /* set up */
     $("button.select").each(function(){
-        $(this).addClass("yes-select");
+        if($(this).hasClass("no-select")){
 
-        //? change color
-        $(this).addClass("btn-success");
+            //? change color
+            $(this).addClass("btn-grigio");
 
-        //? change text
-        if(!$(this).hasClass("size")){
-            $(this).children().html(enable);
+            //? change text
+            if(!$(this).hasClass("size")){
+                $(this).children().html(disable);
+            }
+            
+            //? close input
+            $(this).next().prop("disabled", true);
+            
+        } else {
+            $(this).addClass("yes-select");
+
+            //? change color
+            $(this).addClass("btn-info");
+
+            //? change text
+            if(!$(this).hasClass("size")){
+                $(this).children().html(enable);
+            }
+            
+            //? close input
+            $(this).next().prop("disabled", false);
         }
         
-        //? close input
-        $(this).next().prop("disabled", false);
     });
 
     const changeButtons = $("button.select");
@@ -35,7 +51,7 @@ $(function(){
             $(this).addClass("no-select");
 
             //? change color
-            $(this).removeClass("btn-success");
+            $(this).removeClass("btn-info");
             $(this).addClass("btn-grigio");
  
             //? change text
@@ -52,7 +68,7 @@ $(function(){
 
             //? change color
             $(this).removeClass("btn-grigio");
-            $(this).addClass("btn-success");
+            $(this).addClass("btn-info");
 
             //? change text
             if(!$(this).hasClass("size")){

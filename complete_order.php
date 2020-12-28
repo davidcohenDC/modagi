@@ -38,7 +38,7 @@ else {
         $cart["articleDetails"] = $cartManager->getAllProductDetails();
         foreach ($cart["articleDetails"] as $article) {
             // query per inserimento dell'ordine nel DB
-            $orderStatus = $orderManager->addOrder($userEmail, $article["id"], $article["quantita"]);
+            $orderStatus = $orderManager->addOrder($userEmail, $article["id"], $article["taglia"], $article["quantita"]);
             // se qualcosa va storto rimando sulla index.php segnalando l'errore
             if(!$orderStatus) {
                 header("Location: index.php?orderStatus=" . $orderStatus);
