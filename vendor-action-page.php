@@ -89,11 +89,16 @@ switch ($action) {
         }
         break;
 
-    case 8:
+    case 8: //? modifica prodotto
         $templateParams["title"] = "Modifica Scarpa";
         $templateParams["main"] = "form.php";
         $formParams["title"] = "Nome Scarpa";
         $formParams["main"] = "modify-product.php";
+
+        $formParams["colors"] = $dbh->getAllColors();
+        $formParams["materials"] = $dbh->getAllMaterials();
+        $formParams["brands"] = $dbh->getAllBrands();
+        $formParams["categories"] = $dbh->getAllCategories();
 
         if (isset($_GET["product"])) {
             if ($dbh->productExists($_GET["product"])) {
@@ -113,7 +118,7 @@ switch ($action) {
         //TODO: pagina per modificare il prodotto.
         break;
 
-    case 9:
+    case 9: //? aggiungi rimuovi taglie
         $templateParams["title"] = "Aggiungi Quantità";
         $templateParams["main"] = "form.php";
         $formParams["title"] = "Nome Scarpa";

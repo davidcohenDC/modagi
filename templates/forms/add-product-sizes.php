@@ -1,13 +1,11 @@
+<!-- for change buttons -->
+<script src="<?php echo JS_FILE ?>change-data-selector.js"></script>
+
 <div class="my-3 mx-2">
     <label for="size" class="form-label fw-bold"> Modifica Quantità Disponibili </label>
     <div id="size" aria-label="Lista di taglie da cui scegliere">
         <?php foreach ($formParams["sizes"] as $size) : ?>
             <div class="input-group mb-3">
-
-                <button id="select-<?php echo $size['numero'] ?>" class="select input-embedded size">
-                    <span><?php echo $size['numero'] ?></span>
-                </button>
-
                 <?php
                 $sizeExists = false;
                 foreach ($formParams['quantities'] as $index) {
@@ -24,6 +22,12 @@
                 }
                 ?>
 
+                <button id="select-<?php echo $size['numero'] ?>" class="select input-embedded size <?php if ($value == 0) {
+                                                                                                        echo 'no-select';
+                                                                                                    } ?>">
+                    <span><?php echo $size['numero'] ?></span>
+                </button>
+
                 <input id="quantity-<?php echo $size['id'] ?>" name="quantity-<?php echo $size['id'] ?>" class="form-control col-12 fst-italic" type="number" min="0" value="<?php echo $value ?>" placeholder="quantità per taglia" />
             </div>
 
@@ -38,6 +42,12 @@
                 </span>
             </button>
         </div>
+    </div>
+</div>
+
+<div class="row justify-content-md-center">
+    <div class="my-3 mx-2 col-md-10 col-lg-8">
+        <input type="submit" class="btn btn-light col-12 fw-bold" value="Conferma Modifiche" />
     </div>
 </div>
 

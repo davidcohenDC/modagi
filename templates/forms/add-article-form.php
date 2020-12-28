@@ -5,6 +5,7 @@
 <div class="my-3 mx-2 ">
     <label for="shoe-img" class="upload-img-label col-12 py-2 text-center fw-bold btn-outline-secondary">
         <span class="upload-img">
+            Inserisci
         </span>
     </label>
     <input type="file" id="shoe-img" name="shoe-img" class="file-upload" accept="image/png, image/jpeg, image/jpg, image/gif" />
