@@ -97,6 +97,41 @@ function uploadImage($path, $image, $name)
     return array($result, $msg);
 }
 
+function renameImage($path, $image, $newName)
+{
+    $acceptedExtensions = array("jpg", "jpeg", "png", "gif");
+
+    $imageName = basename($image);
+
+    $fullPath = $path . $imageName;
+    $extension = "";
+
+    foreach ($acceptedExtensions as $ext) {
+        if (file_exists($fullPath . $ext)) {
+            $extension = $ext;
+        }
+    }
+
+    rename($fullPath . $extension, $path . $newName . "." . $extension);
+}
+
+function removeImg($path, $image)
+{
+    $acceptedExtensions = array("jpg", "jpeg", "png", "gif");
+
+    $imageName = basename($image);
+
+    $fullPath = $path . $imageName;
+    $extension = "";
+
+    foreach ($acceptedExtensions as $ext) {
+        if (file_exists($fullPath . $ext)) {
+            $extension = $ext;
+        }
+    }
+
+    unlink($fullPath . $extension);
+}
 
 function logOut()
 {
@@ -198,19 +233,19 @@ function bindProductUrlToQuery()
     $selection = "SELECT P.*, SUM(quantita) as stock FROM prodotto P
     INNER JOIN prodottitaglie PT ON PT.idProdotto = P.id
     INNER JOIN taglia T ON T.id = PT.idTaglia";
-    
+
     $filter = "";
     $count = 0;
 
     if ($_SERVER["REQUEST_URI"] == "/") {
-        $selection = $selection." GROUP BY P.id";
+        $selection = $selection . " GROUP BY P.id";
         return $selection;
     } else {
         $url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         $query = parse_url($url);
 
         if (!isset($query["query"])) {
-            $selection = $selection." GROUP BY P.id";
+            $selection = $selection . " GROUP BY P.id";
             return $selection;
         }
 
@@ -220,7 +255,7 @@ function bindProductUrlToQuery()
         //before filter find a possbile new selection
 
         if (isset($_GET["taglia"])) {
-            $selection = $selection." WHERE PT.idTaglia = " . $_GET["taglia"];
+            $selection = $selection . " WHERE PT.idTaglia = " . $_GET["taglia"];
             $count++;
         }
 
@@ -254,7 +289,7 @@ function bindProductUrlToQuery()
             }
         }
 
-        $filter = $filter." GROUP BY P.id";
+        $filter = $filter . " GROUP BY P.id";
 
         //after filtering select the order
         if (isset($_GET["filter"])) {

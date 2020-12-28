@@ -51,21 +51,6 @@ switch ($action) {
         }
         break;
 
-    case 2: //? materiale
-        $dbh->insertNewValue($newValue, "nome", "materiale");
-        break;
-    case 3: //? marca
-        $dbh->insertNewValue($newValue, "nome", "marca");
-        break;
-    case 4: //? taglia
-        $dbh->insertNewValue($newValue, "numero", "taglia");
-        break;
-    case 5: //? colore
-        $dbh->insertNewValue($newValue, "nome", "colore");
-        break;
-    case 6: //? categorie
-        $dbh->insertNewValue($newValue, "nome", "categoria");
-        break;
     case 7: //? aggiungi promozioni
 
         $templateParams["title"] = "Aggiungi Promozione";
@@ -92,13 +77,7 @@ switch ($action) {
     case 8: //? modifica prodotto
         $templateParams["title"] = "Modifica Scarpa";
         $templateParams["main"] = "form.php";
-        $formParams["title"] = "Nome Scarpa";
         $formParams["main"] = "modify-product.php";
-
-        $formParams["colors"] = $dbh->getAllColors();
-        $formParams["materials"] = $dbh->getAllMaterials();
-        $formParams["brands"] = $dbh->getAllBrands();
-        $formParams["categories"] = $dbh->getAllCategories();
 
         if (isset($_GET["product"])) {
             if ($dbh->productExists($_GET["product"])) {
@@ -115,7 +94,76 @@ switch ($action) {
             header("location: user-page.php");
         }
 
-        //TODO: pagina per modificare il prodotto.
+        $changes = 0;
+
+        //? get All
+        $formParams["colors"] = $dbh->getAllColors();
+        $formParams["materials"] = $dbh->getAllMaterials();
+        $formParams["brands"] = $dbh->getAllBrands();
+        $formParams["categories"] = $dbh->getAllCategories();
+
+        //? get Current
+        $formParams["current"] = $dbh->getProduct($productID);
+        $formParams["currentCategories"] = $dbh->getCategoriesProduct($productID);
+        $formParams["title"] = $formParams["current"]["nome"];
+
+        $key = array("name", "nome");
+        if (isset($_POST[$key[0]]) && $_POST[$key[0]] != "" && $_POST[$key[0]] != $formParams["current"][$key[1]]) {
+
+            // modifica nome 
+            $updateResult = $dbh->updateProduct($productID, $_POST[$key[0]], $key[1]);
+            $changes++;
+
+            if (isset($_FILES["shoe-img"])) {
+                //* cambio nome e immagine
+
+                // rimuovo la vecchia 
+                removeImg(IMG_DIR, $formParams["current"][$key[1]]);
+
+                $imgResult = uploadImage(IMG_DIR, $_FILES["shoe-img"], $_POST[$key[0]]);
+
+                if (!$imgResult[0]) {
+                    $templateParams["error"] = $imgResult[1];
+                }
+            } else {
+                //* cambio nome e basta quindi devo rinominare l'immagine
+                renameImage(IMG_DIR, $formParams["current"][$key[1]], $_POST[$key[0]]);
+            }
+        } elseif (isset($_POST[$key[0]]) && $_POST[$key[0]] == $formParams["current"][$key[1]] && isset($_FILES["shoe-img"])) {
+            //* cambio solo l'immagine
+            $changes++;
+            // rimuovo la vecchia 
+            removeImg(IMG_DIR, $formParams["current"][$key[1]]);
+
+            $imgResult = uploadImage(IMG_DIR, $_FILES["shoe-img"], $formParams["current"][$key[1]]);
+
+            if (!$imgResult[0]) {
+                $templateParams["error"] = $imgResult[1];
+            }
+        }
+
+
+
+        foreach (array(
+            array("description", "descrizione"),
+            array("brand", "idMarca"),
+            array("color", "idColore"),
+            array("price", "prezzo"),
+            array("material", "idMateriale"),
+            array("gender", "idGenere")
+        ) as $key) {
+            if (isset($_POST[$key[0]]) && $_POST[$key[0]] != "" && $_POST[$key[0]] != $formParams["current"][$key[1]]) {
+                // modifica descrizione
+                $dbh->updateProduct($productID, $_POST[$key[0]], $key[1]);
+                $changes++;
+            }
+        }
+
+        if ($changes) {
+            if (!isset($templateParams["error"])) {
+                header("location: user-page.php");
+            }
+        }
         break;
 
     case 9: //? aggiungi rimuovi taglie
@@ -139,11 +187,33 @@ switch ($action) {
             header("location: user-page.php");
         }
 
+        //? get Current
+        $formParams["current"] = $dbh->getProduct($productID);
+        $formParams["title"] = $formParams["current"]["nome"];
+
         $formParams["sizes"] = $dbh->getAllSizes();
         $formParams["quantities"] = $dbh->getAllQuantities($productID);
 
-        //TODO: pagina per aggiungere taglie.
+        //TODO: modify db
+
         break;
+
+    case 2: //? materiale
+        $dbh->insertNewValue($newValue, "nome", "materiale");
+        break;
+    case 3: //? marca
+        $dbh->insertNewValue($newValue, "nome", "marca");
+        break;
+    case 4: //? taglia
+        $dbh->insertNewValue($newValue, "numero", "taglia");
+        break;
+    case 5: //? colore
+        $dbh->insertNewValue($newValue, "nome", "colore");
+        break;
+    case 6: //? categorie
+        $dbh->insertNewValue($newValue, "nome", "categoria");
+        break;
+
     default:
         $templateParams["title"] = "Access Violation";
         echo `<div class="fw-1 text-danger"> 
