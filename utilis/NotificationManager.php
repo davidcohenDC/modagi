@@ -16,28 +16,43 @@ class NotificationManager {
      * Add a notification to a certain user
      */
     public function addNotification($userEmail, $notificationName, $notificationValue) {
-        
+        $stmt = $this->db->prepare("INSERT INTO `notifica`(`nome`, `contenuto`, `email`)
+                                    VALUES (?, ?, ?)");
+
+        $stmt->bind_param("sss", $notificationName, $notificationValue, $userEmail);
+        return $stmt->execute();
     }
 
     /**
      * Get all notification for certain user
      */
     public function getAllNotification($userEmail) {
-        return array(array("nome" => "acquisto avvenuto", "contenuto" => "il tuo acquisto è avvenuto con successo!!"));
+        $stmt = $this->db->prepare("SELECT `nome`, `contenuto` FROM `notifica` WHERE `email` = ?");
+
+        $stmt->bind_param("s", $userEmail);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $stmt->close();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     /**
      * Delete all notification of a certain user
      */
     public function clearNotification($userEmail) {
-        echo "ciao";
+        $stmt = $this->db->prepare("DELETE FROM `notifica` WHERE `email` = ?");
+
+        $stmt->bind_param("s", $userEmail);
+        return $stmt->execute();
     }
 
     /**
      * Get number of all notification of a certain user
      */
-    public function getNotificationCount() {
-        return 1;
+    public function getNotificationCount($userEmail) {
+        return count($this->getAllNotification($userEmail));
     }
 }
 

@@ -107,7 +107,9 @@ VALUES (
 # ---------------------------------------------------------------------- #
 INSERT INTO `Notifica` (`nome`, `contenuto`, `email`)
 VALUES ('test', 'contenuto del test', 'test@gmail.com'),
+       ('test2', 'contenuto del test2', 'test@gmail.com'),
        ('test', 'contenuto del test', 'dev@gmail.com'),
+       ('test2', 'contenuto del test2', 'dev@gmail.com'),
        ('test', 'contenuto del test', 'more@gmail.com');
 
 # ---------------------------------------------------------------------- #
