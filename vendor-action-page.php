@@ -84,6 +84,15 @@ switch ($action) {
             }
         }
         break;
+
+    case 8:
+        $templateParams["title"] = "Modifica Scarpa";
+        $templateParams["main"] = "form.php";
+        $formParams["title"] = "Modifica Scarpa";
+        $formParams["main"] = "modify-product.php";
+
+        //TODO: pagina per modificare il prodotto.
+        break;
     default:
         $templateParams["title"] = "Access Violation";
         echo `<div class="fw-1 text-danger"> 

@@ -35,6 +35,7 @@
 
                     <?php foreach ($templateParams[$date["data"]] as $product) : ?>
 
+                        <!--//TODO: ADD ORDER STATUS -->
 
                         <div class="product my-4 py-4 product-history">
                             <div class="row">
