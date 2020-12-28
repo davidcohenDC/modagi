@@ -15,6 +15,19 @@
 
     <!--main content-->
     <div class="col-10 col-md-8 col-lg-6">
+        <?php if (isset($templateParams["error"])) : ?>
+            <div class="row">
+                <div class="alert alert-danger my-3 text-center col-12" role="alert">
+                    <h2>
+                        ERRORE
+                    </h2>
+                    <p class="my-1 text-center">
+                        <?php echo $templateParams["error"]; ?>
+                    </p>
+                </div>
+
+            </div>
+        <?php endif ?>
         <div class="btn-group-vertical col-12 ">
             <a href="user-action-page.php?action=1" class="my-3 btn btn-light fw-bold"> I miei Ordini </a>
             <a href="user-action-page.php?action=2" class="my-3 btn btn-light fw-bold"> Modifica Dati Utente </a>

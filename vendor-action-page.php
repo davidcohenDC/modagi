@@ -17,6 +17,10 @@ if (!isset($dbh)) {
     $dbh = new DatabaseUser(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
 }
 
+if (isset($_GET["prev"])) {
+    $previous = $_GET["prev"];
+}
+
 switch ($action) {
     case 1: //? Aggingi Scarpa
         $templateParams["title"] = "Aggiungi Articolo";
@@ -54,7 +58,6 @@ switch ($action) {
         $dbh->insertNewValue($newValue, "nome", "marca");
         break;
     case 4: //? taglia
-        $previous = $_GET["prev"];
         $dbh->insertNewValue($newValue, "numero", "taglia");
         break;
     case 5: //? colore
@@ -92,7 +95,20 @@ switch ($action) {
         $formParams["title"] = "Nome Scarpa";
         $formParams["main"] = "modify-product.php";
 
-        $formParams["sizes"] = $dbh->getAllSizes();
+        if (isset($_GET["product"])) {
+            if ($dbh->productExists($_GET["product"])) {
+                //* prodotto esiste
+                $productID = $_GET["product"];
+            } else {
+                //!product not exists
+                $templateParams["error"] = "Il porodotto non esiste";
+                header("location: vendor-action-page.php?action=1");
+            }
+        } else {
+            //!no product
+            $templateParams["error"] = "nessun prodotto da modificare";
+            header("location: user-page.php");
+        }
 
         //TODO: pagina per modificare il prodotto.
         break;
@@ -103,9 +119,25 @@ switch ($action) {
         $formParams["title"] = "Nome Scarpa";
         $formParams["main"] = "add-product-sizes.php";
 
-        $formParams["sizes"] = $dbh->getAllSizes();
+        if (isset($_GET["product"])) {
+            if ($dbh->productExists($_GET["product"])) {
+                //* prodotto esiste
+                $productID = $_GET["product"];
+            } else {
+                //!product not exists
+                $templateParams["error"] = "Il porodotto non esiste";
+                header("location: vendor-action-page.php?action=1");
+            }
+        } else {
+            //!no product
+            $templateParams["error"] = "nessun prodotto da modificare";
+            header("location: user-page.php");
+        }
 
-        //TODO: pagina per modificare il prodotto.
+        $formParams["sizes"] = $dbh->getAllSizes();
+        $formParams["quantities"] = $dbh->getAllQuantities($productID);
+
+        //TODO: pagina per aggiungere taglie.
         break;
     default:
         $templateParams["title"] = "Access Violation";
@@ -117,7 +149,7 @@ switch ($action) {
 
 
 if ($action > 1 && $action < 7) {
-    if ($action == 4) {
+    if (isset($previous)) {
         header("location: vendor-action-page.php?action=" . $previous);
     } else {
         header("location: vendor-action-page.php?action=1");

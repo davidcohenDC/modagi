@@ -140,6 +140,15 @@ class DatabaseUser
         return $this->getAll("prodotto");
     }
 
+    public function getAllQuantities($prodId)
+    {
+        $stmt = $this->db->prepare("SELECT idTaglia, quantita FROM ProdottiTaglie WHERE idProdotto = ?");
+        $stmt->bind_param("i", $prodId);
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
     // INSERTS
     public function registerUser($email, $username, $password, $name, $surname, $address)
     {
@@ -264,6 +273,17 @@ class DatabaseUser
                                         FROM User
                                         WHERE email = ?");
         $stmt->bind_param("s", $id);
+        $stmt->execute();
+
+        return count($stmt->get_result()->fetch_all(MYSQLI_ASSOC)) != 0;
+    }
+
+    public function productExists($prodId)
+    {
+        $stmt = $this->db->prepare("SELECT nome
+                                    FROM Prodotto
+                                    WHERE id = ?");
+        $stmt->bind_param("i", $prodId);
         $stmt->execute();
 
         return count($stmt->get_result()->fetch_all(MYSQLI_ASSOC)) != 0;

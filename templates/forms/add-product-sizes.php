@@ -8,7 +8,23 @@
                     <span><?php echo $size['numero'] ?></span>
                 </button>
 
-                <input id="quantity-<?php echo $size['id'] ?>" name="quantity-<?php echo $size['id'] ?>" class="form-control col-12 fst-italic" type="number" min="0" placeholder="quantità per taglia" />
+                <?php
+                $sizeExists = false;
+                foreach ($formParams['quantities'] as $index) {
+                    if ($index["idTaglia"] == $size['id']) {
+                        $sizeExists = true;
+                        $quantityId = key($formParams['quantities']);
+                    }
+                }
+
+                if ($sizeExists) {
+                    $value = $formParams['quantities'][$quantityId]["quantita"];
+                } else {
+                    $value = 0;
+                }
+                ?>
+
+                <input id="quantity-<?php echo $size['id'] ?>" name="quantity-<?php echo $size['id'] ?>" class="form-control col-12 fst-italic" type="number" min="0" value="<?php echo $value ?>" placeholder="quantità per taglia" />
             </div>
 
         <?php endforeach ?>
