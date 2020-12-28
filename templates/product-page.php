@@ -161,7 +161,7 @@ $prodotto = $templateParams["prodotto"];
               <div class="row">
                 <div class="col-md-12 text-center text-md-center text-md-right">
                 <form method="POST" id="<?php if(isUserVendor()) { echo "formModifyProduct";} else {echo "formAddToCart";}?>" action="">
-                <button type="submit" id="btnAdd" class="btn btn-<?php if(isUserVendor()) { echo "warning";} else {echo "info";}?> btn-rounder"><?php if(isUserVendor()) { echo "Modifica";} else {echo '<i class="fa fa-cart-plus" aria-hidden="true"></i>Aggiungi al carrello';}?></button>
+                <button type="submit" id="btnAdd" class="btn btn-<?php if(isUserVendor()) { echo "dark";} else {echo "info";}?> btn-rounder"><?php if(isUserVendor()) { echo "Modifica";} else {echo '<i class="fa fa-cart-plus" aria-hidden="true"></i>Aggiungi al carrello';}?></button>
                 </form>
                 </div>
               </div>
