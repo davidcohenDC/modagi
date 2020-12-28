@@ -69,7 +69,7 @@
                     <span><?php echo $size['numero'] ?></span>
                 </button>
 
-                <input id="quantity-<?php echo $size['id'] ?>" name="quantity-<?php echo $size['id'] ?>" class="form-control col-12 fst-italic" type="number" placeholder="quantità per taglia" />
+                <input id="quantity-<?php echo $size['id'] ?>" name="quantity-<?php echo $size['id'] ?>" class="form-control col-12 fst-italic" type="number" min="0" placeholder="quantità per taglia" />
             </div>
 
         <?php endforeach ?>
@@ -118,7 +118,7 @@
     <label for="price-group" class="form-label fw-bold"> Prezzo </label>
     <div id="price-group" class="input-group">
         <span class="input-group-text">€</span>
-        <input id="price" name="price" class="form-control col-12 fst-italic" type="number" step="0.01" placeholder="prezzo per unità" required />
+        <input id="price" name="price" class="form-control col-12 fst-italic" type="number" step="0.01" min="0" placeholder="prezzo per unità" required />
     </div>
 </div>
 

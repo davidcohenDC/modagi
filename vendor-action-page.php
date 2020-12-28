@@ -88,8 +88,21 @@ switch ($action) {
     case 8:
         $templateParams["title"] = "Modifica Scarpa";
         $templateParams["main"] = "form.php";
-        $formParams["title"] = "Modifica Scarpa";
+        $formParams["title"] = "Nome Scarpa";
         $formParams["main"] = "modify-product.php";
+
+        $formParams["sizes"] = $dbh->getAllSizes();
+
+        //TODO: pagina per modificare il prodotto.
+        break;
+
+    case 9:
+        $templateParams["title"] = "Aggiungi Quantità";
+        $templateParams["main"] = "form.php";
+        $formParams["title"] = "Nome Scarpa";
+        $formParams["main"] = "add-product-sizes.php";
+
+        $formParams["sizes"] = $dbh->getAllSizes();
 
         //TODO: pagina per modificare il prodotto.
         break;
