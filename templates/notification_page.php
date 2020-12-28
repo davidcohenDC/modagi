@@ -39,8 +39,9 @@
                 $('#notificationCounter').text("0");
                 $.ajax({
                     type: "POST",
-                    url: "./utilis/clearNotification.php"
+                    url: "./ajaxFunction/clearNotification.php"
                 }).done(function( msg ) {
+                    //alert(msg);
                     clear = true;
                 });
                 down = true;
