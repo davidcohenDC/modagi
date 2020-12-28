@@ -67,8 +67,20 @@ CREATE TABLE IF NOT EXISTS `Ordine` (
      `email` CHAR(20) NOT NULL,
      `data` DATE NOT NULL,
      `quantita` INT NOT NULL,
+     `idStato` INT NOT NULL,
      PRIMARY KEY (`id`)
 ) ENGINE = INNODB;
+
+
+# ---------------------------------------------------------------------- #
+# ADD TABLE "StatoOrdine"                                                #
+# ---------------------------------------------------------------------- #
+CREATE TABLE IF NOT EXISTS `StatoOrdine` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+     `nome` INT NOT NULL,
+     PRIMARY KEY (`id`)
+) ENGINE = INNODB;
+
 # ---------------------------------------------------------------------- #
 # ADD TABLE "Prodotto"                                                   #
 # ---------------------------------------------------------------------- #
@@ -126,6 +138,7 @@ CREATE UNIQUE INDEX `PK_Colore` ON `Taglia` (`id`);
 CREATE UNIQUE INDEX `PK_Materiale` ON `Materiale` (`id`);
 CREATE UNIQUE INDEX `PK_Ordine` ON `Ordine` (`id`);
 CREATE INDEX `FK_Ordine_Email` ON `Ordine` (`email`);
+CREATE INDEX `FK_Ordine_Stato` ON `Ordine` (`idStato`);
 CREATE UNIQUE INDEX `PK_Prodotto` ON `Prodotto` (`id`);
 CREATE INDEX `FK_Prodotto_Colore` ON `Prodotto` (`idColore`);
 CREATE INDEX `FK_Prodotto_Genere` ON `Prodotto` (`idGenere`);
@@ -133,6 +146,8 @@ CREATE INDEX `FK_Prodotto_Materiale` ON `Prodotto` (`idMateriale`);
 CREATE UNIQUE INDEX `PK_Genere` ON `Genere` (`id`);
 CREATE UNIQUE INDEX `PK_Email` ON `User` (`email`);
 CREATE UNIQUE INDEX `PK_Marca` ON `Marca` (`id`);
+CREATE UNIQUE INDEX `PK_Stato` ON `StatoOrdine` (`id`);
+
 # ---------------------------------------------------------------------- #
 # FOREIGN KEY CONSTRAINTS                                                #
 # ---------------------------------------------------------------------- #
@@ -148,6 +163,8 @@ ALTER TABLE `Ordine`
 ADD CONSTRAINT `FK_Ordine_Email` FOREIGN KEY (`email`) REFERENCES `User` (`email`);
 ALTER TABLE `Ordine`
 ADD CONSTRAINT `FK_Ordine_Prodotto` FOREIGN KEY (`idProdotto`) REFERENCES `Prodotto` (`id`);
+ALTER TABLE `Ordine`
+ADD CONSTRAINT `FK_Ordine_Stato` FOREIGN KEY (`idStato`) REFERENCES `StatoOrdine` (`id`);
 ALTER TABLE `Prodotto`
 ADD CONSTRAINT `FK_Prodotto_Colore` FOREIGN KEY (`idColore`) REFERENCES `Colore` (`id`);
 ALTER TABLE `Prodotto`
