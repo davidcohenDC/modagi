@@ -20,7 +20,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
     <!-- personal css file -->
     <?php if (isset($templateParams["cssFileName"])) : ?>
-        <link href="<?php echo CSS_FILE . $templateParams["cssFileName"] ?>" rel="stylesheet">
+    <link href="<?php echo CSS_FILE . $templateParams["cssFileName"] ?>" rel="stylesheet">
     <?php endif ?>
 
     <script src="<?php echo BOOTSTRAP_JS_LINK ?>"></script>
@@ -28,7 +28,8 @@ if (session_status() == PHP_SESSION_NONE) {
 
     <!--base css file-->
     <link rel="stylesheet" href="<?php echo CSS_FILE; ?>base.css">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 
     <!-- link for icons -->
@@ -47,7 +48,8 @@ if (session_status() == PHP_SESSION_NONE) {
                 </a>
 
                 <!-- Collapse button -->
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+                    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -78,21 +80,23 @@ if (session_status() == PHP_SESSION_NONE) {
                                 <?php require_once("./utilis/functions.php"); ?>
 
                                 <?php if (isUserLoggedIn()) : ?>
-                                    User Page
+                                User Page
                                 <?php else : ?>
-                                    Log in
+                                Log in
                                 <?php endif ?>
                             </a>
                         </li>
                         <li class="nav-item pl-2 mb-2 mb-md-0">
                             <?php if (isUserLoggedIn()) : ?>
-                                <a href="user-action-page.php?action=0" type="button" class="btn btn-outline-danger btn-md btn-rounded btn-navbar waves-effect waves-light">
-                                    Log out
-                                </a>
+                            <a href="user-action-page.php?action=0" type="button"
+                                class="btn btn-outline-danger btn-md btn-rounded btn-navbar waves-effect waves-light">
+                                Log out
+                            </a>
                             <?php else : ?>
-                                <a href="registration-page.php" type="button" class="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">
-                                    Sign up
-                                </a>
+                            <a href="registration-page.php" type="button"
+                                class="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">
+                                Sign up
+                            </a>
                             <?php endif ?>
                         </li>
                     </ul>
@@ -123,8 +127,10 @@ if (session_status() == PHP_SESSION_NONE) {
         <div class="py-4 container bg-light-dark col-12 col-md-8 col-lg-6">
             <h5 class="px-5 m-0 text-white">
                 <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
-                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                        class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z" />
                     </svg>
                 </span> Contatti
             </h5>
@@ -135,14 +141,14 @@ if (session_status() == PHP_SESSION_NONE) {
                 ?>
                 <dl class="row text-light pt-3 px-5">
                     <?php foreach ($creators as $creator) : ?>
-                        <dt class="col-12 col-md-6 py-2">
-                            <?php echo $creator["nome"] . " " . $creator["cognome"] ?>
-                        </dt>
-                        <dd class="col-12 col-md-6 value py-2">
-                            <?php echo $creator["email"] ?>
-                        </dd>
+                    <dt class="col-12 col-md-6 py-2">
+                        <?php echo $creator["nome"] . " " . $creator["cognome"] ?>
+                    </dt>
+                    <dd class="col-12 col-md-6 value py-2">
+                        <?php echo $creator["email"] ?>
+                    </dd>
 
-                        <hr />
+                    <hr />
                     <?php endforeach ?>
                 </dl>
             </div>

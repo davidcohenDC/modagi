@@ -141,6 +141,12 @@ window.onbeforeunload = function(e) {
       this.submit();
 
     });
+    
+    $('#formModifyProduct').on('submit', function (e) {
+      e.preventDefault();
+      let urlParams = new URLSearchParams(window.location.search);
+      location.href = "vendor-action-page.php?action=8&prodotto="+urlParams.get('prodotto');
+    });
 
     $("input[name=taglia]").on("change", function(){
       $("input[type='number']").prop('max',$("input[name=taglia]").attr("id"));
@@ -149,16 +155,11 @@ window.onbeforeunload = function(e) {
     
     if(location.search.split('modal=')[1]) {
       let urlParams = new URLSearchParams(window.location.search);
-      console.log($("input[type='number']").attr("max"));
-      if(urlParams.get('quantita') > 0 && urlParams.get('quantita') < $("input[type='number']").attr("max")) {
-        if($("#btnAdd").val()) {
-          $('#modalAbandonedCart').modal('show');
-        } else {
-          $('#modalNotUserLogged').modal('show');
-        }
-    } else {
-      $('#modalProduct').modal('show');
-    }
+      if(urlParams.get('quantita') > 0) {
+        $('#modalAbandonedCart').modal('show');
+      } else {
+        $('#modalProduct').modal('show');
+      }
 
     }
     
