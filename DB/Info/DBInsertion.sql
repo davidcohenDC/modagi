@@ -31,6 +31,13 @@ VALUES ('1', '39'),
     ('5', '43'),
     ('6', '44'),
     ('7', '45');
+
+# ---------------------------------------------------------------------- #
+# ADD VALUES "StatoOrdine"                                               #
+# ---------------------------------------------------------------------- #
+INSERT INTO `StatoOrdine` (`id`, `nome`)
+VALUES ('1', 'Confermato'), ('2', 'Spedito'), ('3', 'Consegnato');
+
 # ---------------------------------------------------------------------- #
 # ADD VALUES "Genere"                                                    #
 # ---------------------------------------------------------------------- #
@@ -230,9 +237,9 @@ VALUES (
 # ---------------------------------------------------------------------- #
 # ADD VALUES "Ordine"                                                    #
 # ---------------------------------------------------------------------- #
-INSERT INTO `ordine` (`idProdotto`, `email`, `data`, `quantita`)
-VALUES ('2', 'test@gmail.com', '2020-12-10', '1'),
-    ('1', 'test@gmail.com', '2020-12-10', '2');
+INSERT INTO `ordine` (`idProdotto`, `email`, `data`, `quantita`,`idStato`)
+VALUES ('2', 'test@gmail.com', '2020-12-10', '1','2'),
+    ('1', 'test@gmail.com', '2020-12-10', '2','3');
 # ---------------------------------------------------------------------- #
 # ADD VALUES "ProdottiTaglie"                                                    #
 # ---------------------------------------------------------------------- #
@@ -270,3 +277,5 @@ INSERT INTO `ProdottiTaglie` (`idTaglia`, `idProdotto`, `quantita`)
 VALUES(7, 3, 25);
 INSERT INTO `ProdottiTaglie` (`idTaglia`, `idProdotto`, `quantita`)
 VALUES(7, 4, 25);
+
+
