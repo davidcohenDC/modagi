@@ -54,6 +54,7 @@ switch ($action) {
         $dbh->insertNewValue($newValue, "nome", "marca");
         break;
     case 4: //? taglia
+        $previous = $_GET["prev"];
         $dbh->insertNewValue($newValue, "numero", "taglia");
         break;
     case 5: //? colore
@@ -116,7 +117,11 @@ switch ($action) {
 
 
 if ($action > 1 && $action < 7) {
-    header("location: vendor-action-page.php?action=1");
+    if ($action == 4) {
+        header("location: vendor-action-page.php?action=" . $previous);
+    } else {
+        header("location: vendor-action-page.php?action=1");
+    }
 }
 
 require 'templates/base.php';
