@@ -62,6 +62,11 @@ if (session_status() == PHP_SESSION_NONE) {
                             </a>
                         </li>
                         <li class="nav-item">
+                            <div class="nav-link waves-effect">
+                                <?php require_once("notification.php"); ?>
+                            </div>
+                        </li>
+                        <li class="nav-item">
                             <a href="cart.php" class="nav-link navbar-link-2 waves-effect">
                                 <span class="badge badge-pill red">
                                     <?php
