@@ -7,7 +7,6 @@ const fileNotChosen = `<div class="my-3">
                             </svg>
                         </div>
                         <div class="file-name">
-                            Inserire Immagine
                         </div>`;
 
 const fileChosen = `<div class="my-3">
@@ -20,7 +19,11 @@ const fileChosen = `<div class="my-3">
 
 $(function(){
     span = $("span.upload-img");
+
+    /* set up */
+    const action = span.html();
     span.html(fileNotChosen);
+    $("div.file-name").html(action +" Immagine");
 
     $("input[type='file'].file-upload").on("change", function () {
         if($(this).val() != ''){
@@ -29,11 +32,13 @@ $(function(){
             $("div.file-name").html($(this).val());
 
             $("label.upload-img-label").removeClass("btn-outline-secondary");
-            $("label.upload-img-label").addClass("btn-outline-success");
+            $("label.upload-img-label").addClass("btn-outline-info");
         } else {
             //file non scelto 
             span.html(fileNotChosen);
-            $("label.upload-img-label").removeClass("btn-outline-success");
+            $("div.file-name").html(action +" Immagine");
+
+            $("label.upload-img-label").removeClass("btn-outline-info");
             $("label.upload-img-label").addClass("btn-outline-secondary");
 
         }   

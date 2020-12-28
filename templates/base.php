@@ -78,7 +78,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                 <?php require_once("./utilis/functions.php"); ?>
 
                                 <?php if (isUserLoggedIn()) : ?>
-                                    User Page
+                                    <?php echo $_SESSION["username"]; ?>
                                 <?php else : ?>
                                     Log in
                                 <?php endif ?>

@@ -55,7 +55,37 @@ class DatabaseUser
         }
         return [false, "PASSWORD CORRENTE SBAGLIATA"];
     }
-
+    /* admin */
+    public function updateProduct($id, $newValue, $field)
+    {
+        switch ($field) {
+            case 'nome':
+                $params = "si";
+                break;
+            case 'descrizione':
+                $params = "si";
+                break;
+            case 'idMarca':
+                $params = "ii";
+                break;
+            case 'idColore':
+                $params = "ii";
+                break;
+            case 'prezzo':
+                $params = "ii";
+                break;
+            case 'idGenere':
+                $params = "ii";
+                break;
+            case 'idMateriale':
+                $params = "ii";
+                break;
+            default:
+                # code...
+                break;
+        }
+        $this->updateProductField($field, $id, $newValue, $params);
+    }
     // GETTERS
     public function getUserName($id)
     {
@@ -138,6 +168,25 @@ class DatabaseUser
     public function getAllProducts()
     {
         return $this->getAll("prodotto");
+    }
+
+    public function getAllQuantities($prodId)
+    {
+        $stmt = $this->db->prepare("SELECT idTaglia, quantita FROM ProdottiTaglie WHERE idProdotto = ?");
+        $stmt->bind_param("i", $prodId);
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getProduct($id)
+    {
+        return $this->getAll("prodotto WHERE id = " . $id)[0];
+    }
+
+    public function getCategoriesProduct($id)
+    {
+        return $this->getAll("ProdottiCategorie WHERE idProdotto = " . $id);
     }
 
     // INSERTS
@@ -269,6 +318,17 @@ class DatabaseUser
         return count($stmt->get_result()->fetch_all(MYSQLI_ASSOC)) != 0;
     }
 
+    public function productExists($prodId)
+    {
+        $stmt = $this->db->prepare("SELECT nome
+                                    FROM Prodotto
+                                    WHERE id = ?");
+        $stmt->bind_param("i", $prodId);
+        $stmt->execute();
+
+        return count($stmt->get_result()->fetch_all(MYSQLI_ASSOC)) != 0;
+    }
+
     // PRIVATES
     private function checkPassword($id, $password)
     {
@@ -305,5 +365,15 @@ class DatabaseUser
             return [true, ""];
         }
         return [false, "PASSWORD CORRENTE SBAGLIATA"];
+    }
+
+    private function updateProductField($field, $id, $newValue, $params)
+    {
+        $stmt = $this->db->prepare("UPDATE prodotto
+                                    SET " . $field . " = ?
+                                    WHERE id = ?");
+
+        $stmt->bind_param($params, $newValue, $id);
+        $stmt->execute();
     }
 }
