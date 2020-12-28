@@ -54,6 +54,7 @@ switch ($action) {
         $dbh->insertNewValue($newValue, "nome", "marca");
         break;
     case 4: //? taglia
+        $previous = $_GET["prev"];
         $dbh->insertNewValue($newValue, "numero", "taglia");
         break;
     case 5: //? colore
@@ -84,6 +85,28 @@ switch ($action) {
             }
         }
         break;
+
+    case 8:
+        $templateParams["title"] = "Modifica Scarpa";
+        $templateParams["main"] = "form.php";
+        $formParams["title"] = "Nome Scarpa";
+        $formParams["main"] = "modify-product.php";
+
+        $formParams["sizes"] = $dbh->getAllSizes();
+
+        //TODO: pagina per modificare il prodotto.
+        break;
+
+    case 9:
+        $templateParams["title"] = "Aggiungi Quantità";
+        $templateParams["main"] = "form.php";
+        $formParams["title"] = "Nome Scarpa";
+        $formParams["main"] = "add-product-sizes.php";
+
+        $formParams["sizes"] = $dbh->getAllSizes();
+
+        //TODO: pagina per modificare il prodotto.
+        break;
     default:
         $templateParams["title"] = "Access Violation";
         echo `<div class="fw-1 text-danger"> 
@@ -94,7 +117,11 @@ switch ($action) {
 
 
 if ($action > 1 && $action < 7) {
-    header("location: vendor-action-page.php?action=1");
+    if ($action == 4) {
+        header("location: vendor-action-page.php?action=" . $previous);
+    } else {
+        header("location: vendor-action-page.php?action=1");
+    }
 }
 
 require 'templates/base.php';

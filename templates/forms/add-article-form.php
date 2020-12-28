@@ -1,8 +1,5 @@
-<script src="<?php echo CSS_FILE ?>mdb.min.js"></script>
-
 <!-- for change buttons -->
 <script src="<?php echo JS_FILE ?>change-data-selector.js"></script>
-<script src="<?php echo JS_FILE ?>add-params.js"></script>
 <script src="<?php echo JS_FILE ?>file-upload.js"></script>
 
 <div class="my-3 mx-2 ">
@@ -69,13 +66,13 @@
                     <span><?php echo $size['numero'] ?></span>
                 </button>
 
-                <input id="quantity-<?php echo $size['id'] ?>" name="quantity-<?php echo $size['id'] ?>" class="form-control col-12 fst-italic" type="number" placeholder="quantità per taglia" />
+                <input id="quantity-<?php echo $size['id'] ?>" name="quantity-<?php echo $size['id'] ?>" class="form-control col-12 fst-italic" type="number" min="0" placeholder="quantità per taglia" />
             </div>
 
         <?php endforeach ?>
 
         <div class="my-3">
-            <button class="px-3 py-2 btn-outline-success input-embedded add-button for-taglia action-4" data-mdb-toggle="modal" data-mdb-target="#add-modal">
+            <button class="px-3 py-2 btn-outline-success input-embedded add-button for-taglia action-4 prev-1" data-mdb-toggle="modal" data-mdb-target="#add-modal">
                 <span> Aggiungi
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
@@ -118,7 +115,7 @@
     <label for="price-group" class="form-label fw-bold"> Prezzo </label>
     <div id="price-group" class="input-group">
         <span class="input-group-text">€</span>
-        <input id="price" name="price" class="form-control col-12 fst-italic" type="number" step="0.01" placeholder="prezzo per unità" required />
+        <input id="price" name="price" class="form-control col-12 fst-italic" type="number" step="0.01" min="0" placeholder="prezzo per unità" required />
     </div>
 </div>
 
@@ -175,25 +172,4 @@
 </div>
 
 <!--modal-->
-<div class="modal fade" id="add-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Aggiungi <span class="modal-name"> </span> </h5>
-                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-
-                <div class="my-3 mx-2">
-                    <label for="new-value" class="form-label fw-bold"> <span class="modal-name"> </span> da aggiungere </label>
-                    <input id="new-value" name="new-value" class="form-control col-12 fst-italic" type="text" placeholder="inserire valore da aggiungere" maxlength="40" />
-                </div>
-
-                <div class="my-3 mx-2">
-                    <a href="#" class="px-3 py-2 btn-primary col-12 fw-bold modal-confirm" onclick=""> Conferma </a>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
+<?php require('templates/modals/modal_add-param.php'); ?>

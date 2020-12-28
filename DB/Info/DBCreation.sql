@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `Ordine` (
 # ---------------------------------------------------------------------- #
 CREATE TABLE IF NOT EXISTS `StatoOrdine` (
 	`id` INT NOT NULL AUTO_INCREMENT,
-     `nome` INT NOT NULL,
+     `nome` CHAR(200) NOT NULL,
      PRIMARY KEY (`id`)
 ) ENGINE = INNODB;
 

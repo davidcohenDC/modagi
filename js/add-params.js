@@ -6,6 +6,10 @@ function findAction(className) {
     return className.includes("action-");
 }
 
+function findPrev(className){
+    return className.includes("prev-");
+}
+
 $(function(){
     modalName = $(".modal-name");
     action = 1;
@@ -20,6 +24,11 @@ $(function(){
         action = $(this).attr("class").split(/\s+/).find(findAction);
         action = action.split("-")[1];     
 
+        if(action == 4){
+            prev = $(this).attr("class").split(/\s+/).find(findPrev);
+            prev = prev.split("-")[1]; 
+        }
+
         $("a.modal-confirm").attr("href", ).replace("#", "vendor-action-page.php?action=" + String(action) + "#");
     });
 
@@ -27,9 +36,13 @@ $(function(){
         newValue = $("#new-value").val();
 
         if(newValue == ""){
-            e.preventDefault()
+            e.preventDefault();
         }
 
-        $(this).attr("href", "vendor-action-page.php?action=" + String(action) + "&new-value=" + String(newValue));
+        if(action == 4){
+            $(this).attr("href", "vendor-action-page.php?action=" + String(action) + "&new-value=" + String(newValue) + "&prev=" + String(prev));
+        } else {
+            $(this).attr("href", "vendor-action-page.php?action=" + String(action) + "&new-value=" + String(newValue));
+        }
     })
 });
