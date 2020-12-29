@@ -160,8 +160,8 @@ $prodotto = $templateParams["prodotto"];
             <div class=" mb-2 text-center">
               <div class="row">
                 <div class="col-md-12 text-center text-md-center text-md-right">
-                <form method="POST" id="formAddToCart" action="">
-                <button type="submit" id="btnAdd" value="<?php if(isUserLoggedIn()) {echo "1";}?>" class="btn btn-info btn-rounder"><i class="fa fa-cart-plus" aria-hidden="true"></i> Aggiungi al carrello</button>
+                <form method="POST" id="<?php if(isUserVendor()) { echo "formModifyProduct";} else {echo "formAddToCart";}?>" action="">
+                <button type="submit" id="btnAdd" class="btn btn-<?php if(isUserVendor()) { echo "dark";} else {echo "info";}?> btn-rounder"><?php if(isUserVendor()) { echo '<i class="fa fa-eraser" aria-hidden="true"></i>Modifica';} else {echo '<i class="fa fa-cart-plus" aria-hidden="true"></i>Aggiungi al carrello';}?></button>
                 </form>
                 </div>
               </div>

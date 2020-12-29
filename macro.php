@@ -27,7 +27,7 @@ define("CREATORS", array(
     2 => array(
         "nome" => "David",
         "cognome" => "Cohen",
-        "email" => "TODO",
+        "email" => "david.cohen@studio.unibo.it",
         "matricola" => "TODO"
     ),
     3 => array(

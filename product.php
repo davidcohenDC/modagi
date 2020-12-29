@@ -9,6 +9,8 @@ if(isset($_GET["prodotto"])) {
     $idprodotto = 1;
 }
 
+//vendor-action-page.php?action=8&prodotto=1
+
 $cartManager = new CartManager();
 
 $templateParams["main"] = "product-page.php";
@@ -22,7 +24,7 @@ $templateParams["idMarca"] = $product->selectMarcaByID($idprodotto)[0];
 $templateParams["quantitaTaglia"] = $product->selectQuantitaWithNSize($idprodotto);
 
 
-if(isUserLoggedIn() && isset($_GET["modal"]) && $_GET["quantita"] > 0 ) {
+if(isset($_GET["modal"]) && $_GET["quantita"] > 0 ) {
     $cartManager->addProduct($_GET["prodotto"],$_GET["taglia"],$_GET["quantita"]);
     $cartManager->saveCart();
 }
@@ -33,9 +35,7 @@ require_once("templates/product-page.php");
 
 if(isset($_GET["modal"])) {
     require_once("templates/modals/modal_abandoned_cart.php");
-    require_once("templates/modals/modal_not_user_logged.php");
     require_once("templates/modals/modal_product_no_quantity.php");
-
 }
 
 ?>
