@@ -1,11 +1,9 @@
 <?php
 
-require_once("./macro.php");
-
 class UserManager {
     
-    public function __construct() {
-        $this->db = new mysqli(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
+    public function __construct($server, $username, $password, $dbName) {
+        $this->db = new mysqli($server, $username, $password, $dbName);
 
         // controllo se la connessione è andata a buon fine
         if($this->db->connect_error) {

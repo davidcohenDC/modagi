@@ -53,6 +53,9 @@ CREATE TABLE IF NOT EXISTS `Colore` (
      `nome` CHAR(20) NOT NULL,
      PRIMARY KEY (`id`)
 ) ENGINE = INNODB;
+# ---------------------------------------------------------------------- #
+# ADD TABLE "Materiale"                                                  #
+# ---------------------------------------------------------------------- #
 CREATE TABLE IF NOT EXISTS `Materiale` (
      `id` INT NOT NULL AUTO_INCREMENT,
      `nome` CHAR(20) NOT NULL,
@@ -70,8 +73,6 @@ CREATE TABLE IF NOT EXISTS `Ordine` (
      `idStato` INT NOT NULL,
      PRIMARY KEY (`id`)
 ) ENGINE = INNODB;
-
-
 # ---------------------------------------------------------------------- #
 # ADD TABLE "StatoOrdine"                                                #
 # ---------------------------------------------------------------------- #
@@ -80,7 +81,6 @@ CREATE TABLE IF NOT EXISTS `StatoOrdine` (
      `nome` CHAR(200) NOT NULL,
      PRIMARY KEY (`id`)
 ) ENGINE = INNODB;
-
 # ---------------------------------------------------------------------- #
 # ADD TABLE "Prodotto"                                                   #
 # ---------------------------------------------------------------------- #
@@ -117,6 +117,16 @@ CREATE TABLE IF NOT EXISTS `User` (
      PRIMARY KEY (`email`)
 ) ENGINE = INNODB;
 # ---------------------------------------------------------------------- #
+# ADD TABLE "Notifiche"                                                  #
+# ---------------------------------------------------------------------- #
+CREATE TABLE IF NOT EXISTS `Notifica` (
+     `id` int NOT NULL AUTO_INCREMENT,
+     `nome` CHAR(50) NOT NULL,
+     `contenuto` CHAR(200) NOT NULL,
+     `email` CHAR(40) NOT NULL,
+     PRIMARY KEY (`id`)
+) ENGINE = INNODB;
+# ---------------------------------------------------------------------- #
 # ADD TABLE "Marca"                                                      #
 # ---------------------------------------------------------------------- #
 CREATE TABLE IF NOT EXISTS `marca` (
@@ -134,9 +144,10 @@ CREATE UNIQUE INDEX `PK_ProdottiTaglie` ON `ProdottiTaglie` (`idTaglia`, `idProd
 CREATE INDEX `FK_ProTag_Prodotto` ON `ProdottiTaglie` (`idProdotto`);
 CREATE INDEX `FK_ProTag_Taglia` ON `ProdottiTaglie` (`idTaglia`);
 CREATE UNIQUE INDEX `PK_Colore` ON `Colore` (`id`);
-CREATE UNIQUE INDEX `PK_Colore` ON `Taglia` (`id`);
+CREATE UNIQUE INDEX `PK_Taglia` ON `Taglia` (`id`);
 CREATE UNIQUE INDEX `PK_Materiale` ON `Materiale` (`id`);
 CREATE UNIQUE INDEX `PK_Ordine` ON `Ordine` (`id`);
+CREATE INDEX `FK_Notifica_Email` ON `Notifica` (`email`);
 CREATE INDEX `FK_Ordine_Email` ON `Ordine` (`email`);
 CREATE INDEX `FK_Ordine_Stato` ON `Ordine` (`idStato`);
 CREATE UNIQUE INDEX `PK_Prodotto` ON `Prodotto` (`id`);
@@ -145,6 +156,7 @@ CREATE INDEX `FK_Prodotto_Genere` ON `Prodotto` (`idGenere`);
 CREATE INDEX `FK_Prodotto_Materiale` ON `Prodotto` (`idMateriale`);
 CREATE UNIQUE INDEX `PK_Genere` ON `Genere` (`id`);
 CREATE UNIQUE INDEX `PK_Email` ON `User` (`email`);
+CREATE UNIQUE INDEX `PK_Taglia` ON `Notifica` (`id`);
 CREATE UNIQUE INDEX `PK_Marca` ON `Marca` (`id`);
 CREATE UNIQUE INDEX `PK_Stato` ON `StatoOrdine` (`id`);
 
@@ -165,6 +177,8 @@ ALTER TABLE `Ordine`
 ADD CONSTRAINT `FK_Ordine_Prodotto` FOREIGN KEY (`idProdotto`) REFERENCES `Prodotto` (`id`);
 ALTER TABLE `Ordine`
 ADD CONSTRAINT `FK_Ordine_Stato` FOREIGN KEY (`idStato`) REFERENCES `StatoOrdine` (`id`);
+ALTER TABLE `Notifica`
+ADD CONSTRAINT `FK_Notifica_Email` FOREIGN KEY (`email`) REFERENCES `User` (`email`);
 ALTER TABLE `Prodotto`
 ADD CONSTRAINT `FK_Prodotto_Colore` FOREIGN KEY (`idColore`) REFERENCES `Colore` (`id`);
 ALTER TABLE `Prodotto`

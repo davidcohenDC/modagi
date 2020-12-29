@@ -21,7 +21,7 @@ $cart["articleDetails"] = $cartManager->getAllProductDetails();
 $cart["totalPrice"] = $cartManager->getTotalPrice();
 $cart["orderCount"] = $cartManager->getOrderCount();
 
-$userManager = new UserManager();
+$userManager = new UserManager(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
 $user["email"] = $userManager->getEmail();
 $user["nome"] = $userManager->getNome();
 $user["username"] = $userManager->getUsername();
