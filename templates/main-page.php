@@ -11,6 +11,9 @@ $deleteSelectionHtml = '
   ';
 ?>
 
+<!-- Link: Home Style Css -->
+<link href="<?php echo CSS_FILE . "home.css" ?>" rel="stylesheet">
+
 <div class="row">
 
   <!-- Column: Filters -->
