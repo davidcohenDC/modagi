@@ -80,23 +80,29 @@ $deleteSelectionHtml = '
   <!-- Column: Product -->
   <div class="col-12 col-lg-8">
 
-    <!-- Carousel-->
-    <div id="carouselPromotion" class="carousel slide mb-4 " data-ride="carousel">
-      <div class="carousel-inner" role="listbox">
-        <?php foreach($templateParams["Promo"] as $index => $promo): ?>
-          <?php $prodotto = $product->selectByName($promo)[0]; ?>
-        <div class="carousel-item <?php if ($index == 0) { echo "active";} ?>">
+    <!-- Section: Promotions-->
+    <section id="promotions">
+      <div id="carouselPromotion" class="carousel slide " aria-labelledby="id_title" data-ride="carousel" aria-describedby="id_desc">
+      <h2 id="id_title" class="sr-only">Carousel content with slides.</h2>
+      <p id="id_desc" class="sr-only">A carousel is a rotating set of images,
+        rotation stops on keyboard focus on carousel tab controls or hovering the mouse pointer over images.</p>
+        <div class="carousel-inner">
+          <?php foreach($templateParams["Promo"] as $index => $promo):
+          $prodotto = $product->selectByName($promo)[0]; ?>
+          <div class="carousel-item <?php if ($index == 0) { echo "active";} ?>">
             <img class="d-block img-fluid" src="<?php echo PROMOTION_DIR."promo_".$promo.".jpg"; ?>" alt="Promozione <?php echo $prodotto["nome"] ?>">
               <div class="carousel-caption text-center">
-              <h3 class="text-dark header-text-shadow"><?php echo strtoupper($prodotto["nome"]) ?></h3>
-                <p class="text-dark tablet header-text-shadow"><?php if($prodotto["descrizione"] != "") {echo $prodotto["descrizione"];} else {echo "aggiungi descrizione!";}?></p>
-                <p><a class="btn btn-dark header-text-shadow" href="product.php?prodotto=<?php echo $prodotto["id"]; ?>" role="button">Scopri <span class="fa fa-long-arrow-right" aria-hidden="true"></span></a></p>                
+              <h3><?php echo strtoupper($prodotto["nome"]);?></h3>
+                <p><?php if($prodotto["descrizione"] != "") {echo $prodotto["descrizione"];} else {echo "aggiungi descrizione!";}?></p>
+                <p><a class="btn btn-dark" href="product.php?prodotto=<?php echo $prodotto["id"]; ?>" role="button">Scopri 
+                  <span class="fa fa-long-arrow-right" aria-hidden="true"></span></a></p>                
             </div>
+          </div>
+          <?php endforeach ?>
         </div>
-        <?php endforeach ?>
       </div>
-    </div>
-    <!-- Carousel-->
+    </section>
+      <!-- Section: Promotions-->
 
     <!-- Row: Filters -->
     <div class="row justify-content-center mobile">
