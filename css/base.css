@@ -487,14 +487,7 @@ button.input-embedded {
   border-bottom: 16px solid blue;
 }
 
-section > div > a > label {
-  color: black !important;
-}
 
-section > div > a > label:hover {
-  color: blue !important;
-  cursor: pointer;
-}
 
 @keyframes spin {
   0% {
@@ -922,3 +915,65 @@ ul > li > a {
 input[type="file"].file-upload {
   display: none;
 }
+
+
+
+
+#order-filter, #price-filter, #tables-filter, #delete-filter{
+  margin-bottom: 8px !important;
+}
+
+#order-filter > h6, #price-filter > h6, #tables-filter > section > a > h6{
+  font-weight: bold !important;
+  margin-bottom: 5% !important;
+}
+
+#order-filter > div > a > label, #tables-fiter > section > label {
+  color: black;
+  margin-bottom: 1px !important;
+}
+
+
+#order-filter > div > a > label:hover, .custom-control:hover, .custom-control-label:hover {
+  margin-left: -2px;
+  color: #007bff !important;
+  cursor: pointer;
+
+}
+
+.custom-control-label {
+  margin-bottom: 2px !important;
+}
+
+.custom-control-label:hover {
+  color: #007bff;
+
+}
+
+#range-wrapper {
+  display: inline-flex !important; 
+  margin: 4px 0px !important;
+}
+
+#range-wrapper > span {
+  font-weight: bold !important;
+  color: #6c757d;
+  font-size: 80%;
+}
+
+.multi-range {
+  margin: 0px 6px !important;
+}
+
+#tables-filter > section {
+  margin-bottom: 5px !important;
+}
+
+#tables-filter > section > a > h6 > i{
+  margin-left: 2px !important;
+}
+
+#delete-filter > button {
+  margin-left: -5%;
+}
+

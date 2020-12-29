@@ -1,101 +1,102 @@
 <?php
 $page = $paginator->getPage();
 $totalPage = $paginator->getTotalPages();
-$firstPage = 1;
-
 $tabelle = array();
 array_push($tabelle, "marca","genere","materiale","colore","taglia");
+$selected_css = "font-weight-bold text-primary";
+$deleteSelectionHtml = '
+  <section id="delete-filter">
+  <button type="button" class="btn-delete btn btn-light" name="btnDelete"><i class="fa fa-trash fa-2x mr-2" aria-hidden="true"></i>Elimina Selezione</button>
+  </section>
+  ';
 ?>
 
 <div class="row">
 
-  <div class="col-lg-3 desktop">
+  <!-- Column: Filters -->
+  <div class="filters col-lg-3 desktop">
 
-    <!-- Section: Ordered -->
-    <section class="list-order my-2 mb-4">
-      <h6 class="font-weight-bold mb-3">Ordina</h6>
+    <!-- Section: Order-Filter -->
+    <section id="order-filter">
+      <h6>Ordina</h6>
       <div class="list-group">
-        <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "filter","ultimi_arrivi")?>"><label
-            class="control-label mb-1 <?php if($_GET["filter"] == "ultimi_arrivi") {echo "font-weight-bold text-primary";} else {}?>">Ultimi
-            Arrivi</label></a>
-        <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "filter","prezzo_crescente")?>"><label
-            class="control-label mb-1 <?php if($_GET["filter"] == "prezzo_crescente") {echo "font-weight-bold text-primary";} else {}?>">Prezzo
-            Crescente</label></a>
-        <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "filter","prezzo_decrescente")?>"><label
-            class="control-label mb-1 <?php if($_GET["filter"] == "prezzo_decrescente") {echo "font-weight-bold text-primary";} else {}?>">Prezzo
-            Decrescente</label></a>
+        <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "filter","ultimi_arrivi")?>">
+        <label class="<?php if($_GET["filter"] == "ultimi_arrivi") {echo $selected_css ;}?>">Ultimi Arrivi</label></a>
+        <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "filter","prezzo_crescente")?>">
+        <label class="<?php if($_GET["filter"] == "prezzo_crescente") {echo $selected_css ;}?>">Prezzo Crescente</label></a>
+        <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "filter","prezzo_decrescente")?>">
+        <label class="<?php if($_GET["filter"] == "prezzo_decrescente") {echo $selected_css ;}?>">Prezzo Decrescente</label></a>
       </div>
     </section>
-    <!-- Section: Ordered -->
+    <!-- Section: Order-Filter -->
 
-    <!-- Section: Price -->
-    <section class="list-price my-2 mb-4">
-
-      <h6 class="font-weight-bold mb-3">Prezzo</h6>
-
-      <div class="slider-price d-flex align-items-center my-4">
-        <span class="font-weight-bold small text-muted mr-2">€0</span>
-        <form class="multi-range-field mr-2 ">
+    <!-- Section: Price-Filter -->
+    <section id="price-filter">
+      <h6>Prezzo</h6>
+      <div id="range-wrapper">
+        <span for="multi">€0</span>
+        <form class="multi-range-form">
           <input id="multi" class="multi-range" type="range" min="1" max="500" step="10" />
         </form>
-        <span class="final-value font-weight-bold text-muted small">€500</span>
+        <span for="multi">€500</span>
       </div>
-
     </section>
-    <!-- Section: Price -->
+    <!-- Section: Price-Filter -->
 
-    <!-- Section: Tables -->
-    <section class="list-tables my-2 mb-4">
+
+    <section id="tables-filter">
       <?php foreach($tabelle as $tabella): ?>
-      <section class="list-gender mb-3">
+      <section class="list-<?php echo $tabella ?>">
         <a class="link-table" data-toggle="collapse" href="#collapse_<?php echo $tabella ?>">
-          <h6 class="font-weight-bold mb-3"><?php echo ucfirst($tabella) ?><i
-              class="ml-1 fa fa-arrow-<?php if(isset($_GET[$tabella])) {echo "down";} else {echo "right";} ?>" aria-hidden="true"></i>
-      </h6>
+          <h6><?php echo ucfirst($tabella) ?>
+          <span class="fa fa-arrow-<?php if(isset($_GET[$tabella])) {echo "down";} else {echo "right";} ?>" aria-hidden="true"></span>
+          </h6>
         </a>
-        <?php foreach($templateParams[$tabella] as $value): ?>
-        <div id="collapse_<?php echo $tabella ?>"
-          class="custom-control radio collapse <?php if($_GET[$tabella]) {echo "show";} ?>">
-          <input type="radio" class="custom-control-input"
-            id="<?php if($tabella == "taglia") {echo $value["numero"];} else {echo $value["nome"];} ?>"
-            name="check<?php echo ucfirst($tabella) ?>" value="<?php echo $value["id"] ?>"
-            <?php if(isset($_GET[$tabella]) && $_GET[$tabella] == $value["id"]){echo "checked";}?>>
-          <label
-            class="<?php if($_GET[$tabella] == $value["id"]) {echo "font-weight-bold text-primary";} ?> custom-control-label mb-1"
-            for="<?php if($tabella == "taglia") {echo $value["numero"];} else {echo $value["nome"];} ?>"><?php if($tabella == "taglia") {echo $value["numero"];} else {echo $value["nome"];} ?></label>
-        </div>
-        <?php endforeach ?>
+          <?php foreach($templateParams[$tabella] as $value): ?>
+          <div id="collapse_<?php echo $tabella ?>" class="custom-control collapse <?php if(isset($_GET[$tabella])) {echo "show";} ?>">
+            <input type="radio" class="custom-control-input"
+              id="<?php if($tabella == "taglia") {echo $value["numero"];} else {echo $value["nome"];} ?>"
+              name="check<?php echo ucfirst($tabella) ?>" value="<?php echo $value["id"] ?>"
+              <?php if(isset($_GET[$tabella]) && $_GET[$tabella] == $value["id"]){echo "checked";}?>>
+            <label
+              class="<?php if(isset($_GET[$tabella])) {if($_GET[$tabella] == $value["id"]) {echo $selected_css;}} ?> custom-control-label"
+              for="<?php if($tabella == "taglia") {echo $value["numero"];} else {echo $value["nome"];} ?>"><?php if($tabella == "taglia") {echo $value["numero"];} else {echo $value["nome"];} ?></label>
+          </div>
+          <?php endforeach ?>
       </section>
       <?php endforeach ?>
-
     </section>
-    <!-- Section: Tables -->
-    <?php if($_GET) { echo '
-    <div class="row mb-3">
-    <button type="button" class="btn-delete btn btn-light" name="btndelete"><i class="fa fa-trash fa-2x mr-2" aria-hidden="true"></i>Elimina Selezione</button>
-    </div>
-    ';} ?>
-  </div>
+    <!-- Section: Tables-Filter -->
 
+    <!-- Section: Delete-Filter -->
+    <?php if($_GET) { echo $deleteSelectionHtml;} ?>
+    <!-- Section: Delete-Filter -->
+  </div>
+  <!-- Column: Filters -->
+
+  <!-- Column: Product -->
   <div class="col-12 col-lg-8">
-    
+
+    <!-- Carousel-->
     <div id="carouselPromotion" class="carousel slide mb-4 " data-ride="carousel">
       <div class="carousel-inner" role="listbox">
         <?php foreach($templateParams["Promo"] as $index => $promo): ?>
           <?php $prodotto = $product->selectByName($promo)[0]; ?>
         <div class="carousel-item <?php if ($index == 0) { echo "active";} ?>">
-            <img class="d-block img-fluid" src="<?php echo PROMOTION_DIR."promo_".$promo.".jpg"; ?>" alt="">
+            <img class="d-block img-fluid" src="<?php echo PROMOTION_DIR."promo_".$promo.".jpg"; ?>" alt="Promozione <?php echo $prodotto["nome"] ?>">
               <div class="carousel-caption text-center">
               <h3 class="text-dark header-text-shadow"><?php echo strtoupper($prodotto["nome"]) ?></h3>
                 <p class="text-dark tablet header-text-shadow"><?php if($prodotto["descrizione"] != "") {echo $prodotto["descrizione"];} else {echo "aggiungi descrizione!";}?></p>
-                <p><a class="btn btn-dark header-text-shadow" href="product.php?prodotto=<?php echo $prodotto["id"]; ?>" role="button">Scopri <i class="fa fa-long-arrow-right" aria-hidden="true"></i></i></a></p>                
+                <p><a class="btn btn-dark header-text-shadow" href="product.php?prodotto=<?php echo $prodotto["id"]; ?>" role="button">Scopri <span class="fa fa-long-arrow-right" aria-hidden="true"></span></a></p>                
             </div>
         </div>
         <?php endforeach ?>
       </div>
     </div>
+    <!-- Carousel-->
 
-    <div class="row d-flex justify-content-center mobile">
+    <!-- Row: Filters -->
+    <div class="row justify-content-center mobile">
 
       <div class="col-12 dropdown ml-2 mr-2">
         <button
@@ -115,6 +116,7 @@ array_push($tabelle, "marca","genere","materiale","colore","taglia");
               data-value="prezzoDecrescente" class="dropdown-item">Prezzo Decrescente</label></a>
         </div>
       </div>
+
 
       <?php foreach($tabelle as $str_tabella): ?>
       <div class="dropdown ml-1 mr-1">
@@ -136,35 +138,39 @@ array_push($tabelle, "marca","genere","materiale","colore","taglia");
       <?php endforeach ?>
     </div>
 
-    <?php if($_GET) { echo '
-    <div class="row justify-content-center mb-3 mobile">
-    <button type="button" class="btn-delete btn btn-light" name="btndelete"><i class="fa fa-trash fa-2x mr-2" aria-hidden="true"></i>Elimina Selezione</button>
-    </div>
-    ';} ?>
 
+      <?php if($_GET) { echo '
+      <div class="row justify-content-center mb-3 mobile">
+      <button type="button" class="btn-delete btn btn-light" name="btnDelete"><i class="fa fa-trash fa-2x mr-2" aria-hidden="true"></i>Elimina Selezione</button>
+      </div>
+      ';} ?>
+    <!-- Row: Filters -->
+
+    <!-- Row: Product -->
     <div class="row">
       <?php foreach($templateParams["prodotti"] as $prodotto): ?>
-      <div class="col-6 col-lg-4 col-md-6 mb-4">
-        <div class="card h-100">
-
-          <a href="product.php<?php echo "?prodotto=".$prodotto["id"]; ?>">
-            <img class="card-img-top" src="<?php echo IMG_DIR."/".$prodotto["nome"].".jpg"; ?>" alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="product.php<?php echo "?prodotto=".$prodotto["id"]; ?>"><?php echo $prodotto["nome"]; ?></a>
-            </h4>
-            <h5>€<?php echo $prodotto["prezzo"] ?></h5>
-            <p class="card-text tablet"><?php echo $prodotto["descrizione"]; ?></p>
+      <!-- Column: Product -->
+      <div class="products col-6 col-lg-4 col-md-6 mb-4">
+          <div class="card h-100">
+            <a href="product.php<?php echo "?prodotto=".$prodotto["id"]; ?>">
+              <img class="card-img-top" src="<?php echo IMG_DIR."/".$prodotto["nome"].".jpg"; ?>" alt="Scarpa <?php echo $prodotto["nome"]?>">
+            </a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="product.php<?php echo "?prodotto=".$prodotto["id"]; ?>"><?php echo $prodotto["nome"]; ?></a>
+              </h4>
+              <h5>€<?php echo $prodotto["prezzo"] ?></h5>
+              <p class="card-text tablet"><?php echo $prodotto["descrizione"]; ?></p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Disponibilità: <?php echo $prodotto["stock"];?></small>
+            </div>
           </div>
-          <div class="card-footer">
-            <small class="text-muted">Disponibilità: <?php echo $prodotto["stock"];?></small>
-          </div>
-
-        </div>
       </div>
+      <!-- Column: Product -->
       <?php endforeach ?>
-
     </div>
+    <!-- Row: Product -->
 
     <!-- Nav: Paginator -->
     <div class="row d-flex justify-content-center">
@@ -172,24 +178,27 @@ array_push($tabelle, "marca","genere","materiale","colore","taglia");
       <ul class="pagination pg-dark">
         <li class="page-item ">
           <a class="page-link " aria-label="Previous"
-            href="<?php echo addURLParameter($_SERVER['REQUEST_URI'], "pag",$firstPage);?>">
+            href="<?php echo addURLParameter($_SERVER['REQUEST_URI'], "pag",1);?>">
             <span aria-hidden="true">&laquo;</span>
             <span class="sr-only">Previous</span>
           </a>
         </li>
         <?php for($i=1;$i<=$totalPage;$i++): ?>
-        <li class="page-item <?php if($page == $i){echo "active";} ?>"><a class="page-link"
-            href="<?php echo addURLParameter($_SERVER['REQUEST_URI'], "pag",$i)?>"><?php echo $i ?></a></li>
+        <li class="page-item <?php if($page == $i){echo "active";} ?>">
+          <a class="page-link" href="<?php echo addURLParameter($_SERVER['REQUEST_URI'], "pag",$i)?>"><?php echo $i ?></a>
+        </li>
         <?php endfor ?>
         <li class="page-item">
-          <a class="page-link" aria-label="Next"
-            href="<?php echo addURLParameter($_SERVER['REQUEST_URI'], "pag",$totalPage);?>">
+          <a class="page-link" aria-label="Next" href="<?php echo addURLParameter($_SERVER['REQUEST_URI'], "pag",$totalPage);?>">
             <span aria-hidden="true">&raquo;</span>
             <span class="sr-only">Next</span>
           </a>
         </li>
       </ul>
     </nav>
+    <!-- Nav: Paginator -->
     </div>
     <!-- Nav: Paginator -->
   </div>
+  <!-- Column: Product -->
+</div>
