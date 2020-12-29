@@ -6,14 +6,16 @@ require_once("./utilis/CartManager.php");
 require_once("./utilis/UserManager.php");
 require_once("./utilis/OrderManager.php");
 require_once("./utilis/BankingSimulator.php");
+require_once("./utilis/NotificationManager.php");
 
 $templateParams["title"] = "Checkout";
 $templateParams["main"] = "./templates/complete_order_page.php";
 $templateParams["cssFileName"] = "./complete_order/complete_order.css";
 
 $cartManager = new CartManager();
-$userManager = new UserManager();
+$userManager = new UserManager(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
 $orderManager = new OrderManager();
+$notificationManager = new NotificationManager(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
 if(empty($_POST["cardName"]) || empty($_POST["cardNumber"]) || empty($_POST["cardExpiration"]) || empty($_POST["cardCVV"])) {
     header("Location: checkout.php?incorrectData=inseriti tutti i dati richiesti per il pagamento#incorrectMessage");
@@ -41,11 +43,21 @@ else {
             $orderStatus = $orderManager->addOrder($userEmail, $article["id"], $article["taglia"], $article["quantita"]);
             // se qualcosa va storto rimando sulla index.php segnalando l'errore
             if(!$orderStatus) {
-                header("Location: index.php?orderStatus=" . $orderStatus);
+                header("Location: index.php");
+                $notificationManager->addNotification($userEmail, "Errore durante il completamento dell'ordine",
+                                                        "Il tuo ordine: " . $article["nome"] . " ha avuto qualche problema! Contatta l'assistenza.");
                 die();
+            }
+            if($article["quantita"] > 1) {
+                $notificationManager->addNotification($userEmail, "Ordini ricevuti!", 
+                                                        "Il tuoi " . $article["quantita"] . " ordini: " . $article["nome"] . " sono andati a buon fine.");
+            }
+            else {
+                $notificationManager->addNotification($userEmail, "Ordine ricevuto!", "Il tuo ordine: " . $article["nome"] . " è andato a buon fine.");
             }
         }
 
+        
         $cartManager->clearCart();
         require("./templates/base.php");
     }
