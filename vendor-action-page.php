@@ -159,10 +159,13 @@ switch ($action) {
             }
         }
 
+        //TODO: categories.
+
         if ($changes) {
             if (!isset($templateParams["error"])) {
                 header("location: user-page.php");
             }
+            $changes = 0;
         }
         break;
 
@@ -187,6 +190,8 @@ switch ($action) {
             header("location: user-page.php");
         }
 
+        $changes = 0;
+
         //? get Current
         $formParams["current"] = $dbh->getProduct($productID);
         $formParams["title"] = $formParams["current"]["nome"];
@@ -194,8 +199,17 @@ switch ($action) {
         $formParams["sizes"] = $dbh->getAllSizes();
         $formParams["quantities"] = $dbh->getAllQuantities($productID);
 
-        //TODO: modify db
+        if (isset($_POST["sizes"])) {
+            $dbh->updateSize($_POST, $formParams, $productID);
+            $changes++;
+        }
 
+        if ($changes) {
+            if (!isset($templateParams["error"])) {
+                header("location: user-page.php");
+            }
+            $changes = 0;
+        }
         break;
 
     case 2: //? materiale

@@ -86,6 +86,37 @@ class DatabaseUser
         }
         $this->updateProductField($field, $id, $newValue, $params);
     }
+
+    public function updateSize($values, $params, $prodId)
+    {
+        foreach ($params["sizes"] as $key) {
+            if (isset($values["size-" . $key["id"]]) && $values["size-" . $key["id"]] != "") {
+
+                $check = $this->db->prepare("SELECT * FROM ProdottiTaglie 
+                                            WHERE idProdotto = ? 
+                                            AND idTaglia = ?;");
+                $check->bind_param("ii", $prodId, $key["id"]);
+                $check->execute();
+
+                if (count($check->get_result()->fetch_all(MYSQLI_ASSOC)) == 0) {
+                    // prodotto non aveva la taglia
+                    $stmt = $this->db->prepare("INSERT INTO ProdottiTaglie (idTaglia, idProdotto, quantita)
+                                                VALUES (?, ?, ?);");
+                    $stmt->bind_param("iii", $key["id"], $prodId, $values["quantity-" . $key["id"]]);
+                } else {
+                    // prodotto ha già taglia
+                    $stmt = $this->db->prepare("UPDATE ProdottiTaglie 
+                                                SET quantita = ?
+                                                WHERE idProdotto = ? 
+                                                AND idTaglia = ?;");
+
+                    $stmt->bind_param("iii", $values["quantity-" . $key["id"]], $prodId, $key["id"]);
+                }
+                $stmt->execute();
+            }
+        }
+    }
+
     // GETTERS
     public function getUserName($id)
     {
