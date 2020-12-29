@@ -80,11 +80,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                 <?php require_once("./utilis/functions.php"); ?>
 
                                 <?php if (isUserLoggedIn()) : ?>
-<<<<<<< HEAD
-                                User Page
-=======
                                     <?php echo $_SESSION["username"]; ?>
->>>>>>> dc739229abce06103d32f48d71084dc2898a6cd5
                                 <?php else : ?>
                                 Log in
                                 <?php endif ?>
