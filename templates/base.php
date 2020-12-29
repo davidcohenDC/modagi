@@ -63,11 +63,14 @@ if (session_status() == PHP_SESSION_NONE) {
                                 HOME
                             </a>
                         </li>
+                        <?php require_once("./utilis/functions.php"); ?>
+                        <?php if (isUserLoggedIn()) : ?>
                         <li class="nav-item">
                             <div class="nav-link waves-effect">
                                 <?php require_once("notification.php"); ?>
                             </div>
                         </li>
+                        <?php endif ?>
                         <li class="nav-item">
                             <a href="cart.php" class="nav-link navbar-link-2 waves-effect">
                                 <span class="badge badge-pill red">
@@ -79,11 +82,10 @@ if (session_status() == PHP_SESSION_NONE) {
                                 </span>
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                             </a>
-                        </li>
+                        </li>                        
                         <li class="nav-item">
                             <a href="user-page.php" class="nav-link waves-effect">
                                 <?php require_once("./utilis/functions.php"); ?>
-
                                 <?php if (isUserLoggedIn()) : ?>
                                     <?php echo $_SESSION["username"]; ?>
                                 <?php else : ?>
