@@ -45,6 +45,10 @@ switch ($action) {
             //* insert data in sql db
             $insertResult = $dbh->insertShoe($_POST, $formParams);
 
+            if (!$insertResult[0]) {
+                $templateParams["error"] = $insertResult[1];
+            }
+
             if (!isset($templateParams["error"])) {
                 header("location: user-page.php");
             }
@@ -141,8 +145,6 @@ switch ($action) {
                 $templateParams["error"] = $imgResult[1];
             }
         }
-
-
 
         foreach (array(
             array("description", "descrizione"),

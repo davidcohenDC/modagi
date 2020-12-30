@@ -18,27 +18,21 @@ function isUserVendor()
 
 function isArticleSet($formParams, $post)
 {
-    $check = false;
+    $check = 0;
 
     foreach ($formParams["categories"] as $category) {
         if (isset($post["category-" . $category["id"]]) && $post["category-" . $category["id"]] != "") {
-            $check = true;
+            $check++;
         }
     }
-
-    if (!$check) {
-        return false;
-    }
-
-    $check = false;
 
     foreach ($formParams["sizes"] as $size) {
         if (isset($post["size-" . $size["id"]]) && $post["size-" . $size["id"]] != "") {
-            $check = true;
+            $check++;
         }
     }
 
-    return $check &&
+    return $check != 0 &&
         isset($post["name"]) &&
         isset($post["description"]) &&
         isset($post["material"]) &&
@@ -48,7 +42,7 @@ function isArticleSet($formParams, $post)
         isset($post["price"]);
 }
 
-function uploadImage($path, $image, $name)
+function uploadImage($path, $image, $prodName)
 {
     $imageName = basename($image["name"]);
     $extension = end(explode(".", $image["name"]));
@@ -92,7 +86,7 @@ function uploadImage($path, $image, $name)
         }
     }
 
-    rename($fullPath, $path . $name . "." . $extension);
+    rename($fullPath, $path . $prodName . "." . $extension);
 
     return array($result, $msg);
 }
