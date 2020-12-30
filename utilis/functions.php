@@ -338,3 +338,17 @@ function getPromotionsUrl($dir)
     }
     return $promotions;
 }
+
+function getOrderStatusColor($statusId)
+{
+    switch ($statusId) {
+        case 1:
+            return "text-info";
+        case 2:
+            return "text-warning";
+        case 3:
+            return "text-success";
+        default:
+            return "text-dark";
+    }
+}
