@@ -1,11 +1,10 @@
 <div class="row my-5">
-    <div class="fs-2 col-12 text-center fw-bold">
+    <h3 class="col-12 text-center fw-bold">
         Bentornato!
-    </div>
-    <div class="fs-1 col-12 text-center fw-bold">
+    </h3>
+    <h2 class=" col-12 text-center fw-bold">
         <?php echo $_SESSION["username"]; ?>
-    </div>
-    </h1>
+    </h2>
 </div>
 
 <div class="row justify-content-lg-center">
@@ -29,11 +28,10 @@
             </div>
         <?php endif ?>
         <div class="btn-group-vertical col-12 ">
-            <a href="user-action-page.php?action=1" class="my-3 btn btn-light fw-bold"> I miei Ordini </a>
-            <a href="user-action-page.php?action=2" class="my-3 btn btn-light fw-bold"> Modifica Dati Utente </a>
-            <a href="user-action-page.php?action=3" class="my-3 btn btn-light fw-bold"> Modifica Password </a>
-            <a href="user-action-page.php?action=0" class="my-3 btn btn-danger fw-bold"> Esci </a>
-            <a href="user-action-page.php?action=-1" class="my-3 btn btn-dark fw-bold"> Cancella Account </a>
+
+            <?php if (isset($templateParams["userActions"])) {
+                require("actions/" . $templateParams["userActions"]);
+            } ?>
         </div>
     </div>
 

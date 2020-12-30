@@ -25,11 +25,12 @@ if (isset($_POST["email"]) && isset($_POST["p"])) {
 if (isUserLoggedIn()) {
     if (isUserVendor()) {
         $pageTitle = "Vendor Page";
-        $pageMain = "vendor-home.php";
+        $templateParams["userActions"] = "vendor-actions.php";
     } else {
         $pageTitle = "User Page";
-        $pageMain = "user-home.php";
+        $templateParams["userActions"] = "user-actions.php";
     }
+    $pageMain = "user-home.php";
 } else {
     $pageTitle = "Log In";
     $pageMain = "form.php";
