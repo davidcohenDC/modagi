@@ -2,13 +2,13 @@
 
 
 <div class="icon" id="bell">
-    <span id="notificationCounter" class="badge badge-pill red">
+    <span id="outCounter" class="badge badge-pill red">
         <?php echo $notificationCount; ?>
     </span>
     <img src="https://i.imgur.com/AC7dgLA.png" alt="">
 </div>
 <div class="notifications" id="box">
-    <h2>Notifiche - <span><?php echo $notificationCount ?></span></h2>
+    <h2>Notifiche - <span id="inCounter"><?php echo $notificationCount ?></span></h2>
     <?php foreach ($allNotification as $notify): ?>
     <div class="notifications-item">
         <div class="text">
@@ -24,11 +24,17 @@
         var down = false;
         var clear = false;
 
+        if(parseInt($('#outCounter').text()) > 0) {
+            $('#outCounter').css("background", "#f00");
+        }
+
         $('#bell').click(function(e){
             var color = $(this).text();
             if(down){
                 $('#box').css('height','0px');
                 $('#box').css('opacity','0');
+                $('#inCounter').text("0");
+                $('#outCounter').text("0");
                 down = false;
             }else{
                 if(clear) {
@@ -36,7 +42,7 @@
                 }
                 $('#box').css('height','auto');
                 $('#box').css('opacity','1');
-                $('#notificationCounter').text("0");
+                $('#outCounter').css("background", "#343a40");
                 $.ajax({
                     type: "POST",
                     url: "./ajaxFunction/clearNotification.php"

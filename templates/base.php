@@ -38,85 +38,86 @@ if (session_status() == PHP_SESSION_NONE) {
 
 <body>
     <header class="mb-4">
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top scrolling-navbar ">
-            <div class="container-fluid">
-
-                <!-- Brand -->
-                <a class="navbar-brand" href="index.php">
-                    <i class="fa fa-odnoklassniki mr-3" aria-hidden="true"></i>SHOES COM
-                </a>
-
-                <!-- Collapse button -->
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-                    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <!-- Links -->
-                <div class="collapse navbar-collapse" id="basicExampleNav">
-
-                    <!-- Right -->
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a href="index.php" class="nav-link waves-effect">
-                                HOME
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <div class="nav-link waves-effect">
-                                <?php require_once("notification.php"); ?>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a href="cart.php" class="nav-link navbar-link-2 waves-effect">
-                                <span class="badge badge-pill red">
-                                    <?php
-                                    require_once("./utilis/CartManager.php");
-                                    $cartManager = new CartManager();
-                                    echo $cartManager->getOrderCount();
-                                    ?>
-                                </span>
-                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="user-page.php" class="nav-link waves-effect">
-                                <?php require_once("./utilis/functions.php"); ?>
-
-                                <?php if (isUserLoggedIn()) : ?>
-                                    <?php echo $_SESSION["username"]; ?>
-                                <?php else : ?>
-                                Log in
-                                <?php endif ?>
-                            </a>
-                        </li>
-                        <li class="nav-item pl-2 mb-2 mb-md-0">
-                            <?php if (isUserLoggedIn()) : ?>
-                            <a href="user-action-page.php?action=0" type="button"
-                                class="btn btn-outline-danger btn-md btn-rounded btn-navbar waves-effect waves-light">
-                                Log out
-                            </a>
-                            <?php else : ?>
-                            <a href="registration-page.php" type="button"
-                                class="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">
-                                Sign up
-                            </a>
-                            <?php endif ?>
-                        </li>
-                    </ul>
-
-                </div>
-                <!-- Links -->
-            </div>
-        </nav>
-        <!-- Navbar -->
         <div class=" mt-3 text-center">
             <h1><?php echo SHOP_NAME ?></h1>
             <p>Mission, Vission & Values</p>
         </div>
-
     </header>
+
+    <nav class="navbar navbar-expand-md navbar-dark  scrolling-navbar ">
+        <div class="container-fluid">
+
+            <!-- Brand -->
+            <a class="navbar-brand" href="index.php">
+                <i class="fa fa-odnoklassniki mr-3" aria-hidden="true"></i>SHOES COM
+            </a>
+
+            <!-- Collapse button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+                aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Links -->
+            <div class="collapse navbar-collapse" id="basicExampleNav">
+
+                <!-- Right -->
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="index.php" class="nav-link waves-effect">
+                            HOME
+                        </a>
+                    </li>
+                    <?php require_once("./utilis/functions.php"); ?>
+                    <?php if (isUserLoggedIn()) : ?>
+                    <li class="nav-item">
+                        <div class="nav-link waves-effect">
+                            <?php require_once("notification.php"); ?>
+                        </div>
+                    </li>
+                    <?php endif ?>
+                    <li class="nav-item">
+                        <a href="cart.php" class="nav-link navbar-link-2 waves-effect">
+                            <span class="badge badge-pill red">
+                                <?php
+                                require_once("./utilis/CartManager.php");
+                                $cartManager = new CartManager();
+                                echo $cartManager->getOrderCount();
+                                ?>
+                            </span>
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        </a>
+                    </li>                        
+                    <li class="nav-item">
+                        <a href="user-page.php" class="nav-link waves-effect">
+                            <?php require_once("./utilis/functions.php"); ?>
+                            <?php if (isUserLoggedIn()) : ?>
+                                <?php echo $_SESSION["username"]; ?>
+                            <?php else : ?>
+                            Log in
+                            <?php endif ?>
+                        </a>
+                    </li>
+                    <li class="nav-item pl-2 mb-2 mb-md-0">
+                        <?php if (isUserLoggedIn()) : ?>
+                        <a href="user-action-page.php?action=0" type="button"
+                            class="btn btn-outline-danger btn-md btn-rounded btn-navbar waves-effect waves-light">
+                            Log out
+                        </a>
+                        <?php else : ?>
+                        <a href="registration-page.php" type="button"
+                            class="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">
+                            Sign up
+                        </a>
+                        <?php endif ?>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Links -->
+        </div>
+    </nav>
+
     <main class="container">
         <!--main content-->
         <?php
