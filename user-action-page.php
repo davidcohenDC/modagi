@@ -28,6 +28,9 @@ switch ($action) {
             foreach ($templateParams["dates"] as $date) {
                 $templateParams[$date["data"]] = $dbh->getOrdersProducts($date["data"], $_SESSION["id"]);
             }
+
+            $templateParams["stati"] = $dbh->getOrdersStatus($_SESSION["id"]);
+            $icons["size"] = 30;
         } else {
             $templateParams["noOrders"] = "Nessun Ordine da Mostrare";
         }

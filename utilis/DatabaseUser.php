@@ -140,7 +140,7 @@ class DatabaseUser
 
     public function getOrdersProducts($date, $email)
     {
-        $stmt = $this->db->prepare("SELECT prodotto.nome as nome, prodotto.prezzo as prezzo, ordine.quantita as quantita,
+        $stmt = $this->db->prepare("SELECT prodotto.id as id, prodotto.nome as nome, prodotto.prezzo as prezzo, ordine.quantita as quantita,
                                     genere.nome as genere, colore.nome as colore, materiale.nome as materiale, marca.nome as marca
                                     FROM colore, materiale, marca, genere, ordine, prodotto 
                                     WHERE prodotto.id = ordine.idProdotto 
@@ -168,6 +168,16 @@ class DatabaseUser
         $stmt->execute();
 
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]["al"];
+    }
+
+    public function getOrdersStatus($id)
+    {
+        $stmt = $this->db->prepare("SELECT o.id as id, o.idProdotto as prodID , s.id as statID, s.nome as stato FROM ordine as o, statoordine as s WHERE s.id = o.idStato AND o.email = ? ");
+
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
     /* admin */
