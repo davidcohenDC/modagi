@@ -343,12 +343,12 @@ function getOrderStatusColor($statusId)
 {
     switch ($statusId) {
         case 1:
-            return "text-info";
+            return "info";
         case 2:
-            return "text-warning";
+            return "warning";
         case 3:
-            return "text-success";
+            return "success";
         default:
-            return "text-dark";
+            return "dark";
     }
 }

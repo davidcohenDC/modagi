@@ -44,13 +44,20 @@
                                     <img class="img-fluid mx-auto d-block image product-image" src="<?php echo IMG_DIR . "/" . $product["nome"] . ".jpg" ?>">
                                 </div>
                                 <div class="col-12 col-md-4 text-center">
-                                    <!--empty space-->
-                                    <div class="text-center">
-                                        Stato Ordine:
+                                    <div class="col-md-12">
+                                        <div class="my-5"></div>
+                                        <!--empty space vertical-->
                                     </div>
-                                    <div class="status fw-bold <?php echo getOrderStatusColor($templateParams["stati"][$i]["statID"]); ?>">
-                                        <?php echo $templateParams["stati"][$i]["stato"]; ?>
-                                        <input type="hidden" class="for-<?php echo $j; ?>" value="<?php echo $templateParams["stati"][$i]["statID"]; ?>" />
+                                    <div class="alert alert-<?php echo getOrderStatusColor($templateParams["stati"][$i]["statID"]); ?> my-3 text-center col-12" role="alert">
+                                        <h4>
+                                            Stato Ordine:
+                                        </h4>
+                                        <p class="my-1 text-center fw-bold">
+                                            <div class="status ">
+                                                <?php echo $templateParams["stati"][$i]["stato"]; ?>
+                                                <input type="hidden" class="for-<?php echo $j; ?>" value="<?php echo $templateParams["stati"][$i]["statID"]; ?>-<?php echo getOrderStatusColor($templateParams["stati"][$i]["statID"]); ?>" />
+                                            </div>
+                                        </p>
                                     </div>
 
                                     <div class="text-center visual-status s-<?php echo $j; ?>">
