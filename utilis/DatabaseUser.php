@@ -130,7 +130,7 @@ class DatabaseUser
 
     public function getOrdersDates($id)
     {
-        $stmt = $this->db->prepare("SELECT DISTINCT data FROM ordine WHERE email = ? ");
+        $stmt = $this->db->prepare("SELECT DISTINCT data FROM ordine WHERE email = ? ORDER BY data DESC");
 
         $stmt->bind_param("s", $id);
         $stmt->execute();
@@ -172,7 +172,7 @@ class DatabaseUser
 
     public function getOrdersStatus($id)
     {
-        $stmt = $this->db->prepare("SELECT o.id as id, o.idProdotto as prodID , s.id as statID, s.nome as stato FROM ordine as o, statoordine as s WHERE s.id = o.idStato AND o.email = ? ");
+        $stmt = $this->db->prepare("SELECT o.id as id, o.idProdotto as prodID , s.id as statID, s.nome as stato FROM ordine as o, statoordine as s WHERE s.id = o.idStato AND o.email = ? ORDER BY o.data DESC");
 
         $stmt->bind_param("s", $id);
         $stmt->execute();

@@ -34,7 +34,6 @@
                     <h3 class="text-center">
                         <?php echo $date["data"] ?>
                     </h3>
-                    <?php $i = 0 ?>
                     <?php foreach ($templateParams[$date["data"]] as $product) : ?>
 
                         <div class="product my-4 py-4 product-history">
@@ -47,14 +46,14 @@
                                         <div class="my-5"></div>
                                         <!--empty space vertical-->
                                     </div>
-                                    <div class="alert alert-<?php echo getOrderStatusColor($templateParams["stati"][$i]["statID"]); ?> my-3 text-center col-12" role="alert">
+                                    <div class="alert alert-<?php echo getOrderStatusColor($templateParams["stati"][$j]["statID"]); ?> my-3 text-center col-12" role="alert">
                                         <h4>
                                             Stato Ordine:
                                         </h4>
                                         <p class="my-1 text-center fw-bold">
                                             <div class="status ">
-                                                <?php echo $templateParams["stati"][$i]["stato"]; ?>
-                                                <input type="hidden" class="for-<?php echo $j; ?>" value="<?php echo $templateParams["stati"][$i]["statID"]; ?>-<?php echo getOrderStatusColor($templateParams["stati"][$i]["statID"]); ?>" />
+                                                <?php echo $templateParams["stati"][$j]["stato"]; ?>
+                                                <input type="hidden" class="for-<?php echo $j; ?>" value="<?php echo $templateParams["stati"][$j]["statID"]; ?>-<?php echo getOrderStatusColor($templateParams["stati"][$j]["statID"]); ?>" />
                                             </div>
                                         </p>
                                     </div>
@@ -102,8 +101,7 @@
                                 </div>
                             </div>
                         </div>
-                        <?php $i++;
-                        $j++; ?>
+                        <?php $j++; ?>
                     <?php endforeach ?>
                 </section>
                 <hr />

@@ -52,8 +52,6 @@ switch ($action) {
             if (!isset($templateParams["error"])) {
                 header("location: index.php");
             }
-        } else {
-            echo $_POST["categories"][0];
         }
         break;
 
