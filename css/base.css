@@ -27,7 +27,6 @@ button.bg-info:focus {
   background-color: blue !important;
 }
 
-
 /*media query*/
 
 @media (min-width: 350px) {
@@ -90,7 +89,6 @@ button.bg-info:focus {
     height: 300px;
   }
 }
-
 
 .link-table {
   text-decoration: none !important;
@@ -303,4 +301,8 @@ ul > li > a {
 
 input[type="file"].file-upload {
   display: none;
+}
+
+.input-embedded {
+  border: none;
 }
