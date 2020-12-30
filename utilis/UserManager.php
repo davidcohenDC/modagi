@@ -84,6 +84,15 @@ class UserManager {
 
         return $result->fetch_all(MYSQLI_ASSOC)[0]["indirizzo"];
     }
+
+    public function getAllAdminEmail() {
+        $res = $this->db->query("SELECT email FROM user WHERE admin = 'S'");
+        if($res->num_rows > 0) {
+            return $res->fetch_all(MYSQLI_ASSOC);
+        }
+        return false;
+        
+    }
 }
 
 ?>

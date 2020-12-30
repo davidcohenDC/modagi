@@ -41,6 +41,14 @@ else {
         foreach ($cart["articleDetails"] as $article) {
             // query per inserimento dell'ordine nel DB
             $orderStatus = $orderManager->addOrder($userEmail, $article["id"], $article["taglia"], $article["quantita"]);
+            $orderQuantity = $orderManager->getOrderStockQuantity($orderManager->getIdTagliaFromTaglia($article["taglia"]), $article["id"]);
+            if($orderQuantity <= 0) {
+                $allAdminEmail = $userManager->getAllAdminEmail();
+                foreach ($allAdminEmail as $adminEmail) {
+                    $notificationManager->addNotification($adminEmail["email"], "Articolo esaurito!",
+                                                        "L'articolo '" . $article["nome"] . "' è esaurito nel magazzino.");
+                }
+            }
             // se qualcosa va storto rimando sulla index.php segnalando l'errore
             if(!$orderStatus) {
                 header("Location: index.php");
@@ -58,7 +66,7 @@ else {
         }
 
         
-        $cartManager->clearCart();
+        //$cartManager->clearCart();
         require("./templates/base.php");
     }
 }
