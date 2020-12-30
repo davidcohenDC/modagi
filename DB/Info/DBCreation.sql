@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `Materiale` (
 # ADD TABLE "Ordine"                                                     #
 # ---------------------------------------------------------------------- #
 CREATE TABLE IF NOT EXISTS `Ordine` (
-	 `id` INT NOT NULL AUTO_INCREMENT,
+     `id` INT NOT NULL AUTO_INCREMENT,
      `idProdotto` INT NOT NULL,
      `email` CHAR(20) NOT NULL,
      `data` DATE NOT NULL,
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `Ordine` (
 # ADD TABLE "StatoOrdine"                                                #
 # ---------------------------------------------------------------------- #
 CREATE TABLE IF NOT EXISTS `StatoOrdine` (
-	`id` INT NOT NULL AUTO_INCREMENT,
+     `id` INT NOT NULL AUTO_INCREMENT,
      `nome` CHAR(200) NOT NULL,
      PRIMARY KEY (`id`)
 ) ENGINE = INNODB;
@@ -159,7 +159,6 @@ CREATE UNIQUE INDEX `PK_Email` ON `User` (`email`);
 CREATE UNIQUE INDEX `PK_Taglia` ON `Notifica` (`id`);
 CREATE UNIQUE INDEX `PK_Marca` ON `Marca` (`id`);
 CREATE UNIQUE INDEX `PK_Stato` ON `StatoOrdine` (`id`);
-
 # ---------------------------------------------------------------------- #
 # FOREIGN KEY CONSTRAINTS                                                #
 # ---------------------------------------------------------------------- #

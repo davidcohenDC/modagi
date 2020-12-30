@@ -293,42 +293,42 @@ class DatabaseUser
 
                 // inserts the sizes
                 foreach ($params["sizes"] as $key) {
-                    if (isset($values["size-" . $key["id"]]) && $values["size-" . $key["id"]] != "") {
+                    if (isset($values["quantity-" . $key["id"]]) && $values["quantity-" . $key["id"]] != "") {
                         $stmt = $this->db->prepare("INSERT INTO ProdottiTaglie (idTaglia, idProdotto, quantita)
                                             VALUES (?, ?, ?);");
 
                         $stmt->bind_param("iii", $key["id"], $prodId, $values["quantity-" . $key["id"]]);
                         $stmt->execute();
                     }
+                }
 
-                    // controllo l'inserimento delle taglie
-                    $check =  $this->db->prepare("SELECT idProdotto FROM ProdottiTaglie WHERE idProdotto = ?");
-                    $check->bind_param("s", $prodId);
-                    $check->execute();
+                // controllo l'inserimento delle taglie
+                $check =  $this->db->prepare("SELECT idProdotto FROM ProdottiTaglie WHERE idProdotto = ?");
+                $check->bind_param("s", $prodId);
+                $check->execute();
 
-                    if (count($check->get_result()->fetch_all(MYSQLI_ASSOC)) < 1) {
-                        return [false, "Errore durante l'inserimento delle taglie"];
-                    }
+                if (count($check->get_result()->fetch_all(MYSQLI_ASSOC)) == 0) {
+                    return [false, "Errore durante l'inserimento delle taglie"];
                 }
 
                 // inserts the categories
-                foreach ($params["categories"] as $key) {
-                    if (isset($values["categories-" . $key["id"]]) && $values["categories-" . $key["id"]] != "") {
-                        $stmt = $this->db->prepare("INSERT INTO ProdottiCategorie (idTaglia, idProdotto) VALUES (?, ?)");
 
-                        $stmt->bind_param("ii", $key["id"], $prodId);
-                        $stmt->execute();
-                    }
 
-                    // controllo l'inserimento delle categorie
-                    $check =  $this->db->prepare("SELECT idProdotto FROM ProdottiCategorie WHERE idProdotto = ?");
-                    $check->bind_param("s", $prodId);
-                    $check->execute();
+                for ($i = 0; $i < count($values["categories"]); $i++) {
+                    $stmt = $this->db->prepare("INSERT INTO ProdottiCategorie (idCategoria, idProdotto) VALUES (?, ?)");
 
-                    if (count($check->get_result()->fetch_all(MYSQLI_ASSOC)) < 1) {
-                        return [false, "Errore durante l'inserimento delle categorie"];
-                    }
+                    $stmt->bind_param("ii", $values["categories"][$i], $prodId);
+                    $stmt->execute();
+                }
 
+                // controllo l'inserimento delle categorie
+                $check =  $this->db->prepare("SELECT idProdotto FROM ProdottiCategorie WHERE idProdotto = ?");
+                $check->bind_param("s", $prodId);
+                $check->execute();
+
+                if (count($check->get_result()->fetch_all(MYSQLI_ASSOC)) < 1) {
+                    return [false, "Errore durante l'inserimento delle categorie"];
+                } else {
                     // non ci sono stati problemi
                     return [true, ""];
                 }

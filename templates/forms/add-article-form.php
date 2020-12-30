@@ -147,7 +147,7 @@
     <div id="categories-group col-12" aria-label="Lista di categorie da cui scegliere">
         <?php foreach ($formParams["categories"] as $category) : ?>
             <div class="form-check">
-                <input id="category-<?php echo $category['id'] ?>" class="form-check-input" name="category-<?php echo $category['id'] ?>" type="checkbox" value="<?php echo $category['id'] ?>" />
+                <input id="category-<?php echo $category['id'] ?>" class="form-check-input" name="categories[]" type="checkbox" value="<?php echo $category['id'] ?>" />
                 <label class="form-check-label" for="category-<?php echo $category['id'] ?>">
                     <?php echo $category['nome'] ?>
                 </label>

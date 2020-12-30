@@ -20,19 +20,13 @@ function isArticleSet($formParams, $post)
 {
     $check = 0;
 
-    foreach ($formParams["categories"] as $category) {
-        if (isset($post["category-" . $category["id"]]) && $post["category-" . $category["id"]] != "") {
-            $check++;
-        }
-    }
-
     foreach ($formParams["sizes"] as $size) {
-        if (isset($post["size-" . $size["id"]]) && $post["size-" . $size["id"]] != "") {
+        if (isset($post["quantity-" . $size["id"]]) && $post["quantity-" . $size["id"]] != "") {
             $check++;
         }
     }
 
-    return $check != 0 &&
+    return !empty($post["categories"]) && $check != 0 &&
         isset($post["name"]) &&
         isset($post["description"]) &&
         isset($post["material"]) &&

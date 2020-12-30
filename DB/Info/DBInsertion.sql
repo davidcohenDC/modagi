@@ -31,13 +31,13 @@ VALUES ('1', '39'),
     ('5', '43'),
     ('6', '44'),
     ('7', '45');
-
 # ---------------------------------------------------------------------- #
 # ADD VALUES "StatoOrdine"                                               #
 # ---------------------------------------------------------------------- #
 INSERT INTO `StatoOrdine` (`id`, `nome`)
-VALUES ('1', 'Confermato'), ('2', 'Spedito'), ('3', 'Consegnato');
-
+VALUES ('1', 'Confermato'),
+    ('2', 'Spedito'),
+    ('3', 'Consegnato');
 # ---------------------------------------------------------------------- #
 # ADD VALUES "Genere"                                                    #
 # ---------------------------------------------------------------------- #
@@ -107,11 +107,10 @@ VALUES (
 # ---------------------------------------------------------------------- #
 INSERT INTO `Notifica` (`nome`, `contenuto`, `email`)
 VALUES ('test', 'contenuto del test', 'test@gmail.com'),
-       ('test2', 'contenuto del test2', 'test@gmail.com'),
-       ('test', 'contenuto del test', 'dev@gmail.com'),
-       ('test2', 'contenuto del test2', 'dev@gmail.com'),
-       ('test', 'contenuto del test', 'more@gmail.com');
-
+    ('test2', 'contenuto del test2', 'test@gmail.com'),
+    ('test', 'contenuto del test', 'dev@gmail.com'),
+    ('test2', 'contenuto del test2', 'dev@gmail.com'),
+    ('test', 'contenuto del test', 'more@gmail.com');
 # ---------------------------------------------------------------------- #
 # ADD VALUES "Categoria"                                                 #
 # ---------------------------------------------------------------------- #
@@ -247,9 +246,15 @@ VALUES (
 # ---------------------------------------------------------------------- #
 # ADD VALUES "Ordine"                                                    #
 # ---------------------------------------------------------------------- #
-INSERT INTO `ordine` (`idProdotto`, `email`, `data`, `quantita`,`idStato`)
-VALUES ('2', 'test@gmail.com', '2020-12-10', '1','2'),
-    ('1', 'test@gmail.com', '2020-12-10', '2','3');
+INSERT INTO `ordine` (
+        `idProdotto`,
+        `email`,
+        `data`,
+        `quantita`,
+        `idStato`
+    )
+VALUES ('2', 'test@gmail.com', '2020-12-10', '1', '2'),
+    ('1', 'test@gmail.com', '2020-12-10', '2', '3');
 # ---------------------------------------------------------------------- #
 # ADD VALUES "ProdottiTaglie"                                                    #
 # ---------------------------------------------------------------------- #
@@ -287,5 +292,3 @@ INSERT INTO `ProdottiTaglie` (`idTaglia`, `idProdotto`, `quantita`)
 VALUES(7, 3, 25);
 INSERT INTO `ProdottiTaglie` (`idTaglia`, `idProdotto`, `quantita`)
 VALUES(7, 4, 25);
-
-
