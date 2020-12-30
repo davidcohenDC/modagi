@@ -71,7 +71,7 @@ button.bg-info:focus {
   }
 }
 
-@media (min-width: 961px) {
+@media (min-width: 992px) {
   .mobile {
     display: none !important;
   }
