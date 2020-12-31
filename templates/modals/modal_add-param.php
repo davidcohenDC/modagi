@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="my-3 mx-2">
-                    <a href="#" class="px-3 py-2 btn-primary col-12 fw-bold modal-confirm" onclick=""> Conferma </a>
+                    <a href="#" class="px-3 py-2 btn-info col-12 fw-bold modal-confirm" onclick=""> Conferma </a>
                 </div>
 
             </div>
