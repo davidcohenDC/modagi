@@ -12,7 +12,6 @@ function findPrev(className){
 
 $(function(){
     modalName = $(".modal-name");
-    action = 1;
 
     $(".add-button").on("click", function (e) {
         e.preventDefault();
@@ -24,11 +23,12 @@ $(function(){
         action = $(this).attr("class").split(/\s+/).find(findAction);
         action = action.split("-")[1];     
 
-        if(action == 4){
-            prev = $(this).attr("class").split(/\s+/).find(findPrev);
-            prev = prev.split("-")[1]; 
-        }
-
+        prev = $(this).attr("class").split(/\s+/).find(findPrev);
+        prev = prev.split("-")[1];    
+        
+        product = $("input[type='hidden']").val();
+        console.log(product);
+        
         $("a.modal-confirm").attr("href", ).replace("#", "vendor-action-page.php?action=" + String(action) + "#");
     });
 
@@ -39,10 +39,10 @@ $(function(){
             e.preventDefault();
         }
 
-        if(action == 4){
-            $(this).attr("href", "vendor-action-page.php?action=" + String(action) + "&new-value=" + String(newValue) + "&prev=" + String(prev));
-        } else {
-            $(this).attr("href", "vendor-action-page.php?action=" + String(action) + "&new-value=" + String(newValue));
+        if(prev == 8){
+            $(this).attr("href", "vendor-action-page.php?action=" + String(action) + "&new-value=" + String(newValue) + "&prev=" + String(prev) + "&product=" + String(product));
+        }else{
+            $(this).attr("href","vendor-action-page.php?action=" + String(action) + "&new-value=" + String(newValue) + "&prev=" + String(prev));
         }
     })
 });

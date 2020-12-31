@@ -23,3 +23,7 @@
         </div>
     </div>
 </div>
+
+<?php if (isset($_GET["product"])) : ?>
+    <input type="hidden" value="<?php echo $_GET["product"]; ?>" />
+<?php endif ?>

@@ -27,6 +27,7 @@ switch ($action) {
         $templateParams["main"] = "form.php";
         $formParams["title"] = "Aggiungi Articolo";
         $formParams["main"] = "add-article-form.php";
+        $formParams["previousAction"] = $action;
 
         $formParams["colors"] = $dbh->getAllColors();
         $formParams["sizes"] = $dbh->getAllSizes();
@@ -82,6 +83,7 @@ switch ($action) {
         $templateParams["title"] = "Modifica Scarpa";
         $templateParams["main"] = "form.php";
         $formParams["main"] = "modify-product.php";
+        $formParams["previousAction"] = $action;
 
         if (isset($_GET["product"])) {
             if ($dbh->productExists($_GET["product"])) {
@@ -161,8 +163,6 @@ switch ($action) {
             }
         }
 
-        //TODO: categories.
-
         if ($changes) {
             if (!isset($templateParams["error"])) {
                 header("location: user-page.php");
@@ -232,18 +232,19 @@ switch ($action) {
 
     default:
         $templateParams["title"] = "Access Violation";
-        echo `<div class="fw-1 text-danger"> 
-                404 pagina non trovata 
-              </div>`;
         break;
 }
 
 
 if ($action > 1 && $action < 7) {
     if (isset($previous)) {
-        header("location: vendor-action-page.php?action=" . $previous);
+        $url = "location: vendor-action-page.php?action=" . $previous;
+        if (isset($_GET["product"])) {
+            $url .= "&product=" . $_GET["product"];
+        }
+        header($url);
     } else {
-        header("location: vendor-action-page.php?action=1");
+        header("location: user-page.php");
     }
 }
 

@@ -29,7 +29,7 @@
         <?php endforeach ?>
     </select>
     <div class="my-2">
-        <button class="px-3 py-2 btn-outline-success input-embedded add-button for-materiale action-2" data-mdb-toggle="modal" data-mdb-target="#add-modal">
+        <button class="px-3 py-2 btn-outline-success input-embedded add-button for-materiale action-2 prev-<?php echo $formParams["previousAction"]; ?>" data-mdb-toggle="modal" data-mdb-target="#add-modal">
             <span> Aggiungi
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
@@ -49,7 +49,7 @@
         <?php endforeach ?>
     </select>
     <div class="my-3">
-        <button class="px-3 py-2 btn-outline-success input-embedded add-button for-marca action-3" data-mdb-toggle="modal" data-mdb-target="#add-modal">
+        <button class="px-3 py-2 btn-outline-success input-embedded add-button for-marca action-3 prev-<?php echo $formParams["previousAction"]; ?>" data-mdb-toggle="modal" data-mdb-target="#add-modal">
             <span> Aggiungi
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
@@ -111,7 +111,7 @@
     </select>
 
     <div class="my-3">
-        <button class="px-3 py-2 btn-outline-success input-embedded add-button for-colore action-5" data-mdb-toggle="modal" data-mdb-target="#add-modal">
+        <button class="px-3 py-2 btn-outline-success input-embedded add-button for-colore action-5 prev-<?php echo $formParams["previousAction"]; ?>" data-mdb-toggle="modal" data-mdb-target="#add-modal">
             <span> Aggiungi
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
@@ -151,7 +151,7 @@
     </div>
 
     <div class="my-3">
-        <button class="px-3 py-2 btn-outline-success input-embedded add-button for-categoria action-6" data-mdb-toggle="modal" data-mdb-target="#add-modal">
+        <button class="px-3 py-2 btn-outline-success input-embedded add-button for-categoria action-6 prev-<?php echo $formParams["previousAction"] ?>" data-mdb-toggle="modal" data-mdb-target="#add-modal">
             <span> Aggiungi
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
