@@ -1,6 +1,6 @@
 <!-- for change buttons -->
-<script src="<?php echo JS_FILE ?>change-data-selector.js"></script>
-<script src="<?php echo JS_FILE ?>file-upload.js"></script>
+<script src="<?php echo JS_FILE ?>user/change-data-selector.js"></script>
+<script src="<?php echo JS_FILE ?>user/file-upload.js"></script>
 
 <div class="my-3 mx-2 ">
     <label for="shoe-img" class="upload-img-label col-12 py-2 text-center fw-bold btn-outline-secondary">

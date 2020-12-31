@@ -1,7 +1,7 @@
 <!--cart import for cards-->
 <link rel="stylesheet" href="<?php echo CSS_FILE ?>cart/cart.css">
 <!--status steps-->
-<script src="<?php echo JS_FILE ?>order-status.js"></script>
+<script src="<?php echo JS_FILE ?>user/order-status.js"></script>
 
 <div class="row">
     <h1 class="fs-1 my-5 col-12 text-center fw-bold">

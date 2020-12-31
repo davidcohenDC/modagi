@@ -1,5 +1,5 @@
 <!-- for change buttons -->
-<script src="<?php echo JS_FILE ?>change-data-selector.js"></script>
+<script src="<?php echo JS_FILE ?>user/change-data-selector.js"></script>
 
 <div class="my-3 mx-2 ">
     <label for="name-group" class="form-label fw-bold"> Modifica Nome </label>

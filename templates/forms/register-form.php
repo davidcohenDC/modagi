@@ -1,6 +1,3 @@
-<!-- for tooltips -->
-<script src="<?php echo JS_FILE ?>tooltips.js"></script>
-
 <div class="my-3 mx-2 ">
     <label for="name" class="form-label fw-bold"> Nome </label>
     <input id="name" name="name" class="form-control col-12 fst-italic" type="text" placeholder="inserire nome" maxlength="20" required />

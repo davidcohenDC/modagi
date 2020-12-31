@@ -1,5 +1,5 @@
 <!-- for eye to show password -->
-<script src="<?php echo JS_FILE ?>password-viewer.js"></script>
+<script src="<?php echo JS_FILE ?>user/password-viewer.js"></script>
 
 <div class="row">
     <h1 class="fs-1 my-5 col-12 text-center fw-bold">
