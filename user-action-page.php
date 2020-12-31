@@ -65,12 +65,14 @@ switch ($action) {
             if (isset($_POST["username"]) && $_POST["username"] != "") {
                 $change_result[3] = $dbh->updateUsernmae($_SESSION["id"], $_POST["p"], $_POST["username"]);
             }
-
-            for ($i = 0; $i < array_key_last($change_result) + 1; $i++) {
-                if (!$change_result[$i][0]) {
-                    $templateParams["error"] = $change_result[$i][1];
+            if (isset($change_result)) {
+                for ($i = 0; $i < array_key_last($change_result) + 1; $i++) {
+                    if (!$change_result[$i][0]) {
+                        $templateParams["error"] = $change_result[$i][1];
+                    }
                 }
             }
+
             if (!isset($templateParams["error"])) {
                 if (isset($_POST["name"])) {
                     $_SESSION["username"] = $_POST["name"];

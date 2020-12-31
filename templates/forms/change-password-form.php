@@ -2,7 +2,7 @@
     <label for="old-password-group" class="form-label fw-bold"> Vecchia Password </label>
     <div id="old-password-group" class="input-group mb-3">
         <input id="old-password" name="old" class="form-control fst-italic password" type="password" placeholder="inserire la password da cambiare" minlength="6" maxlength="20" required />
-        <button id="old-eye" class="eye input-embedded">
+        <button type="button" id="old-eye" class="eye input-embedded">
             <span id="old-icon" class="icon">
             </span>
         </button>
@@ -16,7 +16,7 @@
     <label for="new-password-group" class="form-label fw-bold"> Nuova Password </label>
     <div id="new-password-group" class="input-group mb-3">
         <input id="new-password" name="new" class="form-control fst-italic password" type="password" placeholder="inserire la nuova password" minlength="6" maxlength="20" required />
-        <button id="new-eye" class="eye input-embedded">
+        <button type="button" id="new-eye" class="eye input-embedded">
             <span id="new-icon" class="icon">
             </span>
         </button>
