@@ -93,7 +93,7 @@ $prodotto = $templateParams["prodotto"];
                 <?php foreach($templateParams["quantitaTaglia"] as $value => $taglia): ?>
                 <input type="radio" id="<?php echo $taglia["numero"] ?>" value="<?php echo $taglia["quantita"] ?>"
                   name="taglia" <?php if($value ==0) {echo "checked";}?>>
-                <label id="lblTaglia" for="<?php echo $taglia["quantita"] ?>"><?php echo $taglia["numero"] ?></label>
+                <label id="lblTaglia"  for="<?php echo $taglia["quantita"] ?>"><?php echo $taglia["numero"] ?></label>
                 <?php endforeach ?>
               </div>
             </div>
@@ -126,7 +126,7 @@ $prodotto = $templateParams["prodotto"];
           </div>
           <!-- Accordion Quantita -->
         </div>
-        <!-- Accordion card -->
+        <!-- Accordion wrapper -->
 
         <!-- Section: AddToCart -->
         <section class="cart">
@@ -137,7 +137,7 @@ $prodotto = $templateParams["prodotto"];
                   id="<?php if(isUserVendor()) { echo "formModifyProduct";} else {echo "formAddToCart";}?>" action="">
                   <button type="submit" id="btnAdd"
                     class="btn btn-<?php if(isUserVendor()) { echo "dark";} else {echo "info";}?> btn-rounder"><?php if(isUserVendor()) { 
-                  echo '<i class="fa fa-eraser" aria-hidden="true"></i>Modifica';} else {echo '<i class="fa fa-cart-plus" aria-hidden="true"></i>Aggiungi al carrello';}?>
+                  echo '<span class="fa fa-eraser" aria-hidden="true"></span>Modifica';} else {echo '<span class="fa fa-cart-plus" aria-hidden="true"></span>Aggiungi al carrello';}?>
                   </button>
                 </form>
               </div>
