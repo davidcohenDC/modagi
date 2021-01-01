@@ -16,7 +16,7 @@ else {
     $incorrectData = "Attenzione, " . $_GET["incorrectData"];
 }
 
-$cartManager = new CartManager();
+$cartManager = new CartManager(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
 $cart["articleDetails"] = $cartManager->getAllProductDetails();
 $cart["totalPrice"] = $cartManager->getTotalPrice();
 $cart["orderCount"] = $cartManager->getOrderCount();

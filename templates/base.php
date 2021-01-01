@@ -79,7 +79,7 @@ if (session_status() == PHP_SESSION_NONE) {
                             <span class="badge badge-pill red">
                                 <?php
                                 require_once("./utilis/CartManager.php");
-                                $cartManager = new CartManager();
+                                $cartManager = new CartManager(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
                                 echo $cartManager->getOrderCount();
                                 ?>
                             </span>

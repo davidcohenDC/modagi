@@ -1,5 +1,6 @@
 <?php
 
+require_once("./macro.php");
 require_once("./server.php");
 require_once("utilis/cartManager.php");
 
@@ -11,7 +12,7 @@ if(isset($_GET["prodotto"])) {
 
 //vendor-action-page.php?action=8&prodotto=1
 
-$cartManager = new CartManager();
+$cartManager = new CartManager(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
 $templateParams["main"] = "product-page.php";
 $templateParams["prodotto"] = $product->selectByIdWithQuantity($idprodotto)[0];

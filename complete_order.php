@@ -66,7 +66,7 @@ else {
         }
 
         
-        //$cartManager->clearCart();
+        $cartManager->clearCart();
         require("./templates/base.php");
     }
 }
