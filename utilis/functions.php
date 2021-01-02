@@ -87,7 +87,7 @@ function uploadImage($path, $image, $prodName)
 
 function renameImage($path, $image, $newName)
 {
-    $acceptedExtensions = array("jpg", "jpeg", "png", "gif");
+    $acceptedExtensions = array(".jpg", ".jpeg", ".png", ".gif");
 
     $imageName = basename($image);
 
@@ -95,17 +95,19 @@ function renameImage($path, $image, $newName)
     $extension = "";
 
     foreach ($acceptedExtensions as $ext) {
+        echo $fullPath . $ext;
         if (file_exists($fullPath . $ext)) {
+            echo "TROVATA";
             $extension = $ext;
         }
     }
-
-    rename($fullPath . $extension, $path . $newName . "." . $extension);
+    echo  $path . $newName . $extension;
+    rename($fullPath . $extension, $path . $newName . $extension);
 }
 
 function removeImg($path, $image)
 {
-    $acceptedExtensions = array("jpg", "jpeg", "png", "gif");
+    $acceptedExtensions = array(".jpg", ".jpeg", ".png", ".gif");
 
     $imageName = basename($image);
 
@@ -119,6 +121,18 @@ function removeImg($path, $image)
     }
 
     unlink($fullPath . $extension);
+}
+
+function image_exists($fullPath)
+{
+    $acceptedExtensions = array(".jpg", ".jpeg", ".png", ".gif");
+    foreach ($acceptedExtensions as $ext) {
+        if (file_exists($fullPath . $ext)) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 function logOut()
