@@ -407,6 +407,63 @@ class DatabaseUser
         return [false, "PASSWORD ERRATA!"];
     }
 
+    public function removeProduct($user, $password, $prodID)
+    {
+        if ($this->checkPassword($user, $password)[0]) {
+
+            // rimuovo in prodotto categoria
+            $stmt = $this->db->prepare("DELETE FROM ProdottiCategorie WHERE idProdotto = ?");
+
+            $stmt->bind_param("i", $prodID);
+            $stmt->execute();
+
+            $check = $this->db->prepare("SELECT idProdotto FROM ProdottiCategorie WHERE idProdotto = ?");
+            $check->bind_param("i", $prodID);
+            $check->execute();
+
+            if (count($check->get_result()->fetch_all(MYSQLI_ASSOC)) != 0) {
+                return [false, "ERRORE NEL RIMUOVERE LE CATEGORIE APPARTENTI"];
+            }
+
+            // rimuovo in prodotto taglia
+            $stmt = $this->db->prepare("DELETE FROM ProdottiTaglie WHERE idProdotto = ?");
+
+            $stmt->bind_param("i", $prodID);
+            $stmt->execute();
+
+            $check = $this->db->prepare("SELECT idProdotto FROM ProdottiTaglie WHERE idProdotto = ?");
+            $check->bind_param("i", $prodID);
+            $check->execute();
+
+            if (count($check->get_result()->fetch_all(MYSQLI_ASSOC)) != 0) {
+                return [false, "ERRORE NEL RIMUOVERE LE TAGLIE APPARTENTI"];
+            }
+
+            //rimuovo in ordine 
+            $stmt = $this->db->prepare("DELETE FROM ordine WHERE idProdotto = ?");
+
+            $stmt->bind_param("i", $prodID);
+            $stmt->execute();
+
+            $check = $this->db->prepare("SELECT idProdotto FROM ordine WHERE idProdotto = ?");
+            $check->bind_param("i", $prodID);
+            $check->execute();
+
+            if (count($check->get_result()->fetch_all(MYSQLI_ASSOC)) != 0) {
+                return [false, "ERRORE NEL RIMUOVERE GLI ORDINI IN CUI COMPARIVA L'ORDINE"];
+            }
+
+            //rimuovo il prodotto
+            $stmt = $this->db->prepare("DELETE FROM prodotto WHERE id = ?");
+
+            $stmt->bind_param("i", $prodID);
+            $stmt->execute();
+
+            return [!$this->productExists($prodID), "PRODOTTO NON RIMOSSO CORRETTAMENTE"];
+        }
+        return [false, "PASSWORD ERRATA!"];
+    }
+
     // BOOLS
     public function hasOrders($id)
     {
@@ -445,6 +502,17 @@ class DatabaseUser
         $stmt = $this->db->prepare("SELECT nome
                                     FROM Prodotto
                                     WHERE id = ?");
+        $stmt->bind_param("i", $prodId);
+        $stmt->execute();
+
+        return count($stmt->get_result()->fetch_all(MYSQLI_ASSOC)) != 0;
+    }
+
+    public function hasPendingOrders($prodID)
+    {
+        $stmt = $this->db->prepare("SELECT idStato
+                                    FROM ordine
+                                    WHERE idProdotto = ? AND NOT idStato = 3");
         $stmt->bind_param("i", $prodId);
         $stmt->execute();
 

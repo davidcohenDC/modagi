@@ -9,18 +9,35 @@ if (!isUserLoggedIn() || !isset($_GET["action"]) || !isUserVendor()) {
 
 $action = $_GET["action"];
 
-if (isset($_GET["new-value"]) && $action > 1 && $action < 7) {
-    $newValue = $_GET["new-value"];
-}
-
 if (!isset($dbh)) {
     $dbh = new DatabaseUser(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
 }
 
+// controlli per pagine con modali
 if (isset($_GET["prev"])) {
     $previous = $_GET["prev"];
 }
+if (isset($_GET["new-value"]) && $action > 1 && $action < 7) {
+    $newValue = $_GET["new-value"];
+}
 
+// controllo di ridirezione per pagine con prodotti
+if ($action > 7) {
+    if (isset($_GET["product"])) {
+        if ($dbh->productExists($_GET["product"])) {
+            //* prodotto esiste
+            $productID = $_GET["product"];
+        } else {
+            //!product not exists
+            $templateParams["error"] = "Il porodotto non esiste";
+            header("location: vendor-action-page.php?action=1");
+        }
+    } else {
+        //!no product
+        $templateParams["error"] = "nessun prodotto da modificare";
+        header("location: user-page.php");
+    }
+}
 switch ($action) {
     case 1: //? Aggingi Scarpa
         $templateParams["title"] = "Aggiungi Articolo";
@@ -84,21 +101,6 @@ switch ($action) {
         $templateParams["main"] = "form.php";
         $formParams["main"] = "modify-product.php";
         $formParams["previousAction"] = $action;
-
-        if (isset($_GET["product"])) {
-            if ($dbh->productExists($_GET["product"])) {
-                //* prodotto esiste
-                $productID = $_GET["product"];
-            } else {
-                //!product not exists
-                $templateParams["error"] = "Il porodotto non esiste";
-                header("location: vendor-action-page.php?action=1");
-            }
-        } else {
-            //!no product
-            $templateParams["error"] = "nessun prodotto da modificare";
-            header("location: user-page.php");
-        }
 
         $changes = 0;
 
@@ -197,21 +199,6 @@ switch ($action) {
         $formParams["title"] = "Nome Scarpa";
         $formParams["main"] = "add-product-sizes.php";
 
-        if (isset($_GET["product"])) {
-            if ($dbh->productExists($_GET["product"])) {
-                //* prodotto esiste
-                $productID = $_GET["product"];
-            } else {
-                //!product not exists
-                $templateParams["error"] = "Il porodotto non esiste";
-                header("location: vendor-action-page.php?action=1");
-            }
-        } else {
-            //!no product
-            $templateParams["error"] = "nessun prodotto da modificare";
-            header("location: user-page.php");
-        }
-
         $changes = 0;
 
         //? get Current
@@ -234,6 +221,42 @@ switch ($action) {
             }
             $changes = 0;
         }
+        break;
+
+    case 10: //! rimuovi prodotto
+        $templateParams["title"] = "Rimuovi Prodotto";
+        $templateParams["main"] = "form.php";
+
+        $productName = $dbh->getProduct($productID)["nome"];
+
+        $formParams["title"] = "Rimuovi " . $productName;
+        $formParams["main"] = "confirm.php";
+
+        $confirmParams["title"] = "Sei sicuro di voler rimuovere il prodotto \n'" . $productName . "'";
+        $confirmParams["msg"] = "Una volto rimosso il prodotto non potrà essere ripristinato e verrà rimosso dalle cronologie degli ordini dei tuoi clienti.\nSe vuoi modificare le quantità del prodotto presenti <a href='vendor-action-page.php?action=9&product=" . $productID . "'>clicca qui!</a>";
+        $confirmParams["cancel"] = "vendor-action-page.php?action=8&product=" . $productID;
+
+        if (isset($_POST["p"])) {
+
+            if (!$dbh->hasPendingOrders($productID)) {
+                $remove_result = $dbh->removeProduct($_SESSION["id"], $_POST["p"], $productID);
+
+                if ($remove_result[0]) {
+                    // rimuovo la vecchia 
+                    if (image_exists(IMG_DIR . $productName)) {
+                        removeImg(IMG_DIR, $productName);
+                    }
+
+                    //! then go home
+                    header("location: index.php");
+                } else {
+                    $templateParams["error"] = $remove_result[1];
+                }
+            } else {
+                $templateParams["error"] = "IMPOSSIBILE RIMUOVERE '" . $productName . "' IN QUANTO PRESENTE IN ORDINI NON COMPLETATI";
+            }
+        }
+
         break;
 
     case 2: //? materiale
