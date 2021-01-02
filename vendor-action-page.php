@@ -221,14 +221,16 @@ switch ($action) {
         $formParams["sizes"] = $dbh->getAllSizes();
         $formParams["quantities"] = $dbh->getAllQuantities($productID);
 
-        if (isset($_POST["sizes"])) {
-            $dbh->updateSize($_POST, $formParams, $productID);
-            $changes++;
+        foreach ($formParams["sizes"] as $size) {
+            if (isset($_POST["quantity-" . $size['id']]) && $_POST["quantity-" . $size['id']] != "") {
+                $dbh->updateSize($size['id'], $_POST["quantity-" . $size['id']], $productID);
+                $changes++;
+            }
         }
 
         if ($changes) {
             if (!isset($templateParams["error"])) {
-                header("location: user-page.php");
+                header("location: vendor-action-page.php?action=8&product=" . $productID);
             }
             $changes = 0;
         }

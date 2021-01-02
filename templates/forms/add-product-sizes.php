@@ -7,6 +7,7 @@
         <?php foreach ($formParams["sizes"] as $size) : ?>
             <div class="input-group mb-3">
                 <?php
+
                 $sizeExists = false;
                 foreach ($formParams['quantities'] as $index) {
                     if ($index["idTaglia"] == $size['id']) {
