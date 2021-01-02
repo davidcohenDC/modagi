@@ -173,6 +173,16 @@ switch ($action) {
             }
         }
 
+        // modifico categorie scelte
+        if (isset($_POST["categories"])) {
+            $updateResult = $dbh->updateProduct($productID, $_POST["categories"], "categorie");
+            $changes++;
+
+            if (!$updateResult[0]) {
+                $templateParams["error"] = $updateResult[1];
+            }
+        }
+
         if ($changes) {
             if (!isset($templateParams["error"])) {
                 header("location: product.php?prodotto=" . $productID);

@@ -80,6 +80,46 @@ class DatabaseUser
             case 'idMateriale':
                 $params = "ii";
                 break;
+            case 'categorie':
+
+                $stmt = $this->db->prepare("SELECT idCategoria FROM ProdottiCategorie WHERE idProdotto = ?");
+                $stmt->bind_param("i", $id);
+                $stmt->execute();
+
+                $currentCategories = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+                foreach ($newValue as $newCategory) {
+                    if (!in_array($newCategory, $currentCategories)) {
+                        // insert new ones
+                        $stmt = $this->db->prepare("INSERT INTO ProdottiCategorie (idCategoria, idProdotto) VALUES (?,?)");
+                        $stmt->bind_param("ii", $newCategory, $id);
+                        $stmt->execute();
+                    }
+                }
+
+                foreach ($currentCategories as $oldValue) {
+                    if (!in_array($oldValue['idCategoria'], $newValue)) {
+                        // delete not selected ones
+                        $stmt = $this->db->prepare("DELETE FROM ProdottiCategorie WHERE idCategoria = ? AND idProdotto = ?");
+                        $stmt->bind_param("ii", $oldValue['idCategoria'], $id);
+                        $stmt->execute();
+                    }
+                }
+
+                $stmt = $this->db->prepare("SELECT idCategoria FROM ProdottiCategorie WHERE idProdotto = ?");
+                $stmt->bind_param("i", $id);
+                $stmt->execute();
+
+                $currentCategories = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+                // controllo che le nuove categorie siano state inserite correttamente 
+                foreach ($newValue as $newCategory) {
+                    if (in_array($newCategory, $currentCategories)) {
+                        echo $newCategory . "NO";
+                        return [false, "CATEGORIE NON AGGIORNATE CORRETTAMENTE"];
+                    }
+                }
+                return [true, ""];
             default:
                 # code...
                 break;

@@ -139,9 +139,9 @@
             ?>
 
             <div class="form-check">
-                <input id="category-<?php echo $category['id'] ?>" class="form-check-input" name="category-<?php echo $category['id'] ?>" type="checkbox" value="<?php echo $category['id'] ?>" <?php if ($hasCategory) {
-                                                                                                                                                                                                    echo 'checked';
-                                                                                                                                                                                                } ?> />
+                <input id="category-<?php echo $category['id'] ?>" class="form-check-input" name="categories[]" type="checkbox" value="<?php echo $category['id'] ?>" <?php if ($hasCategory) {
+                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                        } ?> />
                 <label class="form-check-label" for="category-<?php echo $category['id'] ?>">
                     <?php echo $category['nome'] ?>
                 </label>
