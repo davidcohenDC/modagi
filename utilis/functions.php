@@ -95,13 +95,11 @@ function renameImage($path, $image, $newName)
     $extension = "";
 
     foreach ($acceptedExtensions as $ext) {
-        echo $fullPath . $ext;
         if (file_exists($fullPath . $ext)) {
-            echo "TROVATA";
             $extension = $ext;
         }
     }
-    echo  $path . $newName . $extension;
+
     rename($fullPath . $extension, $path . $newName . $extension);
 }
 

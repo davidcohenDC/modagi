@@ -139,7 +139,10 @@ switch ($action) {
             // modifica nome 
             $updateResult = $dbh->updateProduct($productID, $_POST[$key[0]], $key[1]);
             $changes++;
-        } elseif (isset($_POST[$key[0]]) && $_POST[$key[0]] == $formParams["current"][$key[1]] && isset($_FILES["shoe-img"])) {
+        } elseif (
+            isset($_POST[$key[0]]) && $_POST[$key[0]] == $formParams["current"][$key[1]]
+            && isset($_FILES["shoe-img"]) && $_FILES["shoe-img"]["name"] != ""
+        ) {
 
             // cambio solo l'immagine  e non il nome
             $changes++;
