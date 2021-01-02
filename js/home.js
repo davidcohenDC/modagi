@@ -123,7 +123,7 @@ $(function(){
     $('#formModifyProduct').on('submit', function (e) {
       e.preventDefault();
       let urlParams = new URLSearchParams(window.location.search);
-      location.href = "vendor-action-page.php?action=8&prodotto="+urlParams.get('prodotto');
+      location.href = "vendor-action-page.php?action=8&product="+urlParams.get('prodotto');
     });
 
     $("input[name=taglia]").on("change", function(){
