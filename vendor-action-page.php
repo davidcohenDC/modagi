@@ -175,7 +175,7 @@ switch ($action) {
 
         if ($changes) {
             if (!isset($templateParams["error"])) {
-                # header("location: user-page.php");
+                header("location: product.php?prodotto=" . $productID);
             }
             $changes = 0;
         }
