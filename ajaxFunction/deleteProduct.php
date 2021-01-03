@@ -8,7 +8,7 @@ if(isset($_POST["id"]) && isset($_POST["size"])) {
     $articleSize = $_POST["size"];
 
     $cartManager = new CartManager(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
-    $newProduct = $cartManager->decreaseProduct($articleId, $articleSize);
+    $newProduct = $cartManager->deleteProduct($articleId, $articleSize);
     
     echo json_encode($newProduct);
 }

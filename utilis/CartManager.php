@@ -1,6 +1,6 @@
 <?php
 
-class DatabaseCart{
+class DatabaseCart {
     private $db;
 
     // costruttore
@@ -23,8 +23,6 @@ class DatabaseCart{
         $result = $stmt->get_result();
         $stmt->close();
 
-        // fetch_all recupera il risultato della query e MYSQLI_ASSOC specifico che voglio
-        // che ritornare un array associativo (dizionario)
         return $result->fetch_all(MYSQLI_ASSOC)[0];
     }
 
@@ -40,6 +38,22 @@ class DatabaseCart{
         }
 
         return $totalPrice;
+    }
+
+    public function getStockQuantity($articleId, $articleSize) {
+        $stmt = $this->db->prepare("SELECT `quantita` FROM `prodottitaglie` 
+                                    JOIN taglia ON taglia.id = prodottitaglie.idTaglia 
+                                    WHERE `idProdotto` = ? AND taglia.numero = ?");
+        $stmt->bind_param("ss", $articleId, $articleSize);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $stmt->close();
+        $res = $result->fetch_all(MYSQLI_ASSOC);
+        if(count($res) > 0) {
+            return $res[0]["quantita"];
+        }
+        return 0;
     }
 
 }
@@ -100,8 +114,13 @@ class CartManager {
         $newProductKey = $productId . "|" . $productSize;
         if(array_key_exists($newProductKey, $this->cart)) {
             $oldProductCount = $this->cart[$newProductKey];
-            $newProduct = array($productId . "|" . $productSize => $oldProductCount-$productCount);
-            $this->cart = array_merge($this->cart, $newProduct);
+            if($oldProductCount < 1) {
+                unset($this->cart[$productId . "|" . $productSize]);
+            }
+            else {
+                $newProduct = array($productId . "|" . $productSize => $oldProductCount-$productCount);
+                $this->cart = array_merge($this->cart, $newProduct);
+            }
         }
     }
 
@@ -109,14 +128,24 @@ class CartManager {
      * increase product quantity
      */
     public function increaseProduct($articleId, $articleSize) {
-        $this->addProduct($articleId, $articleSize);
-        $this->saveCart();
-
         $unitPrice = $this->getArticleDetails($articleId, $articleSize)["prezzo"];
-        $newQuantity = $this->getArticleQuantity($articleId, $articleSize) + 1;
-        $newArticlePrice = round($unitPrice * $newQuantity, 2);
-        $newTotalPrice = round($this->getTotalPrice() + $unitPrice, 2);
-        return array("articlePrice" => $newArticlePrice, "articleQuantity" => $newQuantity, "newTotalPrice" => $newTotalPrice);
+        $oldQuantity = $this->getArticleQuantity($articleId, $articleSize);
+        $stockQuantity = $this->db->getStockQuantity($articleId, $articleSize);
+
+        if(($stockQuantity - $oldQuantity) > 0) {
+            $newQuantity = $this->getArticleQuantity($articleId, $articleSize) + 1;
+            $newArticlePrice = round($unitPrice * $newQuantity, 2);
+            $newTotalPrice = round($this->getTotalPrice() + $unitPrice, 2);
+            $this->addProduct($articleId, $articleSize);
+            $this->saveCart();
+        }
+        else {
+            $newQuantity = $this->getArticleQuantity($articleId, $articleSize);
+            $newArticlePrice = round($unitPrice * $newQuantity, 2);
+            $newTotalPrice = round($this->getTotalPrice(), 2);
+        }
+        return array("articlePrice" => $newArticlePrice, "articleNewQuantity" => $newQuantity, 
+            "articleOldQuantity" => $oldQuantity, "newTotalPrice" => $newTotalPrice);
     }
 
     /**
@@ -128,13 +157,33 @@ class CartManager {
 
         $unitPrice = $this->getArticleDetails($articleId, $articleSize)["prezzo"];
         $newQuantity = $this->getArticleQuantity($articleId, $articleSize) - 1;
+        
         $newArticlePrice = round($unitPrice * $newQuantity, 2);
         $newTotalPrice = round($this->getTotalPrice() - $unitPrice, 2);
+        if($newQuantity < 1) {
+            return array("newTotalPrice" => $newTotalPrice);
+        }
         return array("articlePrice" => $newArticlePrice, "articleQuantity" => $newQuantity, "newTotalPrice" => $newTotalPrice);
     }
 
     /**
-     * clear the product inside the cart
+     * delete product quantity
+     */
+    public function deleteProduct($articleId, $articleSize) {
+        unset($this->cart[$articleId . "|" . $articleSize]);
+        $this->saveCart();
+
+        $unitPrice = $this->getArticleDetails($articleId, $articleSize)["prezzo"];
+        $quantity = $this->getArticleQuantity($articleId, $articleSize);
+        
+        $articlePrice = round($unitPrice * $quantity, 2);
+        $newTotalPrice = round($this->getTotalPrice() - $articlePrice, 2);
+
+        return array("newTotalPrice" => $newTotalPrice);
+    }
+
+    /**
+     * clear all products inside the cart
      */
     public function clearCart() {
         $this->cookie->setCookie(CART_COOKIE, json_encode(array()));
