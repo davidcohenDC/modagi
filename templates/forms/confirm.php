@@ -1,10 +1,10 @@
 <div class="my-3 mx-2">
-    <div class="alert alert-danger" role="alert">
+    <div class="alert alert-danger text-center" role="alert">
         <h2>
-            Sei sicuro di voler cancellare l'account?
+            <?php echo $confirmParams["title"]; ?>
         </h2>
         <p>
-            Una volta premuto conferma l'account non potra essere ripristinato.
+            <?php echo $confirmParams["msg"]; ?>
         </p>
     </div>
 </div>
@@ -24,6 +24,11 @@
 </div>
 
 <div class="row justify-content-md-center">
+
+    <div class="my-2 mx-2 col-md-10 col-lg-8">
+        <a href="<?php echo $confirmParams["cancel"]; ?>" class="my-3 btn btn-light fw-bold col-12"> Annulla </a>
+    </div>
+
     <div class="my-3 mx-2 col-md-10 col-lg-8">
         <input type="submit" class="btn btn-danger col-12 fw-bold" value="Conferma" />
     </div>

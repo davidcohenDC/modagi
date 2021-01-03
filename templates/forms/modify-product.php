@@ -139,9 +139,9 @@
             ?>
 
             <div class="form-check">
-                <input id="category-<?php echo $category['id'] ?>" class="form-check-input" name="category-<?php echo $category['id'] ?>" type="checkbox" value="<?php echo $category['id'] ?>" <?php if ($hasCategory) {
-                                                                                                                                                                                                    echo 'checked';
-                                                                                                                                                                                                } ?> />
+                <input id="category-<?php echo $category['id'] ?>" class="form-check-input" name="categories[]" type="checkbox" value="<?php echo $category['id'] ?>" <?php if ($hasCategory) {
+                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                        } ?> />
                 <label class="form-check-label" for="category-<?php echo $category['id'] ?>">
                     <?php echo $category['nome'] ?>
                 </label>
@@ -163,13 +163,17 @@
 
 <div class="row justify-content-md-center">
     <div class="my-3 mx-2 col-md-10 col-lg-8">
-        <input type="submit" class="btn btn-light col-12 fw-bold" value="Conferma Modifiche" />
+        <a href="vendor-action-page.php?action=9&product=<?php echo $productID; ?>" class="my-3 btn btn-light fw-bold col-12"> Modifica Quantità per Taglia </a>
     </div>
 
     <div class="my-3 mx-2 col-md-10 col-lg-8">
-        <a href="vendor-action-page.php?action=9&product=<?php echo $productID; ?>" class="my-3 btn btn-info fw-bold col-12"> Modifica Quantità per Taglia </a>
-
+        <input type="submit" class="btn btn-info col-12 fw-bold" value="Conferma Modifiche" />
     </div>
+
+    <div class="my-3 mx-2 col-md-10 col-lg-8">
+        <a href="vendor-action-page.php?action=10&product=<?php echo $productID; ?>" class="my-3 btn btn-danger fw-bold col-12"> Rimuovi Prodotto </a>
+    </div>
+
 </div>
 
 

@@ -80,6 +80,46 @@ class DatabaseUser
             case 'idMateriale':
                 $params = "ii";
                 break;
+            case 'categorie':
+
+                $stmt = $this->db->prepare("SELECT idCategoria FROM ProdottiCategorie WHERE idProdotto = ?");
+                $stmt->bind_param("i", $id);
+                $stmt->execute();
+
+                $currentCategories = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+                foreach ($newValue as $newCategory) {
+                    if (!in_array($newCategory, $currentCategories)) {
+                        // insert new ones
+                        $stmt = $this->db->prepare("INSERT INTO ProdottiCategorie (idCategoria, idProdotto) VALUES (?,?)");
+                        $stmt->bind_param("ii", $newCategory, $id);
+                        $stmt->execute();
+                    }
+                }
+
+                foreach ($currentCategories as $oldValue) {
+                    if (!in_array($oldValue['idCategoria'], $newValue)) {
+                        // delete not selected ones
+                        $stmt = $this->db->prepare("DELETE FROM ProdottiCategorie WHERE idCategoria = ? AND idProdotto = ?");
+                        $stmt->bind_param("ii", $oldValue['idCategoria'], $id);
+                        $stmt->execute();
+                    }
+                }
+
+                $stmt = $this->db->prepare("SELECT idCategoria FROM ProdottiCategorie WHERE idProdotto = ?");
+                $stmt->bind_param("i", $id);
+                $stmt->execute();
+
+                $currentCategories = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+                // controllo che le nuove categorie siano state inserite correttamente 
+                foreach ($newValue as $newCategory) {
+                    if (in_array($newCategory, $currentCategories)) {
+                        echo $newCategory . "NO";
+                        return [false, "CATEGORIE NON AGGIORNATE CORRETTAMENTE"];
+                    }
+                }
+                return [true, ""];
             default:
                 # code...
                 break;
@@ -87,34 +127,40 @@ class DatabaseUser
         $this->updateProductField($field, $id, $newValue, $params);
     }
 
-    public function updateSize($values, $params, $prodId)
+    public function updateSize($size, $quantity, $prodId)
     {
-        foreach ($params["sizes"] as $key) {
-            if (isset($values["size-" . $key["id"]]) && $values["size-" . $key["id"]] != "") {
 
-                $check = $this->db->prepare("SELECT * FROM ProdottiTaglie 
+
+        $check = $this->db->prepare("SELECT * FROM ProdottiTaglie 
                                             WHERE idProdotto = ? 
                                             AND idTaglia = ?;");
-                $check->bind_param("ii", $prodId, $key["id"]);
-                $check->execute();
+        $check->bind_param("ii", $prodId, $size);
+        $check->execute();
 
-                if (count($check->get_result()->fetch_all(MYSQLI_ASSOC)) == 0) {
-                    // prodotto non aveva la taglia
-                    $stmt = $this->db->prepare("INSERT INTO ProdottiTaglie (idTaglia, idProdotto, quantita)
+        if (count($check->get_result()->fetch_all(MYSQLI_ASSOC)) == 0) {
+            // prodotto non aveva la taglia
+            $stmt = $this->db->prepare("INSERT INTO ProdottiTaglie (idTaglia, idProdotto, quantita)
                                                 VALUES (?, ?, ?);");
-                    $stmt->bind_param("iii", $key["id"], $prodId, $values["quantity-" . $key["id"]]);
-                } else {
-                    // prodotto ha già taglia
-                    $stmt = $this->db->prepare("UPDATE ProdottiTaglie 
-                                                SET quantita = ?
-                                                WHERE idProdotto = ? 
-                                                AND idTaglia = ?;");
+            $stmt->bind_param("iii", $size, $prodId, $quantity);
+        } else {
+            // prodotto ha già taglia
+            if ($quantity == 0) {
+                $stmt = $this->db->prepare("DELETE FROM ProdottiTaglie 
+                                            WHERE idProdotto = ? 
+                                            AND idTaglia = ?;");
 
-                    $stmt->bind_param("iii", $values["quantity-" . $key["id"]], $prodId, $key["id"]);
-                }
-                $stmt->execute();
+                $stmt->bind_param("ii", $prodId,  $size);
+            } else {
+                $stmt = $this->db->prepare("UPDATE ProdottiTaglie 
+                SET quantita = ?
+                WHERE idProdotto = ? 
+                AND idTaglia = ?;");
+
+                $stmt->bind_param("iii", $quantity, $prodId,  $size);
             }
         }
+
+        $stmt->execute();
     }
 
     // GETTERS
@@ -361,6 +407,63 @@ class DatabaseUser
         return [false, "PASSWORD ERRATA!"];
     }
 
+    public function removeProduct($user, $password, $prodID)
+    {
+        if ($this->checkPassword($user, $password)[0]) {
+
+            // rimuovo in prodotto categoria
+            $stmt = $this->db->prepare("DELETE FROM ProdottiCategorie WHERE idProdotto = ?");
+
+            $stmt->bind_param("i", $prodID);
+            $stmt->execute();
+
+            $check = $this->db->prepare("SELECT idProdotto FROM ProdottiCategorie WHERE idProdotto = ?");
+            $check->bind_param("i", $prodID);
+            $check->execute();
+
+            if (count($check->get_result()->fetch_all(MYSQLI_ASSOC)) != 0) {
+                return [false, "ERRORE NEL RIMUOVERE LE CATEGORIE APPARTENTI"];
+            }
+
+            // rimuovo in prodotto taglia
+            $stmt = $this->db->prepare("DELETE FROM ProdottiTaglie WHERE idProdotto = ?");
+
+            $stmt->bind_param("i", $prodID);
+            $stmt->execute();
+
+            $check = $this->db->prepare("SELECT idProdotto FROM ProdottiTaglie WHERE idProdotto = ?");
+            $check->bind_param("i", $prodID);
+            $check->execute();
+
+            if (count($check->get_result()->fetch_all(MYSQLI_ASSOC)) != 0) {
+                return [false, "ERRORE NEL RIMUOVERE LE TAGLIE APPARTENTI"];
+            }
+
+            //rimuovo in ordine 
+            $stmt = $this->db->prepare("DELETE FROM ordine WHERE idProdotto = ?");
+
+            $stmt->bind_param("i", $prodID);
+            $stmt->execute();
+
+            $check = $this->db->prepare("SELECT idProdotto FROM ordine WHERE idProdotto = ?");
+            $check->bind_param("i", $prodID);
+            $check->execute();
+
+            if (count($check->get_result()->fetch_all(MYSQLI_ASSOC)) != 0) {
+                return [false, "ERRORE NEL RIMUOVERE GLI ORDINI IN CUI COMPARIVA L'ORDINE"];
+            }
+
+            //rimuovo il prodotto
+            $stmt = $this->db->prepare("DELETE FROM prodotto WHERE id = ?");
+
+            $stmt->bind_param("i", $prodID);
+            $stmt->execute();
+
+            return [!$this->productExists($prodID), "PRODOTTO NON RIMOSSO CORRETTAMENTE"];
+        }
+        return [false, "PASSWORD ERRATA!"];
+    }
+
     // BOOLS
     public function hasOrders($id)
     {
@@ -399,6 +502,17 @@ class DatabaseUser
         $stmt = $this->db->prepare("SELECT nome
                                     FROM Prodotto
                                     WHERE id = ?");
+        $stmt->bind_param("i", $prodId);
+        $stmt->execute();
+
+        return count($stmt->get_result()->fetch_all(MYSQLI_ASSOC)) != 0;
+    }
+
+    public function hasPendingOrders($prodID)
+    {
+        $stmt = $this->db->prepare("SELECT idStato
+                                    FROM ordine
+                                    WHERE idProdotto = ? AND NOT idStato = 3");
         $stmt->bind_param("i", $prodId);
         $stmt->execute();
 

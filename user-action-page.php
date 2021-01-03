@@ -9,6 +9,10 @@ if (!isUserLoggedIn() || !isset($_GET["action"])) {
 
 $action = $_GET["action"];
 
+if (!isset($dbh) && $action != 0) {
+    $dbh = new DatabaseUser(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
+}
+
 switch ($action) {
     case 0: //!log out
         logOut();
@@ -17,10 +21,6 @@ switch ($action) {
 
     case 1: //? Storico ordini
         $templateParams["title"] = "I miei Ordini";
-
-        if (!isset($dbh)) {
-            $dbh = new DatabaseUser(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
-        }
 
         if ($dbh->hasOrders($_SESSION["id"])) {
             $templateParams["dates"] = $dbh->getOrdersDates($_SESSION["id"]);
@@ -43,10 +43,6 @@ switch ($action) {
         $templateParams["main"] = "form.php";
         $formParams["title"] = "Modifica Dati Utente";
         $formParams["main"] = "change-user-data.php";
-
-        if (!isset($dbh)) {
-            $dbh = new DatabaseUser(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
-        }
 
         if (isset($_POST["p"])) {
 
@@ -90,10 +86,6 @@ switch ($action) {
         $formParams["main"] = "change-password-form.php";
 
         //* effettivo update query
-        if (!isset($dbh)) {
-            $dbh = new DatabaseUser(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
-        }
-
         if (isset($_POST["old"]) && isset($_POST["new"])) {
             $change_result = $dbh->updatePassword($_SESSION["id"], $_POST["old"], $_POST["new"]);
 
@@ -107,15 +99,15 @@ switch ($action) {
         break;
 
     case -1: //! remove account after confirm
-
         $templateParams["title"] = "Rimuovi Account";
         $templateParams["main"] = "form.php";
         $formParams["title"] = "Rimuovi Account";
         $formParams["main"] = "confirm.php";
 
-        if (!isset($dbh)) {
-            $dbh = new DatabaseUser(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
-        }
+        $confirmParams["title"]  = "Sei sicuro di voler cancellare l'account?";
+        $confirmParams["msg"] = "Una volta premuto conferma l'account non potra essere ripristinato.\nSarà necessario registrarsi nuovamente";
+        $confirmParams["cancel"] = "user-page.php";
+
         if (isset($_POST["p"])) {
             $remove_result = $dbh->removeUser($_SESSION["id"], $_POST["p"]);
 
