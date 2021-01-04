@@ -176,9 +176,13 @@ class DatabaseUser
 
     public function getOrdersDates($id)
     {
-        $stmt = $this->db->prepare("SELECT DISTINCT data FROM ordine WHERE email = ? ORDER BY data DESC");
+        if (isUserVendor()) {
+            $stmt = $this->db->prepare("SELECT DISTINCT data FROM ordine WHERE idStato < 3 ORDER BY data DESC");
+        } else {
+            $stmt = $this->db->prepare("SELECT DISTINCT data FROM ordine WHERE email = ? ORDER BY data DESC");
+            $stmt->bind_param("s", $id);
+        }
 
-        $stmt->bind_param("s", $id);
         $stmt->execute();
 
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
@@ -186,19 +190,35 @@ class DatabaseUser
 
     public function getOrdersProducts($date, $email)
     {
-        $stmt = $this->db->prepare("SELECT prodotto.id as id, prodotto.nome as nome, prodotto.prezzo as prezzo, ordine.quantita as quantita,
+        if (isUserVendor()) {
+            $stmt = $this->db->prepare("SELECT user.nome as user, user.indirizzo as indirizzo, prodotto.id as id, prodotto.nome as nome, prodotto.prezzo as prezzo, ordine.quantita as quantita,
                                     genere.nome as genere, colore.nome as colore, materiale.nome as materiale, marca.nome as marca
-                                    FROM colore, materiale, marca, genere, ordine, prodotto 
-                                    WHERE prodotto.id = ordine.idProdotto 
-                                    AND ordine.email = ? 
+                                    FROM colore, materiale, marca, genere, ordine, prodotto, user 
+                                    WHERE prodotto.id = ordine.idProdotto  
                                     AND ordine.data = ? 
+                                    AND ordine.email = user.email
                                     AND prodotto.idColore = colore.id
                                     AND prodotto.idGenere = genere.id
                                     AND prodotto.idMateriale = materiale.id
                                     AND prodotto.idMarca = marca.id
                                     ORDER BY ordine.data");
 
-        $stmt->bind_param("ss", $email, $date);
+            $stmt->bind_param("s", $date);
+        } else {
+            $stmt = $this->db->prepare("SELECT prodotto.id as id, prodotto.nome as nome, prodotto.prezzo as prezzo, ordine.quantita as quantita,
+            genere.nome as genere, colore.nome as colore, materiale.nome as materiale, marca.nome as marca
+            FROM colore, materiale, marca, genere, ordine, prodotto 
+            WHERE prodotto.id = ordine.idProdotto 
+            AND ordine.email = ? 
+            AND ordine.data = ? 
+            AND prodotto.idColore = colore.id
+            AND prodotto.idGenere = genere.id
+            AND prodotto.idMateriale = materiale.id
+            AND prodotto.idMarca = marca.id
+            ORDER BY ordine.data");
+
+            $stmt->bind_param("ss", $email, $date);
+        }
         $stmt->execute();
 
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
@@ -218,11 +238,13 @@ class DatabaseUser
 
     public function getOrdersStatus($id)
     {
-        $stmt = $this->db->prepare("SELECT o.id as id, o.idProdotto as prodID , s.id as statID, s.nome as stato FROM ordine as o, statoordine as s WHERE s.id = o.idStato AND o.email = ? ORDER BY o.data DESC");
-
-        $stmt->bind_param("s", $id);
+        if (isUserVendor()) {
+            $stmt = $this->db->prepare("SELECT o.id as id, o.idProdotto as prodID , s.id as statID, s.nome as stato FROM ordine as o, statoordine as s WHERE s.id = o.idStato AND o.idStato < 3 ORDER BY o.data DESC");
+        } else {
+            $stmt = $this->db->prepare("SELECT o.id as id, o.idProdotto as prodID , s.id as statID, s.nome as stato FROM ordine as o, statoordine as s WHERE s.id = o.idStato AND o.email = ? ORDER BY o.data DESC");
+            $stmt->bind_param("s", $id);
+        }
         $stmt->execute();
-
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
@@ -274,6 +296,14 @@ class DatabaseUser
     public function getCategoriesProduct($id)
     {
         return $this->getAll("ProdottiCategorie WHERE idProdotto = " . $id);
+    }
+
+    public function getPendingOrders()
+    {
+        $stmt = $this->db->prepare("SELECT * FROM ordine WHERE idStato < 3");
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
     // INSERTS
@@ -533,19 +563,6 @@ class DatabaseUser
         $cryptedPass = password_hash($stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]["password"], PASSWORD_DEFAULT);
 
         return [password_verify($password, $cryptedPass), "PASSWORD ERRATA!"];
-
-
-        /* method without hashing
-        
-        $stmt = $this->db->prepare("SELECT COUNT(email) as correctUsers
-                                    FROM User
-                                    WHERE email = ? AND password = ?");
-        $stmt->bind_param("ss", $id, $password);
-        $stmt->execute();
-
-        return [$stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]["correctUsers"] != "0", "PASSWORD ERRATA!"]; 
-        
-        */
     }
 
     private function getAll($table)

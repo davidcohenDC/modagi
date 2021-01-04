@@ -22,7 +22,7 @@ if (isset($_GET["new-value"]) && $action > 1 && $action < 7) {
 }
 
 // controllo di ridirezione per pagine con prodotti
-if ($action > 7) {
+if ($action > 7 && $action < 11) {
     if (isset($_GET["product"])) {
         if ($dbh->productExists($_GET["product"])) {
             //* prodotto esiste
@@ -280,7 +280,26 @@ switch ($action) {
         }
 
         break;
+    case 11: //* ordini in sospeso
+        $templateParams["title"] = "Ordini in sospeso";
+        $templateParams["main"] = "pending-orders.php";
 
+        $pendingOrders = $dbh->getPendingOrders();
+
+        if (count($pendingOrders) > 0) {
+            $templateParams["dates"] = $dbh->getOrdersDates($_SESSION["id"]);
+
+            foreach ($templateParams["dates"] as $date) {
+                $templateParams[$date["data"]] = $dbh->getOrdersProducts($date["data"], $_SESSION["id"]);
+            }
+
+            $templateParams["stati"] = $dbh->getOrdersStatus($_SESSION["id"]);
+            $icons["size"] = 30;
+        } else {
+            $templateParams["noOrders"] = "Nessun ordine non correttamente consegnato da mostrare.";
+        }
+
+        break;
     case 2: //? materiale
         $dbh->insertNewValue($newValue, "nome", "materiale");
         break;
