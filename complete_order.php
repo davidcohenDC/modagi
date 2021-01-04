@@ -49,13 +49,6 @@ else {
                                                         "L'articolo '" . $article["nome"] . "' è esaurito nel magazzino.");
                 }
             }
-            // se qualcosa va storto rimando sulla index.php segnalando l'errore
-            if(!$orderStatus) {
-                header("Location: index.php");
-                $notificationManager->addNotification($userEmail, "Errore durante il completamento dell'ordine",
-                                                        "Il tuo ordine: " . $article["nome"] . " ha avuto qualche problema! Contatta l'assistenza.");
-                die();
-            }
             if($article["quantita"] > 1) {
                 $notificationManager->addNotification($userEmail, "Ordini ricevuti!", 
                                                         "Il tuoi " . $article["quantita"] . " ordini: " . $article["nome"] . " sono andati a buon fine.");
@@ -63,9 +56,15 @@ else {
             else {
                 $notificationManager->addNotification($userEmail, "Ordine ricevuto!", "Il tuo ordine: " . $article["nome"] . " è andato a buon fine.");
             }
+            // se qualcosa va storto rimando sulla index.php segnalando l'errore
+            if(!$orderStatus) {
+                header("Location: index.php");
+                $notificationManager->addNotification($userEmail, "Errore durante il completamento dell'ordine",
+                                                        "Il tuo ordine: " . $article["nome"] . " è esaurito!");
+                die();
+            }
         }
 
-        
         $cartManager->clearCart();
         require("./templates/base.php");
     }
