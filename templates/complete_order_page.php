@@ -1,4 +1,4 @@
-<script type="text/javascript">
+<script>
 
 const delay = 1000;
 const redirectTimeout = 0;

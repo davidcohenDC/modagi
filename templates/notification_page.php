@@ -12,7 +12,7 @@
     <?php foreach ($allNotification as $notify): ?>
     <div class="notifications-item">
         <div class="text">
-            <h4><?php echo $notify["nome"] ?></h4>
+            <div class="h4"><?php echo $notify["nome"] ?></div>
             <p><?php echo $notify["contenuto"] ?></p>
         </div>
     </div>

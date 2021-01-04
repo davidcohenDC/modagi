@@ -6,10 +6,8 @@
 }
 
 .icon span {
-    background: #343a40;
     padding: 1px 4px 1px 4px;
     border-radius: 10px;
-    color: #fff;
     margin-left: -25px
 }
 
@@ -60,7 +58,6 @@
     border-bottom: 1px solid #eee;
     padding: 6px 9px;
     margin-bottom: 0px;
-    cursor: pointer
 }
 
 .notifications-item:hover {
@@ -76,10 +73,10 @@
     margin-top: 2px
 }
 
-.notifications-item .text h4 {
+.notifications-item .text div {
     color: #777;
     font-size: 16px;
-    margin-top: 3px
+    margin-top: 3px;
 }
 
 .notifications-item .text p {
