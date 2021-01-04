@@ -37,12 +37,12 @@
                     <?php foreach ($templateParams[$date["data"]] as $product) : ?>
                         <div class="product my-4 py-4 product-history">
                             <div class="row">
-                                <div class="col-md-3  my-4">
+                                <div class="col-12 col-md-3 col-lg-2 col-xl-3 my-4">
                                     <a href="product.php?prodotto=<?php echo $product["id"] ?>">
                                         <img class=" img-fluid mx-auto d-block image product-image" src="<?php echo IMG_DIR . "/" . $product["nome"] . ".jpg" ?> " alt="<?php echo "Immagine di: " . $product["nome"]; ?>" />
                                     </a>
                                 </div>
-                                <div class="col-12 col-md-4  text-center">
+                                <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-center">
                                     <div class="col-lg-12">
                                         <div class="my-5"></div>
                                         <!--empty space vertical-->
@@ -78,8 +78,8 @@
                                     </div>
 
                                 </div>
-                                <div class="col-md-5 col-lg-4">
-                                    <div class="info">
+                                <div class="col-md-5 col-lg-4 col-xl-4">
+                                    <div class="info my-4">
                                         <div class="row">
                                             <div class="col-11 product-name">
                                                 <div class="product-name">

@@ -14,6 +14,7 @@ footer {
   margin-top: 50px;
   background-color: #f2f2f2;
   padding: 25px;
+  width: 100%!important;
 }
 
 .bg-info.ciao {

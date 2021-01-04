@@ -522,13 +522,30 @@ class DatabaseUser
     // PRIVATES
     private function checkPassword($id, $password)
     {
+
+        // method with hashing
+        $stmt = $this->db->prepare("SELECT password
+                                    FROM User
+                                    WHERE email = ?");
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+
+        $cryptedPass = password_hash($stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]["password"], PASSWORD_DEFAULT);
+
+        return [password_verify($password, $cryptedPass), "PASSWORD ERRATA!"];
+
+
+        /* method without hashing
+        
         $stmt = $this->db->prepare("SELECT COUNT(email) as correctUsers
                                     FROM User
                                     WHERE email = ? AND password = ?");
         $stmt->bind_param("ss", $id, $password);
         $stmt->execute();
 
-        return [$stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]["correctUsers"] != "0", "PASSWORD ERRATA!"];
+        return [$stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]["correctUsers"] != "0", "PASSWORD ERRATA!"]; 
+        
+        */
     }
 
     private function getAll($table)

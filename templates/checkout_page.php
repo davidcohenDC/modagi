@@ -106,7 +106,7 @@ function showLoading(submitBtn) {
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3 mb-3">
+                <div class="col-md-6 mb-3">
                     <label for="cc-expiration">Scadenza</label>
                     <input type="date" name="cardExpiration" class="form-control <?php if($incorrectData) {echo "bg-danger text-white";} ?>" id="cc-expiration" placeholder="" required="">
                 </div>
