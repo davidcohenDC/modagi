@@ -20,9 +20,9 @@ $prodotto = $templateParams["prodotto"];
       </div>
       <!-- Col: Azioni -->
       <div class="title col-12 col-lg-6">
+      <?php if($prodotto["stock"] == 0) echo '<span class="product-badge badge-dark">NON DISPONIBILE</span>'?>
         <h1><?php echo $prodotto["nome"];?></h1>
-        <label class="text-center mb-2"><?php echo $prodotto["prezzo"];?>€</label>
-
+        <label><?php echo $prodotto["prezzo"];?>€</label>
         <!--Accordion wrapper-->
         <div class="accordion md-accordion" id="accordionEx" aria-multiselectable="true">
 
@@ -132,9 +132,9 @@ $prodotto = $templateParams["prodotto"];
 
         <!-- Section: AddToCart -->
         <section class="cart">
-          <div class=" mb-2 text-center">
+          <div class=" mb-2">
             <div class="row">
-              <div class="col-md-12 text-center text-md-center text-md-right">
+              <div class="col-md-12">
                 <form method="POST"
                   id="<?php if(isUserVendor()) { echo "formModifyProduct";} else {echo "formAddToCart";}?>" action="">
                   <button type="submit" id="btnAdd"
