@@ -13,8 +13,10 @@ $prodotto = $templateParams["prodotto"];
     <!--Row: Prodotto-->
     <div class="row">
       <div class="col-12 col-lg-6">
-        <img src="<?php echo IMG_DIR."/".$prodotto["nome"].".jpg" ?>" alt="<?php echo "Prodotto".$prodotto["nome"] ?>"
-          class="img-fluid">
+        <div class="img-magnifier-container">
+          <img src="<?php echo IMG_DIR."/".$prodotto["nome"].".jpg" ?>" alt="<?php echo "Prodotto".$prodotto["nome"] ?>"
+            class="img-fluid">
+        </div>
       </div>
       <!-- Col: Azioni -->
       <div class="title col-12 col-lg-6">
