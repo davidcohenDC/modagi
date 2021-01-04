@@ -394,3 +394,7 @@ button.input-embedded {
     border-radius: .25rem;
     text-decoration: none;
 }
+
+.dropdown-menu.show {
+  margin: 0px -20px !important;
+}

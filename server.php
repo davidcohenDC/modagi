@@ -11,11 +11,13 @@ require_once("./utilis/Paginator.php");
 require_once("./DB/Colour.php");
 require_once("./DB/Gender.php");
 require_once("./DB/Material.php");
+require_once("./DB/Order.php");
 require_once("./DB/Size.php");
 
 $category = new Category();
 $product = new Product();
 $colour = new Colour();
+$order = new Order();
 $brand = new Brand();
 $gender = new Gender();
 $material = new Material();

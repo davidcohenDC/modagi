@@ -2,6 +2,7 @@
 $page = $paginator->getPage();
 $totalPage = $paginator->getTotalPages();
 $tabelle = array();
+
 array_push($tabelle, "marca","genere","materiale","colore","taglia");
 $selected_css = "font-weight-bold text-primary";
 $deleteSelectionHtml = '
@@ -163,7 +164,8 @@ $deleteSelectionHtml = '
           <div class="card h-100">
             <a href="product.php<?php echo "?prodotto=".$prodotto["id"]; ?>">
               <img class="card-img-top <?php  if($prodotto["stock"] == 0) echo 'not-available'?>" src="<?php echo IMG_DIR."/".$prodotto["nome"].".jpg"; ?>" alt="Scarpa <?php echo $prodotto["nome"]?>">
-              <?php if($prodotto["stock"] == 0) echo '<span class="product-badge badge-dark" aria-label="non disponibile">NON DISPONIBILE</span>'?>
+              <?php if($prodotto["stock"] == 0) echo '<span class="product-badge badge-dark" aria-label="non disponibile">ESAURITO</span>'?>
+              <?php if(checkValueInArray($templateParams["migliori"],"idProdotto",$prodotto['id'])) echo '<span class="product-badge badge-warning" aria-label="consigliato">CONSIGLIATO</span>'?>
             </a>
             <div class="card-body">
               <h4 class="card-title">

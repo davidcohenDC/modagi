@@ -17,6 +17,7 @@ $templateParams["colore"] = $colour->getAll();
 $templateParams["genere"] = $gender->getAll();
 $templateParams["materiale"] = $material->getAll();
 $templateParams["Promo"] = getProductPromotion(PROMOTION_DIR);
+$templateParams["migliori"] = $order->selectTopProduct(5);
 
 require_once("templates/base.php");
 require_once("templates/main-page.php");
