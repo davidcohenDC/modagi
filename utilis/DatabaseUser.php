@@ -124,7 +124,7 @@ class DatabaseUser
                 # code...
                 break;
         }
-        $this->updateProductField($field, $id, $newValue, $params);
+        return $this->updateProductField($field, $id, $newValue, $params);
     }
 
     public function updateSize($size, $quantity, $prodId)
@@ -565,5 +565,12 @@ class DatabaseUser
 
         $stmt->bind_param($params, $newValue, $id);
         $stmt->execute();
+
+        $check = $this->db->prepare("SELECT " . $field . " FROM prodotto WHERE id = ? AND " . $field . " = ?");
+        $check->bind_param($params, $id, $newValue);
+        $check->execute();
+
+        $update = $check->get_result()->fetch_all(MYSQLI_ASSOC);
+        return [count($update) != 0, "Campo " . $field . " non aggiornato correttamente"];
     }
 }
