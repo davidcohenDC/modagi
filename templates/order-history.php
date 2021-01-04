@@ -35,11 +35,12 @@
                         <?php echo $date["data"] ?>
                     </h3>
                     <?php foreach ($templateParams[$date["data"]] as $product) : ?>
-
                         <div class="product my-4 py-4 product-history">
                             <div class="row">
                                 <div class="col-md-3  my-4">
-                                    <img class="img-fluid mx-auto d-block image product-image" src="<?php echo IMG_DIR . "/" . $product["nome"] . ".jpg" ?>">
+                                    <a href="product.php?prodotto=<?php echo $product["id"] ?>">
+                                        <img class=" img-fluid mx-auto d-block image product-image" src="<?php echo IMG_DIR . "/" . $product["nome"] . ".jpg" ?> " alt="<?php echo "Immagine di: " . $product["nome"]; ?>" />
+                                    </a>
                                 </div>
                                 <div class="col-12 col-md-4  text-center">
                                     <div class="col-lg-12">
@@ -51,10 +52,10 @@
                                             Stato Ordine:
                                         </h4>
                                         <p class="my-1 text-center fw-bold">
-                                            <div class="status ">
-                                                <?php echo $templateParams["stati"][$j]["stato"]; ?>
-                                                <input type="hidden" class="for-<?php echo $j; ?>" value="<?php echo $templateParams["stati"][$j]["statID"]; ?>-<?php echo getOrderStatusColor($templateParams["stati"][$j]["statID"]); ?>" />
-                                            </div>
+                                        <div class="status ">
+                                            <?php echo $templateParams["stati"][$j]["stato"]; ?>
+                                            <input type="hidden" class="for-<?php echo $j; ?>" value="<?php echo $templateParams["stati"][$j]["statID"]; ?>-<?php echo getOrderStatusColor($templateParams["stati"][$j]["statID"]); ?>" />
+                                        </div>
                                         </p>
                                     </div>
 
