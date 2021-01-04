@@ -115,12 +115,12 @@ $prodotto = $templateParams["prodotto"];
               <div class="card-body">
                 <div class="def-number-input number-input safari_only mb-0">
                   <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                    class="btn bnt-light fa fa-minus"></button>
+                    class="btn bnt-light fa fa-minus" <?php if($prodotto["stock"] == 0) { echo "disabled";} ?>></button>
                   <input class="number-wrapper" min="0"
-                    max="<?php echo $templateParams["quantitaTaglia"][0]["quantita"]?>" name="number" value="1"
-                    type="number">
+                    max="<?php echo $templateParams["quantitaTaglia"][0]["quantita"]?>" name="number" value="<?php if($prodotto["stock"] == 0) { echo "0";} else {echo "1";} ?>"
+                    type="number" disabled>
                   <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                    class="btn bnt-light fa fa-plus"></button>
+                    class="btn bnt-light fa fa-plus"  <?php if($prodotto["stock"] == 0) { echo "disabled";} ?>></button>
                 </div>
               </div>
             </div>
