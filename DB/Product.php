@@ -30,7 +30,7 @@ class Product extends Database {
 
     public function selectQuantitaWithNSize($id) {
       return parent::Select("SELECT numero,quantita FROM Prodotto P INNER JOIN prodottitaglie PT ON PT.idProdotto= P.id 
-      INNER JOIN taglia T ON PT.idTaglia = T.id WHERE P.id = ".$id. "AND PT.quantita > 0");
+      INNER JOIN taglia T ON PT.idTaglia = T.id WHERE P.id = ".$id. " AND PT.quantita > 0");
     }
 
     public function selectById($id) {
