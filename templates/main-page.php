@@ -24,9 +24,9 @@ $deleteSelectionHtml = '
       <h6>Ordina</h6>
       <div class="list-group">
         <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "filter","ultimi_arrivi")?>">
-        <label class="<?php if(isset($_GET["filter"]) && $_GET["filter"] == "ultimi_arrivi") {  {echo $selected_css ;}?>">Ultimi Arrivi</label></a>
+        <label class="<?php if(isset($_GET["filter"]) && $_GET["filter"] == "ultimi_arrivi") {echo $selected_css ;}?>">Ultimi Arrivi</label></a>
         <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "filter","prezzo_crescente")?>">
-        <label class="<?php if(isset($_GET["filter"]) && $_GET["filter"] == "prezzo_crescente") {echo $selected_css ;}?>">Prezzo Crescente</label></a>
+        <label class="<?php if(isset($_GET["filter"]) && $_GET["filter"] == "prezzo_decrescente") {echo $selected_css ;}?>">Prezzo Crescente</label></a>
         <a href="<?php echo addURLParameters($_SERVER["REQUEST_URI"], "filter","prezzo_decrescente")?>">
         <label class="<?php if(isset($_GET["filter"]) && $_GET["filter"] == "prezzo_decrescente") {echo $selected_css ;}?>">Prezzo Decrescente</label></a>
       </div>
