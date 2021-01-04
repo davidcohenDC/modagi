@@ -20,7 +20,7 @@ $prodotto = $templateParams["prodotto"];
       </div>
       <!-- Col: Azioni -->
       <div class="title col-12 col-lg-6">
-      <?php if($prodotto["stock"] == 0) echo '<span class="product-badge badge-dark">NON DISPONIBILE</span>'?>
+      <?php if($prodotto["stock"] == 0) echo '<span class="product-badge badge-dark" aria-label="non disponibile">NON DISPONIBILE</span>'?>
         <h1><?php echo $prodotto["nome"];?></h1>
         <label><?php echo $prodotto["prezzo"];?>€</label>
         <!--Accordion wrapper-->
@@ -138,7 +138,7 @@ $prodotto = $templateParams["prodotto"];
                 <form method="POST"
                   id="<?php if(isUserVendor()) { echo "formModifyProduct";} else {echo "formAddToCart";}?>" action="">
                   <button type="submit" id="btnAdd"
-                    class="btn btn-<?php if(isUserVendor()) { echo "dark";} else {echo "info";}?> btn-rounder"><?php if(isUserVendor()) { 
+                    class="btn btn-<?php if(isUserVendor()) { echo "dark";} else {echo "info";}?> btn-rounder" <?php if(!isUserVendor() && $prodotto["stock"] == 0) { echo "disabled";} ?>><?php if(isUserVendor()) { 
                   echo '<span class="fa fa-eraser" aria-hidden="true"></span>Modifica';} else {echo '<span class="fa fa-cart-plus" aria-hidden="true"></span>Aggiungi al carrello';}?>
                   </button>
                 </form>
