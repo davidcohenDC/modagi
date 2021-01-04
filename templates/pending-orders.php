@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="<?php echo CSS_FILE ?>cart/cart.css">
 <!--status steps-->
 <script src="<?php echo JS_FILE ?>user/order-status.js"></script>
+<script src="<?php echo JS_FILE ?>user/forward-status.js"></script>
 
 <div class="row">
     <h1 class="fs-1 my-5 col-12 text-center fw-bold">
@@ -53,15 +54,15 @@
                                             Stato Ordine:
                                         </h4>
                                         <p class="my-1 text-center fw-bold">
-                                        <div class="status ">
+                                        <div class="status">
                                             <?php echo $templateParams["stati"][$j]["stato"]; ?>
                                             <input type="hidden" class="for-<?php echo $j; ?>" value="<?php echo $templateParams["stati"][$j]["statID"]; ?>-<?php echo getOrderStatusColor($templateParams["stati"][$j]["statID"]); ?>" />
                                         </div>
                                         </p>
 
-                                        <button class="btn btn-<?php echo getOrderStatusColor($templateParams["stati"][$j]["statID"]); ?>">
+                                        <a href="vendor-action-page.php?action=12&order=<?php echo $product["orderID"] . "&status=" . $templateParams["stati"][$j]["statID"]; ?>" class="btn btn-<?php echo getOrderStatusColor($templateParams["stati"][$j]["statID"]); ?> text-white" type="button">
                                             <span>Avanza Stato</span>
-                                        </button>
+                                        </a>
 
                                     </div>
 

@@ -300,6 +300,17 @@ switch ($action) {
         }
 
         break;
+
+    case 12:
+        if (isset($_GET["order"]) && isset($_GET["status"])) {
+            $orderID = $_GET["order"];
+            $status = $_GET["status"] + 1;
+
+            $dbh->updateOrder($orderID, $status);
+        }
+        header("location: vendor-action-page.php?action=11");
+        break;
+
     case 2: //? materiale
         $dbh->insertNewValue($newValue, "nome", "materiale");
         break;

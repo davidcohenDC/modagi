@@ -55,7 +55,16 @@ class DatabaseUser
         }
         return [false, "PASSWORD CORRENTE SBAGLIATA"];
     }
+
     /* admin */
+
+    public function updateOrder($id, $status)
+    {
+        $stmt = $this->db->prepare("UPDATE ordine SET idStato = ? WHERE id = ?");
+        $stmt->bind_param("ii", $status, $id);
+        $stmt->execute();
+    }
+
     public function updateProduct($id, $newValue, $field)
     {
         switch ($field) {
@@ -192,7 +201,7 @@ class DatabaseUser
     {
         if (isUserVendor()) {
             $stmt = $this->db->prepare("SELECT user.nome as user, user.indirizzo as indirizzo, prodotto.id as id, prodotto.nome as nome, prodotto.prezzo as prezzo, ordine.quantita as quantita,
-                                    genere.nome as genere, colore.nome as colore, materiale.nome as materiale, marca.nome as marca
+                                    genere.nome as genere, colore.nome as colore, materiale.nome as materiale, marca.nome as marca, ordine.id as orderID
                                     FROM colore, materiale, marca, genere, ordine, prodotto, user 
                                     WHERE prodotto.id = ordine.idProdotto  
                                     AND ordine.data = ? 
