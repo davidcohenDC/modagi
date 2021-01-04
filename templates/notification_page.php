@@ -8,7 +8,7 @@
     <img src="https://i.imgur.com/AC7dgLA.png" alt="">
 </div>
 <div class="notifications" id="box">
-    <span class="h2">Notifiche - <span id="inCounter"><?php echo $notificationCount ?></span></span>
+    <span id="titoloNotifica" class="h2">Notifiche - <span id="inCounter"><?php echo $notificationCount ?></span></span>
     <?php foreach ($allNotification as $notify): ?>
     <div class="notifications-item">
         <div class="text">
@@ -33,22 +33,22 @@
             if(down){
                 $('#box').css('height','0px');
                 $('#box').css('opacity','0');
-                $('#inCounter').text("0");
-                $('#outCounter').text("0");
                 down = false;
             }else{
                 if(clear) {
-                    $('.notifications-item').html("");
+                    $('.notifications-item').remove();
                 }
                 $('#box').css('height','auto');
                 $('#box').css('opacity','1');
-                $('#outCounter').css("background", "#343a40");
                 $.ajax({
                     type: "POST",
                     url: "./ajaxFunction/clearNotification.php"
                 }).done(function( msg ) {
                     //alert(msg);
                     clear = true;
+                    $('#inCounter').text("0");
+                    $('#outCounter').text("0");
+                    $('#outCounter').css("background", "");
                 });
                 down = true;
             }
