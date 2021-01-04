@@ -29,7 +29,8 @@
             var newTotalPrice = jsonData.newTotalPrice;
             
             if(articleNewQuantity == articleOldQuantity) {
-                alert("Quantità presente nel magazzino insufficiente");
+                //alert("Quantità presente nel magazzino insufficiente");
+                showModal();
             }
             $("#C_"+ articleId + "_" + articleSize).text(articlePrice + "€");
             $("#Q_"+ articleId + "_" + articleSize).text(articleNewQuantity);
@@ -102,16 +103,34 @@
         else {
             $("#noProductAllert").hide();
             $("#trashAllBtn").show();
-        }    
+        }
     }
+
+    function showModal() {
+        $("#modal").modal('show', {
+            fadeDuration: 100
+    });
+}
 </script>
 
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
-<section class="shopping-cart">
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="h4 modal-title text-center" id="myModalLabel">Ci dispiace ma la quantità presente nel magazzino esaurita</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Product -->
+<div class="shopping-cart">
     <div class="container">
         <div class="block-heading">
-            <h2>Carrello</h2>
+            <p class="h2">Carrello</p>
         </div>
         <div class="content">
             <div class="row">
@@ -127,7 +146,7 @@
                         <div id="<?php echo "P_" . $article["id"]."_".$article["taglia"] ?>" class="product">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <img class="img-fluid mx-auto d-block image product-image" src="<?php echo IMG_DIR.$article["nome"].".jpg" ?>">
+                                    <img class="img-fluid mx-auto d-block image product-image" src="<?php echo IMG_DIR.$article["nome"].".jpg" ?>" alt="<?php echo IMG_DIR.$article["nome"] ?>">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="info">
@@ -168,7 +187,7 @@
                                             </div>
                                             <div class="col-md">
                                                 <button class="btn trash-btn" onclick="deleteProduct('<?php echo $article["id"]."','".$article["taglia"] ?>')">
-                                                    <i class="fa fa-trash"></i>        
+                                                    <span class="fa fa-trash"></span>
                                                 </button>
                                             </div>
                                         </div>
@@ -180,12 +199,12 @@
                         <!-- END SHOW PRODUCT -->
                     </div>
                     <button id="trashAllBtn" class="btn trash-btn" onclick="deleteAllProduct()">
-                        Svuota carrello <i class="fa fa-trash"></i>        
+                        Svuota carrello <span class="fa fa-trash"></span>
                     </button>
                 </div>
                 <div class="col-md-12 col-lg-4">
                     <div class="summary">
-                        <h3>Resoconto</h3>
+                        <p class="h4 font-weight-bold text-center">Resoconto</p>
                         <div class="summary-item"><span class="text">Totale: </span><span id="totalPrice" class="price"><?php echo $cart["totalPrice"] ?>€</span></div>
                         <button type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href = 'checkout.php';">Checkout</button>
                     </div>
@@ -193,4 +212,4 @@
             </div> 
         </div>
     </div>
-</section>
+</div>

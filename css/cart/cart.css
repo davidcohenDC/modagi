@@ -48,7 +48,7 @@
 }
 
 .shopping-cart .block-heading h1,
-.shopping-cart .block-heading h2,
+.shopping-cart .block-heading p,
 .shopping-cart .block-heading h3 {
 	margin-bottom:1.2rem;
 	color: #3b99e0;
@@ -99,7 +99,7 @@
     padding: 30px;
 }
 
-.shopping-cart .summary h3{
+.shopping-cart .summary p{
 	text-align: center;
 	font-size: 1.3em;
 	font-weight: 600;

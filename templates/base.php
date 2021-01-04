@@ -36,7 +36,7 @@ if (session_status() == PHP_SESSION_NONE) {
 <body>
     <header class="mb-4">
         <div class=" mt-3 text-center">
-            <h1><?php echo SHOP_NAME ?></h1>
+            <p class="h1"><?php echo SHOP_NAME ?></p>
             <p>Mission, Vission & Values</p>
         </div>
     </header>
@@ -46,7 +46,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
             <!-- Brand -->
             <a class="navbar-brand" href="index.php">
-                <i class="fa fa-odnoklassniki mr-3" aria-hidden="true"></i>SHOES COM
+                <span class="fa fa-odnoklassniki mr-3" aria-hidden="true"></span>SHOES COM
             </a>
 
             <!-- Collapse button -->
@@ -86,7 +86,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                 echo $cartManager->getOrderCount();
                                 ?>
                             </span>
-                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            <span class="fa fa-shopping-cart" aria-hidden="true"></span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -101,11 +101,11 @@ if (session_status() == PHP_SESSION_NONE) {
                     </li>
                     <li class="nav-item pl-2 mb-2 mb-md-0">
                         <?php if (isUserLoggedIn()) : ?>
-                            <a href="user-action-page.php?action=0" type="button" class="btn btn-outline-danger btn-md btn-rounded btn-navbar waves-effect waves-light">
+                            <a href="user-action-page.php?action=0" class="btn btn-outline-danger btn-md btn-rounded btn-navbar waves-effect waves-light">
                                 Log out
                             </a>
                         <?php else : ?>
-                            <a href="registration-page.php" type="button" class="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">
+                            <a href="registration-page.php" class="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">
                                 Sign up
                             </a>
                         <?php endif ?>
@@ -151,7 +151,6 @@ if (session_status() == PHP_SESSION_NONE) {
                             <?php echo $creator["email"] ?>
                         </dd>
 
-                        <hr />
                     <?php endforeach ?>
                 </dl>
             </div>
