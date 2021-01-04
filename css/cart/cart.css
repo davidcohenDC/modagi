@@ -1,9 +1,24 @@
+/* Mobile STYLE */
+.trash-btn {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#trashAllBtn {
+    margin-right: 0px;
+}
+
+.product-price {
+    margin-top: 10px;
+}
+
 .product-group{
     margin-top: 40px;;
 }
 
-.img-fluid {
-    height: 177px;  
+.product-image {
+    height: auto;  
 }
 
 .shopping-cart{
@@ -44,7 +59,7 @@
 }
 
 .shopping-cart .items .product{
-    padding-bottom: 50px;
+    padding-bottom: 30px;
     border-bottom: 1px solid;
 }
 
@@ -71,7 +86,7 @@
     width: 80px;
 }
 
-.shopping-cart .items .product .info .price{
+.shopping-cart .items .product .info{
 	margin-top: 15px;
     font-weight: bold;
     font-size: 22px;
@@ -105,14 +120,14 @@
 
 .shopping-cart .summary .price{
 	font-size: 1em;
-	float: right;
+    float: right;
 }
 
 .shopping-cart .summary button{
 	margin-top: 20px;
 }
 
-/* Mobile STYLE */
+/* Tablet STYLE */
 @media (min-width: 768px) {
     .shopping-cart .items .product {
 		padding-bottom: 30px;
@@ -125,8 +140,8 @@
 
 	.shopping-cart .items .product .info .price {
 		font-weight: bold;
-		font-size: 22px;
-		top: 17px; 
+        font-size: 22px;
+        max-width: 50%;
 	}
 
 	.shopping-cart .items .product .info .quantity {
@@ -135,10 +150,24 @@
 	.shopping-cart .items .product .info .quantity .quantity-input {
 		padding: 4px 10px;
 		text-align: center; 
-	}
+    }
+
+    .product-image {
+        height: 232px;
+    }
+
+    .trash-btn {
+        width: auto;
+        float: right;
+        margin-right: -2px;
+    }
+
+    #trashAllBtn {
+        margin-right: 15px;
+    }
 }
 
-/* Tablet STYLE */
+/* Desktop small-size STYLE */
 @media (min-width: 992px) {
     .shopping-cart .items .product .info {
         padding-top: 10px;
@@ -153,16 +182,29 @@
         height: 225px;
     }
 
+    #trashAllBtn {
+        margin-right: 0px;
+    }
+
     .product > .row > div {
         padding: 0px;
+        padding-left: 15px;
         margin-right: 20px;
     }
 }
 
-/* Desktop small-size STYLE */
+/* Desktop normal-size STYLE */
 @media (min-width: 1200px) {
     .shopping-cart .items .product .info {
         padding-top: 30px;
 		text-align: left; 
+    }
+
+    .product-image {
+        height: 244px;
+    }
+
+    #trashAllBtn {
+        margin-right: 0px;
     }
 }

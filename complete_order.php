@@ -12,7 +12,7 @@ $templateParams["title"] = "Checkout";
 $templateParams["main"] = "./templates/complete_order_page.php";
 $templateParams["cssFileName"] = "./complete_order/complete_order.css";
 
-$cartManager = new CartManager();
+$cartManager = new CartManager(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
 $userManager = new UserManager(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
 $orderManager = new OrderManager();
 $notificationManager = new NotificationManager(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
