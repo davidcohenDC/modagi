@@ -23,6 +23,7 @@ $templateParams["idGenere"] = $product->selectGenereByID($idprodotto)[0];
 $templateParams["idColore"] = $product->selectColoreByID($idprodotto)[0];
 $templateParams["idMarca"] = $product->selectMarcaByID($idprodotto)[0];
 $templateParams["quantitaTaglia"] = $product->selectQuantitaWithNSize($idprodotto);
+$templateParams["migliori"] = $order->selectTopProduct(5);
 
 
 if(isset($_GET["modal"]) && $_GET["quantita"] > 0 ) {

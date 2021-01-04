@@ -379,3 +379,14 @@ function getOrderStatusColor($statusId)
             return "dark";
     }
 }
+
+
+function checkValueInArray($array,$key, $value) {
+    if(in_array($value, array_column($array, $key))) {
+        return true;
+      } else {
+        return false;
+      }
+}
+
+  
