@@ -124,7 +124,11 @@ switch ($action) {
 
                 // rimuovo la vecchia 
                 if (image_exists(IMG_DIR . $formParams["current"][$key[1]])) {
-                    removeImg(IMG_DIR, $formParams["current"][$key[1]]);
+                    $rmvResult = removeImg(IMG_DIR, $formParams["current"][$key[1]]);
+
+                    if (!$rmvResult[0]) {
+                        $templateParams["error"] = $rmvResult[1];
+                    }
                 }
 
                 // inserisco la nuova
@@ -135,12 +139,20 @@ switch ($action) {
                 }
             } else {
                 // cambio nome e basta quindi devo rinominare l'immagine
-                renameImage(IMG_DIR, $formParams["current"][$key[1]], $_POST[$key[0]]);
+                $rnmResult = renameImage(IMG_DIR, $formParams["current"][$key[1]], $_POST[$key[0]]);
+
+                if (!$rnmResult[0]) {
+                    $templateParams["error"] = $rnmResult[1];
+                }
             }
 
             // modifica nome 
             $updateResult = $dbh->updateProduct($productID, $_POST[$key[0]], $key[1]);
             $changes++;
+
+            if (!$updateResult[0]) {
+                $templateParams["error"] = $updateResult[1];
+            }
         } elseif (
             isset($_POST[$key[0]]) && $_POST[$key[0]] == $formParams["current"][$key[1]]
             && isset($_FILES["shoe-img"]) && $_FILES["shoe-img"]["name"] != ""
@@ -150,7 +162,13 @@ switch ($action) {
             $changes++;
 
             // rimuovo la vecchia 
-            removeImg(IMG_DIR, $formParams["current"][$key[1]]);
+            if (image_exists(IMG_DIR . $formParams["current"][$key[1]])) {
+                $rmvResult = removeImg(IMG_DIR, $formParams["current"][$key[1]]);
+
+                if (!$rmvResult[0]) {
+                    $templateParams["error"] = $rmvResult[1];
+                }
+            }
 
             // metto la nuova
             $imgResult = uploadImage(IMG_DIR, $_FILES["shoe-img"], $formParams["current"][$key[1]]);
@@ -172,6 +190,10 @@ switch ($action) {
             if (isset($_POST[$key[0]]) && $_POST[$key[0]] != "" && $_POST[$key[0]] != $formParams["current"][$key[1]]) {
                 $updateResult = $dbh->updateProduct($productID, $_POST[$key[0]], $key[1]);
                 $changes++;
+
+                if (!$updateResult[0]) {
+                    $templateParams["error"] = $updateResult[1];
+                }
             }
         }
 

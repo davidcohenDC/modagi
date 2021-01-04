@@ -27,7 +27,7 @@ class NotificationManager {
      * Get all notification for certain user
      */
     public function getAllNotification($userEmail) {
-        $stmt = $this->db->prepare("SELECT `nome`, `contenuto` FROM `notifica` WHERE `email` = ?");
+        $stmt = $this->db->prepare("SELECT `nome`, `contenuto` FROM `notifica` WHERE `email` = ? ORDER BY `id` DESC");
 
         $stmt->bind_param("s", $userEmail);
         $stmt->execute();

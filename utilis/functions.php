@@ -82,11 +82,17 @@ function uploadImage($path, $image, $prodName)
 
     rename($fullPath, $path . $prodName . "." . $extension);
 
+    if (!file_exists($path . $prodName . "." . $extension)) {
+        $result = false;
+        $msg .= "Errore nel rinominare l'immagine dell'immagine.";
+    }
+
     return array($result, $msg);
 }
 
 function renameImage($path, $image, $newName)
 {
+    $msg = "";
     $acceptedExtensions = array(".jpg", ".jpeg", ".png", ".gif");
 
     $imageName = basename($image);
@@ -100,11 +106,22 @@ function renameImage($path, $image, $newName)
         }
     }
 
+    if ($extension == "") {
+        $msg .= "Errore Immagine non trovata";
+    }
+
     rename($fullPath . $extension, $path . $newName . $extension);
+
+    if (!file_exists($path . $newName . $extension)) {
+        $msg .= "Errore nel rinominare l'immagine dell'immagine.";
+    }
+
+    return [strlen($msg) == 0, $msg];
 }
 
 function removeImg($path, $image)
 {
+    $msg = "";
     $acceptedExtensions = array(".jpg", ".jpeg", ".png", ".gif");
 
     $imageName = basename($image);
@@ -118,7 +135,17 @@ function removeImg($path, $image)
         }
     }
 
+    if ($extension == "") {
+        $msg .= "Errore Immagine non trovata";
+    }
+
     unlink($fullPath . $extension);
+
+    if (file_exists($fullPath . $extension)) {
+        $msg .= "Errore nel rimuovere l'immagine dell'immagine.";
+    }
+
+    return [strlen($msg) == 0, $msg];
 }
 
 function image_exists($fullPath)
