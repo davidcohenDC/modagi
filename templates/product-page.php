@@ -20,7 +20,7 @@ $prodotto = $templateParams["prodotto"];
       </div>
       <!-- Col: Azioni -->
       <div class="title col-12 col-lg-6">
-      <?php if($prodotto["stock"] == 0) echo '<span class="product-badge badge-dark" aria-label="non disponibile">NON DISPONIBILE</span>'?>
+      <?php if($prodotto["stock"] == 0) echo '<span class="product-badge badge-dark" aria-label="non disponibile">ESAURITO</span>'?>
       <?php if(checkValueInArray($templateParams["migliori"],"idProdotto",$prodotto['id'])) echo '<span class="product-badge badge-warning" aria-label="consigliato">CONSIGLIATO</span>'?>
         <h1><?php echo $prodotto["nome"];?></h1>
         <label><?php echo $prodotto["prezzo"];?>€</label>
