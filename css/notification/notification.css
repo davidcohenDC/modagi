@@ -46,11 +46,12 @@
     z-index: 999999;
 }
 
-.notifications h2 {
+.notifications span {
     font-size: 14px;
     padding: 10px;
     border-bottom: 1px solid #eee;
-    color: #999
+    color: #999;
+    font-weight: bold;
 }
 
 

@@ -8,7 +8,7 @@
     <img src="https://i.imgur.com/AC7dgLA.png" alt="">
 </div>
 <div class="notifications" id="box">
-    <h2>Notifiche - <span id="inCounter"><?php echo $notificationCount ?></span></h2>
+    <span class="h2">Notifiche - <span id="inCounter"><?php echo $notificationCount ?></span></span>
     <?php foreach ($allNotification as $notify): ?>
     <div class="notifications-item">
         <div class="text">
