@@ -320,3 +320,16 @@
   background-color: #eee;
 }
 
+.product-badge {
+  display: block;
+  position: relative;
+  padding: .25em .4em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: .25rem;
+  text-decoration: none;
+  margin-top: 2%;
+}

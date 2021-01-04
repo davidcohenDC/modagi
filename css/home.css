@@ -371,4 +371,26 @@ button.input-embedded {
     color: #343a40!important;
   }
 
-  
+  .card-body > .badge-danger {
+    margin: 2% 0%;
+  }
+
+  .not-available {
+    width: 100%;
+    filter: grayscale(100%) !important;
+    border-top-left-radius: calc(.25rem - 1px);
+    border-top-right-radius: calc(.25rem - 1px);
+  }
+
+  .product-badge {
+    display: block;
+    position: relative;
+    padding: .25em .4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: .25rem;
+    text-decoration: none;
+}

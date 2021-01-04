@@ -25,7 +25,7 @@ class Product extends Database {
 
     public function selectByIdWithQuantity($id) {
       return parent::Select("SELECT P.*, SUM(quantita) as stock FROM ".$this->table." P INNER JOIN prodottitaglie PT ON
-      PT.idTaglia = P.id WHERE P.id = ".$id);
+      PT.idProdotto = P.id WHERE P.id = ".$id);
     }
 
     public function selectQuantitaWithNSize($id) {

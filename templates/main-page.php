@@ -162,7 +162,8 @@ $deleteSelectionHtml = '
       <div class="products col-6 col-lg-4 col-md-6 mb-4">
           <div class="card h-100">
             <a href="product.php<?php echo "?prodotto=".$prodotto["id"]; ?>">
-              <img class="card-img-top" src="<?php echo IMG_DIR."/".$prodotto["nome"].".jpg"; ?>" alt="Scarpa <?php echo $prodotto["nome"]?>">
+              <img class="card-img-top <?php  if($prodotto["stock"] == 0) echo 'not-available'?>" src="<?php echo IMG_DIR."/".$prodotto["nome"].".jpg"; ?>" alt="Scarpa <?php echo $prodotto["nome"]?>">
+              <?php if($prodotto["stock"] == 0) echo '<span class="product-badge badge-dark" aria-label="non disponibile">NON DISPONIBILE</span>'?>
             </a>
             <div class="card-body">
               <h4 class="card-title">
