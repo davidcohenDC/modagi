@@ -1,7 +1,7 @@
 <script src="<?php echo CSS_FILE ?>mdb.min.js"></script>
 <script src="<?php echo JS_FILE ?>user/add-params.js"></script>
 
-<div class="modal fade" id="add-modal" tabindex="-1" aria-labelledby="modal to add new values fields" aria-hidden="true">
+<div class="modal fade" id="add-modal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
