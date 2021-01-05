@@ -46,7 +46,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
             <!-- Brand -->
             <a class="navbar-brand" href="index.php">
-                <span class="fa fa-odnoklassniki mr-3" aria-hidden="true"></span>SHOES COM
+                <span class="fa fa-odnoklassniki mr-3" aria-hidden="true"></span><?php echo SHOP_NAME ?>
             </a>
 
             <!-- Collapse button -->
