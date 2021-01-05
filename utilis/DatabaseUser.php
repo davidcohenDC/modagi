@@ -297,6 +297,16 @@ class DatabaseUser
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
+
+    public function getProductId($name)
+    {
+        $stmt = $this->db->prepare("SELECT id FROM prodotto WHERE nome = ?");
+        $stmt->bind_param("s", $name);
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+    }
+
     public function getProduct($id)
     {
         return $this->getAll("prodotto WHERE id = " . $id)[0];

@@ -41,7 +41,7 @@
                             <div class="row">
                                 <div class="col-12 col-md-3 col-lg-2 col-xl-3 my-4">
                                     <a href="product.php?prodotto=<?php echo $product["id"] ?>">
-                                        <img class=" img-fluid mx-auto d-block image product-image" src="<?php echo IMG_DIR . "/" . $product["nome"] . ".jpg" ?> " alt="<?php echo "Immagine di: " . $product["nome"]; ?>" />
+                                        <img class=" img-fluid mx-auto d-block image product-image" src="<?php echo IMG_DIR . $product["id"] . ".jpg" ?> " alt="<?php echo $product["nome"]; ?>" />
                                     </a>
                                 </div>
                                 <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-center">
@@ -53,12 +53,12 @@
                                         <h4>
                                             Stato Ordine:
                                         </h4>
-                                        <p class="my-1 text-center fw-bold">
-                                        <div class="status">
-                                            <?php echo $templateParams["stati"][$j]["stato"]; ?>
-                                            <input type="hidden" class="for-<?php echo $j; ?>" value="<?php echo $templateParams["stati"][$j]["statID"]; ?>-<?php echo getOrderStatusColor($templateParams["stati"][$j]["statID"]); ?>" />
+                                        <div class="my-1 text-center fw-bold">
+                                            <div class="status">
+                                                <?php echo $templateParams["stati"][$j]["stato"]; ?>
+                                                <input type="hidden" class="for-<?php echo $j; ?>" value="<?php echo $templateParams["stati"][$j]["statID"]; ?>-<?php echo getOrderStatusColor($templateParams["stati"][$j]["statID"]); ?>" />
+                                            </div>
                                         </div>
-                                        </p>
 
                                         <a href="vendor-action-page.php?action=12&order=<?php echo $product["orderID"] . "&status=" . $templateParams["stati"][$j]["statID"] . "&user=" . $product["email"]; ?>" class="btn btn-<?php echo getOrderStatusColor($templateParams["stati"][$j]["statID"]); ?> text-white" type="button">
                                             <span>Avanza Stato</span>

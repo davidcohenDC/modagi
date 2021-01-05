@@ -39,7 +39,7 @@
                             <div class="row">
                                 <div class="col-12 col-md-3 col-lg-2 col-xl-3 my-4">
                                     <a href="product.php?prodotto=<?php echo $product["id"] ?>">
-                                        <img class=" img-fluid mx-auto d-block image product-image" src="<?php echo IMG_DIR . "/" . $product["nome"] . ".jpg" ?> " alt="<?php echo $product["nome"]; ?>" />
+                                        <img class=" img-fluid mx-auto d-block image product-image" src="<?php echo IMG_DIR . $product["id"] . ".jpg" ?> " alt="<?php echo $product["nome"]; ?>" />
                                     </a>
                                 </div>
                                 <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-center">
