@@ -6,6 +6,7 @@ const url = "index.php";
 
 var redirctCounter = 5;
 $(function() {
+    $("#cartCounter").text("0");
     window.setInterval(function(){
         redirctCounter = redirctCounter - 1;
         if(redirctCounter <= redirectTimeout) {

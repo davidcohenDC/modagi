@@ -146,7 +146,7 @@
                         <div id="<?php echo "P_" . $article["id"]."_".$article["taglia"] ?>" class="product">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <img class="img-fluid mx-auto d-block image product-image" src="<?php echo IMG_DIR.$article["nome"].".jpg" ?>" alt="<?php echo IMG_DIR.$article["nome"] ?>">
+                                    <img class="img-fluid mx-auto d-block image product-image" src="<?php echo IMG_DIR.$article["id"].".jpg" ?>" alt="<?php echo IMG_DIR.$article["nome"] ?>">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="info">
