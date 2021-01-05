@@ -2,8 +2,8 @@
 <script src="<?php echo JS_FILE ?>user/change-data-selector.js"></script>
 
 <div class="my-3 mx-2">
-    <label for="size" class="form-label fw-bold"> Modifica Quantità Disponibili </label>
-    <div id="size" aria-label="Lista di taglie da cui scegliere">
+    <fieldset id="size">
+        <legend class="form-label fw-bold"> Modifica Quantità Disponibili </legend>
         <?php foreach ($formParams["sizes"] as $size) : ?>
             <div class="input-group mb-3">
                 <?php
@@ -43,7 +43,7 @@
                 </span>
             </button>
         </div>
-    </div>
+    </fieldset>
 </div>
 
 <div class="row justify-content-md-center">

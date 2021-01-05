@@ -21,6 +21,11 @@ if (session_status() == PHP_SESSION_NONE) {
     <?php if (isset($templateParams["cssFileName"])) : ?>
         <link href="<?php echo CSS_FILE . $templateParams["cssFileName"] ?>" rel="stylesheet">
     <?php endif ?>
+    <!-- personal js file -->
+    <?php if (isset($templateParams["jsFileName"])) : ?>
+        <script src="<?php echo JS_FILE . $templateParams["jsFileName"] ?>"></script>
+    <?php endif ?>
+
 
     <script src="<?php echo BOOTSTRAP_JS_LINK ?>"></script>
 
@@ -36,17 +41,17 @@ if (session_status() == PHP_SESSION_NONE) {
 <body>
     <header class="mb-4">
         <div class=" mt-3 text-center">
-            <h1><?php echo SHOP_NAME ?></h1>
+            <p class="h1"><?php echo SHOP_NAME ?></p>
             <p>Mission, Vission & Values</p>
         </div>
     </header>
 
-    <nav class="navbar navbar-expand-md navbar-dark  scrolling-navbar ">
+    <nav class="navbar navbar-expand-md navbar-dark text-center scrolling-navbar ">
         <div class="container-fluid">
 
             <!-- Brand -->
             <a class="navbar-brand" href="index.php">
-                <i class="fa fa-odnoklassniki mr-3" aria-hidden="true"></i>SHOES COM
+                <span class="fa fa-odnoklassniki mr-3" aria-hidden="true"></span><?php echo SHOP_NAME ?>
             </a>
 
             <!-- Collapse button -->
@@ -55,7 +60,7 @@ if (session_status() == PHP_SESSION_NONE) {
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-chevron-double-down" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
                         <path fill-rule="evenodd" d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-                    </svg>  
+                    </svg>
                 </span>
             </button>
 
@@ -79,14 +84,14 @@ if (session_status() == PHP_SESSION_NONE) {
                     <?php endif ?>
                     <li class="nav-item">
                         <a href="cart.php" class="nav-link navbar-link-2 waves-effect">
-                            <span class="badge badge-pill red">
+                            <span id="cartCounter" class="badge badge-pill red">
                                 <?php
                                 require_once("./utilis/CartManager.php");
                                 $cartManager = new CartManager(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
                                 echo $cartManager->getOrderCount();
                                 ?>
                             </span>
-                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            <span class="fa fa-shopping-cart" aria-hidden="true"></span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -101,11 +106,11 @@ if (session_status() == PHP_SESSION_NONE) {
                     </li>
                     <li class="nav-item pl-2 mb-2 mb-md-0">
                         <?php if (isUserLoggedIn()) : ?>
-                            <a href="user-action-page.php?action=0" type="button" class="btn btn-outline-danger btn-md btn-rounded btn-navbar waves-effect waves-light">
+                            <a href="user-action-page.php?action=0" class="btn btn-outline-danger btn-md btn-rounded btn-navbar waves-effect waves-light">
                                 Log out
                             </a>
                         <?php else : ?>
-                            <a href="registration-page.php" type="button" class="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">
+                            <a href="registration-page.php" class="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">
                                 Sign up
                             </a>
                         <?php endif ?>
@@ -151,7 +156,6 @@ if (session_status() == PHP_SESSION_NONE) {
                             <?php echo $creator["email"] ?>
                         </dd>
 
-                        <hr />
                     <?php endforeach ?>
                 </dl>
             </div>

@@ -10,18 +10,19 @@
 </div>
 
 <div class=" my-3 mx-2 ">
-    <label for=" name" class="form-label fw-bold"> Modifica Nome Aricolo </label>
+    <label for="name" class="form-label fw-bold"> Modifica Nome Aricolo </label>
     <input id="name" name="name" class="form-control col-12 fst-italic" type="text" placeholder="inserire nome articolo" maxlength="20" value="<?php echo $formParams['current']['nome']; ?>" required />
 </div>
 
 <div class="my-3 mx-2 ">
     <label for="description" class="form-label fw-bold"> Modifica Descrizzione </label>
-    <textarea id="description" name="description" class="md-textarea form-control col-12 fst-italic" type="text" placeholder="descrizione del prodotto" rows="3" required><?php echo $formParams['current']['descrizione']; ?></textarea>
+    <textarea id="description" name="description" class="md-textarea form-control col-12 fst-italic" placeholder="descrizione del prodotto" rows="3" required><?php echo $formParams['current']['descrizione']; ?></textarea>
 </div>
 
 <div class="my-3 mx-2 ">
     <label for="material" class="form-label fw-bold"> Modifica Materiale </label>
-    <select id="material" name="material" class="form-select col-12" aria-label="Lista di materiali da cui scegliere" required>
+    <select id="material" name="material" class="form-control col-12" required>
+        <option value="">...</option>
         <?php foreach ($formParams["materials"] as $material) : ?>
             <option value="<?php echo $material['id'] ?>" <?php if ($formParams['current']['idMateriale'] == $material['id']) {
                                                                 echo 'selected';
@@ -41,7 +42,8 @@
 
 <div class="my-3 mx-2 ">
     <label for="brand" class="form-label fw-bold"> Modifica Marca </label>
-    <select id="brand" name="brand" class="form-select col-12" aria-label="Lista di marche da cui scegliere" required>
+    <select id="brand" name="brand" class="form-control col-12" required>
+        <option value="">...</option>
         <?php foreach ($formParams["brands"] as $brand) : ?>
             <option value="<?php echo $brand['id'] ?>" <?php if ($formParams['current']['idMarca'] == $brand['id']) {
                                                             echo 'selected';
@@ -60,11 +62,8 @@
 </div>
 
 <div class="my-3 mx-2">
-
-
-    <label for="gender" class="form-label fw-bold"> Modifica Genere </label>
-    <div id="gender">
-
+    <fieldset id="gender">
+        <legend class="form-label fw-bold"> Modifica Genere </legend>
         <!-- Group of default radios - option 1 -->
         <div class="custom-control custom-radio">
             <input type="radio" class="custom-control-input" id="male" name="gender" value="1" <?php if ($formParams['current']['idGenere'] == 1) {
@@ -88,12 +87,12 @@
                                                                                                     } ?> />
             <label class="custom-control-label" for="unisex">Unisex</label>
         </div>
-    </div>
+    </fieldset>
 </div>
 
 
 <div class="my-3 mx-2">
-    <label for="price-group" class="form-label fw-bold"> Modifica Prezzo </label>
+    <label for="price" class="form-label fw-bold"> Modifica Prezzo </label>
     <div id="price-group" class="input-group">
         <span class="input-group-text">€</span>
         <input id="price" name="price" class="form-control col-12 fst-italic" type="number" step="0.01" min="0" placeholder="prezzo per unità" value="<?php echo $formParams['current']['prezzo']; ?>" required />
@@ -102,7 +101,8 @@
 
 <div class="my-3 mx-2">
     <label for="color" class="form-label fw-bold"> Modifica Colore </label>
-    <select id="color" name="color" class="form-select col-12" aria-label="Lista di colori da cui scegliere" required>
+    <select id="color" name="color" class="form-control col-12" required>
+        <option value="">...</option>
         <?php foreach ($formParams["colors"] as $color) : ?>
             <option value="<?php echo $color['id'] ?>" <?php if ($formParams['current']['idColore'] == $color['id']) {
                                                             echo 'selected';
@@ -123,33 +123,34 @@
 </div>
 
 <div class="my-3 mx-2">
-    <div>
-        <label for="categories-group" class="form-label fw-bold"> Modifica Categorie </label>
-    </div>
-    <div id="categories-group col-12" aria-label="Lista di categorie da cui scegliere">
-        <?php foreach ($formParams["categories"] as $category) : ?>
+    <fieldset>
 
-            <?php
-            $hasCategory = false;
-            foreach ($formParams['currentCategories'] as $index) {
-                if ($index["idCategoria"] == $category['id']) {
-                    $hasCategory = true;
+        <legend class="form-label fw-bold"> Modifica Categorie </legend>
+
+        <div id="categories-group" class="col-12">
+            <?php foreach ($formParams["categories"] as $category) : ?>
+
+                <?php
+                $hasCategory = false;
+                foreach ($formParams['currentCategories'] as $index) {
+                    if ($index["idCategoria"] == $category['id']) {
+                        $hasCategory = true;
+                    }
                 }
-            }
-            ?>
+                ?>
 
-            <div class="form-check">
-                <input id="category-<?php echo $category['id'] ?>" class="form-check-input" name="categories[]" type="checkbox" value="<?php echo $category['id'] ?>" <?php if ($hasCategory) {
-                                                                                                                                                                            echo 'checked';
-                                                                                                                                                                        } ?> />
-                <label class="form-check-label" for="category-<?php echo $category['id'] ?>">
-                    <?php echo $category['nome'] ?>
-                </label>
-            </div>
+                <div class="form-check">
+                    <input id="category-<?php echo $category['id'] ?>" class="form-check-input" name="categories[]" type="checkbox" value="<?php echo $category['id'] ?>" <?php if ($hasCategory) {
+                                                                                                                                                                                echo 'checked';
+                                                                                                                                                                            } ?> />
+                    <label class="form-check-label" for="category-<?php echo $category['id'] ?>">
+                        <?php echo $category['nome'] ?>
+                    </label>
+                </div>
 
-        <?php endforeach ?>
-    </div>
-
+            <?php endforeach ?>
+        </div>
+    </fieldset>
     <div class="my-3">
         <button class="px-3 py-2 btn-outline-success input-embedded add-button for-categoria action-6 prev-<?php echo $formParams["previousAction"] ?>" data-mdb-toggle="modal" data-mdb-target="#add-modal">
             <span> Aggiungi

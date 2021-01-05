@@ -22,7 +22,7 @@ if (isset($_GET["new-value"]) && $action > 1 && $action < 7) {
 }
 
 // controllo di ridirezione per pagine con prodotti
-if ($action > 7) {
+if ($action > 7 && $action < 11) {
     if (isset($_GET["product"])) {
         if ($dbh->productExists($_GET["product"])) {
             //* prodotto esiste
@@ -53,18 +53,20 @@ switch ($action) {
         $formParams["categories"] = $dbh->getAllCategories();
 
         if (isArticleSet($formParams, $_POST)) {
-            //* upload img
-            $imgResult = uploadImage(IMG_DIR, $_FILES["shoe-img"], $_POST["name"]);
-
-            if (!$imgResult[0]) {
-                $templateParams["error"] = $imgResult[1];
-            }
-
             //* insert data in sql db
             $insertResult = $dbh->insertShoe($_POST, $formParams);
 
             if (!$insertResult[0]) {
                 $templateParams["error"] = $insertResult[1];
+            }
+
+            $prodID = $dbh->getProductId($_POST["name"])["id"];
+
+            //* upload img
+            $imgResult = uploadImage(IMG_DIR, $_FILES["shoe-img"], $prodID);
+
+            if (!$imgResult[0]) {
+                $templateParams["error"] = $imgResult[1];
             }
 
             if (!isset($templateParams["error"])) {
@@ -83,8 +85,10 @@ switch ($action) {
         $formParams["shoes"] = $dbh->getAllProducts();
 
         if (isset($_FILES["promo-img"]) && isset($_POST["shoe"])) {
+
+            $prodID = $dbh->getProductId($_POST["shoe"])["id"];
             //* upload img
-            $imgResult = uploadImage(IMG_DIR . "/promotion/", $_FILES["promo-img"], "promo_" . $_POST["shoe"]);
+            $imgResult = uploadImage(IMG_DIR . "/promotion/", $_FILES["promo-img"], "promo_" . $prodID);
 
             if (!$imgResult[0]) {
                 $templateParams["error"] = $imgResult[1];
@@ -122,24 +126,31 @@ switch ($action) {
 
             if (isset($_FILES["shoe-img"]) && $_FILES["shoe-img"]["name"] != "") {
 
+                $prodID = $dbh->getProductId($formParams["current"][$key[1]])["id"];
+
                 // rimuovo la vecchia 
-                if (image_exists(IMG_DIR . $formParams["current"][$key[1]])) {
-                    $rmvResult = removeImg(IMG_DIR, $formParams["current"][$key[1]]);
+                if (image_exists(IMG_DIR . $prodID)) {
+                    $rmvResult = removeImg(IMG_DIR, $prodID);
 
                     if (!$rmvResult[0]) {
                         $templateParams["error"] = $rmvResult[1];
                     }
                 }
 
+                $prodID = $dbh->getProductId($_POST[$key[0]])["id"];
+
                 // inserisco la nuova
-                $imgResult = uploadImage(IMG_DIR, $_FILES["shoe-img"], $_POST[$key[0]]);
+                $imgResult = uploadImage(IMG_DIR, $_FILES["shoe-img"], $prodID);
 
                 if (!$imgResult[0]) {
                     $templateParams["error"] = $imgResult[1];
                 }
             } else {
+                $oldProdID = $dbh->getProductId($formParams["current"][$key[1]])["id"];
+                $newProdID = $dbh->getProductId($_POST[$key[0]])["id"];
+
                 // cambio nome e basta quindi devo rinominare l'immagine
-                $rnmResult = renameImage(IMG_DIR, $formParams["current"][$key[1]], $_POST[$key[0]]);
+                $rnmResult = renameImage(IMG_DIR, $oldProdID, $newProdID);
 
                 if (!$rnmResult[0]) {
                     $templateParams["error"] = $rnmResult[1];
@@ -161,9 +172,11 @@ switch ($action) {
             // cambio solo l'immagine  e non il nome
             $changes++;
 
+            $prodID = $dbh->getProductId($formParams["current"][$key[1]])["id"];
+
             // rimuovo la vecchia 
-            if (image_exists(IMG_DIR . $formParams["current"][$key[1]])) {
-                $rmvResult = removeImg(IMG_DIR, $formParams["current"][$key[1]]);
+            if (image_exists(IMG_DIR . $prodID)) {
+                $rmvResult = removeImg(IMG_DIR, $prodID);
 
                 if (!$rmvResult[0]) {
                     $templateParams["error"] = $rmvResult[1];
@@ -171,7 +184,7 @@ switch ($action) {
             }
 
             // metto la nuova
-            $imgResult = uploadImage(IMG_DIR, $_FILES["shoe-img"], $formParams["current"][$key[1]]);
+            $imgResult = uploadImage(IMG_DIR, $_FILES["shoe-img"], $prodID);
 
             if (!$imgResult[0]) {
                 $templateParams["error"] = $imgResult[1];
@@ -265,8 +278,8 @@ switch ($action) {
 
                 if ($remove_result[0]) {
                     // rimuovo la vecchia 
-                    if (image_exists(IMG_DIR . $productName)) {
-                        removeImg(IMG_DIR, $productName);
+                    if (image_exists(IMG_DIR . $productID)) {
+                        removeImg(IMG_DIR, $productID);
                     }
 
                     //! then go home
@@ -279,6 +292,44 @@ switch ($action) {
             }
         }
 
+        break;
+    case 11: //* ordini in sospeso
+        $templateParams["title"] = "Ordini in sospeso";
+        $templateParams["main"] = "pending-orders.php";
+
+        $pendingOrders = $dbh->getPendingOrders();
+
+        if (count($pendingOrders) > 0) {
+            $templateParams["dates"] = $dbh->getOrdersDates($_SESSION["id"]);
+
+            foreach ($templateParams["dates"] as $date) {
+                $templateParams[$date["data"]] = $dbh->getOrdersProducts($date["data"], $_SESSION["id"]);
+            }
+
+            $templateParams["stati"] = $dbh->getOrdersStatus($_SESSION["id"]);
+            $icons["size"] = 30;
+        } else {
+            $templateParams["noOrders"] = "Nessun ordine non correttamente consegnato da mostrare.";
+        }
+
+        break;
+
+    case 12:
+        if (isset($_GET["order"]) && isset($_GET["status"]) && isset($_GET["email"])) {
+            $userID = $_GET["email"];
+            $orderID = $_GET["order"];
+            $status = $_GET["status"] + 1;
+
+            $statusResult = $dbh->updateOrder($orderID, $status);
+
+            if (!$statusResult[0]) {
+                $templateParams["error"] = $statusResult[1];
+            }
+            // TODO: dopo di questo lo stato è aggiornato e va mandata una modifica
+        }
+        if (!isset($templateParams["error"])) {
+            header("location: vendor-action-page.php?action=11");
+        }
         break;
 
     case 2: //? materiale

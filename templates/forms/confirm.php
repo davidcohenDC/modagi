@@ -10,11 +10,11 @@
 </div>
 
 <div class="my-3 mx-2 ">
-    <label for="password-group" class="form-label fw-bold"> Inserire Password </label>
+    <label for="password" class="form-label fw-bold"> Inserire Password </label>
     <div id="password-group" class="input-group mb-3">
         <input id="password" name="p" class="form-control fst-italic password" type="password" placeholder="inserire password" minlength="6" maxlength="20" required />
         <button type="button" id="eye" class=" eye input-embedded">
-            <span id="icon" class="icon">
+            <span id="icon" class="e-icon">
             </span>
         </button>
     </div>

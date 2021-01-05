@@ -11,6 +11,7 @@ require_once("./utilis/NotificationManager.php");
 $templateParams["title"] = "Checkout";
 $templateParams["main"] = "./templates/complete_order_page.php";
 $templateParams["cssFileName"] = "./complete_order/complete_order.css";
+$templateParams["jsFileName"] = "complete_order/complete_order.js";
 
 $cartManager = new CartManager(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
 $userManager = new UserManager(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);

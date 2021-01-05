@@ -6,11 +6,10 @@
 }
 
 .icon span {
-    background: #343a40;
     padding: 1px 4px 1px 4px;
     border-radius: 10px;
-    color: #fff;
-    margin-left: -25px
+    margin-left: -25px;
+    color: #999c9f;
 }
 
 .icon img {
@@ -46,11 +45,14 @@
     z-index: 999999;
 }
 
-.notifications h2 {
+.notifications > span {
+    display: block;
+    margin: 0;
     font-size: 14px;
     padding: 10px;
     border-bottom: 1px solid #eee;
-    color: #999
+    color: #999;
+    font-weight: bold;
 }
 
 
@@ -59,7 +61,6 @@
     border-bottom: 1px solid #eee;
     padding: 6px 9px;
     margin-bottom: 0px;
-    cursor: pointer
 }
 
 .notifications-item:hover {
@@ -75,10 +76,10 @@
     margin-top: 2px
 }
 
-.notifications-item .text h4 {
+.notifications-item .text div {
     color: #777;
     font-size: 16px;
-    margin-top: 3px
+    margin-top: 3px;
 }
 
 .notifications-item .text p {
