@@ -320,11 +320,16 @@ switch ($action) {
             $orderID = $_GET["order"];
             $status = $_GET["status"] + 1;
 
-            $dbh->updateOrder($orderID, $status);
+            $statusResult = $dbh->updateOrder($orderID, $status);
 
+            if (!$statusResult[0]) {
+                $templateParams["error"] = $statusResult[1];
+            }
             // TODO: dopo di questo lo stato è aggiornato e va mandata una modifica
         }
-        header("location: vendor-action-page.php?action=11");
+        if (!isset($templateParams["error"])) {
+            header("location: vendor-action-page.php?action=11");
+        }
         break;
 
     case 2: //? materiale

@@ -60,9 +60,15 @@ class DatabaseUser
 
     public function updateOrder($id, $status)
     {
-        $stmt = $this->db->prepare("UPDATE ordine SET idStato = ? WHERE id = ?");
+        $stmt = $this->db->prepare("UPDATE ordine SET idStato = ? WHERE id = ?;");
         $stmt->bind_param("ii", $status, $id);
         $stmt->execute();
+
+        $check = $this->db->prepare("SELECT idStato FROM ordine WHERE id = ?;");
+        $check->bind_param("i", $id);
+        $check->execute();
+
+        return [$check->get_result()->fetch_all(MYSQLI_ASSOC)[0]["idStato"] == $status, "Stato non aggiornato correttamente"];
     }
 
     public function updateProduct($id, $newValue, $field)
@@ -200,7 +206,7 @@ class DatabaseUser
     public function getOrdersProducts($date, $email)
     {
         if (isUserVendor()) {
-            $stmt = $this->db->prepare("SELECT user.email as email user.nome as user, user.indirizzo as indirizzo, prodotto.id as id, prodotto.nome as nome, prodotto.prezzo as prezzo, ordine.quantita as quantita,
+            $stmt = $this->db->prepare("SELECT user.email as email, user.nome as user, user.indirizzo as indirizzo, prodotto.id as id, prodotto.nome as nome, prodotto.prezzo as prezzo, ordine.quantita as quantita,
                                     genere.nome as genere, colore.nome as colore, materiale.nome as materiale, marca.nome as marca, ordine.id as orderID
                                     FROM colore, materiale, marca, genere, ordine, prodotto, user 
                                     WHERE prodotto.id = ordine.idProdotto  

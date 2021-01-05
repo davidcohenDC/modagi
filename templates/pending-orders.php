@@ -60,7 +60,7 @@
                                             </div>
                                         </div>
 
-                                        <a href="vendor-action-page.php?action=12&order=<?php echo $product["orderID"] . "&status=" . $templateParams["stati"][$j]["statID"] . "&user=" . $product["email"]; ?>" class="btn btn-<?php echo getOrderStatusColor($templateParams["stati"][$j]["statID"]); ?> text-white" type="button">
+                                        <a href="vendor-action-page.php?action=12&order=<?php echo $product["orderID"] . "&status=" . $templateParams["stati"][$j]["statID"] . "&email=" . $product["email"]; ?>" class="btn btn-<?php echo getOrderStatusColor($templateParams["stati"][$j]["statID"]); ?> text-white">
                                             <span>Avanza Stato</span>
                                         </a>
 
