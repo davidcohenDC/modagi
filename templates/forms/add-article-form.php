@@ -127,7 +127,6 @@
     <label for="color" class="form-label fw-bold"> Colore </label>
     <select id="color" name="color" class="form-select col-12" required>
         <option value="">...</option>
-
         <?php foreach ($formParams["colors"] as $color) : ?>
             <option value="<?php echo $color['id'] ?>"><?php echo $color['nome'] ?></option>
         <?php endforeach ?>
