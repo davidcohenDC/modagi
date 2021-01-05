@@ -1,9 +1,9 @@
 <?php if (isset($_SESSION["registrationSuccess"]) && $_SESSION["registrationSuccess"] == 1) : ?>
     <div class="row">
         <div class="alert alert-success my-3 text-center col-12" role="alert">
-            <h2>
+            <div class="h2">
                 CONGRATULAZIONI!
-            </h2>
+            </div>
             <p class="my-1 text-center">
                 La registrazione è avventua con successo.
             </p>
