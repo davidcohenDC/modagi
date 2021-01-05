@@ -9,13 +9,18 @@
     margin-bottom: 5% !important;
   }
   
-  #order-filter > div > a > label, #tables-fiter > section > label {
+  #order-filter > div > a > span, #tables-fiter > section > label {
     color: black;
     margin-bottom: 1px !important;
   }
+
+  #order-filter > div > a:hover{
+    text-decoration: none !important;
+  }
   
   
-  #order-filter > div > a > label:hover, .custom-control:hover, .custom-control-label:hover {
+  #order-filter > div > a > span:hover, .custom-control:hover, .custom-control-label:hover {
+
     margin-left: -2px;
     color: #007bff !important;
     cursor: pointer;
