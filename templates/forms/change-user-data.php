@@ -2,7 +2,7 @@
 <script src="<?php echo JS_FILE ?>user/change-data-selector.js"></script>
 
 <div class="my-3 mx-2 ">
-    <label for="name-group" class="form-label fw-bold"> Modifica Nome </label>
+    <label for="name" class="form-label fw-bold"> Modifica Nome </label>
     <div id="name-group" class="input-group mb-3">
         <button id="change-name" class="select input-embedded">
             <span></span>
@@ -15,7 +15,7 @@
 </div>
 
 <div class="my-3 mx-2 ">
-    <label for="surname-group" class="form-label fw-bold"> Modifica Cognome </label>
+    <label for="surname" class="form-label fw-bold"> Modifica Cognome </label>
     <div id="surname-group" class="input-group mb-3">
         <button id="change-surname" class="select input-embedded ">
             <span></span>
@@ -28,7 +28,7 @@
 </div>
 
 <div class="my-3 mx-2 ">
-    <label for="address-group" class="form-label fw-bold"> Modifica Indirizzo </label>
+    <label for="address" class="form-label fw-bold"> Modifica Indirizzo </label>
     <div id="address-group" class="input-group mb-3">
         <button id="change-address" class="select input-embedded">
             <span></span>
@@ -41,7 +41,7 @@
 </div>
 
 <div class="my-3 mx-2 ">
-    <label for="username-group" class="form-label fw-bold"> Modifica Username </label>
+    <label for="username" class="form-label fw-bold"> Modifica Username </label>
     <div id="username-group" class="input-group mb-3">
         <button id="change-username" class="select input-embedded">
             <span></span>
@@ -54,7 +54,7 @@
 </div>
 
 <div class="my-3 mx-2 ">
-    <label for="password-group" class="form-label fw-bold"> Password </label>
+    <label for="password" class="form-label fw-bold"> Password </label>
     <div id="password-group" class="input-group mb-3">
         <input id="password" name="p" class="form-control fst-italic password" type="password" placeholder="inserire la password" maxlength="20" required />
         <button type="button" id="eye" class=" eye input-embedded">
