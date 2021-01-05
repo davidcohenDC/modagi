@@ -14,18 +14,18 @@ $prodotto = $templateParams["prodotto"];
     <div class="row">
       <div class="col-12 col-lg-6">
         <div class="img-magnifier-container">
-          <img src="<?php echo IMG_DIR."/".$prodotto["nome"].".jpg" ?>" alt="<?php echo "Prodotto".$prodotto["nome"] ?>"
+          <img src="<?php echo IMG_DIR."/".$prodotto["id"].".jpg" ?>" alt="<?php echo "Prodotto".$prodotto["nome"] ?>"
             class="img-fluid">
         </div>
       </div>
       <!-- Col: Azioni -->
       <div class="title col-12 col-lg-6">
       <?php if($prodotto["stock"] == 0) echo '<span class="product-badge badge-dark" aria-label="non disponibile">ESAURITO</span>'?>
-      <?php if(checkValueInArray($templateParams["migliori"],"idProdotto",$prodotto['id'])) echo '<span class="product-badge badge-warning" aria-label="consigliato">CONSIGLIATO</span>'?>
-        <h1><?php echo $prodotto["nome"];?></h1>
+      <?php if(checkValueInArray($templateParams["migliori"],"idProdotto",$prodotto['id'])) echo '<span class="product-badge badge-warning">CONSIGLIATO</span>'?>
+        <span id="titolo"><?php echo $prodotto["nome"];?></span>
         <label><?php echo $prodotto["prezzo"];?>€</label>
         <!--Accordion wrapper-->
-        <div class="accordion md-accordion" id="accordionEx" aria-multiselectable="true">
+        <div class="accordion md-accordion" id="accordionEx">
 
           <!-- Accordion card Descrizione-->
           <div class="card ">
@@ -86,7 +86,7 @@ $prodotto = $templateParams["prodotto"];
           <!-- Accordion card Taglie -->
           <div class="card card-no-shadow">
             <div class="card-header" id="wrapTaglia">
-              <a data-toggle="collapse" aria-expanded="true" aria-controls="collapseTaglia" class="">
+              <a data-toggle="collapse" aria-expanded="true" href="#" aria-controls="collapseTaglia">
                 <h5>Taglie Disponibili</h5>
               </a>
             </div>
@@ -96,7 +96,7 @@ $prodotto = $templateParams["prodotto"];
                 <?php foreach($templateParams["quantitaTaglia"] as $value => $taglia): ?>
                 <input type="radio" id="<?php echo $taglia["numero"] ?>" value="<?php echo $taglia["quantita"] ?>"
                   name="taglia" <?php if($value ==0) {echo "checked";}?>>
-                <label id="lblTaglia"  for="<?php echo $taglia["quantita"] ?>"><?php echo $taglia["numero"] ?></label>
+                <label class="lblTaglia" for="<?php echo $taglia["numero"] ?>"><?php echo $taglia["numero"] ?></label>
                 <?php endforeach ?>
               </div>
             </div>
@@ -107,7 +107,7 @@ $prodotto = $templateParams["prodotto"];
           <!-- Accordion Quantita -->
           <div class="card card-no-shadow">
             <div class="card-header" id="swapQuantita">
-              <a data-toggle="collapse" aria-expanded="true" aria-controls="collapseQuantita" class="">
+              <a data-toggle="collapse" aria-expanded="true" href="#" aria-controls="collapseQuantita">
                 <h5>Quantità</h5>
               </a>
             </div>
@@ -117,9 +117,9 @@ $prodotto = $templateParams["prodotto"];
                 <div class="def-number-input number-input safari_only mb-0">
                   <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
                     class="btn bnt-light fa fa-minus" <?php if($prodotto["stock"] == 0) { echo "disabled";} ?>></button>
-                  <input class="number-wrapper" min="0"
+                  <input title="range" type="number" class="number-wrapper" min="0" id="range"
                     max="<?php echo $templateParams["quantitaTaglia"][0]["quantita"]?>" name="number" value="<?php if($prodotto["stock"] == 0) { echo "0";} else {echo "1";} ?>"
-                    type="number" disabled>
+                    disabled>
                   <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
                     class="btn bnt-light fa fa-plus"  <?php if($prodotto["stock"] == 0) { echo "disabled";} ?>></button>
                 </div>
@@ -132,12 +132,12 @@ $prodotto = $templateParams["prodotto"];
         <!-- Accordion wrapper -->
 
         <!-- Section: AddToCart -->
-        <section class="cart">
+        <id class="cart">
           <div class=" mb-2">
             <div class="row">
               <div class="col-md-12">
                 <form method="POST"
-                  id="<?php if(isUserVendor()) { echo "formModifyProduct";} else {echo "formAddToCart";}?>" action="">
+                  id="<?php if(isUserVendor()) { echo "formModifyProduct";} else {echo "formAddToCart";}?>">
                   <button type="submit" id="btnAdd"
                     class="btn btn-<?php if(isUserVendor()) { echo "dark";} else {echo "info";}?> btn-rounder" <?php if(!isUserVendor() && $prodotto["stock"] == 0) { echo "disabled";} ?>><?php if(isUserVendor()) { 
                   echo '<span class="fa fa-eraser" aria-hidden="true"></span>Modifica';} else {echo '<span class="fa fa-cart-plus" aria-hidden="true"></span>Aggiungi al carrello';}?>
@@ -146,7 +146,7 @@ $prodotto = $templateParams["prodotto"];
               </div>
             </div>
           </div>
-        </section>
+        </id>
         <!-- Section: AddToCart -->
       </div>
       <!-- Col: Azioni -->
