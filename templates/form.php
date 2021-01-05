@@ -2,9 +2,9 @@
 <script src="<?php echo JS_FILE ?>user/password-viewer.js"></script>
 
 <div class="row">
-    <h1 class="fs-1 my-5 col-12 text-center fw-bold">
+    <h2 class="my-5 col-12 text-center fw-bold">
         <?php echo $formParams["title"]; ?>
-    </h1>
+    </h2>
 </div>
 
 <div class="row justify-content-lg-center">

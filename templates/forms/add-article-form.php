@@ -23,7 +23,7 @@
 
 <div class="my-3 mx-2 ">
     <label for="material" class="form-label fw-bold"> Materiale </label>
-    <select id="material" name="material" class="form-select col-12" required>
+    <select id="material" name="material" class="form-control col-12" required>
         <option value="">...</option>
         <?php foreach ($formParams["materials"] as $material) : ?>
             <option value="<?php echo $material['id'] ?>"><?php echo $material['nome'] ?></option>
@@ -42,7 +42,7 @@
 
 <div class="my-3 mx-2 ">
     <label for="brand" class="form-label fw-bold"> Marca </label>
-    <select id="brand" name="brand" class="form-select col-12" required>
+    <select id="brand" name="brand" class="form-control col-12" required>
         <option value="">...</option>
         <?php foreach ($formParams["brands"] as $brand) : ?>
             <option value="<?php echo $brand['id'] ?>"><?php echo $brand['nome'] ?></option>
@@ -125,7 +125,7 @@
 
 <div class="my-3 mx-2">
     <label for="color" class="form-label fw-bold"> Colore </label>
-    <select id="color" name="color" class="form-select col-12" required>
+    <select id="color" name="color" class="form-control col-12" required>
         <option value="">...</option>
         <?php foreach ($formParams["colors"] as $color) : ?>
             <option value="<?php echo $color['id'] ?>"><?php echo $color['nome'] ?></option>
