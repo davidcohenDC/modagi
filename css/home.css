@@ -398,3 +398,14 @@ button.input-embedded {
 .dropdown-menu.show {
   margin: 0px -20px !important;
 }
+
+.card .card-body .card-text {
+    height:auto;
+    overflow: hidden !important;
+
+}
+
+.card-body {
+  height:auto;
+  overflow: hidden !important;
+}
