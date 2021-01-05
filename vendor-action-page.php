@@ -302,11 +302,14 @@ switch ($action) {
         break;
 
     case 12:
-        if (isset($_GET["order"]) && isset($_GET["status"])) {
+        if (isset($_GET["order"]) && isset($_GET["status"]) && isset($_GET["email"])) {
+            $userID = $_GET["email"];
             $orderID = $_GET["order"];
             $status = $_GET["status"] + 1;
 
             $dbh->updateOrder($orderID, $status);
+
+            // TODO: dopo di questo lo stato è aggiornato e va mandata una modifica
         }
         header("location: vendor-action-page.php?action=11");
         break;

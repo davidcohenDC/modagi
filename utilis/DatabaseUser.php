@@ -200,7 +200,7 @@ class DatabaseUser
     public function getOrdersProducts($date, $email)
     {
         if (isUserVendor()) {
-            $stmt = $this->db->prepare("SELECT user.nome as user, user.indirizzo as indirizzo, prodotto.id as id, prodotto.nome as nome, prodotto.prezzo as prezzo, ordine.quantita as quantita,
+            $stmt = $this->db->prepare("SELECT user.email as email user.nome as user, user.indirizzo as indirizzo, prodotto.id as id, prodotto.nome as nome, prodotto.prezzo as prezzo, ordine.quantita as quantita,
                                     genere.nome as genere, colore.nome as colore, materiale.nome as materiale, marca.nome as marca, ordine.id as orderID
                                     FROM colore, materiale, marca, genere, ordine, prodotto, user 
                                     WHERE prodotto.id = ordine.idProdotto  
