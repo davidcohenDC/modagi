@@ -5,7 +5,7 @@ const passShowing = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="
 $(function(){
     const eyes = $("button.eye");
     const passwords = $("input.password");
-    const icons = $("span.icon");
+    const icons = $("span.e-icon");
     
     /* set up */
     passwords.prop("type", "password");
