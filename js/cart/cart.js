@@ -38,6 +38,7 @@ function decreaseQuantity(articleId, articleSize) {
             $("#Q_"+ articleId + "_" + articleSize).text(articleQuantity);
         }
         else {
+            $("#cartCounter").text(parseInt($("#cartCounter").text()) - 1);
             $("#P_"+ articleId + "_" + articleSize).remove();
             checkProductCount();
         }
@@ -52,6 +53,7 @@ function deleteProduct(articleId, articleSize) {
         url: "./ajaxFunction/deleteProduct.php"
     }).done(function(response) {
         //alert(response);
+        $("#cartCounter").text(parseInt($("#cartCounter").text()) - 1);
         var jsonData = JSON.parse(response);
         var newTotalPrice = jsonData.newTotalPrice;
 
@@ -68,6 +70,7 @@ function deleteAllProduct() {
         url: "./ajaxFunction/deleteAllProduct.php"
     }).done(function(response) {
         //alert(response);
+        $("#cartCounter").text("0");
         const newTotalPrice = 0;
 
         $(".product").remove();
