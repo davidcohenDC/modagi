@@ -21,6 +21,11 @@ if (session_status() == PHP_SESSION_NONE) {
     <?php if (isset($templateParams["cssFileName"])) : ?>
         <link href="<?php echo CSS_FILE . $templateParams["cssFileName"] ?>" rel="stylesheet">
     <?php endif ?>
+    <!-- personal js file -->
+    <?php if (isset($templateParams["jsFileName"])) : ?>
+        <script src="<?php echo JS_FILE . $templateParams["jsFileName"] ?>"></script>
+    <?php endif ?>
+
 
     <script src="<?php echo BOOTSTRAP_JS_LINK ?>"></script>
 

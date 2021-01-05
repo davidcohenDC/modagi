@@ -1,15 +1,4 @@
 <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-<script>
-
-function showLoading(submitBtn) {
-    $(submitBtn).prop("disabled", true);
-    $(submitBtn).html(
-        '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="margin-bottom: 4px; margin-right: 5px;"></span>Continue to checkout'
-    );
-    $("#form").submit();
-}
-
-</script>
 
 <div class="row">
     <!-- Riepilogo carrello -->
