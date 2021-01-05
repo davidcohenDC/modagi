@@ -2,10 +2,11 @@
 <link rel="stylesheet" href="<?php echo CSS_FILE ?>cart/cart.css">
 <!--status steps-->
 <script src="<?php echo JS_FILE ?>user/order-status.js"></script>
+<script src="<?php echo JS_FILE ?>user/forward-status.js"></script>
 
 <div class="row">
     <h1 class="fs-1 my-5 col-12 text-center fw-bold">
-        I Miei Ordini
+        Ordini in sospeso
     </h1>
 </div>
 
@@ -22,9 +23,6 @@
                 <h2>
                     <?php echo $templateParams["noOrders"] ?>
                 </h2>
-                <p>
-                    Iniziamo a fare compere <a href="index.php" class="fw-bold">cliccando qui!</a>
-                </p>
             </div>
         <?php else : ?>
             <?php $j = 0 ?>
@@ -36,6 +34,10 @@
                     </h3>
                     <?php foreach ($templateParams[$date["data"]] as $product) : ?>
                         <div class="product my-4 py-4 product-history">
+                            <div class="row text-center">
+                                <h4 class="col-12">User: <?php echo $product["user"]; ?></h4>
+                                <h4 class="col-12">Indirizzo: <?php echo $product["indirizzo"]; ?></h4>
+                            </div>
                             <div class="row">
                                 <div class="col-12 col-md-3 col-lg-2 col-xl-3 my-4">
                                     <a href="product.php?prodotto=<?php echo $product["id"] ?>">
@@ -44,7 +46,7 @@
                                 </div>
                                 <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-center">
                                     <div class="col-lg-12">
-                                        <div class="my-5"></div>
+                                        <div class="my-2"></div>
                                         <!--empty space vertical-->
                                     </div>
                                     <div class="alert alert-<?php echo getOrderStatusColor($templateParams["stati"][$j]["statID"]); ?> my-3 text-center col-12" role="alert">
@@ -52,11 +54,16 @@
                                             Stato Ordine:
                                         </h4>
                                         <div class="my-1 text-center fw-bold">
-                                            <div class="status ">
+                                            <div class="status">
                                                 <?php echo $templateParams["stati"][$j]["stato"]; ?>
                                                 <input type="hidden" class="for-<?php echo $j; ?>" value="<?php echo $templateParams["stati"][$j]["statID"]; ?>-<?php echo getOrderStatusColor($templateParams["stati"][$j]["statID"]); ?>" />
                                             </div>
                                         </div>
+
+                                        <a href="vendor-action-page.php?action=12&order=<?php echo $product["orderID"] . "&status=" . $templateParams["stati"][$j]["statID"] . "&email=" . $product["email"]; ?>" class="btn btn-<?php echo getOrderStatusColor($templateParams["stati"][$j]["statID"]); ?> text-white">
+                                            <span>Avanza Stato</span>
+                                        </a>
+
                                     </div>
 
                                     <div class="text-center visual-status s-<?php echo $j; ?>">
@@ -80,7 +87,7 @@
                                 </div>
                                 <div class="col-md-5 col-lg-4 col-xl-4">
                                     <div class="info my-4">
-                                        <div class="row">
+                                        <div class="row text-center">
                                             <div class="col-11 product-name">
                                                 <div class="product-name">
                                                     <h4 class="card-title text-md-right"><?php echo $product["nome"] ?></h4>

@@ -10,8 +10,9 @@
 </div>
 
 <div class=" my-3 mx-2 ">
-    <label for=" shoe" class="form-label fw-bold"> Scarpa in evidenza </label>
-    <select id="shoe" name="shoe" class="form-select" aria-label="Lista di materiali da cui scegliere" required>
+    <label for="shoe" class="form-label fw-bold"> Scarpa in evidenza </label>
+    <select id="shoe" name="shoe" class="form-control col-12" aria-label="Lista di materiali da cui scegliere" required>
+        <option value="">...</option>
         <?php foreach ($formParams["shoes"] as $shoe) : ?>
             <option value="<?php echo $shoe['nome'] ?>"><?php echo $shoe['nome'] ?></option>
         <?php endforeach ?>
