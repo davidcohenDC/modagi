@@ -151,7 +151,6 @@ if (session_status() == PHP_SESSION_NONE) {
                             <?php echo $creator["email"] ?>
                         </dd>
 
-                        <hr />
                     <?php endforeach ?>
                 </dl>
             </div>
