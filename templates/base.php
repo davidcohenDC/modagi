@@ -101,11 +101,11 @@ if (session_status() == PHP_SESSION_NONE) {
                     </li>
                     <li class="nav-item pl-2 mb-2 mb-md-0">
                         <?php if (isUserLoggedIn()) : ?>
-                            <a href="user-action-page.php?action=0" type="button" class="btn btn-outline-danger btn-md btn-rounded btn-navbar waves-effect waves-light">
+                            <a href="user-action-page.php?action=0" class="btn btn-outline-danger btn-md btn-rounded btn-navbar waves-effect waves-light">
                                 Log out
                             </a>
                         <?php else : ?>
-                            <a href="registration-page.php" type="button" class="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">
+                            <a href="registration-page.php" class="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">
                                 Sign up
                             </a>
                         <?php endif ?>
