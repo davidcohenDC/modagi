@@ -1,10 +1,10 @@
 <div class="row my-5">
-    <h3 class="col-12 text-center fw-bold">
+    <div class="h3 col-12 text-center fw-bold">
         Bentornato!
-    </h3>
-    <h2 class=" col-12 text-center fw-bold">
+    </div>
+    <div class="h2 col-12 text-center fw-bold">
         <?php echo $_SESSION["username"]; ?>
-    </h2>
+    </div>
 </div>
 
 <div class="row justify-content-lg-center">
@@ -17,9 +17,9 @@
         <?php if (isset($templateParams["error"])) : ?>
             <div class="row">
                 <div class="alert alert-danger my-3 text-center col-12" role="alert">
-                    <h2>
+                    <div class="h2">
                         ERRORE
-                    </h2>
+                    </div>
                     <p class="my-1 text-center">
                         <?php echo $templateParams["error"]; ?>
                     </p>

@@ -5,9 +5,9 @@
 <script src="<?php echo JS_FILE ?>user/forward-status.js"></script>
 
 <div class="row">
-    <h1 class="fs-1 my-5 col-12 text-center fw-bold">
+    <div class="h1 my-5 col-12 text-center fw-bold">
         Ordini in sospeso
-    </h1>
+    </div>
 </div>
 
 <div class="row justify-content-lg-center">
@@ -20,23 +20,23 @@
         <!-- if no orders -->
         <?php if (isset($templateParams["noOrders"])) : ?>
             <div class="alert alert-secondary text-center my-5" role="alert">
-                <h2>
+                <div class="h2">
                     <?php echo $templateParams["noOrders"] ?>
-                </h2>
+                </div>
             </div>
         <?php else : ?>
             <?php $j = 0 ?>
             <!-- date -->
             <?php foreach ($templateParams["dates"] as $date) : ?>
                 <section class="my-3">
-                    <h3 class="text-center">
+                    <div class="h3 text-center">
                         <?php echo $date["data"] ?>
-                    </h3>
+                    </div>
                     <?php foreach ($templateParams[$date["data"]] as $product) : ?>
                         <div class="product my-4 py-4 product-history">
                             <div class="row text-center">
-                                <h4 class="col-12">User: <?php echo $product["user"]; ?></h4>
-                                <h4 class="col-12">Indirizzo: <?php echo $product["indirizzo"]; ?></h4>
+                                <div class="h4 col-12">User: <?php echo $product["user"]; ?></div>
+                                <div class="h4 col-12">Indirizzo: <?php echo $product["indirizzo"]; ?></div>
                             </div>
                             <div class="row">
                                 <div class="col-12 col-md-3 col-lg-2 col-xl-3 my-4">
@@ -50,9 +50,9 @@
                                         <!--empty space vertical-->
                                     </div>
                                     <div class="alert alert-<?php echo getOrderStatusColor($templateParams["stati"][$j]["statID"]); ?> my-3 text-center col-12" role="alert">
-                                        <h4>
+                                        <div class="h4">
                                             Stato Ordine:
-                                        </h4>
+                                        </div>
                                         <div class="my-1 text-center fw-bold">
                                             <div class="status">
                                                 <?php echo $templateParams["stati"][$j]["stato"]; ?>
@@ -90,7 +90,7 @@
                                         <div class="row text-center">
                                             <div class="col-11 product-name">
                                                 <div class="product-name">
-                                                    <h4 class="card-title text-md-right"><?php echo $product["nome"] ?></h4>
+                                                    <div class="h4 card-title text-md-right"><?php echo $product["nome"] ?></div>
                                                     <div class="product-info">
                                                         <ul class="list-group list-group-flush">
                                                             <li class="list-group-item text-md-right">Quantità: <span class="value"><?php echo $product["quantita"] ?></span></li>

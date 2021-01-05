@@ -1,11 +1,11 @@
 <div class="my-3 mx-2">
     <div class="alert alert-danger text-center" role="alert">
-        <h2>
+        <div class="h2">
             <?php echo $confirmParams["title"]; ?>
-        </h2>
-        <p>
+        </div>
+        <div>
             <?php echo $confirmParams["msg"]; ?>
-        </p>
+        </div>
     </div>
 </div>
 

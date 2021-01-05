@@ -2,9 +2,9 @@
 <script src="<?php echo JS_FILE ?>user/password-viewer.js"></script>
 
 <div class="row">
-    <h2 class="my-5 col-12 text-center fw-bold">
+    <div class="h2 my-5 col-12 text-center fw-bold">
         <?php echo $formParams["title"]; ?>
-    </h2>
+    </div>
 </div>
 
 <div class="row justify-content-lg-center">
@@ -16,9 +16,9 @@
         <?php if (isset($templateParams["error"])) : ?>
             <div class="row">
                 <div class="alert alert-danger my-3 text-center col-12" role="alert">
-                    <h2>
+                    <div class="h2">
                         ERRORE
-                    </h2>
+                    </div>
                     <p class="my-1 text-center">
                         <?php echo $templateParams["error"]; ?>
                     </p>
