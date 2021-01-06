@@ -348,7 +348,7 @@ class DatabaseUser
         $stmt->bind_param("ssssss", $email, $username, $password, $name, $surname, $address);
         $stmt->execute();
 
-        return [$this->userExists($username), "REGISTRAZIONE NON RIUSCITA"];
+        return [$this->userExists($email), "REGISTRAZIONE NON RIUSCITA"];
     }
 
     /* admin */
