@@ -28,6 +28,15 @@
             </div>
         <?php else : ?>
             <?php $j = 0 ?>
+            <!--filter-->
+            <div class="my-3 col-12">
+                <button type="button" class="px-3 py-2 btn btn-light col-12" data-mdb-toggle="modal" data-mdb-target="#filter-modal">
+                    <span> Filtra
+
+                    </span>
+                </button>
+            </div>
+
             <!-- date -->
             <?php foreach ($templateParams["dates"] as $date) : ?>
                 <div class="my-3">
@@ -113,4 +122,6 @@
     <div class="col-md-1 col-lg-2">
         <!--empty space-->
     </div>
+
+    <?php require('templates/modals/modal_filter-modal.php'); ?>
 </div>

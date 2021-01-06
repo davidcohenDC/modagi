@@ -21,12 +21,41 @@ switch ($action) {
 
     case 1: //? Storico ordini
         $templateParams["title"] = "I miei Ordini";
+        if (isset($_GET["status"])) {
+            switch ($_GET["status"]) {
+                case 0:
+                    $filter = "";
+                    break;
+
+                case 1:
+                    $filter = " AND idStato = " . $_GET["status"] . " ";
+                    break;
+
+                case 2:
+                    $filter = " AND idStato = " . $_GET["status"] . " ";
+                    break;
+
+                case 3:
+                    $filter = " AND idStato = " . $_GET["status"] . " ";
+                    break;
+
+                case 4:
+                    $filter = " AND idStato < 3 ";
+                    break;
+
+                default:
+                    $filter = "";
+                    break;
+            }
+        } else {
+            $filter = "";
+        }
 
         if ($dbh->hasOrders($_SESSION["id"])) {
-            $templateParams["dates"] = $dbh->getOrdersDates($_SESSION["id"]);
+            $templateParams["dates"] = $dbh->getOrdersDates($_SESSION["id"], $filter);
 
             foreach ($templateParams["dates"] as $date) {
-                $templateParams[$date["data"]] = $dbh->getOrdersProducts($date["data"], $_SESSION["id"]);
+                $templateParams[$date["data"]] = $dbh->getOrdersProducts($date["data"], $_SESSION["id"], $filter);
             }
 
             $icons["size"] = 30;
