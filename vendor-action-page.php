@@ -327,10 +327,12 @@ switch ($action) {
             if (!$statusResult[0]) {
                 $templateParams["error"] = $statusResult[1];
             }
-            // TODO: dopo di questo lo stato è aggiornato e va mandata una modifica
+
+            $notificationData = $dbh->getNotificationData($orderID);
+
             $notificationManager = new NotificationManager(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
             $notificationTitle = "Ordine " . strtolower($statusName);
-            $notificationMsg = "Il tuo ordine " . $orderID . " è stato " . strtolower($statusName);
+            $notificationMsg = "Il tuo ordine per (" . $notificationData["quantita"] . ") " . $notificationData["prod"] . " effetuato in data " . $notificationData["data"] . " è stato " . strtolower($statusName);
             $notificationManager->addNotification($userID, $notificationTitle, $notificationMsg);
         }
         if (!isset($templateParams["error"])) {

@@ -274,6 +274,16 @@ class DatabaseUser
         return false;
     }
 
+    public function getNotificationData($orderID)
+    {
+        $stmt = $this->db->prepare("SELECT o.quantita as quantita, o.data as data, p.nome as prod FROM ordine as o, prodotto as p WHERE p.id = o.idProdotto AND o.id = ? ");
+        $stmt->bind_param("i", $orderID);
+
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+    }
+
     /* admin */
     public function getAllColors()
     {
