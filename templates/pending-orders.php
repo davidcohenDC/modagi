@@ -2,7 +2,6 @@
 <link rel="stylesheet" href="<?php echo CSS_FILE ?>cart/cart.css">
 <!--status steps-->
 <script src="<?php echo JS_FILE ?>user/order-status.js"></script>
-<script src="<?php echo JS_FILE ?>user/forward-status.js"></script>
 
 <div class="row">
     <div class="h1 my-5 col-12 text-center fw-bold">
