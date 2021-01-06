@@ -27,7 +27,6 @@ $(function(){
         prev = prev.split("-")[1];    
         
         product = $("input[type='hidden']").val();
-        console.log(product);
         
         $("a.modal-confirm").attr("href", ).replace("#", "vendor-action-page.php?action=" + String(action) + "#");
     });
