@@ -61,6 +61,13 @@ class Product extends Database {
       return parent::Select(("SELECT numero FROM prodottitaglie PT LEFT JOIN ".$this->table." P ON PT.idProdotto = P.id LEFT JOIN taglia T ON PT.idTaglia = T.id WHERE idProdotto = ").$id);
     }
 
+    public function selectQuantitaTaglia($id, $taglia) {
+    return parent::Select("SELECT quantita FROM prodottitaglie PT 
+                          INNER JOIN ". $this->table ." P ON PT.idProdotto = P.id 
+                          INNER JOIN taglia T ON PT.idTaglia = T.id 
+                          WHERE P.id = ". $id . " AND T.numero = ". $taglia);
+
+    }
 
 }
 

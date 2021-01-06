@@ -25,12 +25,13 @@ $templateParams["idMarca"] = $product->selectMarcaByID($idprodotto)[0];
 $templateParams["quantitaTaglia"] = $product->selectQuantitaWithNSize($idprodotto);
 $templateParams["migliori"] = $order->selectTopProduct(5);
 
-
-if(isset($_GET["modal"]) && $_GET["quantita"] > 0 ) {
-    $cartManager->addProduct($_GET["prodotto"],$_GET["taglia"],$_GET["quantita"]);
-    $cartManager->saveCart();
+if(isset($_GET["modal"]) && isset($_GET['quantita']) && isset($_GET['taglia'])) {
+    $quantity = $product->selectQuantitaTaglia($idprodotto, $_GET["taglia"])[0]["quantita"];
+    if($_GET["quantita"] > 0 && $_GET["quantita"] <= $quantity) {
+        $cartManager->addProduct($idprodotto,$_GET["taglia"],$_GET["quantita"]);
+        $cartManager->saveCart();
+    }
 }
-
 
 require_once('templates/base.php');
 require_once("templates/product-page.php");
