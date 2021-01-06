@@ -414,3 +414,23 @@ button.input-embedded {
   height:auto;
   overflow: hidden !important;
 }
+
+.btn-promotion { 
+  padding: 10px 32px; 
+  font-size: 16px; 
+  text-align: center; 
+  cursor: pointer; 
+  outline: none; 
+  color: #fff; 
+  border: none; 
+  border-radius: 5px; 
+  box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24); 
+} 
+/* Adding styles on 'active' state */ 
+
+.btn-promotion:active { 
+  box-shadow: 
+    7px 6px 28px 1px rgba(0, 0, 0, 0.24); 
+  transform: translateY(4px); 
+  /* Moving button 4px to y-axis */ 
+}
