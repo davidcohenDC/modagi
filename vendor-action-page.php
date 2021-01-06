@@ -270,7 +270,7 @@ switch ($action) {
         } else {
             $filter = "";
         }
-
+        $templateParams["filter"] = $_GET["status"];
         $pendingOrders = $dbh->getPendingOrders();
 
         if (count($pendingOrders) > 0) {
@@ -288,6 +288,12 @@ switch ($action) {
         break;
 
     case 12:
+        if (isset($_GET["filter"])) {
+            $filter = $_GET["filter"];
+        } else {
+            $filter = '0';
+        }
+
         if (isset($_GET["order"]) && isset($_GET["status"]) && isset($_GET["email"])) {
             $userID = $_GET["email"];
             $orderID = $_GET["order"];
@@ -308,7 +314,7 @@ switch ($action) {
             $notificationManager->addNotification($userID, $notificationTitle, $notificationMsg);
         }
         if (!isset($templateParams["error"])) {
-            header("location: vendor-action-page.php?action=11");
+            header("location: vendor-action-page.php?action=11&status={$filter}");
         }
         break;
 

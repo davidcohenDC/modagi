@@ -47,6 +47,7 @@ switch ($action) {
                     $filter = "";
                     break;
             }
+            $templateParams["filter"] = $_GET["status"];
         } else {
             $filter = "";
         }

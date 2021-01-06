@@ -65,7 +65,7 @@
                                             </div>
                                         </div>
 
-                                        <a href="vendor-action-page.php?action=12&order=<?php echo $product["orderID"] . "&status=" . $product["statID"] . "&email=" . $product["email"]; ?>" class="btn btn-<?php echo getOrderStatusColor($product["statID"]); ?> text-white">
+                                        <a href="vendor-action-page.php?action=12&order=<?php echo $product["orderID"] . "&status=" . $product["statID"] . "&email=" . $product["email"] . "&filter=" . $templateParams["filter"]; ?>" class="btn btn-<?php echo getOrderStatusColor($product["statID"]); ?> text-white">
                                             <span>Avanza Stato</span>
                                         </a>
 

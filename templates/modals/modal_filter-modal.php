@@ -12,32 +12,64 @@
                     </svg>
                 </button>
             </div>
-            <div class="modal-body ">
+            <div class="modal-body text-center">
                 <?php if (isUserVendor()) : ?>
                     <div class="my-3 mx-2 col-12">
-                        <a href="vendor-action-page.php?action=11&status=0" class="px-3 py-2 btn-light col-12 fw-bold"> Tutti </a>
+                        <a href="vendor-action-page.php?action=11&status=0" class="px-3 py-2 btn-<?php if (isset($templateParams["filter"]) && $templateParams["filter"] == 0) {
+                                                                                                        echo "info text-white";
+                                                                                                    } else {
+                                                                                                        echo "light";
+                                                                                                    } ?> col-12 fw-bold"> Tutti </a>
                     </div>
                     <div class="my-3 mx-2 col-12">
-                        <a href="vendor-action-page.php?action=11&status=2" class="px-3 py-2 btn-light col-12 fw-bold"> Solo spediti </a>
+                        <a href="vendor-action-page.php?action=11&status=2" class="px-3 py-2 btn-<?php if (isset($templateParams["filter"]) && $templateParams["filter"] == 2) {
+                                                                                                        echo "info text-white";
+                                                                                                    } else {
+                                                                                                        echo "light";
+                                                                                                    } ?> col-12 fw-bold"> Solo spediti </a>
                     </div>
                     <div class="my-3 mx-2 col-12">
-                        <a href="vendor-action-page.php?action=11&status=1" class="px-3 py-2 btn-light col-12 fw-bold"> Solo confermati </a>
+                        <a href="vendor-action-page.php?action=11&status=1" class="px-3 py-2 btn-<?php if (isset($templateParams["filter"]) && $templateParams["filter"] == 1) {
+                                                                                                        echo "info text-white";
+                                                                                                    } else {
+                                                                                                        echo "light";
+                                                                                                    } ?> col-12 fw-bold"> Solo confermati </a>
                     </div>
                 <?php else : ?>
                     <div class="my-3 mx-2 col-12">
-                        <a href="user-action-page.php?action=1&status=0" class="px-3 py-2 btn-light col-12 fw-bold"> Tutti </a>
+                        <a href="user-action-page.php?action=1&status=0" class="px-3 py-2 btn-<?php if (isset($templateParams["filter"]) && $templateParams["filter"] == 0) {
+                                                                                                    echo "info text-white";
+                                                                                                } else {
+                                                                                                    echo "light";
+                                                                                                } ?> col-12 fw-bold"> Tutti </a>
                     </div>
                     <div class="my-3 mx-2 col-12">
-                        <a href="user-action-page.php?action=1&status=4" class="px-3 py-2 btn-light col-12 fw-bold"> Solo non consegnati</a>
+                        <a href="user-action-page.php?action=1&status=4" class="px-3 py-2 btn-<?php if (isset($templateParams["filter"]) && $templateParams["filter"] == 4) {
+                                                                                                    echo "info text-white";
+                                                                                                } else {
+                                                                                                    echo "light";
+                                                                                                } ?> col-12 fw-bold"> Solo non consegnati</a>
                     </div>
                     <div class="my-3 mx-2 col-12">
-                        <a href="user-action-page.php?action=1&status=3" class="px-3 py-2 btn-light col-12 fw-bold"> Solo consegnati </a>
+                        <a href="user-action-page.php?action=1&status=3" class="px-3 py-2 btn-<?php if (isset($templateParams["filter"]) && $templateParams["filter"] == 3) {
+                                                                                                    echo "info text-white";
+                                                                                                } else {
+                                                                                                    echo "light";
+                                                                                                } ?> col-12 fw-bold"> Solo consegnati </a>
                     </div>
                     <div class="my-3 mx-2 col-12">
-                        <a href="user-action-page.php?action=1&status=2" class="px-3 py-2 btn-light col-12 fw-bold"> Solo spediti </a>
+                        <a href="user-action-page.php?action=1&status=2" class="px-3 py-2 btn-<?php if (isset($templateParams["filter"]) && $templateParams["filter"] == 2) {
+                                                                                                    echo "info text-white";
+                                                                                                } else {
+                                                                                                    echo "light";
+                                                                                                } ?> col-12 fw-bold"> Solo spediti </a>
                     </div>
                     <div class="my-3 mx-2 col-12">
-                        <a href="user-action-page.php?action=1&status=1" class="px-3 py-2 btn-light col-12 fw-bold"> Solo confermati </a>
+                        <a href="user-action-page.php?action=1&status=1" class="px-3 py-2 btn-<?php if (isset($templateParams["filter"]) && $templateParams["filter"] == 1) {
+                                                                                                    echo "info text-white";
+                                                                                                } else {
+                                                                                                    echo "light";
+                                                                                                } ?> col-12 fw-bold"> Solo confermati </a>
                     </div>
                 <?php endif ?>
             </div>
