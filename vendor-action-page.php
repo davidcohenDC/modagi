@@ -267,10 +267,12 @@ switch ($action) {
                     $filter = "";
                     break;
             }
+            $templateParams["filter"] = $_GET["status"];
         } else {
             $filter = "";
+            $templateParams["filter"] = 0;
         }
-        $templateParams["filter"] = $_GET["status"];
+
         $pendingOrders = $dbh->getPendingOrders();
 
         if (count($pendingOrders) > 0) {

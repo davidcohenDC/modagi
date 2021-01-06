@@ -50,6 +50,7 @@ switch ($action) {
             $templateParams["filter"] = $_GET["status"];
         } else {
             $filter = "";
+            $templateParams["filter"] = 0;
         }
 
         if ($dbh->hasOrders($_SESSION["id"])) {
