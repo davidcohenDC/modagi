@@ -1,6 +1,7 @@
 <?php
 
 require_once("./server.php");
+require_once("./utilis/NotificationManager.php");
 require_once './utilis/DatabaseUser.php';
 
 if (!isUserLoggedIn() || !isset($_GET["action"]) || !isUserVendor()) {
@@ -29,7 +30,7 @@ if ($action > 7 && $action < 11) {
             $productID = $_GET["product"];
         } else {
             //!product not exists
-            $templateParams["error"] = "Il porodotto non esiste";
+            $templateParams["error"] = "Il prodotto non esiste";
             header("location: vendor-action-page.php?action=1");
         }
     } else {
@@ -318,14 +319,21 @@ switch ($action) {
         if (isset($_GET["order"]) && isset($_GET["status"]) && isset($_GET["email"])) {
             $userID = $_GET["email"];
             $orderID = $_GET["order"];
-            $status = $_GET["status"] + 1;
+            $statusId = $_GET["status"] + 1;
 
-            $statusResult = $dbh->updateOrder($orderID, $status);
+            $statusName = $dbh->getStatusName($statusId);
+            $statusResult = $dbh->updateOrder($orderID, $statusId);
 
             if (!$statusResult[0]) {
                 $templateParams["error"] = $statusResult[1];
             }
-            // TODO: dopo di questo lo stato è aggiornato e va mandata una modifica
+
+            $notificationData = $dbh->getNotificationData($orderID);
+
+            $notificationManager = new NotificationManager(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
+            $notificationTitle = "Ordine " . strtolower($statusName);
+            $notificationMsg = "Il tuo ordine per (" . $notificationData["quantita"] . ") " . $notificationData["prod"] . " effetuato in data " . $notificationData["data"] . " è stato " . strtolower($statusName);
+            $notificationManager->addNotification($userID, $notificationTitle, $notificationMsg);
         }
         if (!isset($templateParams["error"])) {
             header("location: vendor-action-page.php?action=11");

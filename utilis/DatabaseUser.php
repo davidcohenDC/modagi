@@ -216,6 +216,7 @@ class DatabaseUser
                                     AND prodotto.idGenere = genere.id
                                     AND prodotto.idMateriale = materiale.id
                                     AND prodotto.idMarca = marca.id
+                                    AND ordine.idStato < 3
                                     ORDER BY ordine.data");
 
             $stmt->bind_param("s", $date);
@@ -261,6 +262,26 @@ class DatabaseUser
         }
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getStatusName($statusId)
+    {
+        $stmt = $this->db->prepare("SELECT nome FROM statoordine WHERE id = ? ");
+        $stmt->bind_param("s", $statusId);
+        if ($stmt->execute()) {
+            return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]["nome"];
+        }
+        return false;
+    }
+
+    public function getNotificationData($orderID)
+    {
+        $stmt = $this->db->prepare("SELECT o.quantita as quantita, o.data as data, p.nome as prod FROM ordine as o, prodotto as p WHERE p.id = o.idProdotto AND o.id = ? ");
+        $stmt->bind_param("i", $orderID);
+
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
     }
 
     /* admin */
