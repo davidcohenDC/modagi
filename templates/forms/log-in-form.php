@@ -17,9 +17,6 @@
 <div class="my-3 mx-2 ">
     <label for="email" class="form-label fw-bold"> E-mail </label>
     <input id="email" name="email" class="form-control col-12 fst-italic" type="email" placeholder="inserire username" required />
-    <div class="invalid-feedback">
-        email non valida
-    </div>
 </div>
 
 <div class="my-3 mx-2 ">
@@ -30,9 +27,6 @@
             <span id="icon" class="e-icon">
             </span>
         </button>
-    </div>
-    <div class="invalid-feedback">
-        Password troppo corta
     </div>
 </div>
 

@@ -17,25 +17,16 @@
 <div class="my-3 mx-2 ">
     <label for="address" class="form-label fw-bold"> Indirizzo </label>
     <input id="address" name="address" class="form-control col-12 fst-italic" type="text" placeholder="inserire cognome" maxlength="40" required />
-    <div class="invalid-feedback">
-        Inserire un indirizzo valido
-    </div>
 </div>
 
 <div class="my-3 mx-2 ">
     <label for="username" class="form-label fw-bold"> Username </label>
     <input id="username" name="username" class="form-control col-12 fst-italic" type="text" placeholder="inserire username" maxlength="20" required />
-    <div class="invalid-feedback">
-        Username non valido
-    </div>
 </div>
 
 <div class="my-3 mx-2 ">
     <label for="email" class="form-label fw-bold"> E-mail </label>
     <input id="email" name="email" class="form-control col-12 fst-italic" type="email" placeholder="inserire username" required />
-    <div class="invalid-feedback">
-        email non valida
-    </div>
 </div>
 
 <div class="my-3 mx-2 ">
@@ -45,9 +36,6 @@
         <button type="button" id="eye" class="eye input-embedded">
             <span id="icon" class="e-icon"></span>
         </button>
-    </div>
-    <div class="invalid-feedback">
-        Password troppo corta
     </div>
 </div>
 

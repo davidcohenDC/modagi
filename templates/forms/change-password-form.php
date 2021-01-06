@@ -6,9 +6,6 @@
             <span id="old-icon" class="e-icon"></span>
         </button>
     </div>
-    <div class="invalid-feedback">
-        Password troppo corta
-    </div>
 </div>
 
 <div class="my-3 mx-2 ">
@@ -19,9 +16,6 @@
             <span id="new-icon" class="e-icon">
             </span>
         </button>
-    </div>
-    <div class="invalid-feedback">
-        Password troppo corta
     </div>
 </div>
 

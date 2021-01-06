@@ -18,9 +18,6 @@
             </span>
         </button>
     </div>
-    <div class="invalid-feedback">
-        Password troppo corta
-    </div>
 </div>
 
 <div class="row justify-content-md-center">

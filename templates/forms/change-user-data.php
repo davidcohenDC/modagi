@@ -8,9 +8,6 @@
             <span></span>
         </button>
         <input id="name" name="name" class="form-control col-12 fst-italic" type="text" placeholder="inserire nome" maxlength="20" />
-        <div class="invalid-feedback">
-            Inserire un nome valido
-        </div>
     </div>
 </div>
 
@@ -21,9 +18,6 @@
             <span></span>
         </button>
         <input id="surname" name="surname" class="form-control col-12 fst-italic" type="text" placeholder="inserire cognome" maxlength="20" />
-        <div class="invalid-feedback">
-            Inserire un cognome valido
-        </div>
     </div>
 </div>
 
@@ -34,9 +28,6 @@
             <span></span>
         </button>
         <input id="address" name="address" class="form-control col-12 fst-italic" type="text" placeholder="inserire indirizzo" maxlength="40" />
-        <div class="invalid-feedback">
-            Inserire un indirizzo valido
-        </div>
     </div>
 </div>
 
@@ -47,9 +38,6 @@
             <span></span>
         </button>
         <input id="username" name="username" class="form-control col-12 fst-italic" type="text" placeholder="inserire username" maxlength="20" />
-        <div class="invalid-feedback">
-            Inserire un username valido
-        </div>
     </div>
 </div>
 
@@ -62,9 +50,7 @@
             </span>
         </button>
     </div>
-    <div class="invalid-feedback">
-        Password troppo corta
-    </div>
+
 </div>
 
 <div class="row justify-content-md-center justify-content-lg-end">
