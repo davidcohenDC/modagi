@@ -28,7 +28,7 @@
             <?php $j = 0 ?>
             <!-- date -->
             <?php foreach ($templateParams["dates"] as $date) : ?>
-                <section class="my-3">
+                <div class="my-3">
                     <div class="h3 text-center">
                         <?php echo $date["data"] ?>
                     </div>
@@ -111,7 +111,7 @@
                         </div>
                         <?php $j++; ?>
                     <?php endforeach ?>
-                </section>
+                </div>
                 <hr />
             <?php endforeach ?>
         <?php endif ?>
