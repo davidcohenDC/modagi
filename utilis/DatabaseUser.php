@@ -216,6 +216,7 @@ class DatabaseUser
                                     AND prodotto.idGenere = genere.id
                                     AND prodotto.idMateriale = materiale.id
                                     AND prodotto.idMarca = marca.id
+                                    AND ordine.idStato < 3
                                     ORDER BY ordine.data");
 
             $stmt->bind_param("s", $date);
@@ -267,7 +268,7 @@ class DatabaseUser
     {
         $stmt = $this->db->prepare("SELECT nome FROM statoordine WHERE id = ? ");
         $stmt->bind_param("s", $statusId);
-        if($stmt->execute()) {
+        if ($stmt->execute()) {
             return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]["nome"];
         }
         return false;
