@@ -356,3 +356,37 @@
   transform: translateY(4px); 
   /* Moving button 4px to y-axis */ 
 }
+
+@media (min-width: 350px) {
+  .desktop {
+    display: none !important;
+  }
+  .mobile {
+    display: flex !important;
+  }
+
+  .tablet {
+    display: none !important;
+  }
+  .carousel-caption {
+    bottom: 0px;
+  }
+
+  .carousel-item > img {
+    width: 640px;
+    height: 180px;
+  }
+}
+
+.btn-addToCart { 
+  padding: 10px 10px; 
+  box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24); 
+} 
+/* Adding styles on 'active' state */ 
+
+.btn-addToCart:active { 
+  box-shadow: 
+    7px 6px 28px 1px rgba(0, 0, 0, 0.24); 
+  transform: translateY(4px); 
+  /* Moving button 4px to y-axis */ 
+}
