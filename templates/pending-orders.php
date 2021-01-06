@@ -2,7 +2,6 @@
 <link rel="stylesheet" href="<?php echo CSS_FILE ?>cart/cart.css">
 <!--status steps-->
 <script src="<?php echo JS_FILE ?>user/order-status.js"></script>
-<script src="<?php echo JS_FILE ?>user/forward-status.js"></script>
 
 <div class="row">
     <div class="h1 my-5 col-12 text-center fw-bold">
@@ -28,7 +27,7 @@
             <?php $j = 0 ?>
             <!-- date -->
             <?php foreach ($templateParams["dates"] as $date) : ?>
-                <section class="my-3">
+                <div class="my-3">
                     <div class="h3 text-center">
                         <?php echo $date["data"] ?>
                     </div>
@@ -111,7 +110,7 @@
                         </div>
                         <?php $j++; ?>
                     <?php endforeach ?>
-                </section>
+                </div>
                 <hr />
             <?php endforeach ?>
         <?php endif ?>
