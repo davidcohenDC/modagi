@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="./css/notification/notification.css" />
 
-
 <div class="icon" id="bell">
     <span id="outCounter" class="badge badge-pill red">
         <?php echo $notificationCount; ?>
