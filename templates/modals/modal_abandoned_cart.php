@@ -1,3 +1,4 @@
+<div class="col-12">
 <div class="modal fade right" id="modalAbandonedCart" tabindex="-1" role="dialog" aria-labelledby="modalAbandonedCart"
   aria-hidden="true" data-backdrop="false">
   <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-info" role="document">
@@ -26,11 +27,12 @@
 
       <!--Footer-->
       <div class="modal-footer justify-content-center">
-      <a href="index.php" id="btnReturnHome" class="btn btn-info btn-rounder" >Continua a Comprare</a>
-      <a href="cart.php" id="btnGoToCart" class="btn btn-info btn-rounder" >Vai al Carrello</a>
+      <a href="index.php" id="btnReturnHome" class="btn-addToCart btn btn-info btn-rounder" >Continua a Comprare</a>
+      <a href="cart.php" id="btnGoToCart" class="btn-addToCart btn btn-info btn-rounder" >Vai al Carrello</a>
       </div>
     </div>
     <!--/.Content-->
   </div>
+</div>
 </div>
 <!-- Modal -->

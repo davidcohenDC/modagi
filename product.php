@@ -38,7 +38,6 @@ require_once("templates/product-page.php");
 
 if(isset($_GET["modal"])) {
     require_once("templates/modals/modal_abandoned_cart.php");
-    require_once("templates/modals/modal_product_no_quantity.php");
 }
 
 ?>
