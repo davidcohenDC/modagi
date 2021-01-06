@@ -189,12 +189,12 @@ class DatabaseUser
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]["nome"];
     }
 
-    public function getOrdersDates($id)
+    public function getOrdersDates($id, $filter = "")
     {
         if (isUserVendor()) {
-            $stmt = $this->db->prepare("SELECT DISTINCT data FROM ordine WHERE idStato < 3 ORDER BY data ASC");
+            $stmt = $this->db->prepare("SELECT DISTINCT data FROM ordine WHERE idStato < 3 " . $filter . " ORDER BY data ASC");
         } else {
-            $stmt = $this->db->prepare("SELECT DISTINCT data FROM ordine WHERE email = ? ORDER BY data DESC");
+            $stmt = $this->db->prepare("SELECT DISTINCT data FROM ordine WHERE email = ? " . $filter . " ORDER BY data DESC");
             $stmt->bind_param("s", $id);
         }
 
@@ -203,7 +203,7 @@ class DatabaseUser
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getOrdersProducts($date, $email)
+    public function getOrdersProducts($date, $email, $filter = "")
     {
         if (isUserVendor()) {
             $stmt = $this->db->prepare("SELECT user.email as email, user.nome as user, user.indirizzo as indirizzo, prodotto.id as id, prodotto.nome as nome, prodotto.prezzo as prezzo, ordine.quantita as quantita,
@@ -217,8 +217,7 @@ class DatabaseUser
                                     AND prodotto.idGenere = genere.id
                                     AND prodotto.idMateriale = materiale.id
                                     AND prodotto.idMarca = marca.id
-                                    AND ordine.idStato < 3
-                                    ORDER BY ordine.data ASC");
+                                    AND ordine.idStato < 3  " . $filter . " ORDER BY ordine.data ASC");
 
             $stmt->bind_param("s", $date);
         } else {
@@ -232,8 +231,7 @@ class DatabaseUser
             AND prodotto.idColore = colore.id
             AND prodotto.idGenere = genere.id
             AND prodotto.idMateriale = materiale.id
-            AND prodotto.idMarca = marca.id
-            ORDER BY ordine.data");
+            AND prodotto.idMarca = marca.id " . $filter . " ORDER BY ordine.data");
 
             $stmt->bind_param("ss", $email, $date);
         }

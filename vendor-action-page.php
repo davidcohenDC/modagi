@@ -249,13 +249,35 @@ switch ($action) {
         $templateParams["title"] = "Ordini in sospeso";
         $templateParams["main"] = "pending-orders.php";
 
+        if (isset($_GET["status"])) {
+            switch ($_GET["status"]) {
+                case 0:
+                    $filter = "";
+                    break;
+
+                case 1:
+                    $filter = " AND idStato = " . $_GET["status"] . " ";
+                    break;
+
+                case 2:
+                    $filter = " AND idStato = " . $_GET["status"] . " ";
+                    break;
+
+                default:
+                    $filter = "";
+                    break;
+            }
+        } else {
+            $filter = "";
+        }
+
         $pendingOrders = $dbh->getPendingOrders();
 
         if (count($pendingOrders) > 0) {
-            $templateParams["dates"] = $dbh->getOrdersDates($_SESSION["id"]);
+            $templateParams["dates"] = $dbh->getOrdersDates($_SESSION["id"], $filter);
 
             foreach ($templateParams["dates"] as $date) {
-                $templateParams[$date["data"]] = $dbh->getOrdersProducts($date["data"], $_SESSION["id"]);
+                $templateParams[$date["data"]] = $dbh->getOrdersProducts($date["data"], $_SESSION["id"], $filter);
             }
 
             $icons["size"] = 30;
