@@ -415,7 +415,7 @@ button.input-embedded {
   overflow: hidden !important;
 }
 
-.btn-promotion { 
+.btn-promotion{ 
   padding: 10px 32px; 
   font-size: 16px; 
   text-align: center; 
@@ -428,9 +428,29 @@ button.input-embedded {
 } 
 /* Adding styles on 'active' state */ 
 
-.btn-promotion:active { 
+.btn-promotion:active{ 
   box-shadow: 
     7px 6px 28px 1px rgba(0, 0, 0, 0.24); 
   transform: translateY(4px); 
   /* Moving button 4px to y-axis */ 
+}
+
+
+
+.card:hover {
+  box-shadow: 
+    7px 6px 28px 1px rgba(0, 0, 0, 0.1); 
+  transform: translateY(2px); 
+}
+
+.card:active {
+  box-shadow: 
+    7px 6px 28px 1px rgba(0, 0, 0, 0.24); 
+  transform: translateX(0px); 
+}
+
+.card:hover .product-badge{
+  font-size: 14px;
+  transition: font-size 0.5s;
+
 }
