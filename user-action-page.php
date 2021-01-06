@@ -56,6 +56,10 @@ switch ($action) {
         if ($dbh->hasOrders($_SESSION["id"])) {
             $templateParams["dates"] = $dbh->getOrdersDates($_SESSION["id"], $filter);
 
+            if (count($templateParams["dates"]) == 0) {
+                $templateParams["noOrders"] = "Nessun ordine da mostrare per il filtro scelto.";
+            }
+
             foreach ($templateParams["dates"] as $date) {
                 $templateParams[$date["data"]] = $dbh->getOrdersProducts($date["data"], $_SESSION["id"], $filter);
             }
