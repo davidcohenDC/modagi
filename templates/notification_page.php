@@ -5,7 +5,7 @@
     <span id="outCounter" class="badge badge-pill red">
         <?php echo $notificationCount; ?>
     </span>
-    <img src="https://i.imgur.com/AC7dgLA.png" alt="">
+    <span class="fa fa-bell" aria-hidden="true"></span>
 </div>
 <div class="notifications" id="box">
     <span id="titoloNotifica" class="h2 text-left">Notifiche - <span id="inCounter"><?php echo $notificationCount ?></span></span>
