@@ -13,7 +13,8 @@ $deleteSelectionHtml = '
 ?>
 
 <!-- Link: Home Style Css -->
-<link href="<?php echo CSS_FILE . "home.css" ?>" rel="stylesheet">
+<script src="./js/home/home.js"></script>
+<link href="<?php echo CSS_FILE . "home/home.css" ?>" rel="stylesheet">
 
 <div class="row">
 
@@ -94,10 +95,10 @@ $deleteSelectionHtml = '
           $prodotto = $product->selectById($promo)[0]; ?>
           <div class="carousel-item <?php if ($index == 0) { echo "active";} ?>">
             <img class="d-block img-fluid" src="<?php echo PROMOTION_DIR."promo_".$promo.".jpg"; ?>" alt="Promozione <?php echo $prodotto["nome"] ?>">
-              <div class="carousel-caption text-center">
+              <div class="carousel-caption">
               <h3><?php echo strtoupper($prodotto["nome"]);?></h3>
-                <p><?php if($prodotto["descrizione"] != "") {echo $prodotto["descrizione"];} else {echo "aggiungi descrizione!";}?></p>
-                <p><a class="btn btn-dark" href="product.php?prodotto=<?php echo $prodotto["id"]; ?>" role="button">Scopri 
+                <p class="desktop"><?php if($prodotto["descrizione"] != "") {echo $prodotto["descrizione"];} else {echo "aggiungi descrizione!";}?></p>
+                <p><a class="btn-promotion btn btn-dark" href="product.php?prodotto=<?php echo $prodotto["id"]; ?>" role="button">Scopri 
                   <span class="fa fa-long-arrow-right" aria-hidden="true"></span></a></p>                
             </div>
           </div>

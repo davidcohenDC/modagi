@@ -335,3 +335,24 @@
   text-decoration: none;
   margin-top: 2%;
 }
+
+
+.btn-cart { 
+  padding: 10px 32px; 
+  font-size: 16px; 
+  text-align: center; 
+  cursor: pointer; 
+  outline: none; 
+  color: #fff; 
+  border: none; 
+  border-radius: 5px; 
+  box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24); 
+} 
+/* Adding styles on 'active' state */ 
+
+.btn-cart:active { 
+  box-shadow: 
+    7px 6px 28px 1px rgba(0, 0, 0, 0.24); 
+  transform: translateY(4px); 
+  /* Moving button 4px to y-axis */ 
+}

@@ -3,7 +3,8 @@ $prodotto = $templateParams["prodotto"];
 ?>
 
 <!-- Link: Product Style Css -->
-<link href="<?php echo CSS_FILE . "product.css" ?>" rel="stylesheet">
+<script src="./js/product/product.js"></script>
+<link href="<?php echo CSS_FILE . "/product/product.css" ?>" rel="stylesheet">
 
 <!--Section: Product detail -->
 <section id="productDetails">
@@ -139,7 +140,7 @@ $prodotto = $templateParams["prodotto"];
                 <form method="POST"
                   id="<?php if(isUserVendor()) { echo "formModifyProduct";} else {echo "formAddToCart";}?>">
                   <button type="submit" id="btnAdd"
-                    class="btn btn-<?php if(isUserVendor()) { echo "dark";} else {echo "info";}?> btn-rounder" <?php if(!isUserVendor() && $prodotto["stock"] == 0) { echo "disabled";} ?>><?php if(isUserVendor()) { 
+                    class="btn-cart btn btn-<?php if(isUserVendor()) { echo "dark";} else {echo "info";}?> btn-rounder" <?php if(!isUserVendor() && $prodotto["stock"] == 0) { echo "disabled";} ?>><?php if(isUserVendor()) { 
                   echo '<span class="fa fa-eraser" aria-hidden="true"></span>Modifica';} else {echo '<span class="fa fa-cart-plus" aria-hidden="true"></span>Aggiungi al carrello';}?>
                   </button>
                 </form>

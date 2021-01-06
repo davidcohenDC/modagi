@@ -29,7 +29,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
     <script src="<?php echo BOOTSTRAP_JS_LINK ?>"></script>
 
-    <script src="./js/home.js"></script>
+    <script src="./js/utils/utils.js"></script>
 
     <!--base css file-->
     <link rel="stylesheet" href="<?php echo CSS_FILE; ?>base.css">

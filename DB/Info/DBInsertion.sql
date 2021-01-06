@@ -196,7 +196,7 @@ VALUES (
     (
         '6',
         '84.99',
-        '',
+        'La sneaker Nike Zoom è un rimando ai primi anni 2000, visibile nel branding e nel tallone oversize. La tomaia è composta da un mix di vari materiali.',
         'ZOOM',
         '1',
         '1',
@@ -236,7 +236,7 @@ VALUES (
     (
         '10',
         '124.99',
-        '',
+        'Nike Air Barrage Low aggiorna la classica scarpa da training anni 90 per campi in erba sintetica rendendola ideale da indossare ovunque.',
         'Air Barrage',
         '7',
         '3',
