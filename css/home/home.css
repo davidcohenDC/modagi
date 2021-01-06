@@ -451,6 +451,12 @@ button.input-embedded {
 
 .card:hover .product-badge{
   font-size: 14px;
-  transition: font-size 0.5s;
+  transition: font-size 0.2s;
+
+}
+
+.card:hover a{
+  margin-left: 1px;
+  transition: color 0.2s;
 
 }
