@@ -307,7 +307,6 @@ switch ($action) {
                 $templateParams[$date["data"]] = $dbh->getOrdersProducts($date["data"], $_SESSION["id"]);
             }
 
-            $templateParams["stati"] = $dbh->getOrdersStatus($_SESSION["id"]);
             $icons["size"] = 30;
         } else {
             $templateParams["noOrders"] = "Nessun ordine non correttamente consegnato da mostrare.";

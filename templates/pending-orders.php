@@ -48,18 +48,18 @@
                                         <div class="my-2"></div>
                                         <!--empty space vertical-->
                                     </div>
-                                    <div class="alert alert-<?php echo getOrderStatusColor($templateParams["stati"][$j]["statID"]); ?> my-3 text-center col-12" role="alert">
+                                    <div class="alert alert-<?php echo getOrderStatusColor($product["statID"]); ?> my-3 text-center col-12" role="alert">
                                         <div class="h4">
                                             Stato Ordine:
                                         </div>
                                         <div class="my-1 text-center fw-bold">
                                             <div class="status">
-                                                <?php echo $templateParams["stati"][$j]["stato"]; ?>
-                                                <input type="hidden" class="for-<?php echo $j; ?>" value="<?php echo $templateParams["stati"][$j]["statID"]; ?>-<?php echo getOrderStatusColor($templateParams["stati"][$j]["statID"]); ?>" />
+                                                <?php echo $product["stato"]; ?>
+                                                <input type="hidden" class="for-<?php echo $j; ?>" value="<?php echo $product["statID"] ?>-<?php echo getOrderStatusColor($product["statID"]); ?>" />
                                             </div>
                                         </div>
 
-                                        <a href="vendor-action-page.php?action=12&order=<?php echo $product["orderID"] . "&status=" . $templateParams["stati"][$j]["statID"] . "&email=" . $product["email"]; ?>" class="btn btn-<?php echo getOrderStatusColor($templateParams["stati"][$j]["statID"]); ?> text-white">
+                                        <a href="vendor-action-page.php?action=12&order=<?php echo $product["orderID"] . "&status=" . $product["statID"] . "&email=" . $product["email"]; ?>" class="btn btn-<?php echo getOrderStatusColor($product["statID"]); ?> text-white">
                                             <span>Avanza Stato</span>
                                         </a>
 

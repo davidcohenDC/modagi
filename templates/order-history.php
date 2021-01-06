@@ -47,14 +47,14 @@
                                         <div class="my-5"></div>
                                         <!--empty space vertical-->
                                     </div>
-                                    <div class="alert alert-<?php echo getOrderStatusColor($templateParams["stati"][$j]["statID"]); ?> my-3 text-center col-12" role="alert">
+                                    <div class="alert alert-<?php echo getOrderStatusColor($product["statID"]); ?> my-3 text-center col-12" role="alert">
                                         <div class="h4">
                                             Stato Ordine:
                                         </div>
                                         <div class="my-1 text-center fw-bold">
                                             <div class="status ">
-                                                <?php echo $templateParams["stati"][$j]["stato"]; ?>
-                                                <input type="hidden" class="for-<?php echo $j; ?>" value="<?php echo $templateParams["stati"][$j]["statID"]; ?>-<?php echo getOrderStatusColor($templateParams["stati"][$j]["statID"]); ?>" />
+                                                <?php echo $product["stato"]; ?>
+                                                <input type="hidden" class="for-<?php echo $j; ?>" value="<?php echo $product["statID"]; ?>-<?php echo getOrderStatusColor($product["statID"]); ?>" />
                                             </div>
                                         </div>
                                     </div>
