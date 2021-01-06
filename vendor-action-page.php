@@ -317,7 +317,7 @@ switch ($action) {
 
             $notificationManager = new NotificationManager(DB_SERVER_NAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
             $notificationTitle = "Ordine " . strtolower($statusName);
-            $notificationMsg = "Il tuo ordine per (" . $notificationData["quantita"] . ") " . $notificationData["prod"] . " effetuato in data " . $notificationData["data"] . " è stato " . strtolower($statusName);
+            $notificationMsg = "Il tuo ordine per (" . $notificationData["quantita"] . ") " . $notificationData["prod"] . " effettuato in data " . $notificationData["data"] . " è stato " . strtolower($statusName);
             $notificationManager->addNotification($userID, $notificationTitle, $notificationMsg);
         }
         if (!isset($templateParams["error"])) {
