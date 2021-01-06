@@ -25,43 +25,49 @@ class Product extends Database {
 
     public function selectByIdWithQuantity($id) {
       return parent::Select("SELECT P.*, SUM(quantita) as stock FROM ".$this->table." P INNER JOIN prodottitaglie PT ON
-      PT.idProdotto = P.id WHERE P.id = ".$id);
+      PT.idProdotto = P.id WHERE P.id = ?",["i",$id]);
     }
 
     public function selectQuantitaWithNSize($id) {
       return parent::Select("SELECT numero,quantita FROM Prodotto P INNER JOIN prodottitaglie PT ON PT.idProdotto= P.id 
-      INNER JOIN taglia T ON PT.idTaglia = T.id WHERE P.id = ".$id. " AND PT.quantita > 0");
+      INNER JOIN taglia T ON PT.idTaglia = T.id WHERE P.id = ? AND PT.quantita > 0",["i",$id]);
     }
 
     public function selectById($id) {
-      return parent::Select("SELECT * FROM ".$this->table. " WHERE id = ".$id);
+      return parent::Select("SELECT * FROM ".$this->table. " WHERE id = ?",["i",$id]);
     }
 
     public function selectByName($name) {
-      return parent::Select("SELECT * FROM ".$this->table. " WHERE nome = '".$name."'");
+      return parent::Select("SELECT * FROM ".$this->table. " WHERE nome = ?",["s",$name]);
     }
 
     public function selectMaterialeByID($id) {
-      return parent::Select("SELECT materiale.nome FROM materiale LEFT JOIN ".$this->table. " ON materiale.id = ".$this->table. ".idMateriale WHERE ".$this->table.".id = ".$id);
+      return parent::Select("SELECT materiale.nome FROM materiale LEFT JOIN ".$this->table. " ON materiale.id = ".$this->table. ".idMateriale WHERE ".$this->table.".id = ?",["i",$id]);
     }
 
     public function selectGenereByID($id) {
-      return parent::Select("SELECT genere.nome FROM genere LEFT JOIN ".$this->table. " ON genere.id = ".$this->table. ".idGenere WHERE ".$this->table.".id = ".$id);
+      return parent::Select("SELECT genere.nome FROM genere LEFT JOIN ".$this->table. " ON genere.id = ".$this->table. ".idGenere WHERE ".$this->table.".id = ?",["i",$id]);
     }
 
     public function selectColoreByID($id) {
-      return parent::Select("SELECT colore.nome FROM colore LEFT JOIN ".$this->table. " ON colore.id = ".$this->table. ".idColore WHERE ".$this->table.".id = ".$id);
+      return parent::Select("SELECT colore.nome FROM colore LEFT JOIN ".$this->table. " ON colore.id = ".$this->table. ".idColore WHERE ".$this->table.".id = ?",["i",$id]);
     }
 
     public function selectMarcaByID($id) {
-      return parent::Select("SELECT marca.nome FROM marca LEFT JOIN ".$this->table. " ON marca.id = ".$this->table. ".idMarca WHERE ".$this->table.".id = ".$id);
+      return parent::Select("SELECT marca.nome FROM marca LEFT JOIN ".$this->table. " ON marca.id = ".$this->table. ".idMarca WHERE ".$this->table.".id = ?",["i",$id]);
     }
 
     public function selectTagliaByID($id) {
-      return parent::Select(("SELECT numero FROM prodottitaglie PT LEFT JOIN ".$this->table." P ON PT.idProdotto = P.id LEFT JOIN taglia T ON PT.idTaglia = T.id WHERE idProdotto = ").$id);
+      return parent::Select("SELECT numero FROM prodottitaglie PT LEFT JOIN ".$this->table." P ON PT.idProdotto = P.id LEFT JOIN taglia T ON PT.idTaglia = T.id WHERE idProdotto = ?",["i",$id]);
     }
 
+    public function selectQuantitaTaglia($id, $taglia) {
+    return parent::Select("SELECT quantita FROM prodottitaglie PT 
+                          INNER JOIN ". $this->table ." P ON PT.idProdotto = P.id 
+                          INNER JOIN taglia T ON PT.idTaglia = T.id 
+                          WHERE P.id = ? AND T.numero = ".$taglia,["i",$id]);
 
+    }
 }
 
 ?>

@@ -24,7 +24,7 @@ class Gender extends Database {
     }
 
     public function selectbyID($id) {
-      return parent::Select("SELECT * FROM ".$this->table. " WHERE id = ".$id);
+      return parent::Select("SELECT * FROM ".$this->table. " WHERE id = ?",["i",$id]);
     }
 
 

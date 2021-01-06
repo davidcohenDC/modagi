@@ -133,11 +133,8 @@ $(function(){
     
     if(location.search.split('modal=')[1]) {
       let urlParams = new URLSearchParams(window.location.search);
-      if(urlParams.get('quantita') > 0) {
+      if(urlParams.get('quantita') > 0 ) {
         $('#modalAbandonedCart').modal('show');
-      } else {
-        $('#modalProduct').modal('show');
       }
-
     }
 });

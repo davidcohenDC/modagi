@@ -111,12 +111,12 @@ class Database{
 		
             $stmt = $this->connection->prepare( $query );
 		
-            if($stmt === false) {
+            if($stmt == false) {
                 throw New Exception("Unable to do prepared statement: " . $query);
             }
 		
             if( $params ){
-                call_user_func_array(array($stmt, 'bind_param'), $params );				
+                call_user_func_array(array($stmt, 'bind_param'), $this->refValues($params));				
             }
 		
             $stmt->execute();
@@ -129,7 +129,19 @@ class Database{
 	
     }
 
+    private function refValues($arr){
+        if (strnatcmp(phpversion(),'5.3') >= 0) //Reference is required for PHP 5.3+
+        {
+            $refs = array();
+            foreach($arr as $key => $value)
+                $refs[$key] = &$arr[$key];
+            return $refs;
+        }
+        return $arr;
+    }
 		
 }
+
+
 
 ?>

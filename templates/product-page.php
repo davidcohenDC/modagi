@@ -117,7 +117,7 @@ $prodotto = $templateParams["prodotto"];
                 <div class="def-number-input number-input safari_only mb-0">
                   <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
                     class="btn bnt-light fa fa-minus" <?php if($prodotto["stock"] == 0) { echo "disabled";} ?>></button>
-                  <input title="range" type="number" class="number-wrapper" min="0" id="range"
+                  <input title="range" type="number" class="number-wrapper" min="1" id="range"
                     max="<?php echo $templateParams["quantitaTaglia"][0]["quantita"]?>" name="number" value="<?php if($prodotto["stock"] == 0) { echo "0";} else {echo "1";} ?>"
                     disabled>
                   <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
