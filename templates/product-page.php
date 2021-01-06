@@ -133,7 +133,7 @@ $prodotto = $templateParams["prodotto"];
         <!-- Accordion wrapper -->
 
         <!-- Section: AddToCart -->
-        <id class="cart">
+        <div class="cart">
           <div class=" mb-2">
             <div class="row">
               <div class="col-md-12">
@@ -147,7 +147,7 @@ $prodotto = $templateParams["prodotto"];
               </div>
             </div>
           </div>
-        </id>
+        </div>
         <!-- Section: AddToCart -->
       </div>
       <!-- Col: Azioni -->

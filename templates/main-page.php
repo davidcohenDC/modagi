@@ -41,7 +41,7 @@ $deleteSelectionHtml = '
       <div id="range-wrapper">
         <span>€0</span>
         <form class="multi-range-form">
-          <input title="multi range" id="multi" class="multi-range" type="range" min="1" max="500" step="10" value="range"/>
+          <input title="multi range" id="multi" class="multi-range" type="range" min="1" max="500" step="10" />
         </form>
         <span>€500</span>
       </div>
