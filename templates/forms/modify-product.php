@@ -15,7 +15,7 @@
 </div>
 
 <div class="my-3 mx-2 ">
-    <label for="description" class="form-label fw-bold"> Modifica Descrizzione </label>
+    <label for="description" class="form-label fw-bold"> Modifica Descrizione </label>
     <textarea id="description" name="description" class="md-textarea form-control col-12 fst-italic" placeholder="descrizione del prodotto" rows="3" required><?php echo $formParams['current']['descrizione']; ?></textarea>
 </div>
 
