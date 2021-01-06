@@ -192,7 +192,7 @@ class DatabaseUser
     public function getOrdersDates($id)
     {
         if (isUserVendor()) {
-            $stmt = $this->db->prepare("SELECT DISTINCT data FROM ordine WHERE idStato < 3 ORDER BY data DESC");
+            $stmt = $this->db->prepare("SELECT DISTINCT data FROM ordine WHERE idStato < 3 ORDER BY data ASC");
         } else {
             $stmt = $this->db->prepare("SELECT DISTINCT data FROM ordine WHERE email = ? ORDER BY data DESC");
             $stmt->bind_param("s", $id);
@@ -207,9 +207,10 @@ class DatabaseUser
     {
         if (isUserVendor()) {
             $stmt = $this->db->prepare("SELECT user.email as email, user.nome as user, user.indirizzo as indirizzo, prodotto.id as id, prodotto.nome as nome, prodotto.prezzo as prezzo, ordine.quantita as quantita,
-                                    genere.nome as genere, colore.nome as colore, materiale.nome as materiale, marca.nome as marca, ordine.id as orderID
-                                    FROM colore, materiale, marca, genere, ordine, prodotto, user 
+                                    genere.nome as genere, colore.nome as colore, materiale.nome as materiale, marca.nome as marca, ordine.id as orderID, ordine.idStato as statID, statoordine.nome as stato
+                                    FROM colore, materiale, marca, genere, ordine, prodotto, user , statoordine
                                     WHERE prodotto.id = ordine.idProdotto  
+                                    AND ordine.idStato = statoordine.id
                                     AND ordine.data = ? 
                                     AND ordine.email = user.email
                                     AND prodotto.idColore = colore.id
@@ -217,14 +218,15 @@ class DatabaseUser
                                     AND prodotto.idMateriale = materiale.id
                                     AND prodotto.idMarca = marca.id
                                     AND ordine.idStato < 3
-                                    ORDER BY ordine.data");
+                                    ORDER BY ordine.data ASC");
 
             $stmt->bind_param("s", $date);
         } else {
             $stmt = $this->db->prepare("SELECT prodotto.id as id, prodotto.nome as nome, prodotto.prezzo as prezzo, ordine.quantita as quantita,
-            genere.nome as genere, colore.nome as colore, materiale.nome as materiale, marca.nome as marca
-            FROM colore, materiale, marca, genere, ordine, prodotto 
+            genere.nome as genere, colore.nome as colore, materiale.nome as materiale, marca.nome as marca, ordine.idStato as statID, statoordine.nome as stato
+            FROM colore, materiale, marca, genere, ordine, prodotto , statoordine
             WHERE prodotto.id = ordine.idProdotto 
+            AND ordine.idStato = statoordine.id
             AND ordine.email = ? 
             AND ordine.data = ? 
             AND prodotto.idColore = colore.id
@@ -250,18 +252,6 @@ class DatabaseUser
         $stmt->execute();
 
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]["al"];
-    }
-
-    public function getOrdersStatus($id)
-    {
-        if (isUserVendor()) {
-            $stmt = $this->db->prepare("SELECT o.id as id, o.idProdotto as prodID , s.id as statID, s.nome as stato FROM ordine as o, statoordine as s WHERE s.id = o.idStato AND o.idStato < 3 ORDER BY o.data DESC");
-        } else {
-            $stmt = $this->db->prepare("SELECT o.id as id, o.idProdotto as prodID , s.id as statID, s.nome as stato FROM ordine as o, statoordine as s WHERE s.id = o.idStato AND o.email = ? ORDER BY o.data DESC");
-            $stmt->bind_param("s", $id);
-        }
-        $stmt->execute();
-        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
     public function getStatusName($statusId)
