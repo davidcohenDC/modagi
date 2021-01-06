@@ -120,60 +120,10 @@ switch ($action) {
         $formParams["currentCategories"] = $dbh->getCategoriesProduct($productID);
         $formParams["title"] = $formParams["current"]["nome"];
 
-        $key = array("name", "nome");
+        //modifico l'immagine
+        if (isset($_FILES["shoe-img"]) && $_FILES["shoe-img"]["name"] != "") {
 
-        // il nome è diverso dal precedente
-        if (isset($_POST[$key[0]]) && $_POST[$key[0]] != "" && $_POST[$key[0]] != $formParams["current"][$key[1]]) {
-
-            if (isset($_FILES["shoe-img"]) && $_FILES["shoe-img"]["name"] != "") {
-
-                $prodID = $dbh->getProductId($formParams["current"][$key[1]])["id"];
-
-                // rimuovo la vecchia 
-                if (image_exists(IMG_DIR . $prodID)) {
-                    $rmvResult = removeImg(IMG_DIR, $prodID);
-
-                    if (!$rmvResult[0]) {
-                        $templateParams["error"] = $rmvResult[1];
-                    }
-                }
-
-                $prodID = $dbh->getProductId($_POST[$key[0]])["id"];
-
-                // inserisco la nuova
-                $imgResult = uploadImage(IMG_DIR, $_FILES["shoe-img"], $prodID);
-
-                if (!$imgResult[0]) {
-                    $templateParams["error"] = $imgResult[1];
-                }
-            } else {
-                $oldProdID = $dbh->getProductId($formParams["current"][$key[1]])["id"];
-                $newProdID = $dbh->getProductId($_POST[$key[0]])["id"];
-
-                // cambio nome e basta quindi devo rinominare l'immagine
-                $rnmResult = renameImage(IMG_DIR, $oldProdID, $newProdID);
-
-                if (!$rnmResult[0]) {
-                    $templateParams["error"] = $rnmResult[1];
-                }
-            }
-
-            // modifica nome 
-            $updateResult = $dbh->updateProduct($productID, $_POST[$key[0]], $key[1]);
-            $changes++;
-
-            if (!$updateResult[0]) {
-                $templateParams["error"] = $updateResult[1];
-            }
-        } elseif (
-            isset($_POST[$key[0]]) && $_POST[$key[0]] == $formParams["current"][$key[1]]
-            && isset($_FILES["shoe-img"]) && $_FILES["shoe-img"]["name"] != ""
-        ) {
-
-            // cambio solo l'immagine  e non il nome
-            $changes++;
-
-            $prodID = $dbh->getProductId($formParams["current"][$key[1]])["id"];
+            $prodID = $dbh->getProductId($formParams["current"]["nome"])["id"];
 
             // rimuovo la vecchia 
             if (image_exists(IMG_DIR . $prodID)) {
@@ -184,7 +134,7 @@ switch ($action) {
                 }
             }
 
-            // metto la nuova
+            // inserisco la nuova
             $imgResult = uploadImage(IMG_DIR, $_FILES["shoe-img"], $prodID);
 
             if (!$imgResult[0]) {
@@ -194,6 +144,7 @@ switch ($action) {
 
         // modifico gli altri parametri solo se sono diversi da prima 
         foreach (array(
+            array("name", "nome"),
             array("description", "descrizione"),
             array("brand", "idMarca"),
             array("color", "idColore"),
