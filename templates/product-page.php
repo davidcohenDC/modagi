@@ -95,9 +95,11 @@ $prodotto = $templateParams["prodotto"];
             <div id="collapseTaglia" class="collapse show" aria-labelledby="wrapTaglia">
               <div class="card-body">
                 <?php foreach($templateParams["quantitaTaglia"] as $value => $taglia): ?>
-                <input type="radio" id="<?php echo $taglia["numero"] ?>" value="<?php echo $taglia["quantita"] ?>"
-                  name="taglia" <?php if($value ==0) {echo "checked";}?>>
-                <label class="lblTaglia" for="<?php echo $taglia["numero"] ?>"><?php echo $taglia["numero"] ?></label>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" class="custom-control-input" id="<?php echo $taglia["numero"] ?>" value="<?php echo $taglia["quantita"] ?>"
+                    name="taglia" <?php if($value ==0) {echo "checked";}?>>
+                  <label class="custom-control-label lblTaglia" for="<?php echo $taglia["numero"] ?>"><?php echo $taglia["numero"] ?></label>
+                </div>
                 <?php endforeach ?>
               </div>
             </div>
