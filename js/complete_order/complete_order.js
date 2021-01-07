@@ -2,7 +2,7 @@ const delay = 1000;
 const redirectTimeout = 0;
 const url = "index.php";
 
-var redirctCounter = 5;
+let redirctCounter = 5;
 $(function() {
     $("#cartCounter").text("0");
     window.setInterval(function(){

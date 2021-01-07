@@ -4,15 +4,13 @@ function increaseQuantity(articleId, articleSize) {
         data: { id: articleId , size: articleSize},
         url: "./ajaxFunction/increaseProduct.php"
     }).done(function(response) {
-        //alert(response);
-        var jsonData = JSON.parse(response);
-        var articlePrice = jsonData.articlePrice;
-        var articleNewQuantity = jsonData.articleNewQuantity;
-        var articleOldQuantity = jsonData.articleOldQuantity;
-        var newTotalPrice = jsonData.newTotalPrice;
+        const jsonData = JSON.parse(response);
+        const articlePrice = jsonData.articlePrice;
+        const articleNewQuantity = jsonData.articleNewQuantity;
+        const articleOldQuantity = jsonData.articleOldQuantity;
+        const newTotalPrice = jsonData.newTotalPrice;
         
         if(articleNewQuantity == articleOldQuantity) {
-            //alert("Quantità presente nel magazzino insufficiente");
             showModal();
         }
         $("#C_"+ articleId + "_" + articleSize).text(articlePrice + "€");
@@ -27,12 +25,11 @@ function decreaseQuantity(articleId, articleSize) {
         data: { id: articleId , size: articleSize},
         url: "./ajaxFunction/decreaseProduct.php"
     }).done(function(response) {
-        //alert(response);
-        var jsonData = JSON.parse(response);
-        var newTotalPrice = jsonData.newTotalPrice;
+        const jsonData = JSON.parse(response);
+        const newTotalPrice = jsonData.newTotalPrice;
         if(Object.keys(jsonData).length > 1) {
-            var articlePrice = jsonData.articlePrice;
-            var articleQuantity = jsonData.articleQuantity;
+            const articlePrice = jsonData.articlePrice;
+            const articleQuantity = jsonData.articleQuantity;
             
             $("#C_"+ articleId + "_" + articleSize).text(articlePrice + "€");
             $("#Q_"+ articleId + "_" + articleSize).text(articleQuantity);
@@ -52,10 +49,9 @@ function deleteProduct(articleId, articleSize) {
         data: { id: articleId , size: articleSize},
         url: "./ajaxFunction/deleteProduct.php"
     }).done(function(response) {
-        //alert(response);
         $("#cartCounter").text(parseInt($("#cartCounter").text()) - 1);
-        var jsonData = JSON.parse(response);
-        var newTotalPrice = jsonData.newTotalPrice;
+        const jsonData = JSON.parse(response);
+        const newTotalPrice = jsonData.newTotalPrice;
 
         $("#P_"+ articleId + "_" + articleSize).remove();
         checkProductCount();
@@ -69,7 +65,6 @@ function deleteAllProduct() {
         type: "POST",
         url: "./ajaxFunction/deleteAllProduct.php"
     }).done(function(response) {
-        //alert(response);
         $("#cartCounter").text("0");
         const newTotalPrice = 0;
 
@@ -81,7 +76,7 @@ function deleteAllProduct() {
 }
 
 function checkProductCount() {
-    var numProduct = $(".product").length;
+    const numProduct = $(".product").length;
     if(numProduct < 1) {
         $("#noProductAllert").show();
         $("#trashAllBtn").hide();
