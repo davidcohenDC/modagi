@@ -10,7 +10,7 @@ define("JQUERY_LINK", "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
 define("IMG_DIR", "./upload/");
 define("PROMOTION_DIR", "./upload/promotion/");
 
-define("DB_SERVER_NAME", "localhost");
+define("DB_SERVER_NAME", "127.0.0.1");
 define("DB_USERNAME", "root");
 define("DB_PASSWORD", "");
 define("DB_NAME", "modagi");

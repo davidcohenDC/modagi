@@ -1,10 +1,10 @@
 <?php
 class DbInfo {
 
-    private $username = "root";
-    private $password = "";
-    private $name = "modagi";
-    private $host = "127.0.0.1";
+    private $username = DB_USERNAME;
+    private $password = DB_PASSWORD;
+    private $name = DB_NAME;
+    private $host = DB_SERVER_NAME;
     private $port = 3306;
 
     public function getUsername() {

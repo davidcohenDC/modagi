@@ -95,9 +95,11 @@ $prodotto = $templateParams["prodotto"];
             <div id="collapseTaglia" class="collapse show" aria-labelledby="wrapTaglia">
               <div class="card-body">
                 <?php foreach($templateParams["quantitaTaglia"] as $value => $taglia): ?>
-                <input type="radio" id="<?php echo $taglia["numero"] ?>" value="<?php echo $taglia["quantita"] ?>"
-                  name="taglia" <?php if($value ==0) {echo "checked";}?>>
-                <label class="lblTaglia" for="<?php echo $taglia["numero"] ?>"><?php echo $taglia["numero"] ?></label>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" class="custom-control-input" id="<?php echo $taglia["numero"] ?>" value="<?php echo $taglia["quantita"] ?>"
+                    name="taglia" <?php if($value ==0) {echo "checked";}?>>
+                  <label class="custom-control-label lblTaglia" for="<?php echo $taglia["numero"] ?>"><?php echo $taglia["numero"] ?></label>
+                </div>
                 <?php endforeach ?>
               </div>
             </div>
@@ -119,7 +121,7 @@ $prodotto = $templateParams["prodotto"];
                   <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
                     class="btn bnt-light fa fa-minus" <?php if($prodotto["stock"] == 0) { echo "disabled";} ?>></button>
                   <input title="range" type="number" class="number-wrapper" min="1" id="range"
-                    max="<?php echo $templateParams["quantitaTaglia"][0]["quantita"]?>" name="number" value="<?php if($prodotto["stock"] == 0) { echo "0";} else {echo "1";} ?>"
+                    max="<?php if(isset($templateParams["quantitaTaglia"][0])) {echo $templateParams["quantitaTaglia"][0]["quantita"];} else {echo "1";}?>" name="number" value="<?php if($prodotto["stock"] == 0) { echo "0";} else {echo "1";} ?>"
                     disabled>
                   <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
                     class="btn bnt-light fa fa-plus"  <?php if($prodotto["stock"] == 0) { echo "disabled";} ?>></button>

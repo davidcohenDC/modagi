@@ -65,7 +65,7 @@ class Product extends Database {
     return parent::Select("SELECT quantita FROM prodottitaglie PT 
                           INNER JOIN ". $this->table ." P ON PT.idProdotto = P.id 
                           INNER JOIN taglia T ON PT.idTaglia = T.id 
-                          WHERE P.id = ? AND T.numero = ".$taglia,["i",$id]);
+                          WHERE P.id = ? AND T.numero = ?",["ii",$id,$taglia]);
 
     }
 }

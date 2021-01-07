@@ -17,7 +17,7 @@
 </div>
 
 <div class="my-3 mx-2 ">
-    <label for="description" class="form-label fw-bold"> Descrizzione </label>
+    <label for="description" class="form-label fw-bold"> Descrizione </label>
     <textarea id="description" name="description" class="md-textarea form-control col-12 fst-italic" placeholder="descrizione del prodotto" rows="3" required></textarea>
 </div>
 
