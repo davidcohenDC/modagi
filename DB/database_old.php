@@ -16,7 +16,7 @@ class DatabaseHelper{
 
     public function getRandomPosts($n=2) {
         $stmt = $this->db->prepare("SELECT idarticolo, titoloarticolo, imgarticolo 
-                                    FROM articolo ORDER BY RAND() LIMIT ?");
+                                    FROM Articolo ORDER BY RAND() LIMIT ?");
         $stmt->bind_param("i", $n);
         $stmt->execute();
 

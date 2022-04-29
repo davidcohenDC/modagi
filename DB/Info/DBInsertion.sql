@@ -2,7 +2,7 @@ USE `Modagi`;
 # ---------------------------------------------------------------------- #
 # ADD VALUES "Colore"                                                    #
 # ---------------------------------------------------------------------- #
-INSERT INTO `colore` (`id`, `nome`)
+INSERT INTO `Colore` (`id`, `nome`)
 VALUES ('1', 'Bianco'),
     ('2', 'Nero'),
     ('3', 'Rosso'),
@@ -15,7 +15,7 @@ VALUES ('1', 'Bianco'),
 # ---------------------------------------------------------------------- #
 # ADD VALUES "Materiale"                                                 #
 # ---------------------------------------------------------------------- #
-INSERT INTO `materiale` (`id`, `nome`)
+INSERT INTO `Materiale` (`id`, `nome`)
 VALUES ('1', 'Cuoio'),
     ('2', 'Sintentico'),
     ('3', 'Pelle'),
@@ -23,7 +23,7 @@ VALUES ('1', 'Cuoio'),
 # ---------------------------------------------------------------------- #
 # ADD VALUES "Taglia"                                                    #
 # ---------------------------------------------------------------------- #
-INSERT INTO `taglia` (`id`, `numero`)
+INSERT INTO `Taglia` (`id`, `numero`)
 VALUES ('1', '39'),
     ('2', '40'),
     ('3', '41'),
@@ -48,7 +48,7 @@ VALUES ('1', 'Uomo'),
 # ---------------------------------------------------------------------- #
 # ADD VALUES "User"                                                      #
 # ---------------------------------------------------------------------- #
-INSERT INTO `user` (
+INSERT INTO `User` (
         `email`,
         `username`,
         `password`,
@@ -83,17 +83,8 @@ VALUES (
         'Luigi',
         'Olivieri',
         'Via Test 2'
-    );
-INSERT INTO `user` (
-        `email`,
-        `username`,
-        `password`,
-        `admin`,
-        `nome`,
-        `cognome`,
-        `indirizzo`
-    )
-VALUES (
+    ),
+    (
         'test@gmail.com',
         'test',
         'test',
@@ -101,7 +92,7 @@ VALUES (
         'testNome',
         'TestCognome',
         'Via Test 3'
-    );
+    ); 
 # ---------------------------------------------------------------------- #
 # ADD VALUES "Notifica"                                                  #
 # ---------------------------------------------------------------------- #
@@ -114,7 +105,7 @@ VALUES ('test', 'contenuto del test', 'test@gmail.com'),
 # ---------------------------------------------------------------------- #
 # ADD VALUES "Categoria"                                                 #
 # ---------------------------------------------------------------------- #
-INSERT INTO `categoria` (`id`, `nome`)
+INSERT INTO `Categoria` (`id`, `nome`)
 VALUES ('1', 'Running'),
     ('2', 'Mocassini'),
     ('3', 'Tacchi'),
@@ -124,7 +115,7 @@ VALUES ('1', 'Running'),
 # ---------------------------------------------------------------------- #
 # ADD VALUES "Marca"                                                     #
 # ---------------------------------------------------------------------- #
-INSERT INTO `marca` (`id`, `nome`)
+INSERT INTO `Marca` (`id`, `nome`)
 VALUES ('1', 'Nike'),
     ('2', 'Timberland'),
     ('4', 'Anna Field'),
@@ -133,7 +124,7 @@ VALUES ('1', 'Nike'),
 # ---------------------------------------------------------------------- #
 # ADD VALUES "Prodotto"                                                  #
 # ---------------------------------------------------------------------- #
-INSERT INTO `prodotto` (
+INSERT INTO `Prodotto` (
         `id`,
         `prezzo`,
         `descrizione`,
@@ -246,7 +237,7 @@ VALUES (
 # ---------------------------------------------------------------------- #
 # ADD VALUES "Ordine"                                                    #
 # ---------------------------------------------------------------------- #
-INSERT INTO `ordine` (
+INSERT INTO `Ordine` (
         `idProdotto`,
         `email`,
         `data`,
@@ -295,5 +286,5 @@ VALUES(7, 3, 25);
 INSERT INTO `ProdottiTaglie` (`idTaglia`, `idProdotto`, `quantita`)
 VALUES(7, 4, 25);
 
-INSERT INTO `prodottitaglie` (`idTaglia`, `idProdotto`, `quantita`) 
+INSERT INTO `ProdottiTaglie` (`idTaglia`, `idProdotto`, `quantita`) 
 VALUES ('5', '8', '11'), ('3', '9', '2'), ('3', '10', '55'), ('4', '8', '12'), ('6', '10', '22')

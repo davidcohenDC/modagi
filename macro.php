@@ -13,7 +13,7 @@ define("PROMOTION_DIR", "./upload/promotion/");
 define("DB_SERVER_NAME", "127.0.0.1");
 define("DB_USERNAME", "root");
 define("DB_PASSWORD", "");
-define("DB_NAME", "modagi");
+define("DB_NAME", "Modagi");
 define("MAX_PRODUCT_FOR_PAGE", 6);
 
 //TODO: correct fields

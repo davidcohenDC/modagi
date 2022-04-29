@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `Notifica` (
 # ---------------------------------------------------------------------- #
 # ADD TABLE "Marca"                                                      #
 # ---------------------------------------------------------------------- #
-CREATE TABLE IF NOT EXISTS `marca` (
+CREATE TABLE IF NOT EXISTS `Marca` (
      `id` INT NOT NULL AUTO_INCREMENT,
      `nome` VARCHAR(50) NOT NULL,
      PRIMARY KEY (`Id`)

@@ -257,9 +257,9 @@ function build_url($url_data)
 function bindProductUrlToQuery()
 {
     //the main selection for prodotto with all corrispecti
-    $selection = "SELECT P.*, SUM(quantita) as stock FROM prodotto P
-    INNER JOIN prodottitaglie PT ON PT.idProdotto = P.id
-    INNER JOIN taglia T ON T.id = PT.idTaglia";
+    $selection = "SELECT P.*, SUM(quantita) as stock FROM Prodotto P
+    INNER JOIN ProdottiTaglie PT ON PT.idProdotto = P.id
+    INNER JOIN Taglia T ON T.id = PT.idTaglia";
 
     $filter = "";
     $count = 0;
