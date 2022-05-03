@@ -16,7 +16,7 @@ class NotificationManager {
      * Add a notification to a certain user
      */
     public function addNotification($userEmail, $notificationName, $notificationValue) {
-        $stmt = $this->db->prepare("INSERT INTO `notifica`(`nome`, `contenuto`, `email`)
+        $stmt = $this->db->prepare("INSERT INTO `Notifica`(`nome`, `contenuto`, `email`)
                                     VALUES (?, ?, ?)");
 
         $stmt->bind_param("sss", $notificationName, $notificationValue, $userEmail);
@@ -27,7 +27,7 @@ class NotificationManager {
      * Get all notification for certain user
      */
     public function getAllNotification($userEmail) {
-        $stmt = $this->db->prepare("SELECT `nome`, `contenuto` FROM `notifica` WHERE `email` = ? ORDER BY `id` DESC");
+        $stmt = $this->db->prepare("SELECT `nome`, `contenuto` FROM `Notifica` WHERE `email` = ? ORDER BY `id` DESC");
 
         $stmt->bind_param("s", $userEmail);
         $stmt->execute();
@@ -42,7 +42,7 @@ class NotificationManager {
      * Delete all notification of a certain user
      */
     public function clearNotification($userEmail) {
-        $stmt = $this->db->prepare("DELETE FROM `notifica` WHERE `email` = ?");
+        $stmt = $this->db->prepare("DELETE FROM `Notifica` WHERE `email` = ?");
 
         $stmt->bind_param("s", $userEmail);
         return $stmt->execute();

@@ -181,7 +181,7 @@ class DatabaseUser
     // GETTERS
     public function getUserName($id)
     {
-        $stmt = $this->db->prepare("SELECT nome FROM user WHERE email = ? ");
+        $stmt = $this->db->prepare("SELECT nome FROM User WHERE email = ? ");
 
         $stmt->bind_param("s", $id);
         $stmt->execute();
@@ -192,9 +192,9 @@ class DatabaseUser
     public function getOrdersDates($id, $filter = "")
     {
         if (isUserVendor()) {
-            $stmt = $this->db->prepare("SELECT DISTINCT data FROM ordine WHERE idStato < 3 " . $filter . " ORDER BY data ASC");
+            $stmt = $this->db->prepare("SELECT DISTINCT data FROM Ordine WHERE idStato < 3 " . $filter . " ORDER BY data ASC");
         } else {
-            $stmt = $this->db->prepare("SELECT DISTINCT data FROM ordine WHERE email = ? " . $filter . " ORDER BY data DESC");
+            $stmt = $this->db->prepare("SELECT DISTINCT data FROM Ordine WHERE email = ? " . $filter . " ORDER BY data DESC");
             $stmt->bind_param("s", $id);
         }
 
@@ -206,32 +206,32 @@ class DatabaseUser
     public function getOrdersProducts($date, $email, $filter = "")
     {
         if (isUserVendor()) {
-            $stmt = $this->db->prepare("SELECT user.email as email, user.nome as user, user.indirizzo as indirizzo, prodotto.id as id, prodotto.nome as nome, prodotto.prezzo as prezzo, ordine.quantita as quantita,
-                                    genere.nome as genere, colore.nome as colore, materiale.nome as materiale, marca.nome as marca, ordine.id as orderID, ordine.idStato as statID, statoordine.nome as stato
-                                    FROM colore, materiale, marca, genere, ordine, prodotto, user , statoordine
-                                    WHERE prodotto.id = ordine.idProdotto  
-                                    AND ordine.idStato = statoordine.id
-                                    AND ordine.data = ? 
-                                    AND ordine.email = user.email
-                                    AND prodotto.idColore = colore.id
-                                    AND prodotto.idGenere = genere.id
-                                    AND prodotto.idMateriale = materiale.id
-                                    AND prodotto.idMarca = marca.id
-                                    AND ordine.idStato < 3  " . $filter . " ORDER BY ordine.data ASC");
+            $stmt = $this->db->prepare("SELECT User.email as email, User.nome as User, User.indirizzo as indirizzo, Prodotto.id as id, Prodotto.nome as nome, Prodotto.prezzo as prezzo, Ordine.quantita as quantita,
+                                    Genere.nome as genere, Colore.nome as colore, Materiale.nome as materiale, Marca.nome as marca, Ordine.id as orderID, Ordine.idStato as statID, StatoOrdine.nome as stato
+                                    FROM Colore, Materiale, Marca, Genere, Ordine, Prodotto, User , StatoOrdine
+                                    WHERE Prodotto.id = Ordine.idProdotto  
+                                    AND Ordine.idStato = StatoOrdine.id
+                                    AND Ordine.data = ? 
+                                    AND Ordine.email = user.email
+                                    AND Prodotto.idColore = Colore.id
+                                    AND Prodotto.idGenere = Genere.id
+                                    AND Prodotto.idMateriale = Materiale.id
+                                    AND Prodotto.idMarca = Marca.id
+                                    AND Ordine.idStato < 3  " . $filter . " ORDER BY Ordine.data ASC");
 
             $stmt->bind_param("s", $date);
         } else {
-            $stmt = $this->db->prepare("SELECT prodotto.id as id, prodotto.nome as nome, prodotto.prezzo as prezzo, ordine.quantita as quantita,
-            genere.nome as genere, colore.nome as colore, materiale.nome as materiale, marca.nome as marca, ordine.idStato as statID, statoordine.nome as stato
-            FROM colore, materiale, marca, genere, ordine, prodotto , statoordine
-            WHERE prodotto.id = ordine.idProdotto 
-            AND ordine.idStato = statoordine.id
-            AND ordine.email = ? 
-            AND ordine.data = ? 
-            AND prodotto.idColore = colore.id
-            AND prodotto.idGenere = genere.id
-            AND prodotto.idMateriale = materiale.id
-            AND prodotto.idMarca = marca.id " . $filter . " ORDER BY ordine.data");
+            $stmt = $this->db->prepare("SELECT Prodotto.id as id, Prodotto.nome as nome, Prodotto.prezzo as prezzo, Ordine.quantita as quantita,
+            Genere.nome as genere, Colore.nome as colore, Materiale.nome as materiale, Marca.nome as marca, Ordine.idStato as statID, StatoOrdine.nome as stato
+            FROM Colore, Materiale, Marca, Genere, Ordine, Prodotto , StatoOrdine
+            WHERE Prodotto.id = Ordine.idProdotto 
+            AND Ordine.idStato = StatoOrdine.id
+            AND Ordine.email = ? 
+            AND Ordine.data = ? 
+            AND Prodotto.idColore = Colore.id
+            AND Prodotto.idGenere = Genere.id
+            AND Prodotto.idMateriale = Materiale.id
+            AND Prodotto.idMarca = Marca.id " . $filter . " ORDER BY ordine.data");
 
             $stmt->bind_param("ss", $email, $date);
         }
@@ -243,7 +243,7 @@ class DatabaseUser
     public function userAccessLevel($id)
     {
         $stmt = $this->db->prepare("SELECT admin as al
-                                        FROM user 
+                                        FROM User 
                                         WHERE email = ?;");
 
         $stmt->bind_param("s", $id);
@@ -254,7 +254,7 @@ class DatabaseUser
 
     public function getStatusName($statusId)
     {
-        $stmt = $this->db->prepare("SELECT nome FROM statoordine WHERE id = ? ");
+        $stmt = $this->db->prepare("SELECT nome FROM StatoOrdine WHERE id = ? ");
         $stmt->bind_param("s", $statusId);
         if ($stmt->execute()) {
             return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]["nome"];
@@ -264,7 +264,7 @@ class DatabaseUser
 
     public function getNotificationData($orderID)
     {
-        $stmt = $this->db->prepare("SELECT o.quantita as quantita, o.data as data, p.nome as prod FROM ordine as o, prodotto as p WHERE p.id = o.idProdotto AND o.id = ? ");
+        $stmt = $this->db->prepare("SELECT o.quantita as quantita, o.data as data, p.nome as prod FROM Ordine as o, Prodotto as p WHERE p.id = o.idProdotto AND o.id = ? ");
         $stmt->bind_param("i", $orderID);
 
         $stmt->execute();
@@ -275,32 +275,32 @@ class DatabaseUser
     /* admin */
     public function getAllColors()
     {
-        return $this->getAll("colore");
+        return $this->getAll("Colore");
     }
 
     public function getAllSizes()
     {
-        return $this->getAll("taglia");
+        return $this->getAll("Taglia");
     }
 
     public function getAllMaterials()
     {
-        return $this->getAll("materiale");
+        return $this->getAll("Materiale");
     }
 
     public function getAllBrands()
     {
-        return $this->getAll("marca");
+        return $this->getAll("Marca");
     }
 
     public function getAllCategories()
     {
-        return $this->getAll("categoria");
+        return $this->getAll("Categoria");
     }
 
     public function getAllProducts()
     {
-        return $this->getAll("prodotto");
+        return $this->getAll("Prodotto");
     }
 
     public function getAllQuantities($prodId)
@@ -315,7 +315,7 @@ class DatabaseUser
 
     public function getProductId($name)
     {
-        $stmt = $this->db->prepare("SELECT id FROM prodotto WHERE nome = ?");
+        $stmt = $this->db->prepare("SELECT id FROM Prodotto WHERE nome = ?");
         $stmt->bind_param("s", $name);
         $stmt->execute();
 
@@ -343,7 +343,7 @@ class DatabaseUser
     // INSERTS
     public function registerUser($email, $username, $password, $name, $surname, $address)
     {
-        $stmt = $this->db->prepare("INSERT INTO user (email, username, password, admin, nome, cognome, indirizzo) VALUES (?, ?, ?, 'N', ?, ?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO User (email, username, password, admin, nome, cognome, indirizzo) VALUES (?, ?, ?, 'N', ?, ?, ?)");
 
         $stmt->bind_param("ssssss", $email, $username, $password, $name, $surname, $address);
         $stmt->execute();
@@ -614,7 +614,7 @@ class DatabaseUser
     private function updateField($id, $password, $field, $newValue)
     {
         if ($this->checkPassword($id, $password)[0]) {
-            $stmt = $this->db->prepare("UPDATE user
+            $stmt = $this->db->prepare("UPDATE User
                                         SET " . $field . " = ?
                                         WHERE email = ?");
             $stmt->bind_param("ss", $newValue, $id);
@@ -627,14 +627,14 @@ class DatabaseUser
 
     private function updateProductField($field, $id, $newValue, $params)
     {
-        $stmt = $this->db->prepare("UPDATE prodotto
+        $stmt = $this->db->prepare("UPDATE Prodotto
                                     SET " . $field . " = ?
                                     WHERE id = ?");
 
         $stmt->bind_param($params, $newValue, $id);
         $stmt->execute();
 
-        $check = $this->db->prepare("SELECT " . $field . " FROM prodotto WHERE id = ? AND " . $field . " = ?");
+        $check = $this->db->prepare("SELECT " . $field . " FROM Prodotto WHERE id = ? AND " . $field . " = ?");
         $check->bind_param($params, $id, $newValue);
         $check->execute();
 
