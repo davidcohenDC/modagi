@@ -10,10 +10,12 @@ define("JQUERY_LINK", "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
 define("IMG_DIR", "./upload/");
 define("PROMOTION_DIR", "./upload/promotion/");
 
-define("DB_SERVER_NAME", "127.0.0.1");
-define("DB_USERNAME", "root");
-define("DB_PASSWORD", "");
-define("DB_NAME", "Modagi");
+// Database connection: overridable through environment variables (see compose.yaml),
+// defaults are the original XAMPP-style local setup.
+define("DB_SERVER_NAME", getenv("DB_HOST") ?: "127.0.0.1");
+define("DB_USERNAME", getenv("DB_USER") ?: "root");
+define("DB_PASSWORD", getenv("DB_PASSWORD") ?: "");
+define("DB_NAME", getenv("DB_NAME") ?: "Modagi");
 define("MAX_PRODUCT_FOR_PAGE", 6);
 
 //TODO: correct fields

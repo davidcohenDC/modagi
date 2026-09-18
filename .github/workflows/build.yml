@@ -1,0 +1,77 @@
+name: Build
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: PHP syntax check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: php -l on every file
+        run: |
+          docker run --rm -v "$PWD:/app" -w /app php:8.3-cli sh -c "find . -name '*.php' -not -path './.git/*' -print0 | xargs -0 -n1 php -l"
+
+  smoke:
+    name: Build image & smoke test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Start the stack
+        run: docker compose up --build -d --wait
+
+      - name: Pages respond and render the shop
+        run: |
+          set -e
+          for path in "" "product.php?prodotto=1" "cart.php" "registration-page.php" "user-page.php" "checkout.php"; do
+            code=$(curl -s -o page.html -w "%{http_code}" "http://localhost:8080/$path")
+            echo "/$path -> $code"
+            test "$code" = "200"
+            ! grep -q "Fatal error" page.html
+          done
+          curl -s http://localhost:8080/ | grep -q "Modagi"
+
+      - name: Customer can log in and see the cart
+        run: |
+          set -e
+          curl -s -c jar -b jar -o /dev/null "http://localhost:8080/product.php?prodotto=1&taglia=39&quantita=1&modal=on"
+          curl -s -c jar -b jar -o /dev/null -d "email=test@gmail.com&p=test" http://localhost:8080/user-page.php
+          curl -s -c jar -b jar http://localhost:8080/cart.php | grep -q "Air Max 1"
+
+      - name: Show PHP errors from the container log
+        if: always()
+        run: docker compose logs web | grep -i "PHP" || true
+
+      - name: Stop the stack
+        if: always()
+        run: docker compose down -v
+
+  release:
+    name: Release
+    needs: [lint, smoke]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Run semantic-release
+        run: npx --yes -p semantic-release@24 -p @semantic-release/exec@7 semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

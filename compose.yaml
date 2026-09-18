@@ -1,0 +1,34 @@
+# One command to run the whole shop: `docker compose up --build`, then open http://localhost:8080
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      DB_HOST: db
+      DB_USER: modagi
+      DB_PASSWORD: modagi
+      DB_NAME: Modagi
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mariadb:10.11
+    # The code mixes table-name cases (Prodotto / prodotto): fine on the Windows MySQL it was
+    # written against, so replicate that behaviour instead of touching the queries.
+    command: --lower-case-table-names=1
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: Modagi
+      MARIADB_USER: modagi
+      MARIADB_PASSWORD: modagi
+    volumes:
+      # Executed in name order on first start: schema first, then demo data.
+      - ./DB/Info/DBCreation.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./DB/Info/DBInsertion.sql:/docker-entrypoint-initdb.d/02-data.sql:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 3s
+      retries: 20

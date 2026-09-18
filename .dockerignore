@@ -1,0 +1,10 @@
+.git
+.github
+.idea
+docs
+compose.yaml
+Dockerfile
+README.md
+LICENSE
+# Development-only Apache overrides (display_errors on): the image uses php.ini-production and logs errors instead.
+.htaccess
